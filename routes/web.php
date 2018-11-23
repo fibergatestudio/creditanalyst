@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
 	Route::get('/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
 	Route::post('/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
-	
+
 /*	Route::get('/sellers/{object}/{product?}/{district?}',['uses' => 'Admin\SellersController@index','as' => 'adminSellers']);
 
 	Route::post('/sellers/{object}',['uses' => 'Admin\SellersController@destroy','as' => 'deleteSeller']);
@@ -39,3 +39,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/seller/{object}/{id}', 'Admin\SellersController@showSeller');*/
 
 });
+
+/*
+* Пути, которые отвечают за информационную базу приложения
+*/
+
+	Route::get('/sources_list', 'SourcesListController@show'); // Список всех источников
