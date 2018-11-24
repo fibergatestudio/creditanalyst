@@ -82,7 +82,6 @@
 
         @yield('content')
 
-        <img id="testImg" src="" style="display: none;">
     </div><!-- /#right-panel -->
 
     
@@ -107,77 +106,36 @@
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/lib/chart-js/chartjs-init.js') }}"></script>
+    <script src="{{ asset('js/line-charts.js') }}"></script>
 
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
+            $('#bootstrap-data-table-export').DataTable();
 
-          var str = document.location.href;
-          if(str.indexOf('sellers') + 1) {
-            $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
-            $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
-        }
+            var str = document.location.href;
+            if(str.indexOf('sellers') + 1) {
+                $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
+                $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
+            }
 
-        $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
+            $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
-        if ($('.dataTables_empty').text() == 'No data available in table') {
-            $('.dataTables_empty').text('Нет данных');
-        }
+            if ($('.dataTables_empty').text() == 'No data available in table') {
+                $('.dataTables_empty').text('Нет данных');
+            }
 
-    } );
-</script>
-<script>
+        } );
+    </script>
 
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['January','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','', 'February','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','March'/*,'','','','','','','','','','','','','','','','','','','','','',,'','','','','','','','','','', 'April','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','', 'May','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','', 'June','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','', 'July','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','', 'August', 'September', 'October', 'November', 'December'*/],                       
-            datasets: [{
-                label: 'line',
-                data:[15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,/*15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15,5,25,20,10,15,25,20,10,20,10,15,15,5,25,20,10,15,25,20,10,20,10,15*/],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                'rgba(255,99,132,1)'
-                ],
-                borderWidth: 1,
-                pointRadius: 0,
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        min: 'January',
-                        //max: 'September'
-                    }
-                }]
-            },
-            animation: {
-            duration: 0, // general animation time
-        },
-        hover: {
-            animationDuration: 0, // duration of animations when hovering an item
-        },
-        responsiveAnimationDuration: 0, // animation duration after a resize
-    }
-});
+    <script type="text/javascript">
+        ( function( $ ) {
+            $(document).ready(function (){ 
 
-
-</script>
-<script type="text/javascript">
-    ( function( $ ) {
-        $(document).ready(function (){ 
-
-            function canvasToImg() {
-              var canvas = document.getElementById('myChart'); 
-              document.getElementById("testImg").src = canvas.toDataURL();
-              var img = canvas.toDataURL();
-              //console.log(img);
-              $.ajax({
+                function canvasToImg() {
+                  var canvas = document.getElementById('myChart'); 
+                  var img = canvas.toDataURL();
+              /*$.ajax({
                 url: "{{ route('chartsSave') }}",
                 type: "POST",
                 data: {img:img},
@@ -190,14 +148,14 @@
                 error: function (msg) {
                     alert('Ошибка');
                 }
-            });
+            });*/
           }
 
           canvasToImg();  
 
       });
-    } )( jQuery );
-</script>
+        } )( jQuery );
+    </script>
 
 </body>
 </html>
