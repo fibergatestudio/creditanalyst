@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>    
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -82,11 +81,10 @@
 
         @yield('content')
 
-        <img id="testImg" src="">
     </div><!-- /#right-panel -->
 
-    
-    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -106,57 +104,57 @@
 
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/chart-js/chartjs-init.js') }}"></script>
+    <script src="{{ asset('js/line-charts.js') }}"></script>
 
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
+            $('#bootstrap-data-table-export').DataTable();
 
-          var str = document.location.href;
-          if(str.indexOf('sellers') + 1) {
-            $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
-            $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
-        }
+            var str = document.location.href;
+            if(str.indexOf('sellers') + 1) {
+                $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
+                $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
+            }
 
-        $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
+            $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
-        if ($('.dataTables_empty').text() == 'No data available in table') {
-            $('.dataTables_empty').text('Нет данных');
-        }
+            if ($('.dataTables_empty').text() == 'No data available in table') {
+                $('.dataTables_empty').text('Нет данных');
+            }
 
-    } );
-</script>
-<script type="text/javascript">
-    ( function( $ ) {
-        $(document).ready(function (){ 
+        } );
+    </script>
 
-            function canvasToImg() {
-              var canvas = document.getElementById('team-chart'); 
-              document.getElementById("testImg").src = canvas.toDataURL();
-              var img = canvas.toDataURL();
-              //console.log(img);
-              $.ajax({
-                url: "{{ route('chartsSave') }}",
-                type: "POST",
-                data: {img:img},
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
-            });
-          }
+    <script type="text/javascript">
+        /*
+        * Сохранение графика
+        */
 
-          setTimeout(canvasToImg, 2000);  
+        $('#saveChart').click(function (){ 
+            if (fullChart) {
+                var canvas = document.getElementById('myChart'); 
+                var img = canvas.toDataURL();
+                $.ajax({
+                    url: "{{ route('chartsSave') }}",
+                    type: "POST",
+                    data: {img:img},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (msg) {
+                        alert('Ошибка');
+                    }
+                }); 
+            }
+            else{
+            alert("Постройте график!");
+            }
+        });
 
-
-      });
-    } )( jQuery );
 </script>
 
 </body>
