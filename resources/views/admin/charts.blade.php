@@ -24,51 +24,89 @@
 </div>
 
 <div class="card-body card-block">
-    <form action="" method="post" class="form-horizontal">
-        <div class="row form-group">
-            <div class="col col-md-12">
-                <div class="input-group">
-                    <input type="text" id="searchIndicator" name="searchIndicator" placeholder="Введите поисковый запрос" class="form-control">
-                    <div class="input-group-btn">
-                        <button class="btn">
-                            <i class="fa fa-search"></i> 
-                        </button>
-                        <button type="submit" class="btn btn-success btn-sm">Добавить индикатор</button>
-                    </div>                    
-                </div>
-            </div>
+    <div class="row form-group">
+        <div class="col col-md-12">
+            <table class="table" id="indicatorGroup"></table>                                       
         </div>
-    </form>
+    </div>
+</div>
+
+@if(isset($indicators_obj))
+@foreach($indicators_obj as $k=>$indicator)
+
+
+@endforeach
+@endif
+
+<style type="text/css">
+#searchIndicator, #resultIndicator{
+    width: 500px;
+}
+#resultIndicator{
+    background: #fff;
+}
+#resultIndicator > li{
+    list-style-type: none;
+}
+#resultIndicator > li:hover{
+    background: #87CEEB;
+    cursor: pointer;
+}
+i.fa.fa-window-close-o{
+    cursor: pointer;
+}    
+</style>
+
+<div class="card-body card-block">
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <input type="text" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+            <i class="fa fa-search"></i> 
+            <button id="addIndicator" class="btn btn-success btn-sm">Добавить индикатор</button>
+        </div>       
+    </div>
+    <ul id="resultIndicator"></ul>
 </div>
 
 <hr>
 
 <div class="card-body card-block">
-    <form action="" method="post" class="form-horizontal">
-        <div class="row form-group">
-            <div class="col-12 col-md-9">
-                <h5>Период:</h5>
-                <h5>от</h5>
-                <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
-                    <option value="0">месяц</option>
-                    <option value="1">Option #1</option>
-                </select>
-                <select name="fromYear" id="fromYear" class="form-control-sm form-control">
-                    <option value="0">год</option>
-                    <option value="1">Option #1</option>
-                </select>
-                <h5>до</h5>
-                <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
-                    <option value="0">месяц</option>
-                    <option value="1">Option #1</option>
-                </select>
-                <select name="untilYear" id="untilYear" class="form-control-sm form-control">
-                    <option value="0">год</option>
-                    <option value="1">Option #1</option>
-                </select>
-            </div>
+    <div class="row form-group">
+        <div class="col-12 col-md-9">
+            <h5>Период:</h5>
+            <h5>от</h5>
+            <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
+                @if(isset($months))
+                @for($i=0; $i < count($months); $i++)
+                <option value="{{$i}}">{{ $months[$i] }}</option>
+                @endfor
+                @endif
+            </select>
+            <select name="fromYear" id="fromYear" class="form-control-sm form-control">
+                @if(isset($years))
+                @for($i=0; $i < count($years); $i++)
+                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                @endfor
+                @endif
+            </select>
+            <h5>до</h5>
+            <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
+                @if(isset($months))
+                @for($i=0; $i < count($months); $i++)
+                <option value="{{$i}}">{{ $months[$i] }}</option>
+                @endfor
+                @endif
+            </select>
+            <select name="untilYear" id="untilYear" class="form-control-sm form-control">
+                @if(isset($years))
+                @for($i=0; $i < count($years); $i++)
+                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                @endfor
+                @endif
+            </select>
+            <button id="makeChart" class="btn btn-primary btn-sm">Построить график</button>
         </div>
-    </form>
+    </div>
 </div>
 
 <div class="content mt-3">
@@ -90,21 +128,25 @@
 </div><!-- .content -->
 
 <div class="card-body card-block">
-    <form action="" method="post" class="form-horizontal">
-        <div class="row form-group">
-            <div class="col col-md-12">
-                <div class="input-group">
-                    <h5>Название графика</h5>
-                    <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
-                    <div class="input-group-btn">
-                        <button class="btn btn-success btn-sm">Сохранить</button>
-                        <button class="btn btn-danger btn-sm">Экспортировать</button>
-                        <button class="btn btn-success btn-sm">Экспорт в Word</button>
-                    </div>                    
-                </div>
+    <div class="row form-group">
+        <div class="col col-md-12">
+            <div class="input-group">
+                <h5>Название графика</h5>
+                <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
+                <div class="input-group-btn">
+                    <button id="saveChart" class="btn btn-success btn-sm">Сохранить</button>
+                    <button class="btn btn-danger btn-sm">Экспортировать</button>
+                    <button class="btn btn-success btn-sm">Экспорт в Word</button>
+                </div>                    
             </div>
         </div>
-    </form>
+    </div>
 </div>
+
+<script type="text/javascript">
+    var indicatorsName = '<?=$indicators_name ?>';
+    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+</script>
 
 @endsection

@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>    
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -84,8 +83,8 @@
 
     </div><!-- /#right-panel -->
 
-    
-    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -105,7 +104,6 @@
 
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/chart-js/chartjs-init.js') }}"></script>
     <script src="{{ asset('js/line-charts.js') }}"></script>
 
 
@@ -129,33 +127,35 @@
     </script>
 
     <script type="text/javascript">
-        ( function( $ ) {
-            $(document).ready(function (){ 
+        /*
+        * Сохранение графика
+        */
 
-                function canvasToImg() {
-                  var canvas = document.getElementById('myChart'); 
-                  var img = canvas.toDataURL();
-              /*$.ajax({
-                url: "{{ route('chartsSave') }}",
-                type: "POST",
-                data: {img:img},
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
-            });*/
-          }
+        $('#saveChart').click(function (){ 
+            if (fullChart) {
+                var canvas = document.getElementById('myChart'); 
+                var img = canvas.toDataURL();
+                $.ajax({
+                    url: "{{ route('chartsSave') }}",
+                    type: "POST",
+                    data: {img:img},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (msg) {
+                        alert('Ошибка');
+                    }
+                }); 
+            }
+            else{
+            alert("Постройте график!");
+            }
+        });
 
-          canvasToImg();  
-
-      });
-        } )( jQuery );
-    </script>
+</script>
 
 </body>
 </html>
