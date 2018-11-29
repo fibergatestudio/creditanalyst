@@ -8,15 +8,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Info sources</title>
+    <title>Indicators</title>
   </head>
   <body>
+    @include('basic_bootstrap_template_parts.navbar')
     <div class="container">
-        @foreach($infosources as $infosource)
-            {{ $infosource-> name }}
 
-        @endforeach
+        <div class="row">
+            <div class="col col-lg-3">
+            @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => 'monitoring'])
+            
+            </div><!-- /col col-lg-3 -->
 
+            <div class="col col-lg-9">
+
+            <h2>Список индикаторов, отслеживаемых пользователем</h2>
+            
+            @foreach($indicator_watchlist_data as $data_entry)
+                {{ $data_entry->name }}
+                
+                {{-- Кнопка удалить показатель из мониторинга --}}
+                <a href="{{ url("/remove_indicator_from_watchlist")."/".$data_entry->indicator_id }}">
+                    <div class="btn btn-danger">
+                        Удалить из списка
+                    </div>
+                </a>
+            @endforeach
+            </div><!-- /col-lg-3 -->
+        </div><!-- /row -->
     </div>
 
     <!-- Optional JavaScript -->

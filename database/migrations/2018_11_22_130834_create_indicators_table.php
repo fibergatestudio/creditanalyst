@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use Illuminate\Support\Facades\DB;
+
 class CreateIndicatorsTable extends Migration
 {
     /**
@@ -41,6 +43,24 @@ class CreateIndicatorsTable extends Migration
             $table->foreign('source_id')->references('id')->on('infosources'); // Foreign key для источника, к которому относится показатель
             $table->timestamps();
         });
+		
+		
+		/*
+		* Ниже представлен тестовый массив данных
+		*/
+		
+		$data = [
+			[
+				'id' => 1,
+				'name' => 'Объёмы производства картошки в Украине',
+				'frequency' => 'month',
+				'geography_unit' => 'state',
+				'measurement_unit' => 'tonns',
+				'source_id' => 1
+			]
+		];
+		
+		DB::table('indicators')->insert($data);
     }
 
     /**
