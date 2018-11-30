@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use Illuminate\Support\Facades\DB;
+
 class CreateInfosourcesTable extends Migration
 {
     /**
@@ -37,6 +39,23 @@ class CreateInfosourcesTable extends Migration
             $table->string('max_geographic_unit'); // Максимальный размер географических единиц, для которых представлены данные в источнике (в примере - Макс. география: область); обязательное поле
             $table->timestamps();
         });
+		
+		
+		/*
+		* Ниже представлен тестовый массив данных
+		*/
+		$data = [
+			[
+				'id' => 1, 
+				'name' => 'Абсолютно все данные с сайта Госкомстата плюс цены на бананы',
+				'procurer' => 'ООО «Аналитическое агентство “Данные Госкомстата и бананы”»',
+				'description' => 'Тестовое описание',
+				'max_frequency' => 'month',
+				'max_geographic_unit' => 'state'
+			]
+		];
+		
+		DB::table('infosources')->insert($data);
     }
 
     /**
