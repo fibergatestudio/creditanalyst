@@ -16,33 +16,38 @@
 
         <div class="row">
             <div class="col col-lg-3">
-            @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => ''])
+            @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => 'none'])
             
             </div><!-- /col col-lg-3 -->
 
             <div class="col col-lg-9">
               <h2>Показатели для Источника "{{ $infosource->name }}"</h2>
-              @foreach($indicators as $indicator)
-                  
-                  {{-- НАЗВАНИЕ ПОКАЗАТЕЛЯ --}}
-                  {{ $indicator->name }}
-
-                  {{-- КНОПКА ПРОСМОТР ДАННЫХ В ПОКАЗАТЕЛЕ --}}
-                  <a href="{{ url('/dataset_view_indicator/'.$indicator->id) }}">
-                    <div class="btn btn-success">
-                      Просмотр
-                    </div>
-
-                  </a>
-
-                  {{-- КНОПКА ДОБАВИТЬ ПОКАЗАТЕЛЬ В МОНИТОРИНГ --}}
-                  <a href="{{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
-                    <div class="btn btn-primary">
-                      Добавить в мониторинг
-                    </div>
-                  </a>
-
-              @endforeach
+              <table class="table">
+                @foreach($indicators as $indicator)
+                    <tr>
+                      <td>
+                        {{-- НАЗВАНИЕ ПОКАЗАТЕЛЯ --}}
+                        {{ $indicator->name }}
+                      </td>
+                      <td>
+                        {{-- КНОПКА ПРОСМОТР ДАННЫХ В ПОКАЗАТЕЛЕ --}}
+                        <a href="{{ url('/dataset_view_indicator/'.$indicator->id) }}">
+                          <div class="btn btn-success">
+                            Просмотр
+                          </div>
+                        </a>
+                      </td>
+                      <td>
+                        {{-- КНОПКА ДОБАВИТЬ ПОКАЗАТЕЛЬ В МОНИТОРИНГ --}}
+                        <a href="{{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
+                          <div class="btn btn-primary">
+                            Добавить в мониторинг
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
+                @endforeach
+              </table>
             </div><!-- /col-lg-9 -->
         </div>
     </div><!-- /container -->

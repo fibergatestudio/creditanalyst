@@ -49,7 +49,10 @@
                     </li>                                                                     
                     <li>
                         <a href="{{route('chartsIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
-                    </li>                   
+                    </li>
+                    <li>
+                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
+                    </li>                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

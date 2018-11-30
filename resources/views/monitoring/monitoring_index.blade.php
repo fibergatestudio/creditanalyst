@@ -24,16 +24,22 @@
 
             <h2>Список индикаторов, отслеживаемых пользователем</h2>
             
-            @foreach($indicator_watchlist_data as $data_entry)
-                {{ $data_entry->name }}
-                
-                {{-- Кнопка удалить показатель из мониторинга --}}
-                <a href="{{ url("/remove_indicator_from_watchlist")."/".$data_entry->indicator_id }}">
-                    <div class="btn btn-danger">
-                        Удалить из списка
-                    </div>
-                </a>
-            @endforeach
+            <table class="table">
+                @foreach($indicator_watchlist_data as $data_entry)
+                    <tr>
+                        <td>{{ $data_entry->name }}</td>
+                        
+                        {{-- Кнопка удалить показатель из мониторинга --}}
+                        <td>
+                            <a href="{{ url("/remove_indicator_from_watchlist")."/".$data_entry->indicator_id }}">
+                                <div class="btn btn-danger">
+                                    Удалить из списка
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
             </div><!-- /col-lg-3 -->
         </div><!-- /row -->
     </div>

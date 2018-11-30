@@ -21,4 +21,14 @@ class CronData extends Model
         return $id_to_return;
 
     }
+
+    /*
+    * Функция, которая устанавливает ID последнего отработанного элемента
+    */
+
+    public static function set_last_processed_data_entry_id($id){
+        DB::table('cron_data')
+            ->where('key', '=', 'last_processed_indicator_id')
+            ->update(['value' => $id]);
+    }
 }

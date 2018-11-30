@@ -23,7 +23,8 @@ class CreateGeographyUnitsTable extends Migration
         });
 		
 		$data = [
-			['id' => 1, 'slug' => 'state', 'name_ru' => 'область']
+            ['id' => 1, 'slug' => 'state', 'name_ru' => 'область'],
+            ['id' => 2, 'slug' => 'country', 'name_ru' => 'страна'],
 		];
 		
 		DB::table('geography_units')->insert($data);
