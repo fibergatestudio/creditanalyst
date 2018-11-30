@@ -18,7 +18,7 @@ class SourcesListController extends Controller
     public function show(){
 
         $infosources = Infosource::all(); // Получаем данные об Источниках
-        return view('sources_list.index', ['infosources' => $infosources]);
+        return view('sources_list.sources_index', ['infosources' => $infosources]);
 
     }
 }

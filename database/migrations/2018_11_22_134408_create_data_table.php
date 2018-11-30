@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use Illuminate\Support\Facades\DB;
+
 class CreateDataTable extends Migration
 {
     /**
@@ -45,6 +47,29 @@ class CreateDataTable extends Migration
             $table->foreign('indicator_id')->references('id')->on('indicators'); // Foregin key для ID показателя, к которому относятся данные
             $table->timestamps();
         });
+		
+		/*
+		* Ниже представлен тестовый массив данных
+		*/
+		
+		$data = [
+			[
+				'id' => 1,
+				'date' => '2017-01-01',
+				'geography' => '6300000000',
+				'value' => '800.00',
+				'indicator_id' => 1				
+			],
+			[
+				'id' => 2,
+				'date' => '2017-01-01',
+				'geography' => '5300000000',
+				'value' => '980.00',
+				'indicator_id' => 1		
+			]
+		];
+		
+		DB::table('data')->insert($data);
     }
 
     /**
