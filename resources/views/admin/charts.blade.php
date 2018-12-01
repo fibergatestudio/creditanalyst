@@ -52,7 +52,7 @@
     background: #87CEEB;
     cursor: pointer;
 }
-i.fa.fa-window-close-o{
+i.fa.fa-window-close-o, i.fa.fa-wrench{
     cursor: pointer;
 }    
 </style>
@@ -144,6 +144,7 @@ i.fa.fa-window-close-o{
 </div>
 
 <script type="text/javascript">
+    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
     var indicatorsName = '<?=$indicators_name ?>';
     var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
     var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
