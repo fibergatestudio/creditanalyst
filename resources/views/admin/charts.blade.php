@@ -31,13 +31,6 @@
     </div>
 </div>
 
-@if(isset($indicators_obj))
-@foreach($indicators_obj as $k=>$indicator)
-
-
-@endforeach
-@endif
-
 <style type="text/css">
 #searchIndicator, #resultIndicator{
     width: 500px;
@@ -133,10 +126,10 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             <div class="input-group">
                 <h5>Название графика</h5>
                 <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
-                <div class="input-group-btn">
+                <div id="save-export" class="input-group-btn">
                     <button id="saveChart" class="btn btn-success btn-sm">Сохранить</button>
-                    <button class="btn btn-danger btn-sm">Экспортировать</button>
-                    <button class="btn btn-success btn-sm">Экспорт в Word</button>
+                    <button id="exportChart" class="btn btn-danger btn-sm">Экспортировать</button>
+                    <button id="exportToWordChart" class="btn btn-success btn-sm">Экспорт в Word</button>
                 </div>                    
             </div>
         </div>
@@ -144,6 +137,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 </div>
 
 <script type="text/javascript">
+    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
     var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
     var indicatorsName = '<?=$indicators_name ?>';
     var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';

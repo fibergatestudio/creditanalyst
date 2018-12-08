@@ -3,6 +3,33 @@
 */
 
 var indicatorsObj = JSON.parse(indicators);
+var dataObj = JSON.parse(data);
+//console.log(dataObj);
+var data = {};
+for (var i = 0; i < indicatorsObj.length; i++){
+    data[indicatorsObj[i].id] = [];
+    for (var j = 0; j < dataObj.length; j++) {
+        if (dataObj[j].indicator_id == indicatorsObj[i].id) {
+            if (dataObj[j].geography != '0000000000') {
+                if (dataObj[j].geography == '6310100000') {
+                    data[indicatorsObj[i].id].push({
+                        date : dataObj[j].date,
+                        value : dataObj[j].value
+                    });
+                } 
+            }
+            else{
+                data[indicatorsObj[i].id].push({
+                    date : dataObj[j].date,
+                    value : dataObj[j].value
+                });
+            }          
+        }                       
+    }
+}
+//console.log(data);
+//console.log(dataObj[0]);
+dataObj = data;
 var indicatorsAddArr = [];
 var measurement = '';
 var indicatorsArr = JSON.parse(indicatorsName);
@@ -82,25 +109,311 @@ $("#addIndicator").click(function() {
 function settingsIndicator(elem) {
     if (elem.siblings(".wrench").length > 0) {elem.siblings(".wrench").remove(); return 0;}
     var name = elem.parent().siblings('.indicator-name').text();
-    console.log(name);
     elem.after(`
         <select class="wrench">
-            <option value="0">агрегировать данные</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="month-mean">месяц(средний)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="quarter-mean">квартал(средний)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="year-mean">год(средний)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="month-min">месяц(минимальный)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="quarter-min">квартал(минимальный)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="year-min">год(минимальный)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="month-max">месяц(максимальный)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="quarter-max">квартал(максимальный)</option>
-            <option onclick="aggregationIndicator($(this),'`+name+`')" value="year-max">год(максимальный)</option>
+        <option value="0">агрегировать данные</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="M-mean">месяц(средний)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Q-mean">квартал(средний)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Y-mean">год(средний)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="M-min">месяц(минимальный)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Q-min">квартал(минимальный)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Y-min">год(минимальный)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="M-max">месяц(максимальный)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Q-max">квартал(максимальный)</option>
+        <option onclick="aggregationIndicator($(this),'`+name+`')" value="Y-max">год(максимальный)</option>
         </select>
         `);
 }
 
+//выполняем объединение данных согласно выбранной частоте
 function aggregationIndicator(elem,name) {
-    alert(elem.val()+ ' ' + name);
+    var frequencyArr = {'M':1, 'Q':2, 'Y':3};
+    for (var i = 0; i < indicatorsObj.length; i++){
+        if (indicatorsObj[i].name === name) {
+            if (indicatorsObj[i].frequency === elem.val().split('-')[0] || frequencyArr[indicatorsObj[i].frequency] > frequencyArr[elem.val().split('-')[0]]) {
+                alert("Подберите корректную частоту данных, или обновите страницу !");
+                return 0;
+            }
+            else {
+                if (confirm("Вы действительно хотите агрегировать эти данные ?")) {
+                    var data = dataObj[indicatorsObj[i].id];
+                    var startMonth = new Date(data[0].date).getMonth();
+                    var startYear = new Date(data[0].date).getFullYear();
+                    var startDate = data[0].date;
+                    var total = 0;
+                    var mean = 0;
+                    var min = parseFloat(data[0].value);
+                    var max = parseFloat(data[0].value);
+                    var newData = [];
+                    var length = 0;
+                    if (elem.val().split('-')[0] === 'M') {
+                        if (elem.val().split('-')[1] === 'mean') {                           
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == startMonth) {
+                                    total += parseFloat(data[j].value);
+                                    length++;
+                                }
+                                else{
+                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    newData.push({
+                                        date : startDate,
+                                        value : mean
+                                    });
+                                    startMonth++;
+                                    if (startMonth < 12) {
+                                        startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    }
+                                    else{
+                                        startYear++;
+                                        startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                        startMonth = 0;
+                                    }
+                                    total = 0;
+                                    length = 0;                                    
+                                }
+                            }
+                            mean = Math.ceil(total/length*100)/100;
+                            newData.push({
+                                date : startDate,
+                                value : mean
+                            });                            
+                        }
+                        else if (elem.val().split('-')[1] === 'min') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == startMonth) {
+                                    if (min > parseFloat(data[j].value)) {
+                                        min = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : min
+                                    });
+                                    startMonth++;
+                                    if (startMonth < 12) {
+                                        startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    }
+                                    else{
+                                        startYear++;
+                                        startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                        startMonth = 0;
+                                    }                             
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : min
+                            });
+                        }
+                        else if (elem.val().split('-')[1] === 'max') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == startMonth) {
+                                    if (max < parseFloat(data[j].value)) {
+                                        max = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : max
+                                    });
+                                    startMonth++;
+                                    if (startMonth < 12) {
+                                        startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    }
+                                    else{
+                                        startYear++;
+                                        startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                        startMonth = 0;
+                                    }                             
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : max
+                            });
+                        }
+                    }
+                    if (elem.val().split('-')[0] === 'Q') {
+                        if (elem.val().split('-')[1] === 'mean') {                           
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    newData.push({
+                                        date : startDate,
+                                        value : mean
+                                    });                                   
+                                    total = 0;
+                                    length = 0;
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    startMonth = 0;
+                                }
+                                if (new Date(data[j].date).getMonth() < startMonth + 3) {
+                                    total += parseFloat(data[j].value);
+                                    length++;
+                                }
+                                else{
+                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    newData.push({
+                                        date : startDate,
+                                        value : mean
+                                    });
+                                    startMonth += 3;
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    total = 0;
+                                    length = 0;                                    
+                                }
+                            }
+                            mean = Math.ceil(total/length*100)/100;
+                            newData.push({
+                                date : startDate,
+                                value : mean
+                            });                            
+                        }
+                        else if (elem.val().split('-')[1] === 'min') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                                   
+                                    newData.push({
+                                        date : startDate,
+                                        value : min
+                                    });                                   
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    startMonth = 0;
+                                }
+                                if (new Date(data[j].date).getMonth() < startMonth + 3) {
+                                    if (min > parseFloat(data[j].value)) {
+                                        min = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : min
+                                    });
+                                    startMonth += 3;
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : min
+                            });
+                        }
+                        else if (elem.val().split('-')[1] === 'max') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                                   
+                                    newData.push({
+                                        date : startDate,
+                                        value : max
+                                    });                                   
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    startMonth = 0;
+                                }
+                                if (new Date(data[j].date).getMonth() < startMonth + 3) {
+                                    if (max < parseFloat(data[j].value)) {
+                                        max = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : max
+                                    });
+                                    startMonth += 3;
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                          
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : max
+                            });
+                        }
+                    }
+                    if (elem.val().split('-')[0] === 'Y') {
+                        if (elem.val().split('-')[1] === 'mean') {                           
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getFullYear() == startYear) {
+                                    total += parseFloat(data[j].value);
+                                    length++;
+                                }
+                                else{
+                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    newData.push({
+                                        date : startDate,
+                                        value : mean
+                                    });
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    total = 0;
+                                    length = 0;                                    
+                                }
+                            }
+                            mean = Math.ceil(total/length*100)/100;
+                            newData.push({
+                                date : startDate,
+                                value : mean
+                            });                            
+                        }
+                        else if (elem.val().split('-')[1] === 'min') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == startYear) {
+                                    if (min > parseFloat(data[j].value)) {
+                                        min = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : min
+                                    });
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');                            
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : min
+                            });
+                        }
+                        else if (elem.val().split('-')[1] === 'max') {
+                            for (var j = 0; j < data.length; j++) {
+                                if (new Date(data[j].date).getMonth() == startYear) {
+                                    if (max < parseFloat(data[j].value)) {
+                                        max = parseFloat(data[j].value);
+                                    }
+                                }
+                                else{                                  
+                                    newData.push({
+                                        date : startDate,
+                                        value : max
+                                    });
+                                    startYear++;
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');                            
+                                }
+                            }
+                            newData.push({
+                                date : startDate,
+                                value : max
+                            });
+                        }
+                    }
+
+                    indicatorsObj[i].frequency = elem.val().split('-')[0];
+                    dataObj[indicatorsObj[i].id] = newData;
+                }
+                else{
+                    return 0;
+                }
+            }           
+        }
+    }
 }
 
 
@@ -109,13 +422,13 @@ function aggregationIndicator(elem,name) {
 */
 
 var monthsArr = JSON.parse(months);
-var dataObj = JSON.parse(data);
 var fullChart = false;
 var backgroundColor = ['rgba(255, 99, 132, 0.2)', 'rgba(76, 47, 39, 0.2)', 'rgba(33, 255, 33, 0.2)', 'rgba(33, 33, 255, 0.2)'];
 var borderColor = ['rgba(255, 99, 132, 1)', 'rgba(76, 47, 39, 1)', 'rgba(33, 255, 33, 1)', 'rgba(33, 33, 255, 1)'];
 
 $("#makeChart").click(function() {
 
+    var frequency = '';
     var ctx = undefined;
     var myLineChart = undefined;
     var dataChartObj = [];
@@ -154,22 +467,49 @@ $("#makeChart").click(function() {
                 }
             }    
         }
+
+        //Проверяем частоту данных
+        for (var i = 0; i < dataChartObj.length; i++) {
+            if (frequency === '') {
+                frequency = dataChartObj[i].frequency;
+            }
+            else if(frequency !== dataChartObj[i].frequency){
+                alert("Настройте одинаковую частоту индикаторов !");
+                return 0;
+            }            
+        }
         
         //Cоздаем объект с данными для каждого индикатора
-        
+
         hasFromYear = false;
         hasUntilYear = false;
         //проверяем наличие данных согласно периоду
         for (var i = 0; i < dataChartObj[0].data.length; i++){
-            if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear){
-                hasFromYear = true;
-                break;
+            if (dataChartObj[0].frequency === 'D'){
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear && new Date(dataChartObj[0].data[i].date).getMonth() == fromMonth){
+                    hasFromYear = true;
+                    break;
+                } 
+            }
+            else{
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear){
+                    hasFromYear = true;
+                    break;
+                }
             }
         }
         for (var i = 0; i < dataChartObj[0].data.length; i++){
-            if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear){
-                hasUntilYear = true;
-                break;  
+            if (dataChartObj[0].frequency === 'D') {
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear && new Date(dataChartObj[0].data[i].date).getMonth() == untilMonth - 1){
+                    hasUntilYear = true;
+                    break;  
+                }
+            }
+            else{
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear){
+                    hasUntilYear = true;
+                    break;  
+                }
             }
         }       
         if (!hasFromYear || !hasUntilYear) {
@@ -178,7 +518,14 @@ $("#makeChart").click(function() {
         } 
         
         //создаем горизонтальную шкалу согласно величине периода
-        if (daysPeriod < 367) {
+        if (daysPeriod < 58) {
+            for (var i = 0; i < dataChartObj[0].data.length; i++){
+                if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                    labels.push((new Date(dataChartObj[0].data[i].date).toLocaleString()).slice(0, -14));
+                }               
+            }
+        }
+        else if (daysPeriod < 367) {
             for (var i = 0; i < dataChartObj[0].data.length; i++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
                     labels.push(monthsArr[new Date(dataChartObj[0].data[i].date).getMonth()]);
@@ -237,7 +584,7 @@ $("#makeChart").click(function() {
         myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: labels,
+                labels: labels,//горизонтальная шкала данных
                 datasets: datasets,                       
             },
             options: {

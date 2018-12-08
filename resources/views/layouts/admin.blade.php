@@ -83,7 +83,6 @@
 
     </div><!-- /#right-panel -->
 
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
     <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
@@ -111,12 +110,6 @@
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
 
-            var str = document.location.href;
-            if(str.indexOf('sellers') + 1) {
-                $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
-                $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
-            }
-
             $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
             if ($('.dataTables_empty').text() == 'No data available in table') {
@@ -132,30 +125,86 @@
         */
 
         $('#saveChart').click(function (){ 
-            if (fullChart) {
-                var canvas = document.getElementById('myChart'); 
-                var img = canvas.toDataURL();
-                $.ajax({
-                    url: "{{ route('chartsSave') }}",
-                    type: "POST",
-                    data: {img:img},
-                    headers: {
-                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (data) {
-                        alert(data);
-                    },
-                    error: function (msg) {
-                        alert('Ошибка');
-                    }
-                }); 
+            var fileName = $('#chartName').val();
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert(data);
+                            window.location.reload();
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                        }
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                }
             }
             else{
-            alert("Постройте график!");
+                alert("Введите название графика!");
             }
         });
 
-</script>
+
+        /*
+        * Экспорт графика
+        */
+
+        $('#exportChart').click(function (){
+            var fileName = $('#chartName').val();
+            var fileExport = true;
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName, fileExport:fileExport},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.png');
+                            $('#exportChart').after(link);
+                            link.click();
+                            window.location.reload();
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                        }
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                }
+            }
+            else{
+                alert("Введите название графика!");
+            }
+        });
+    </script>
 
 </body>
 </html>
