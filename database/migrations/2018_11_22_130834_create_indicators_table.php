@@ -49,7 +49,7 @@ class CreateIndicatorsTable extends Migration
 		* Ниже представлен тестовый массив данных
 		*/
 		
-		$data = [
+		/* $data = [
 			[
 				'id' => 1,
 				'name' => 'Объёмы производства картошки в Украине',
@@ -57,10 +57,18 @@ class CreateIndicatorsTable extends Migration
 				'geography_unit' => 'state',
 				'measurement_unit' => 'tonns',
 				'source_id' => 1
+            ],
+            [
+				'id' => 2,
+				'name' => 'Объёмы производства бананов в Украине',
+				'frequency' => 'month',
+				'geography_unit' => 'state',
+				'measurement_unit' => 'tonns',
+				'source_id' => 1
 			]
 		];
 		
-		DB::table('indicators')->insert($data);
+		DB::table('indicators')->insert($data); */
     }
 
     /**

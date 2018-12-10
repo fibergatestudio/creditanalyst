@@ -58,8 +58,19 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	// Удаления индикатора из вотчлиста
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist');
 
+/* Пути для уведомлений */
+	Route::get('/notifications', 'NotificationsController@show_notifications')->middleware('auth');;
+
 /* Пути для управления пользоваетелем */
 	Route::get('/user_logout', 'UserManagementController@user_logout');
 
 /* Пути для крона */
 	Route::get('/cron', 'CronController@notification_pusher');
+
+/*
+* Пути для импорта данных (временные)
+*/
+
+	Route::get('/import', 'ImportController@import_test_data');
+/* Пути для AJAX API */
+	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');

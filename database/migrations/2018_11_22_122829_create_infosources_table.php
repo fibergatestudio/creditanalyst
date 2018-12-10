@@ -44,7 +44,7 @@ class CreateInfosourcesTable extends Migration
 		/*
 		* Ниже представлен тестовый массив данных
 		*/
-		$data = [
+		/* $data = [
 			[
 				'id' => 1, 
 				'name' => 'Абсолютно все данные с сайта Госкомстата плюс цены на бананы',
@@ -52,10 +52,26 @@ class CreateInfosourcesTable extends Migration
 				'description' => 'Тестовое описание',
 				'max_frequency' => 'month',
 				'max_geographic_unit' => 'state'
-			]
+            ],
+            [
+				'id' => 2, 
+				'name' => 'Тестовый источник 2',
+				'procurer' => 'ООО «Компания»',
+				'description' => 'Тестовое описание 2',
+				'max_frequency' => 'year',
+				'max_geographic_unit' => 'country'
+            ],
+            [
+                'id' => 3,
+				'name' => 'Тестовый источник 3',
+				'procurer' => 'ПрАТ «Акционерное общество»',
+				'description' => 'Тестовое описание 3',
+				'max_frequency' => 'year',
+				'max_geographic_unit' => 'state'
+            ]
 		];
 		
-		DB::table('infosources')->insert($data);
+		DB::table('infosources')->insert($data); */
     }
 
     /**
