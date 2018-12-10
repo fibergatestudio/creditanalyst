@@ -57,6 +57,14 @@ class CreateIndicatorsTable extends Migration
 				'geography_unit' => 'state',
 				'measurement_unit' => 'tonns',
 				'source_id' => 1
+            ],
+            [
+				'id' => 2,
+				'name' => 'Объёмы производства бананов в Украине',
+				'frequency' => 'month',
+				'geography_unit' => 'state',
+				'measurement_unit' => 'tonns',
+				'source_id' => 1
 			]
 		];
 		

@@ -24,11 +24,6 @@ class CreateGeographyUnitsTable extends Migration
             $table->timestamps();
         });
 		
-		/* $data = [
-			['id' => 1, 'slug' => 'state', 'name_ru' => 'область']
-		];
-		
-		DB::table('geography_units')->insert($data); */
     }
 
     /**

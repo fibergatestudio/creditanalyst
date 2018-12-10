@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Infosource;
 use App\Indicator;
 
+use Illuminate\Support\Facades\DB;
+
 class IndicatorListController extends Controller
 {
     //
@@ -32,13 +34,22 @@ class IndicatorListController extends Controller
     */
     public function search($search_query = ''){
         $results = [];
+        $results_meta = [];
         
         if(isset($_GET['search_query'])){
             $results = Indicator::search($_GET['search_query'])->get();
+            
+            
+            foreach($results as $result_entry){
+                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
+                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
+            }
+            
         }
 
         return view('indicator_list.indicator_search',[
-            'results' => $results
+            'results' => $results,
+            'results_meta' => $results_meta
         ]);
     }
 }
