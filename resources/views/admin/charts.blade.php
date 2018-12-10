@@ -140,6 +140,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 
 <script type="text/javascript">
     var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+    filesCharts = JSON.parse(filesCharts);
     var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
     var indicatorsName = '<?=$indicators_name ?>';
     var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';

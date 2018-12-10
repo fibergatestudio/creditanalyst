@@ -4,19 +4,30 @@
 
 var indicatorsObj = JSON.parse(indicators);
 var dataObj = JSON.parse(data);
-//console.log(dataObj);
 var data = {};
+var geography = '';
+//перебираем данные для составления объекта данных для графика под одну конкретную, 
+//первую попавшуюся область, если она задана, а не равна '0000000000'
 for (var i = 0; i < indicatorsObj.length; i++){
     data[indicatorsObj[i].id] = [];
     for (var j = 0; j < dataObj.length; j++) {
-        if (dataObj[j].indicator_id == indicatorsObj[i].id) {
-            if (dataObj[j].geography != '0000000000') {
-                if (dataObj[j].geography == '6310100000') {
+        if (dataObj[j].indicator_id === indicatorsObj[i].id) {
+            if (dataObj[j].geography !== '0000000000') {
+                if (geography !== '') {
+                    if (dataObj[j].geography === geography) {
+                        data[indicatorsObj[i].id].push({
+                            date : dataObj[j].date,
+                            value : dataObj[j].value
+                        });
+                    } 
+                }
+                else{
+                    geography = dataObj[j].geography;
                     data[indicatorsObj[i].id].push({
                         date : dataObj[j].date,
                         value : dataObj[j].value
                     });
-                } 
+                }               
             }
             else{
                 data[indicatorsObj[i].id].push({
@@ -24,11 +35,11 @@ for (var i = 0; i < indicatorsObj.length; i++){
                     value : dataObj[j].value
                 });
             }          
-        }                       
+        }                               
     }
+    geography = '';
 }
-//console.log(data);
-//console.log(dataObj[0]);
+
 dataObj = data;
 var indicatorsAddArr = [];
 var measurement = '';
@@ -94,6 +105,21 @@ $("#addIndicator").click(function() {
                 </tr>`
                 );
         }
+        //корректируем под имеющиеся данные блок периода графика
+        var start = 0;
+        var finish = 0;
+        var html = '';
+        for (var i = 0; i < indicatorsObj.length; i++){
+            if (indicatorsObj[i].name === $("#searchIndicator").val()) {
+                start = new Date(dataObj[indicatorsObj[i].id][0].date).getFullYear();
+                finish = new Date(dataObj[indicatorsObj[i].id][dataObj[indicatorsObj[i].id].length - 1].date).getFullYear();
+            }
+        }
+        for (var i = start; i <= finish; i++) {
+            html += `<option value="`+i+`">`+i+`</option>`;
+        }
+        $("#fromYear").html(html);
+        $("#untilYear").html(html);
     }
     else{
         alert("Лимит 4 индикатора !");

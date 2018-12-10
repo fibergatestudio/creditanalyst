@@ -40,15 +40,19 @@ class ChartsController extends AdminController
 		}
 */		
 
-		$files_charts = Storage::files('/charts');
+		//$files_charts = Storage::files('/charts');
+		$files_charts = scandir('storage/charts');
 		$temp = [];
 		foreach ($files_charts as $file) {
-			$temp[] = strtok(mb_substr($file, 7), '.');
+			if ($file !== '.' AND $file !== '..') {
+				$temp[] = strtok($file, '.');
+			}
 		}
 		$files_charts = $temp;
-		//echo '<pre>'.print_r($temp,true).'</pre>';
+		
 
 		$indicators_obj = Indicator::all();
+		//echo '<pre>'.print_r($files_charts,true).'</pre>';
 		$data_obj = Dataset::orderBy('date')->get();		
 		
 		return view('admin.charts', ['title' => $this->title, 'indicators_obj' => $indicators_obj, 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $data_obj, 'files_charts' => $files_charts]);
@@ -81,6 +85,17 @@ class ChartsController extends AdminController
 
 		if ($request->fileExport) {
 			$url = asset('storage/charts/'.$request->fileName.'.png');
+			return $url;
+		}
+
+		if ($request->fileExportToWord) {
+			$phpWord = new \PhpOffice\PhpWord\PhpWord();
+			$section = $phpWord->addSection();
+			$section->addImage('storage/charts/'.$request->fileName.'.png', array('width' => 500,
+        'height' => 150));  
+			$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+			$objWriter->save('storage/charts/'.$request->fileName.'.docx');
+			$url = asset('storage/charts/'.$request->fileName.'.docx');
 			return $url;
 		}
 
