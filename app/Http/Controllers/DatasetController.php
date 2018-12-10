@@ -17,12 +17,14 @@ class DatasetController extends Controller
         //$current_dataset = Dataset::where('indicator_id', $indicator_id)->get();
         $current_indicator = Indicator::find($indicator_id);
 
-        $current_indicator =
+        /* $current_indicator =
             DB::table('indicators')
                 ->where('indicators.id', '=', $indicator_id)
                 ->join('measurement_units', 'indicators.measurement_unit', '=', 'measurement_units.slug')
                 ->select('indicators.*', 'measurement_units.name_ru AS measurement_unit_name')
-                ->first();
+                ->first(); */
+        
+        
         
         $current_dataset = 
             DB::table('data')
@@ -31,14 +33,17 @@ class DatasetController extends Controller
                 ->select('data.*', 'koatuu.name_ru AS koatuu_name')
                 ->orderBy('data.date', 'desc')
                 ->get();
-        
+
+        //$current_dataset = Dataset::where('indicator_id', $indicator_id)->get();
+
+        //print_r($current_dataset);
         
 
         return view('dataset.dataset_index', 
             [
                 'dataset' => $current_dataset,
                 'indicator' => $current_indicator
-            ]);
+            ]); 
 
 
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+Use Illuminate\Support\Facades\DB;
+
 use App\Indicator;
 
 class AjaxController extends Controller
@@ -12,7 +14,9 @@ class AjaxController extends Controller
 
     public function indicator_hints_json(){
 
-        $indicators = Indicator::all();
+        //$indicators = Indicator::all();
+        $indicators = DB::table('indicators')->get();
+
         $data_array = [];
         foreach($indicators as $indicator){
             $data_array[] = $indicator->name;
