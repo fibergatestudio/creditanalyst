@@ -44,7 +44,7 @@ class CreateInfosourcesTable extends Migration
 		/*
 		* Ниже представлен тестовый массив данных
 		*/
-		$data = [
+		/* $data = [
 			[
 				'id' => 1, 
 				'name' => 'Абсолютно все данные с сайта Госкомстата плюс цены на бананы',
@@ -55,7 +55,7 @@ class CreateInfosourcesTable extends Migration
 			]
 		];
 		
-		DB::table('infosources')->insert($data);
+		DB::table('infosources')->insert($data); */
     }
 
     /**

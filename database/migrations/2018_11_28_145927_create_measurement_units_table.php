@@ -17,16 +17,18 @@ class CreateMeasurementUnitsTable extends Migration
     {
         Schema::create('measurement_units', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('slug');
+            $table->string('slug');
+            $table->string('name_en');
+            $table->string('name_ua');
 			$table->string('name_ru');
             $table->timestamps();
         });
 		
-		$data = [
+		/* $data = [
 			['id' => 1, 'slug' => 'tonns', 'name_ru' => 'тонны']
 		];
 		
-		DB::table('measurement_units')->insert($data);
+		DB::table('measurement_units')->insert($data); */
     }
 
     /**

@@ -42,7 +42,7 @@ class CreateDataTable extends Migration
             $table->increments('id');
             $table->date('date'); // Дата, с которой начинается период, к которому относится значение. Период берётся по Показателю ("родительскому" элементу)
             $table->string('geography'); // Код КОАТУУ, который обозначает територальную единицу, к которой относятся данные
-            $table->float('value'); // Числовое значение блока
+            $table->float('value', 14, 6); // Числовое значение блока
             $table->unsignedInteger('indicator_id'); // ID Показателя, к которому относятся данные
             $table->foreign('indicator_id')->references('id')->on('indicators'); // Foregin key для ID показателя, к которому относятся данные
             $table->timestamps();
@@ -52,7 +52,7 @@ class CreateDataTable extends Migration
 		* Ниже представлен тестовый массив данных
 		*/
 		
-		$data = [
+		/* $data = [
 			[
 				'id' => 1,
 				'date' => '2017-01-01',
@@ -69,7 +69,7 @@ class CreateDataTable extends Migration
 			]
 		];
 		
-		DB::table('data')->insert($data);
+		DB::table('data')->insert($data); */
     }
 
     /**

@@ -63,3 +63,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 /* Пути для крона */
 	Route::get('/cron', 'CronController@notification_pusher');
+
+/*
+* Пути для импорта данных (временные)
+*/
+
+	Route::get('/import', 'ImportController@import_test_data');
