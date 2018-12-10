@@ -143,7 +143,7 @@
                         },
                         success: function (data) {
                             alert(data);
-                            window.location.reload();
+                            filesCharts.push(fileName);
                         },
                         error: function (msg) {
                             alert('Ошибка');
@@ -189,7 +189,7 @@
                             link.setAttribute('download',fileName +'.png');
                             $('#exportChart').after(link);
                             link.click();
-                            window.location.reload();
+                            filesCharts.push(fileName);
                         },
                         error: function (msg) {
                             alert('Ошибка');
