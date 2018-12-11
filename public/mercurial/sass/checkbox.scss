@@ -1,0 +1,43 @@
+.form-check {
+  label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input[type=checkbox] {
+    display: none;
+    & + label {
+      &::before {
+        content: '';
+        display: block;
+        height: 22px;
+        width: 22px;
+        margin-right: 15px;
+        background-size: cover;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' id='svg9088' viewBox='0 0 847.00001 847.00001' style='clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision' version='1.1' height='8.4691mm' width='8.4691mm' xml:space='preserve'%3E%3Cmetadata id='metadata9092'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title%3E%3C/dc:title%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs9082'%3E%3C/defs%3E%3Cg transform='translate(-141,-141)' id='Слой_x0020_1'%3E%3Cmetadata id='CorelCorpID_0Corel-Layer' /%3E%3Cpath style='fill:%23bbbec1' id='path9085' d='m 282,141 h 565 c 77,0 141,64 141,141 v 565 c 0,77 -64,141 -141,141 H 282 C 205,988 141,924 141,847 V 282 c 0,-77 64,-141 141,-141 z m 565,71 H 282 c -19,0 -37,8 -50,20 v 0 c -12,13 -20,31 -20,50 v 565 c 0,19 8,37 20,49 v 1 c 13,12 31,20 50,20 h 565 c 19,0 37,-8 49,-20 l 1,-1 c 12,-12 20,-30 20,-49 V 282 c 0,-19 -8,-37 -20,-50 h -1 c -12,-12 -30,-20 -49,-20 z' class='fil0' /%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      padding-left:25px;
+      //height:15px;
+      display:flex;
+      flex-direction: row;
+      line-height:22px;
+      background-repeat:no-repeat;
+      background-position: 0 0;
+      font-size:15px;
+      vertical-align:middle;
+      cursor:pointer;
+    }
+
+    &:checked + label {
+      &::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:cc='http://creativecommons.org/ns%23' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' id='svg12' viewBox='0 0 847.00001 847.00001' style='clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision' version='1.1' height='8.4691mm' width='8.4691mm' xml:space='preserve'%3E%3Cmetadata id='metadata16'%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Cdc:title%3E%3C/dc:title%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cdefs id='defs4'%3E%3C/defs%3E%3Cg transform='translate(-141,-141)' id='Слой_x0020_1'%3E%3Cmetadata id='CorelCorpID_0Corel-Layer' /%3E%3Cpath style='fill:%23603684' id='path7' d='m 282,141 h 565 c 77,0 141,64 141,141 v 565 c 0,77 -64,141 -141,141 H 282 C 205,988 141,924 141,847 V 282 c 0,-77 64,-141 141,-141 z m 565,71 H 282 c -19,0 -37,8 -50,20 v 0 c -12,13 -20,31 -20,50 v 565 c 0,19 8,37 20,49 v 1 c 13,12 31,20 50,20 h 565 c 19,0 37,-8 49,-20 l 1,-1 c 12,-12 20,-30 20,-49 V 282 c 0,-19 -8,-37 -20,-50 h -1 c -12,-12 -30,-20 -49,-20 z' class='fil0' /%3E%3Cpolygon style='fill:%23603684;fill-rule:nonzero' id='polygon9' points='700,375 781,443 520,754 348,548 429,480 520,589 ' class='fil1' /%3E%3C/g%3E%3C/svg%3E");
+      }
+    }
+  }
+
+}

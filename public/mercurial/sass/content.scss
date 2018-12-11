@@ -1,0 +1,199 @@
+.section-content{
+  padding: 25px 50px;
+  .content-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .exit{
+      color: #3e4550;
+      line-height: 28px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  .name-menu{
+    color: #3e4550;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .card {
+    //width: calc(50% - 10px);
+    border-radius: 10px;
+    border-color: transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    &.odd {
+      //width: calc(55% - 10px);
+    }
+    &.even {
+      //width: calc(45% - 10px);
+    }
+    .card-body {
+      padding: 30px;
+    }
+
+    form {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .title-block{
+      background-image: linear-gradient(47deg, #3D3F8B, #603684);
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 32px;
+      padding: 12px;
+      margin: -20px -20px 23px -20px;
+
+    }
+    .form-check{
+      color: #3e4550;
+    }
+  }
+  .btn{
+    background-color: #84c33d;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    //text-transform: uppercase;
+  }
+  label{
+    color: #3e4550;
+  }
+  .text-align-right{
+      text-align: right;
+  }
+
+}
+#page-settings{
+  .card {
+    width: calc(50% - 10px);
+
+    &.odd {
+      width: calc(55% - 10px);
+    }
+
+    &.even {
+      width: calc(45% - 10px);
+    }
+  }
+  .new-password{
+    .form-group{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      label{
+        width: 80%;
+        //margin-bottom: 0;
+      }
+      .form-control{
+        width: auto;
+      }
+    }
+  }
+  .block-save-password{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 35px;
+    button{
+      padding: 15px 20px;
+      margin-right: 20px;
+    }
+    .save-password{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+.alert-dark {
+  color: #565e6e;
+  background-color: #f0eded;
+  border-color: transparent;
+}
+//-----------------------------------------------//page-exit//-------------------------------------------------------------------------------
+#page-exit{
+  text-align: center;
+  margin: 0 auto;
+  .card{
+    margin: 30px auto 0;
+
+    .row{
+      justify-content: space-around;
+    }
+    .button-exit{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .remind-password{
+      margin-top: 15px;
+      margin-bottom: 15px;
+      color: #b3b3b3;
+      text-decoration :underline;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #page-exit {
+    .exit-language {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 15px ;
+      label {
+        margin-bottom: 0;
+      }
+    }
+    .card {
+      min-width: 450px;
+      width: 50%;
+      form {
+        padding: 0;
+        label, span.col {
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+}
+
+//-----------------------------------------------//users-list//-------------------------------------------------------------------------------
+table {
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    a {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+#page-list-users {
+  table {
+    td {
+      &:last-child {
+        width: 25%;
+      }
+    }
+  }
+  .done-new-user{
+    color: #86c53c;
+  }
+
+}
