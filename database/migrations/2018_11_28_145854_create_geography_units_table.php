@@ -18,15 +18,12 @@ class CreateGeographyUnitsTable extends Migration
         Schema::create('geography_units', function (Blueprint $table) {
             $table->increments('id');
 			$table->string('slug');
-			$table->string('name_ru');
+            $table->string('name_en');
+            $table->string('name_ua');
+            $table->string('name_ru');
             $table->timestamps();
         });
 		
-		$data = [
-			['id' => 1, 'slug' => 'state', 'name_ru' => 'область']
-		];
-		
-		DB::table('geography_units')->insert($data);
     }
 
     /**

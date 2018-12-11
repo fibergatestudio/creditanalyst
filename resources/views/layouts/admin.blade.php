@@ -49,7 +49,10 @@
                     </li>                                                                     
                     <li>
                         <a href="{{route('chartsIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
-                    </li>                   
+                    </li>
+                    <li>
+                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
+                    </li>                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -83,7 +86,6 @@
 
     </div><!-- /#right-panel -->
 
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
     <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
@@ -111,12 +113,6 @@
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
 
-            var str = document.location.href;
-            if(str.indexOf('sellers') + 1) {
-                $('#bootstrap-data-table_wrapper > div:nth-child(3)').hide();
-                $('#bootstrap-data-table_wrapper > div:nth-child(1) > div:nth-child(1)').hide();
-            }
-
             $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
             if ($('.dataTables_empty').text() == 'No data available in table') {
@@ -131,31 +127,151 @@
         * Сохранение графика
         */
 
-        $('#saveChart').click(function (){ 
-            if (fullChart) {
-                var canvas = document.getElementById('myChart'); 
-                var img = canvas.toDataURL();
-                $.ajax({
-                    url: "{{ route('chartsSave') }}",
-                    type: "POST",
-                    data: {img:img},
-                    headers: {
-                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (data) {
-                        alert(data);
-                    },
-                    error: function (msg) {
-                        alert('Ошибка');
-                    }
-                }); 
+        $('#saveChart').click(function (){
+            $('#saveChart').prop( "disabled" , true ); 
+            var fileName = $('#chartName').val();
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    $('#saveChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert(data);
+                            filesCharts.push(fileName);
+                            $('#saveChart').prop( "disabled" , false );
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                            $('#saveChart').prop( "disabled" , false );
+                        }
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                    $('#saveChart').prop( "disabled" , false );
+                }
             }
             else{
-            alert("Постройте график!");
+                alert("Введите название графика!");
+                $('#saveChart').prop( "disabled" , false );
             }
         });
 
-</script>
+
+        /*
+        * Экспорт графика
+        */
+
+        $('#exportChart').click(function (){
+            $('#exportChart').prop( "disabled" , true );
+            var fileName = $('#chartName').val();
+            var fileExport = true;
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    $('#exportChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName, fileExport:fileExport},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.png');
+                            $('#exportChart').after(link);
+                            link.click();
+                            filesCharts.push(fileName);
+                            $('#exportChart').prop( "disabled" , false );
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                            $('#exportChart').prop( "disabled" , false );
+                        }
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                    $('#exportChart').prop( "disabled" , false );
+                }
+            }
+            else{
+                alert("Введите название графика!");
+                $('#exportChart').prop( "disabled" , false );
+            }
+        });
+
+
+        /*
+        * Экспорт графика в Word
+        */
+
+        $('#exportToWordChart').click(function (){
+            $('#exportToWordChart').prop( "disabled" , true );
+            var fileName = $('#chartName').val();
+            var fileExportToWord = true;
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    $('#exportToWordChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName, fileExportToWord:fileExportToWord},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.docx');
+                            $('#exportToWordChart').after(link);
+                            link.click();
+                            filesCharts.push(fileName);
+                            $('#exportToWordChart').prop( "disabled" , false );
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                            $('#exportToWordChart').prop( "disabled" , false );
+                        }                        
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                    $('#exportToWordChart').prop( "disabled" , false );
+                }
+            }
+            else{
+                alert("Введите название графика!");
+                $('#exportToWordChart').prop( "disabled" , false );
+            }
+        });
+    </script>
 
 </body>
 </html>

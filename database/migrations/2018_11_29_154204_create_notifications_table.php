@@ -1,12 +1,10 @@
 <?php
-/*
-* Эта таблица, которая содержит данные по тому, какие данные отслеживают пользователи
-*/
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserIndicatorWatchListTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +13,13 @@ class CreateUserIndicatorWatchListTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_indicator_watch_list', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('dataset_entry_id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('indicator_id');
+            $table->boolean('seen')->default(true);
+            $table->foreign('dataset_entry_id')->references('id')->on('data');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('indicator_id')->references('id')->on('indicators');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateUserIndicatorWatchListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_indicator_watch_list');
+        Schema::dropIfExists('notifications');
     }
 }

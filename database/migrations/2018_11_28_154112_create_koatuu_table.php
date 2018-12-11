@@ -17,7 +17,9 @@ class CreateKoatuuTable extends Migration
     {
         Schema::create('koatuu', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('unique_koatuu_id');
+            $table->string('unique_koatuu_id');
+            $table->string('name_en');
+            $table->string('name_ua');
 			$table->string('name_ru');
             $table->timestamps();
         });
@@ -26,7 +28,7 @@ class CreateKoatuuTable extends Migration
 		* Ниже представлен тестовый массив данных
 		*/
 		
-		$data = [
+		/* $data = [
 			[
 				'id' => 1,
 				'unique_koatuu_id' => 6300000000,
@@ -39,7 +41,7 @@ class CreateKoatuuTable extends Migration
 			]
 		];
 		
-		DB::table('koatuu')->insert($data);
+		DB::table('koatuu')->insert($data); */
     }
 
     /**

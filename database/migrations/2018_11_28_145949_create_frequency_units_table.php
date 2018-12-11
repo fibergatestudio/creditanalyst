@@ -17,18 +17,20 @@ class CreateFrequencyUnitsTable extends Migration
     {
         Schema::create('frequency_units', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('slug');
+            $table->string('slug');
+            $table->string('name_en');
+            $table->string('name_ua');
 			$table->string('name_ru');
             $table->timestamps();
         });
 		
-		$data = [
+		/* $data = [
 			['id' => 1, 'slug' => 'month', 'name_ru' => 'месяц'],
 			['id' => 2, 'slug' => 'year', 'name_ru' => 'год']
 		];
 			
 		
-		DB::table('frequency_units')->insert($data);
+		DB::table('frequency_units')->insert($data); */
     }
 
     /**

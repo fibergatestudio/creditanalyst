@@ -16,6 +16,17 @@
         <li class="list-group-item {{ sidebar_tab_active_checker('monitoring',$active_sidebar_name) }}">Мониторинг</li>
     </a>
 
+    <a href="{{ url('notifications') }}">
+        <li class="list-group-item d-flex justify-content-between align-items-center {{ sidebar_tab_active_checker('notifications',$active_sidebar_name) }}">Уведомления
+        
+        </li>
+        
+    </a>
+
+    <a href="{{ url('admin/charts') }}">
+        <li class="list-group-item {{ sidebar_tab_active_checker('',$active_sidebar_name) }}">Построение графика</li>
+    </a>
+
     <a href="{{ url('user_logout') }}">
         <li class="list-group-item">Выход</li>
     </a>
