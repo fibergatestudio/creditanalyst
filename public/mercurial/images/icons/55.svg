@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg10"
+   viewBox="0 0 846.00001 879.99999"
+   style="clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+   version="1.1"
+   height="8.799861mm"
+   width="8.4598665mm"
+   xml:space="preserve"><metadata
+   id="metadata14"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+ <defs
+   id="defs4">
+ </defs>
+ <g
+   transform="translate(-212,-195)"
+   id="Слой_x0020_1">
+  <metadata
+   id="CorelCorpID_0Corel-Layer" />
+  <path
+   style="fill:#3e4550"
+   id="path7"
+   d="M 663,582 H 325 c -24,0 -43,22 -43,51 v 321 c 0,28 19,51 43,51 h 338 c 23,0 43,-23 43,-51 V 634 c 1,-29 -18,-52 -43,-52 z M 536,825 v 54 c 0,22 -18,42 -42,42 -23,0 -42,-18 -42,-42 v -54 c -26,-14 -43,-41 -43,-72 0,-47 38,-83 83,-83 47,0 84,38 84,83 1,31 -16,58 -40,72 z M 1058,511 V 406 C 1058,290 964,195 847,195 729,195 635,290 635,406 V 511 H 325 c -34,0 -64,16 -85,41 -17,21 -28,50 -28,81 v 321 c 0,31 11,59 28,81 21,25 51,40 85,40 h 338 c 34,0 64,-15 85,-40 17,-22 28,-50 28,-81 v -320 0 -1 -1 c 0,-30 -10,-58 -28,-80 -11,-13 -25,-24 -40,-31 V 406 c 0,-77 62,-139 139,-139 77,0 139,62 139,139 v 105 z"
+   class="fil0" />
+ </g>
+</svg>

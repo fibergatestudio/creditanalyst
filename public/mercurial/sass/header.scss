@@ -1,0 +1,42 @@
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 25px 17px;
+  background-color: $header-bg-color;
+  border-bottom: 3px solid $header-border-color;
+}
+.logo {
+  height: 40px;
+}
+
+.form-search {
+  min-width: 350px;
+
+  .input-group {
+    width: 100%;
+    color: #cbcbcb;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+
+    &::placeholder {
+      color: #cbcbcb;
+    }
+  }
+}
+
+.btn-outline-secondary {
+  border-color: #cbcbcb;
+  color: #565e6e;
+}
+.block-right{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  span{
+    color: #3e4550;
+    padding-right: 35px;
+  }
+}

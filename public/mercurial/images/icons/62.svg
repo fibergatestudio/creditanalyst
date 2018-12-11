@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="9.1722mm" height="25.3998mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 917 2540"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#3E4550;fill-rule:nonzero}
+    .fil3 {fill:#4F5660;fill-rule:nonzero}
+    .fil1 {fill:#777C83;fill-rule:nonzero}
+    .fil2 {fill:#A9ACB1;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2417842011872">
+   <path class="fil0" d="M459 95c100,0 191,41 258,107 66,66 107,158 107,258l0 465c0,100 -41,192 -107,258 -67,66 -158,107 -258,107 -101,0 -192,-41 -258,-107 -66,-66 -108,-158 -108,-258l0 -465c0,-100 42,-192 108,-258 66,-66 157,-107 258,-107zm0 169c25,0 48,10 65,27 16,17 26,40 26,65l0 172c0,25 -10,48 -26,65l0 0c-17,16 -40,27 -65,27 -26,0 -49,-11 -65,-27l0 0c-17,-17 -27,-40 -27,-65l0 -172c0,-25 10,-48 27,-65 16,-17 39,-27 65,-27zm0 56c-10,0 -19,4 -26,11 -6,6 -10,15 -10,25l0 172c0,10 4,19 10,25 7,7 16,11 26,11 9,0 18,-4 25,-11 6,-6 10,-15 10,-25l0 -172c0,-10 -4,-19 -10,-25 -7,-7 -16,-11 -25,-11zm0 -169c-85,0 -163,35 -219,91 -56,56 -90,133 -90,218l0 465c0,85 34,162 90,218 56,56 134,91 219,91 85,0 162,-35 218,-91 56,-56 91,-133 91,-218l0 -465c0,-85 -35,-162 -91,-218 -56,-56 -133,-91 -218,-91z"/>
+   <path class="fil1" d="M266 1909c-12,-9 -14,-27 -5,-39 10,-12 28,-14 40,-5l158 126 157 -126c13,-9 30,-7 40,5 9,12 7,30 -5,39l-175 140 -17 14 -18 -14 -175 -140z"/>
+   <path class="fil2" d="M266 2292c-12,-10 -14,-28 -5,-40 10,-12 28,-14 40,-4l158 125 157 -125c13,-10 30,-8 40,4 9,12 7,30 -5,40l-175 139 -17 14 -18 -14 -175 -139z"/>
+   <path class="fil3" d="M266 1527c-12,-10 -14,-28 -5,-40 10,-12 28,-14 40,-4l158 125 157 -125c13,-10 30,-8 40,4 9,12 7,30 -5,40l-175 139 -17 14 -18 -14 -175 -139z"/>
+  </g>
+ </g>
+</svg>
