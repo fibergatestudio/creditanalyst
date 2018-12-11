@@ -127,11 +127,13 @@
         * Сохранение графика
         */
 
-        $('#saveChart').click(function (){ 
+        $('#saveChart').click(function (){
+            $('#saveChart').prop( "disabled" , true ); 
             var fileName = $('#chartName').val();
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
+                    $('#saveChart').prop( "disabled" , false );
                     return 0;
                 }
                 if (fullChart) {
@@ -147,18 +149,22 @@
                         success: function (data) {
                             alert(data);
                             filesCharts.push(fileName);
+                            $('#saveChart').prop( "disabled" , false );
                         },
                         error: function (msg) {
                             alert('Ошибка');
+                            $('#saveChart').prop( "disabled" , false );
                         }
                     }); 
                 }
                 else{
                     alert("Постройте график!");
+                    $('#saveChart').prop( "disabled" , false );
                 }
             }
             else{
                 alert("Введите название графика!");
+                $('#saveChart').prop( "disabled" , false );
             }
         });
 
@@ -168,11 +174,13 @@
         */
 
         $('#exportChart').click(function (){
+            $('#exportChart').prop( "disabled" , true );
             var fileName = $('#chartName').val();
             var fileExport = true;
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
+                    $('#exportChart').prop( "disabled" , false );
                     return 0;
                 }
                 if (fullChart) {
@@ -193,18 +201,74 @@
                             $('#exportChart').after(link);
                             link.click();
                             filesCharts.push(fileName);
+                            $('#exportChart').prop( "disabled" , false );
                         },
                         error: function (msg) {
                             alert('Ошибка');
+                            $('#exportChart').prop( "disabled" , false );
                         }
                     }); 
                 }
                 else{
                     alert("Постройте график!");
+                    $('#exportChart').prop( "disabled" , false );
                 }
             }
             else{
                 alert("Введите название графика!");
+                $('#exportChart').prop( "disabled" , false );
+            }
+        });
+
+
+        /*
+        * Экспорт графика в Word
+        */
+
+        $('#exportToWordChart').click(function (){
+            $('#exportToWordChart').prop( "disabled" , true );
+            var fileName = $('#chartName').val();
+            var fileExportToWord = true;
+            if (fileName) {
+                if (filesCharts.indexOf(fileName) !== -1){
+                    alert("Файл с таким именем уже существует!");
+                    $('#exportToWordChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fullChart) {
+                    var canvas = document.getElementById('myChart'); 
+                    var img = canvas.toDataURL();
+                    $.ajax({
+                        url: "{{ route('chartsSave') }}",
+                        type: "POST",
+                        data: {img:img, fileName:fileName, fileExportToWord:fileExportToWord},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.docx');
+                            $('#exportToWordChart').after(link);
+                            link.click();
+                            filesCharts.push(fileName);
+                            $('#exportToWordChart').prop( "disabled" , false );
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                            $('#exportToWordChart').prop( "disabled" , false );
+                        }                        
+                    }); 
+                }
+                else{
+                    alert("Постройте график!");
+                    $('#exportToWordChart').prop( "disabled" , false );
+                }
+            }
+            else{
+                alert("Введите название графика!");
+                $('#exportToWordChart').prop( "disabled" , false );
             }
         });
     </script>
