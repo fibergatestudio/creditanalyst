@@ -169,14 +169,14 @@ class ImportController extends Controller
 
 
         if($debug == false){
-            DB::table('geography_units')->insert($frequency_units_to_import);
+            DB::table('geography_units')->insert($geography_units_to_import);
         }
 
         /*
         * Седьмая страница - measurement_units
         */
 
-        $measurement_units = $array[5];
+        $measurement_units = $array[6];
         $measurement_units_to_import = [];
         foreach($measurement_units as $measurement_unit_entry){
             if($measurement_unit_entry[0] != 'id' && !empty($measurement_unit_entry[1])){
@@ -192,7 +192,7 @@ class ImportController extends Controller
 
 
         if($debug == false){
-            DB::table('measurement_units')->insert($frequency_units_to_import);
+            DB::table('measurement_units')->insert($measurement_units_to_import);
         }
 
     }
