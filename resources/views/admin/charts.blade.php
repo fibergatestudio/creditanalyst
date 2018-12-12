@@ -53,8 +53,6 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <div class="card-body card-block">
     <div class="row">
         <div class="col-12 col-md-9">
-            Для теста представлены следующие показатели: 'Цены на картошку (грн.)', 'Цены на бананы (грн.)', 'ВВП Украины (млрд. грн.)', 'Объёмы производства картошки в Украине (тонны)'
-            <hr>
             <input type="text" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
             <i class="fa fa-search"></i> 
             <button id="addIndicator" class="btn btn-success btn-sm">Добавить индикатор</button>
