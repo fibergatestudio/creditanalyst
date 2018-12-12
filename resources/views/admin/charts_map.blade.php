@@ -68,38 +68,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <div class="card-body card-block">
     <div class="row form-group">
         <div class="col-12 col-md-9">
-            <h5>Период:</h5>
-            <h5>от</h5>
-            <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
-                @if(isset($months))
-                @for($i=0; $i < count($months); $i++)
-                <option value="{{$i}}">{{ $months[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <select name="fromYear" id="fromYear" class="form-control-sm form-control">
-                @if(isset($years))
-                @for($i=0; $i < count($years); $i++)
-                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <h5>до</h5>
-            <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
-                @if(isset($months))
-                @for($i=0; $i < count($months); $i++)
-                <option value="{{$i}}">{{ $months[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <select name="untilYear" id="untilYear" class="form-control-sm form-control">
-                @if(isset($years))
-                @for($i=0; $i < count($years); $i++)
-                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <button id="makeChart" class="btn btn-primary btn-sm">Построить график</button>
+            <button id="makeChartMap" class="btn btn-primary btn-sm">Построить график</button>
         </div>
     </div>
 </div>
@@ -111,8 +80,8 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-3">myChart </h4>
-                        <canvas id="myChart" width="1200" height="300"></canvas>
+                        <h4 class="mb-3">myChartMap </h4>
+                        <canvas id="myChartMap" width="1200" height="300"></canvas>
                     </div>
                 </div>
             </div><!-- /# column -->
@@ -141,7 +110,6 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <script type="text/javascript">
     var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
     filesCharts = JSON.parse(filesCharts);
-    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
     var indicatorsName = '<?=$indicators_name ?>';
     var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
     var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
