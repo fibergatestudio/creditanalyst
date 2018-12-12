@@ -7,7 +7,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AdminController;
 use App\Indicator;
 use App\Dataset;
@@ -23,7 +23,7 @@ class ChartsMapController extends AdminController
 	
 	public function index(){
 		
-		$files_charts = scandir('storage/charts');
+		$files_charts = scandir('charts');
 		$temp = [];
 		foreach ($files_charts as $file) {
 			if ($file !== '.' AND $file !== '..') {

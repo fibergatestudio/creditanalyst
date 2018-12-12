@@ -20,12 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //admin
-Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {	
-	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
-	Route::get('/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
+Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
-	Route::post('/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
-	Route::post('/charts-map',['uses' => 'Admin\ChartsMapController@save_img_file','as' => 'chartsMapSave']);	
+	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
+	Route::get('/statistics-analysis',['uses' => 'Admin\StatisticsAnalysisController@index','as' => 'statisticsAnalysisIndex']);
+	Route::get('/statistics-analysis/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
+	Route::post('/statistics-analysis/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
+	Route::get('/statistics-analysis/charts-map',['uses'=>'Admin\ChartsMapController@index','as'=>'chartsMapIndex']);
+	Route::post('/statistics-analysis/charts-map',['uses' => 'Admin\ChartsMapController@save_img_file','as' => 'chartsMapSave']);	
 
 });
 

@@ -48,7 +48,7 @@
                         <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>Панель управления </a>
                     </li>                                                                     
                     <li>
-                        <a href="{{route('chartsIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
+                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
                     </li>
                     <li>
                         <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
