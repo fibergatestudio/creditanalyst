@@ -2,6 +2,25 @@
 
 @section('content')
 
+<style type="text/css">
+#searchIndicator, #resultIndicator{
+    width: 500px;
+}
+#resultIndicator{
+    background: #fff;
+}
+#resultIndicator > li{
+    list-style-type: none;
+}
+#resultIndicator > li:hover{
+    background: #87CEEB;
+    cursor: pointer;
+}
+i.fa.fa-window-close-o, i.fa.fa-wrench{
+    cursor: pointer;
+}    
+</style>
+
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
@@ -30,25 +49,6 @@
         </div>
     </div>
 </div>
-
-<style type="text/css">
-#searchIndicator, #resultIndicator{
-    width: 500px;
-}
-#resultIndicator{
-    background: #fff;
-}
-#resultIndicator > li{
-    list-style-type: none;
-}
-#resultIndicator > li:hover{
-    background: #87CEEB;
-    cursor: pointer;
-}
-i.fa.fa-window-close-o, i.fa.fa-wrench{
-    cursor: pointer;
-}    
-</style>
 
 <div class="card-body card-block">
     <div class="row">
@@ -106,13 +106,5 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
-    filesCharts = JSON.parse(filesCharts);
-    var indicatorsName = '<?=$indicators_name ?>';
-    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
-    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
-</script>
 
 @endsection

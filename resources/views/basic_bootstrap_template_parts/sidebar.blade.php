@@ -23,7 +23,7 @@
         
     </a>
 
-    <a href="{{ url('admin/charts') }}">
+    <a href="{{ url('admin/statistics-analysis') }}">
         <li class="list-group-item {{ sidebar_tab_active_checker('',$active_sidebar_name) }}">Построение графика</li>
     </a>
 

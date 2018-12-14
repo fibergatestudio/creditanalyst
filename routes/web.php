@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
 	Route::get('/statistics-analysis',['uses' => 'Admin\StatisticsAnalysisController@index','as' => 'statisticsAnalysisIndex']);
+	Route::post('/statistics-analysis',['uses' => 'Admin\StatisticsAnalysisController@destroy','as' => 'statisticsAnalysisDestroy']);
 	Route::get('/statistics-analysis/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
 	Route::post('/statistics-analysis/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
 	Route::get('/statistics-analysis/charts-map',['uses'=>'Admin\ChartsMapController@index','as'=>'chartsMapIndex']);

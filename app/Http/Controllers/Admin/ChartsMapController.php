@@ -7,57 +7,30 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AdminController;
 use App\Indicator;
 use App\Dataset;
 
 class ChartsMapController extends AdminController
 {
+	
 	private	$title = 'Создать новую карту';
 
 	
 	/*
-    * Функция которая отображает страницу создания графиков
+    * Функция которая отображает страницу создания графиков-карт
     */
 	
 	public function index(){
-		
-		$files_charts = scandir('charts');
-		$temp = [];
-		foreach ($files_charts as $file) {
-			if ($file !== '.' AND $file !== '..') {
-				$temp[] = strtok($file, '.');
-			}
-		}
-		$files_charts = $temp;
-		
-		$indicators_obj = Indicator::all();
+
 		//echo '<pre>'.print_r($files_charts,true).'</pre>';
-		$data_obj = Dataset::orderBy('date')->get();		
-		
-		return view('admin.charts_map', ['title' => $this->title, 'indicators_obj' => $indicators_obj, 'indicators_name' => $this->get_arr_name_indicators(), 'data_obj' => $data_obj, 'files_charts' => $files_charts]);
-	}
-
-
-	/*
-    * Функция которая выделяет имена индикаторов и возвращает json 
-    */
-
-	private function get_arr_name_indicators(){
-		$indicators_name = [];
-		$indicators_obj = Indicator::all();
-		foreach ($indicators_obj as $k => $value) {
-			$indicators_name[] = $value['name'];
-		}
-		$indicators_name =  json_encode($indicators_name,JSON_UNESCAPED_UNICODE);
-
-		return $indicators_name;
+						
+		return view('admin.charts_map', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full()]);
 	}
 
 	
 	/*
-    * Функция которая сохраняет график в картинку и позволяет экспортировать
+    * Функция которая сохраняет график-карту в картинку и позволяет экспортировать
     */
 
 	public function save_img_file(Request $request){

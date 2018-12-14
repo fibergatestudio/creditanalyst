@@ -224,7 +224,8 @@ function aggregationIndicator(elem,name) {
                                         startYear++;
                                         startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                         startMonth = 0;
-                                    }                             
+                                    } 
+                                    min = parseFloat(data[j].value);                            
                                 }
                             }
                             newData.push({
@@ -252,7 +253,8 @@ function aggregationIndicator(elem,name) {
                                         startYear++;
                                         startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                         startMonth = 0;
-                                    }                             
+                                    }
+                                    max = parseFloat(data[j].value);                             
                                 }
                             }
                             newData.push({
@@ -306,7 +308,8 @@ function aggregationIndicator(elem,name) {
                                     newData.push({
                                         date : startDate,
                                         value : min
-                                    });                                   
+                                    });
+                                    min = parseFloat(data[j].value);                                   
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                     startMonth = 0;
@@ -323,6 +326,7 @@ function aggregationIndicator(elem,name) {
                                     });
                                     startMonth += 3;
                                     startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    min = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -337,7 +341,8 @@ function aggregationIndicator(elem,name) {
                                     newData.push({
                                         date : startDate,
                                         value : max
-                                    });                                   
+                                    });
+                                    max = parseFloat(data[j].value);                                   
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                     startMonth = 0;
@@ -353,7 +358,8 @@ function aggregationIndicator(elem,name) {
                                         value : max
                                     });
                                     startMonth += 3;
-                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                          
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
+                                    max = parseFloat(data[j].value);                          
                                 }
                             }
                             newData.push({
@@ -389,7 +395,7 @@ function aggregationIndicator(elem,name) {
                         }
                         else if (elem.val().split('-')[1] === 'min') {
                             for (var j = 0; j < data.length; j++) {
-                                if (new Date(data[j].date).getMonth() == startYear) {
+                                if (new Date(data[j].date).getFullYear() == startYear) {
                                     if (min > parseFloat(data[j].value)) {
                                         min = parseFloat(data[j].value);
                                     }
@@ -400,7 +406,8 @@ function aggregationIndicator(elem,name) {
                                         value : min
                                     });
                                     startYear++;
-                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');                            
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    min = parseFloat(data[j].value);                            
                                 }
                             }
                             newData.push({
@@ -410,7 +417,7 @@ function aggregationIndicator(elem,name) {
                         }
                         else if (elem.val().split('-')[1] === 'max') {
                             for (var j = 0; j < data.length; j++) {
-                                if (new Date(data[j].date).getMonth() == startYear) {
+                                if (new Date(data[j].date).getFullYear() == startYear) {
                                     if (max < parseFloat(data[j].value)) {
                                         max = parseFloat(data[j].value);
                                     }
@@ -421,7 +428,8 @@ function aggregationIndicator(elem,name) {
                                         value : max
                                     });
                                     startYear++;
-                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');                            
+                                    startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
+                                    max = parseFloat(data[j].value);                            
                                 }
                             }
                             newData.push({

@@ -7,7 +7,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Admin\AdminController;
 
 
@@ -20,21 +19,24 @@ class StatisticsAnalysisController extends AdminController
     * Функция которая отображает страницу сохраненных графиков
     */
 	
-	public function index(){
-		
-		$files_charts = scandir('charts');
-		$temp = [];
-		foreach ($files_charts as $file) {
-			if ($file !== '.' AND $file !== '..') {
-				$temp[] = strtok($file, '.');
-			}
-		}
-		$files_charts = $temp;
+	public function index(){		
 		
 		//echo '<pre>'.print_r($files_charts,true).'</pre>';	
 		
-		return view('admin.statistics_analysis', ['title' => $this->title, 'files_charts' => $files_charts]);
+		return view('admin.statistics_analysis', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full()]);
 	}
 
+
+	/*
+    * Функция которая удаляет сохраненные графики
+    */
+	public function destroy(Request $request){
+
+		if (file_exists ('charts/'.$request->fileName)) {
+			unlink('charts/'.$request->fileName);
+		}		
+		
+		return $request->fileName;	
+	}
 
 }
