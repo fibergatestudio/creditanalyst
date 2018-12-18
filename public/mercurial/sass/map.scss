@@ -1,0 +1,59 @@
+
+
+
+.flex-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.single-chart {
+  width: 94px;
+  height: 94px;
+}
+.circular-chart .circle {
+  stroke: #86c53c;
+}
+
+.percentage {
+  width: 25px;
+  text-anchor: middle;
+  & > * {
+    color: #000000;
+    font-family: "Open Sans";
+    font-size: 4px;
+    font-weight: 700;
+  }
+
+  .number {
+    font-size: 12px;
+  }
+  .symbol,
+  .description {
+    font-size: 4px;
+    font-weight: normal;
+  }
+}
+
+.map {
+  position: relative;
+  .center {
+    position: absolute;
+    left: 34%;
+    bottom: 45%;
+  }
+  .west{
+    position: absolute;
+    left: 15%;
+    bottom: 75%;
+  }
+  .east{
+    position: absolute;
+    right: 30%;
+    bottom: 70%;
+  }
+  .south{
+    position: absolute;
+    right: 20%;
+    bottom: 35%;
+  }
+}
