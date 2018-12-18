@@ -5,10 +5,17 @@
 @import "grid";
 @import "header";
 @import "sidebar";
+@import "modal";
+@import "table";
+@import "map";
+@import "select";
 @import "content";
 
 * {
   box-sizing: border-box;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
 }
 
 ul{
@@ -38,6 +45,9 @@ body{
 .offset{
   margin-left: 18.8px;
 }
+.none{
+  display: none;
+}
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle,
@@ -47,8 +57,19 @@ body{
 .italic{
   font-style: italic;
 }
-input,button,.form-control{
+input,button,select,
+.form-control {
   height: 42px;
+}
+
+.form-control {
+  &:focus, &:hover {
+    border-color: #603684;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(96,54,132,.25);
+  }
 }
 input,
 .form-control:active{
@@ -56,7 +77,7 @@ input,
 }
 input[type='checkbox'],
 select.form-control {
-  height: auto;
+  //height: auto;
 }
 .popover {
   color: #2e448f;
@@ -76,15 +97,25 @@ select.form-control {
     border-radius: 50%;
     border-color: #e7e7e7;
     color: #3e4550;
+    .not-active{
+      color: #eaeaea;
+    }
   }
 }
 .page-item {
+  margin-right: 5px;
+
   &:first-child, &:last-child {
+
     .page-link {
       border-radius: 50%;
       color: #2e448f;
     }
+    .not-active{
+      color: #eaeaea;
+    }
   }
+
   &.active{
     .page-link {
       background-color: #f3f3f3;
@@ -98,3 +129,79 @@ select.form-control {
     }
   }
 }
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom:0;
+  background-color: transparent;
+  border-radius: .25rem;
+  li.breadcrumb-item{
+    &.active{
+      color: #ffffff;
+    }
+    a{
+      color: #a99dc4;
+    }
+
+  }
+}
+div.title-block{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .button-back{
+    color: #ffffff;
+    font-size: 12px;
+    padding: 3px 17px;
+    border: 1px solid #a99dc4;
+    border-radius: 10%;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+}
+.form-group {
+  align-items: center;
+}
+.form-time {
+  display: flex;
+
+  input[type="time"] {
+    &.form-control {
+      width: auto;
+      max-width: 120px;
+    }
+    &+label {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.btn-secondary{
+  background-color: #f0eded;
+  color: #808080;
+  border-color: transparent;
+}
+.content-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+a.btn{
+  height: 42px;
+  padding: 12px;
+  //display: flex;
+  //flex-direction: row;
+  //align-items: center
+}
+.table {
+  td{
+    vertical-align: middle;
+  }
+}
+.sm-lang {
+  padding-right: 0;
+  max-width: 75px;
+}
+

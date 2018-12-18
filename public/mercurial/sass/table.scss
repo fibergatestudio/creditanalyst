@@ -1,0 +1,7 @@
+.table-borderless {
+  tbody, thead, tfoot {
+    td, th {
+      border: none;
+    }
+  }
+}
