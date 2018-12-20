@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ url('admin/statistics-analysis') }}">
                     <span class="icon icon-statist"></span>
                     <span class="menu-item-description collapse show">Статистика и анализ</span>
                 </a>
