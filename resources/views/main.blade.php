@@ -52,9 +52,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Обратная  связь</a>
                             </li>
-                            <form class="form-inline">
-                                <button class="btn" href="{{ url('localhost/login') }} type="button">Вход</button>
-                            </form>
+                            <a href="{{ url('login') }}">
+                                <button class="btn">Вход</button>
+                            </a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-globe"></i> RU

@@ -14,7 +14,7 @@
 //Route::get('/', function () {
 	//return redirect('/login');
 	//return view('main');
-});
+//});
 
 //лендинг
 Route::get('/', 'MainController@index')->name('main');
@@ -35,8 +35,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/sources_list', function(){					//на dashdoard
 		return view('/sources_list');						//шаблон админки 
 	})->name('dashboard');									//название админки	
-}
-
+});
 
 
 Auth::routes();
