@@ -29,7 +29,11 @@ class MonitoringController extends Controller
                 ->get();
 
         
-        return view('monitoring.monitoring_index', ['indicator_watchlist_data' => $indicator_watch_data]);
+        return view('monitoring.monitoring_index', 
+            [
+                'indicator_watchlist_data' => $indicator_watch_data,
+                'active_sidebar_name' => 'monitoring'
+            ]);
     }
 
     /*

@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist');
 
 /* Пути для уведомлений */
-	Route::get('/notifications', 'NotificationsController@show_notifications')->middleware('auth');;
+	Route::get('/notifications', 'NotificationsController@show_notifications')->middleware('auth');
 
 /* Пути для управления пользоваетелем */
 	Route::get('/user_logout', 'UserManagementController@user_logout');
@@ -77,3 +77,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/import', 'ImportController@import_test_data');
 /* Пути для AJAX API */
 	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');
+
+/* Путь страниц помощи */
+Route::get('/help', 'HelpController@help_index')->middleware('auth');
