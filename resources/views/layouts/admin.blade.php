@@ -48,7 +48,7 @@
                         <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>Панель управления </a>
                     </li>                                                                     
                     <li>
-                        <a href="{{route('chartsIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
+                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
                     </li>
                     <li>
                         <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
@@ -86,6 +86,18 @@
 
     </div><!-- /#right-panel -->
 
+    <script type="text/javascript">
+        var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+        filesCharts = JSON.parse(filesCharts);
+        var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
+        filesChartsFull = JSON.parse(filesChartsFull);
+        var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
+        var indicatorsName = '<?=$indicators_name ?>';
+        var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+        var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+        var chartLink = "{{ asset('charts') }}";
+    </script>
+
     <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
@@ -107,7 +119,6 @@
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('js/line-charts.js') }}"></script>
-
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -133,6 +144,11 @@
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
+                    $('#saveChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fileName.indexOf('.') !== -1){
+                    alert('Недопустимый символ "." в имени файла!');
                     $('#saveChart').prop( "disabled" , false );
                     return 0;
                 }
@@ -180,6 +196,11 @@
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
+                    $('#exportChart').prop( "disabled" , false );
+                    return 0;
+                }
+                if (fileName.indexOf('.') !== -1){
+                    alert('Недопустимый символ "." в имени файла!');
                     $('#exportChart').prop( "disabled" , false );
                     return 0;
                 }
@@ -235,6 +256,11 @@
                     $('#exportToWordChart').prop( "disabled" , false );
                     return 0;
                 }
+                if (fileName.indexOf('.') !== -1){
+                    alert('Недопустимый символ "." в имени файла!');
+                    $('#exportToWordChart').prop( "disabled" , false );
+                    return 0;
+                }
                 if (fullChart) {
                     var canvas = document.getElementById('myChart'); 
                     var img = canvas.toDataURL();
@@ -271,7 +297,42 @@
                 $('#exportToWordChart').prop( "disabled" , false );
             }
         });
-    </script>
+
+        
+        /*
+        * Удаление сохраненных графиков
+        */
+        
+        function removeChart(element) {
+            if (confirm("Вы действительно хотите удалить эти данные ?")){
+                var fileName = filesChartsFull[element.getAttribute('data-id')];
+                $.ajax({
+                    url: "{{ route('statisticsAnalysisDestroy') }}",
+                    type: "POST",
+                    data: {fileName:fileName},
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        alert('Файл "'+data+'" успешно удален !');
+                        element.parentElement.remove();
+                    },
+                    error: function (msg) {
+                        alert('Ошибка');
+                    }
+                });               
+            }    
+        }
+
+</script>
+
+<script type="text/javascript">
+    //Посмотреть график
+    function watchChart(element) {
+        var fileName = filesChartsFull[element.getAttribute('data-id')];
+        document.location.href = chartLink + '/' + fileName;    
+    }
+</script>
 
 </body>
 </html>

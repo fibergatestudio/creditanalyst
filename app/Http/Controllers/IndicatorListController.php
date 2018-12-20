@@ -12,21 +12,24 @@ use Illuminate\Support\Facades\DB;
 
 class IndicatorListController extends Controller
 {
-    //
 
     /*
-    * Функция отображает все Показатели в Источнике по ID Исчтоника
+    * ОДИН Источник - все показатели : страница отображения
     */
     public function show($source_id){
         $infosource = Infosource::find($source_id);
         //$indicators = Indicator::where('source_id', $source_id)->get();
 
-        $indicators = DB::table('indicators')->where('source_id', $source_id)->get();
-        //print_r($indicators);
+        $indicators = 
+            DB::table('indicators')
+                ->where('source_id', $source_id)
+                ->paginate(3);
+        
         return view('indicator_list.indicators_index',
             [
                 'infosource' => $infosource,
-                'indicators' => $indicators
+                'indicators' => $indicators,
+                'active_sidebar_name' => 'sources'
             ]
         );
     }
@@ -59,7 +62,8 @@ class IndicatorListController extends Controller
 
         return view('indicator_list.indicator_search',[
             'results' => $results,
-            'results_meta' => $results_meta
+            'results_meta' => $results_meta,
+            'active_sidebar_name' => 'search'
         ]);
     }
 }

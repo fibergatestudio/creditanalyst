@@ -11,21 +11,46 @@
 |
 */
 
-Route::get('/', function () {
-	return redirect('/login');
-	//return view('welcome');
+//Route::get('/', function () {
+	//return redirect('/login');
+	//return view('main');
+//});
+
+//лендинг
+Route::get('/', 'MainController@index')->name('main');
+
+//кастом логин админ/пользователь
+Route::post('/login/custom', [
+	'uses' => 'LoginController@login',
+	'as' => 'login.custom'
+]);
+
+//роут для вывода админки админу
+Route::group(['middleware' => 'auth'], function(){
+
+	Route::get('/sources_list', function(){                 //на личный кабинет пользователя
+		return view('sources_list');                        //шаблон лк
+	})->name('cabinet');								    //название лк	
+
+	Route::get('/sources_list', function(){					//на dashdoard
+		return view('/sources_list');						//шаблон админки 
+	})->name('dashboard');									//название админки	
 });
+
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //admin
-Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {	
+Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
+
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
-	Route::get('/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
-
-	Route::post('/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);	
-
+	Route::get('/statistics-analysis',['uses' => 'Admin\StatisticsAnalysisController@index','as' => 'statisticsAnalysisIndex']);
+	Route::post('/statistics-analysis',['uses' => 'Admin\StatisticsAnalysisController@destroy','as' => 'statisticsAnalysisDestroy']);
+	Route::get('/statistics-analysis/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
+	Route::post('/statistics-analysis/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
+	Route::get('/statistics-analysis/charts-map',['uses'=>'Admin\ChartsMapController@index','as'=>'chartsMapIndex']);
+	Route::post('/statistics-analysis/charts-map',['uses' => 'Admin\ChartsMapController@save_img_file','as' => 'chartsMapSave']);	
 
 });
 
@@ -59,7 +84,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist');
 
 /* Пути для уведомлений */
-	Route::get('/notifications', 'NotificationsController@show_notifications')->middleware('auth');;
+	Route::get('/notifications', 'NotificationsController@show_notifications')->middleware('auth');
 
 /* Пути для управления пользоваетелем */
 	Route::get('/user_logout', 'UserManagementController@user_logout');
@@ -74,3 +99,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/import', 'ImportController@import_test_data');
 /* Пути для AJAX API */
 	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');
+
+/* Путь страниц помощи */
+Route::get('/help', 'HelpController@help_index')->middleware('auth');

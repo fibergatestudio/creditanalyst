@@ -1,61 +1,207 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.mercurial')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+@section('content')
 
-    <title>Indicators</title>
-  </head>
-  <body>
-    @include('basic_bootstrap_template_parts.navbar')
-    <div class="container">
+              
+{{-- 
+  Ссылки:
+  КНОПКА ПРОСМОТР ДАННЫХ В ПОКАЗАТЕЛЕ
+  url('/dataset_view_indicator/'.$indicator->id)
 
-        <div class="row">
-            <div class="col col-lg-3">
-            @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => 'none'])
-            
-            </div><!-- /col col-lg-3 -->
+  КНОПКА ДОБАВИТЬ ПОКАЗАТЕЛЬ В МОНИТОРИНГ
+  {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}
 
-            <div class="col col-lg-9">
-              <h2>Показатели для Источника "{{ $infosource->name }}"</h2>
-              <table class="table">
-                @foreach($indicators as $indicator)
-                    <tr>
-                      <td>
-                        {{-- НАЗВАНИЕ ПОКАЗАТЕЛЯ --}}
-                        {{ $indicator->name }}
-                      </td>
-                      <td>
-                        {{-- КНОПКА ПРОСМОТР ДАННЫХ В ПОКАЗАТЕЛЕ --}}
-                        <a href="{{ url('/dataset_view_indicator/'.$indicator->id) }}">
-                          <div class="btn btn-success">
-                            Просмотр
-                          </div>
-                        </a>
-                      </td>
-                      <td>
-                        {{-- КНОПКА ДОБАВИТЬ ПОКАЗАТЕЛЬ В МОНИТОРИНГ --}}
-                        <a href="{{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
-                          <div class="btn btn-primary">
-                            Добавить в мониторинг
-                          </div>
-                        </a>
-                      </td>
-                    </tr>
-                @endforeach
-              </table>
-            </div><!-- /col-lg-9 -->
+--}}
+{{-- Выше - было --}}
+
+{{-- Ниже - стало --}}
+
+<section id="page-source-name" class="section-content">
+        <div class="content-title">
+            <h2 class="name-menu">{{ $infosource->name }}</h2>
+            {{-- Logout --}}
+            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
         </div>
-    </div><!-- /container -->
+        <div class="card card-fluid">
+            <div class="card-body">
+                <div class="title-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ url('sources_list') }}">Источники данных</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $infosource->name }}</li>
+                        </ol>
+                    </nav>
+                    <a href="{{ url('sources_list') }}" class="text button-back">Назад</a>
+                </div>
+                <div class="content-row">
+                    <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
+                    <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        Экспорт всех данных в Excel
+                    </a>
+                    {{-- Верхняя пагинация --}}
+                    {{ $indicators->links() }}
+                    
+                    {{-- Конец верхней пагинации --}}
+                </div>
+                <table class="table table-striped">
+                    <thead></thead>
+                    <tbody>
+                      @foreach($indicators as $indicator)
+                        <tr>
+                            <td>{{ $indicator->name }}</td>
+                            <td>
+                                <div class="actions">
+                                    <a href=" {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
+                                        <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Добавить показатель в мониторинг"></span>
+                                    </a>
+                                    <a href="#" class="icon icon-stat"></a>
+                                    <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a>
+                                </div>
+                            </td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                </table>
+                <div class="content-row">
+                    <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
+                    <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
+                    <a href="#" class="btn btn-success">Экспорт всех данных в Excel</a>
+                    {{-- Нижняя пагинация --}}
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
-</html>
+                        {{ $indicators->links() }}
+
+                    {{-- Конец нижней пагинации --}}
+                </div>
+            </div>
+        </div>
+
+        {{-- Модальное окно : Общий экспорт в эксель --}}
+        <div class="modal modal-export fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form>
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Экспорт в Excel</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="icon icon-close"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                            <label for="exampleCheck2"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                                            <label for="exampleCheck3"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck4">
+                                            <label for="exampleCheck4"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck5">
+                                            <label for="exampleCheck5"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck7">
+                                            <label for="exampleCheck7"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck6">
+                                            <label for="exampleCheck6"></label>
+                                        </div>
+                                    </td>
+                                    <td>Показатель 6, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов,
+                                        пока финальный текст еще не создан. Рыбный текст также известен как текст-заполнитель или же текст-наполнитель. Иногда текст-«рыба»
+                                        также используется композиторами при написании музыки.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="modal-footer">
+                        
+                            <button type="submit" class="btn btn-success">Экспорт в Excel</button>
+                            {{-- Пагинация --}}
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                            </ul>
+                            {{-- Конец пагинации --}}
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        {{-- Конец модального окна --}}
+
+        {{-- Модальное окно : Показатель --}}
+        <div class="modal modal-more fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="icon icon-close"></span>
+                        </button>
+                    </div>
+                    <div class="text-align-left modal-body">
+                        <span class="text text-bold">Показатель Название</span>
+                        <span class="modal-size-small">
+                    Lorem ipsum dolor sit amet. Duo duis ipsum diam. Te erat clita et eos est hendrerit amet.
+                    Ipsum soluta nonummy eros consequat. Iriure in eirmod consequat sit rebum consequat.
+                    Ullamcorper dolores dolor augue wisi ea et duis. Assum nobis et in stet takimata dolores quis.
+                    Takimata no sed amet
+                </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">В мониторинг</button>
+                        <button type="button" class="btn btn-success ">Экспорт в Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Конец модального окна --}}
+
+    </section>
+
+@endsection

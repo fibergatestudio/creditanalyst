@@ -27,10 +27,10 @@ class SourcesListController extends Controller
                 ->join('frequency_units', 'infosources.max_frequency', '=', 'frequency_units.slug')
                 ->join('geography_units', 'infosources.max_geographic_unit', '=', 'geography_units.slug')
                 ->select('infosources.*', 'frequency_units.name_ru AS frequency_unit_name', 'geography_units.name_ru AS geography_unit_name')
-                ->get();
+                ->paginate(10);
         
 
-        return view('sources_list.sources_index', ['infosources' => $infosources]);
+        return view('sources_list.sources_index', ['infosources' => $infosources, 'active_sidebar_name' => 'sources']);
 
     }
 }

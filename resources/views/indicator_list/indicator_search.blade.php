@@ -1,76 +1,163 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.mercurial')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+@section('content')
 
-    <title>Поиск</title>
-  </head>
-  <body>
-    @include('basic_bootstrap_template_parts.navbar')
-        <div class="container">
 
-            <div class="row">
-                <div class="col col-lg-3">
-                @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => 'search'])
-                
-                </div><!-- /col col-lg-3 -->
+{{-- 
+    Ссылки:
+    Просмотр
+    url('/dataset_view_indicator'.'/'.$result->id)
+    Добавить в мониторинг
+    url('/add_indicator_to_watch_list'.'/'.$result->id)
 
-                <div class="col col-lg-9">
-                    <h2>Поиск</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form class="form-inline" method="GET" actions="{{ url('indicator_search') }}">
-                                <input type="text" class="form-control typeahead" name="search_query" place="Введите поисковый запрос">
-                                <button type="submit" class="btn btn-primary"> Поиск</button>
+--}}
+
+{{-- Выше - было --}}
+
+{{-- Ниже - стало --}}
+
+                <section id="page-search-results" class="section-content">
+        <div class="content-title">
+            <h2 class="name-menu">Поиск данных</h2>
+            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+        </div>
+        <div class="card card-fluid">
+            <div class="card-body">
+                {{-- Хлебные крошки --}}
+                <div class="title-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @if(isset($_GET['search_query']) && !empty($_GET['search_query']))
+                                <li class="breadcrumb-item"><a href="{{ url('indicator_search') }}">Введите поисковый запрос</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Результат поиска</li>
+                            @else
+                                <li class="breadcrumb-item"><a href="#">Введите поисковый запрос</a></li>
+                                
+                            @endif
+                            
+                        </ol>
+                    </nav>
+                </div>
+                {{-- Конец хлебных крошек --}}
+
+                <section class="search-content row justify-content-center">
+                    <div class="col-sm-8 align-self-center">
+                        <div class="input-group">
+                            {{-- Форма поиска --}}
+                            <form class="form-inline" method="GET" actions="{{ url('indicator_search') }} >
+                                @csrf
+                                <div class="input-group input-group-lg">
+                                    <input type="text" class="form-control typeahead input-lg" placeholder="Введите поисковый запрос" name="search_query" style="width: 500px">
+                                    <button class="btn btn-outline-secondary" type="submit"><span class="icon icon-search"></span></button>
+                                
+                                </div>
 
                             </form>
-                        </div><!-- /col-md-6 -->
-                    </div><!-- /work -->
 
-                    <div class="row" style="margin-top: 10px">
-                        <table class="table">
-                            @foreach($results as $result)
-                                <tr>
-                                    <td>    
-                                        <b>{{ $result->name }}</b><br>
-                                        <i>Источник данных:</i> {{ $results_meta[$result->id]['infosource_name'] }}<br>
-                                        <i>Поставщик данных:</i> {{ $results_meta[$result->id]['procurer'] }}
-                                    </td>
-                                    
-                                    {{-- Кнопка "Просмотр" --}}
-                                    <td>
-                                        <a href="{{ url('/dataset_view_indicator'.'/'.$result->id) }}">
-                                            <div class="btn btn-success">Просмотр</div>
-                                        </a>
-                                    </td>                            
+                            {{-- Конец формы --}}
 
-                                    {{-- Кнопка "Добавить в мониторинг" --}}
-                                    <td>
-                                        <a href="{{ url('/add_indicator_to_watch_list'.'/'.$result->id) }}">
-                                            <div class="btn btn-primary">Добавить в мониторинг</div>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
+                        </div>
                     </div>
-                </div><!-- /col-lg-9 -->
-            </div><!-- /row -->
-        </div><!-- /container -->
+                    <div class="w-100 search-delimeter row"></div>
+                    {{-- Результаты поиска  --}}
+                    <div class="mb-3 col-md-8">
+                        <ul class="list-results">
+                        
+                            @foreach($results as $result)
+                                <li>
+                                    <div class="result-item">
+                                        <img src="mercurial/images/icon-logo-data-sources.png">
+                                        <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#"> подробнее</a>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="search-details">{{ $result->name }}</span> <a href="#"> подробнее</a>
+                                    </div>
+                                </li>
+                            @endforeach
 
+                        </ul>
+                        
+                        @if( count($results) == 0 && empty($_GET['search_query']))
+                            Пожалуйста, введите поисковый запрос.
+                        @endif
+                        
+                        @if( count($results) == 0 && !empty($_GET['search_query']))
+                            По вашему запросу, к сожалению, ничего не найдено
+                        @endif
+                    </div>
+                        
+                    {{-- Конец результатов поиска --}}
+                    
+                        
+
+                    <div class="w-100 search-delimeter row"></div>
+
+                    <div class="content-row results-bottom col-md-12">
+                        <div class="content-row col-md-6">
+                            <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
+                                {{-- Не нашли то, что искали? --}}
+                            </a>
+
+                                {{-- Модальное окно : не нашли --}}
+                                <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span class="icon icon-close"></span>
+                                                </button>
+                                            </div>
+                                            <div class="text-align-left modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="exampleFormControlTextarea1"></label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
+                                                    </div>
+                                                </form>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        Отправить анонимно
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                    <label class="form-check-label" for="exampleRadios2">
+                                                        Со мной можно связаться для уточнения
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>{{-- /modal --}}
+                                {{-- Конец модального окна --}}
+
+                            
+                            <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
+                        </div>
+
+                        {{-- 
+                        <ul class="pagination col-md-2">
+                            <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
+                            <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                        </ul>
+                        --}}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    @endsection
+    
+    
+@section('scripts')
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     {{-- Typeahead JS --}}
     <script src="{{ url('assets/typeahead.bundle.js') }}"></script>
@@ -133,5 +220,4 @@
             border: 1px solid grey;
         }
     </style>
-  </body>
-</html>
+@endsection

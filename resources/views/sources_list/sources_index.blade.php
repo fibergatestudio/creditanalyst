@@ -1,28 +1,7 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.mercurial')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Info sources</title>
-  </head>
-  <body>
-
-    @include('basic_bootstrap_template_parts.navbar')
-
-    <div class="container">
-        
-      <div class="row">
-        <div class="col col-lg-3">
-          @include('basic_bootstrap_template_parts.sidebar', ['active_sidebar_name' => 'sources'])
-          
-        </div><!-- /col col-lg-3 -->
-
-        <div class="col col-lg-9">
+@section('content')
+{{-- 
           <div class="accordion" id="sources_accordion">
             
             @foreach($infosources as $infosource)
@@ -55,19 +34,64 @@
                 </div><!-- / card -->
               @endforeach
             </div><!-- / accordion -->
-          </div> <!-- / col col-lg-9 -->
+            --}}
+{{-- ВЫШЕ - БЫЛО --}}
 
-      </div><!-- / row -->
-    </div><!-- / container -->
+<section id="data-sources" class="section-content">
+        <div class="content-title">
+            <h2 class="name-menu">Источники данных</h2>
+            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+        </div>
+        <div class="content-grid">
+            <div class="card card-fluid">
+                <div class="card-body">
+                    <h3 class="title-block">Источники данных</h3>
+                    <div id="accordion">
+                      @foreach($infosources as $infosource)
+                        <div class="card card-fluid">
+                            <div class="card-header-accordion" id="headingOne">
+                                <div class="content-row">
+                                    <img src="mercurial/images/icon-logo-data-sources.png">
+                                    <h3 class="text">{{ $infosource->name }}</h3>
+                                </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                                    <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fas fa-angle-up"></i>
+                                    </button>
+                            </div>
+
+                            <div class="row">
+                                <div id="collapseOne" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-md-4">Описание:</dt>
+                                            <dd class="col-md-8">{{ $infosource->description }}. </dd>
+                                            <dt class="col-md-4">Источник / поставщик:</dt>
+                                            <dd class="col-md-8">{{ $infosource->procurer }}</dd>
+                                            <dt class="col-md-4">Частота данных:</dt>
+                                            <dd class="col-md-8">{{ $infosource->frequency_unit_name }}</dd>
+                                            <dt class="col-md-4">География данных:</dt>
+                                            <dd class="col-md-8">{{ $infosource->geography_unit_name }}</dd>
+                                        </dl>
+                                        <a href="{{ url('indicator_list/'.$infosource->id) }}">
+                                          <button class="btn btn-success">Список показателей</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>{{-- /card card fluid --}}
+                      @endforeach 
+                        
+                        
+                    </div>{{-- /accordion--}}
+                </div>
+                {{-- Пагинация --}}
+
+                    {{ $infosources->links() }}
+                
+                {{-- Конец пагинации --}}
+            </div>
+        </div>
 
 
-    <!-- Typeahed -->
-    <script src="{{ url('assets/typeahead.bundle.js') }}">
-  </body>
-</html>
+@endsection
