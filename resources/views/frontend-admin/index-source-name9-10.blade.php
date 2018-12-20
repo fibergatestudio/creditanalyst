@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
+    <link href="mercurial/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
+        <img src="mercurial/images/logo.png" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Введите поисковый запрос">
@@ -195,97 +195,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="modal modal-export fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <form>
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3>Экспорт в Excel</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span class="icon icon-close"></span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-striped">
-                                <thead>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                                            <label for="exampleCheck2"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck3">
-                                            <label for="exampleCheck3"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck4">
-                                            <label for="exampleCheck4"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck5">
-                                            <label for="exampleCheck5"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck7">
-                                            <label for="exampleCheck7"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck6">
-                                            <label for="exampleCheck6"></label>
-                                        </div>
-                                    </td>
-                                    <td>Показатель 6, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов,
-                                        пока финальный текст еще не создан. Рыбный текст также известен как текст-заполнитель или же текст-наполнитель. Иногда текст-«рыба»
-                                        также используется композиторами при написании музыки.</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Экспорт в Excel</button>
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                                <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-
 
         <div class="modal modal-more fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

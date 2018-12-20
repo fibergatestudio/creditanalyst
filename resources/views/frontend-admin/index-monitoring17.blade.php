@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
+    <link href="mercurial/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
+        <img src="mercurial/images/logo.png" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Введите поисковый запрос">
@@ -82,256 +82,256 @@
                 <h3 class="title-block content-row icon-edit-after"> Мониторинг </h3>
                 <table class="table table-striped">
                     <tbody>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">50</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">14</span>
-                                    <span class="percent-value text-small">24%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">117</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-down"></a></span>
-                                    <span class="percent-value text-small">10</span>
-                                    <span class="percent-value text-small">-17%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">41</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">14</span>
-                                    <span class="percent-value text-small">24%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">1024</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">105</span>
-                                    <span class="percent-value text-small">12%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">50</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">14</span>
-                                    <span class="percent-value text-small">24%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">117</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-down"></a></span>
-                                    <span class="percent-value text-small">10</span>
-                                    <span class="percent-value text-small">-17%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">41</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">14</span>
-                                    <span class="percent-value text-small">24%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">1024</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">105</span>
-                                    <span class="percent-value text-small">12%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">50</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">14</span>
-                                    <span class="percent-value text-small">24%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
-                                макета в публикациях или производстве веб-сайтов
-                            </td>
-                            <td >
-                                <div class="price-wrapper">
-                                    <span class="value-price">1024</span>
-                                    <span class="percent-value text-small">грн</span>
-                                    <span class="percent-value text-small">/кг</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-wrapper">
-                                    <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
-                                    <span class="percent-value text-small">105</span>
-                                    <span class="percent-value text-small">12%</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="icon icon-statistic-black"> </a>
-                                    <a href="#" class="icon icon-alarm-black"> </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">50</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">14</span>
+                                <span class="percent-value text-small">24%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">117</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-down"></a></span>
+                                <span class="percent-value text-small">10</span>
+                                <span class="percent-value text-small">-17%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">41</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">14</span>
+                                <span class="percent-value text-small">24%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">1024</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">105</span>
+                                <span class="percent-value text-small">12%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">50</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">14</span>
+                                <span class="percent-value text-small">24%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">117</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-down"></a></span>
+                                <span class="percent-value text-small">10</span>
+                                <span class="percent-value text-small">-17%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">41</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">14</span>
+                                <span class="percent-value text-small">24%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">1024</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">105</span>
+                                <span class="percent-value text-small">12%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">50</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">14</span>
+                                <span class="percent-value text-small">24%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Показатель Название, Рыбным текстом называется текст, служащий для временного наполнения
+                            макета в публикациях или производстве веб-сайтов
+                        </td>
+                        <td >
+                            <div class="price-wrapper">
+                                <span class="value-price">1024</span>
+                                <span class="percent-value text-small">грн</span>
+                                <span class="percent-value text-small">/кг</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrapper">
+                                <span class="arrow-price"><a href="#" class="icon icon-arrow-up"></a></span>
+                                <span class="percent-value text-small">105</span>
+                                <span class="percent-value text-small">12%</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="#" class="icon icon-statistic-black"> </a>
+                                <a href="#" class="icon icon-alarm-black"> </a>
+                            </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -363,13 +363,13 @@
                 </div>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active show" id="year">
-                        <img src="{{asset('mercurial/images/img-graph.png')}}" class="responsive-image" alt="img">
+                        <img src="mercurial/images/img-graph.png" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="three-months">
-                        <img src="{{asset('mercurial/images/img-graph.png')}}" class="responsive-image" alt="img">
+                        <img src="mercurial/images/img-graph.png" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="months">
-                        <img src="{{asset('mercurial/images/img-graph.png')}}" class="responsive-image" alt="img">
+                        <img src="mercurial/images/img-graph.png" class="responsive-image" alt="img">
                     </div>
                 </div>
             </div>

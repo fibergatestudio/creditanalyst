@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
 
-    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
+    <link href="mercurial/css/style.css" rel="stylesheet">
 </head>
 <body>
 <section id="page-exit" class="section-content">
-    <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
+    <img src="mercurial/images/logo.png" class="logo" alt="logo">
     <div class="card">
         <div class="card-body">
             <h3 class="title-block">Вход</h3>

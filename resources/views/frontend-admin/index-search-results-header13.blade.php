@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
+    <link href="mercurial/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
+        <img src="mercurial/images/logo.png" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Бананы">
@@ -22,7 +22,7 @@
                         <ul class="list-results">
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="mercurial/images/icon-logo-data-sources.png">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -31,7 +31,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="mercurial/images/icon-logo-data-sources.png">
                                     <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -41,7 +41,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="mercurial/images/icon-logo-data-sources.png">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">

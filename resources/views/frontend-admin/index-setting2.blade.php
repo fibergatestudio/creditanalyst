@@ -9,12 +9,12 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
+    <link href="mercurial/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
+        <img src="mercurial/images/logo.png" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Введите поисковый запрос">
@@ -107,9 +107,9 @@
                             <div class="col inputs">
                                 <input type="text" class="form-control"  placeholder="">
                                 <input type="text" class="form-control"  placeholder="">
-                                <select id="" class="form-control selectpicker">
+                                <select id="" data-hidden="true" class="form-control selectpicker" title=" ">
                                     <option selected></option>
-                                    <option>2000</option>
+                                    <option >2000</option>
                                     <option>2001</option>
                                     <option>2002</option>
                                 </select>
