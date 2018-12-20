@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="mercurial/css/style.css" rel="stylesheet">
+    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="mercurial/images/logo.png" class="logo" alt="logo">
+        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Введите поисковый запрос">
@@ -212,7 +212,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active show" id="all">
                         <div class="map">
-                            <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                            <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                             <div class="single-chart center">
                                 <svg viewBox="0 0 36 36" width="100%" height="100%">
                                     <path
@@ -300,22 +300,22 @@
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="south">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="west">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="east">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="center">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="state">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="region">
-                        <img src="mercurial/images/icons/1.svg" class="responsive-image" alt="img">
+                        <img src="{{asset('mercurial/images/icons/1.svg')}}" class="responsive-image" alt="img">
                     </div>
                 </div>
             </div>

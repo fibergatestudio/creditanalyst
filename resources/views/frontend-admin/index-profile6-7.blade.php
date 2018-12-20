@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
-    <link href="mercurial/css/style.css" rel="stylesheet">
+    <link href="{{asset('mercurial/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
 <div class="grid-wrapper">
     <header class="header">
-        <img src="mercurial/images/logo.png" class="logo" alt="logo">
+        <img src="{{asset('mercurial/images/logo.png')}}" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Введите поисковый запрос">
