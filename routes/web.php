@@ -11,10 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-	return redirect('/login');
-	//return view('welcome');
+//Route::get('/', function () {
+	//return redirect('/login');
+	//return view('main');
 });
+
+//лендинг
+Route::get('/', 'MainController@index')->name('main');
+
+//кастом логин админ/пользователь
+Route::post('/login/custom', [
+	'uses' => 'LoginController@login',
+	'as' => 'login.custom'
+]);
+
+//роут для вывода админки админу
+Route::group(['middleware' => 'auth'], function(){
+
+	Route::get('/sources_list', function(){                 //на личный кабинет пользователя
+		return view('sources_list');                        //шаблон лк
+	})->name('cabinet');								    //название лк	
+
+	Route::get('/sources_list', function(){					//на dashdoard
+		return view('/sources_list');						//шаблон админки 
+	})->name('dashboard');									//название админки	
+}
+
+
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

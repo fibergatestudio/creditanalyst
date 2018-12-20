@@ -46,4 +46,17 @@ class User extends Authenticatable
             )
             ->count();
     }
+
+    public function is_admine()
+
+    {
+        if($this->admin)
+        {
+
+            return true;
+
+        }
+
+        return false;
+    }
 }
