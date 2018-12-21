@@ -46,10 +46,11 @@
                             {{-- Форма поиска --}}
                             <form class="form-inline" method="GET" actions="{{ url('indicator_search') }} >
                                 @csrf
-                                <div class="input-group input-group-lg">
+                                <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder="Введите поисковый запрос" name="search_query" style="width: 500px">
-                                    <button class="btn btn-outline-secondary" type="submit"><span class="icon icon-search"></span></button>
-                                
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit"><span class="icon icon-search"></span></button>
+                                    </div>
                                 </div>
 
                             </form>
@@ -66,7 +67,7 @@
                             @foreach($results as $result)
                                 <li>
                                     <div class="result-item">
-                                        <img src="mercurial/images/icon-logo-data-sources.png">
+                                        <img src="{{assert('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                         <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#"> подробнее</a>
                                     </div>
                                     <div class="result-item">
@@ -114,13 +115,13 @@
                                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
                                                     </div>
                                                 </form>
-                                                <div class="form-check">
+                                                <div class="form-group form-radio">
                                                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Отправить анонимно
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-group form-radio">
                                                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                                                     <label class="form-check-label" for="exampleRadios2">
                                                         Со мной можно связаться для уточнения

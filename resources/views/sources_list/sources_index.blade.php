@@ -51,7 +51,7 @@
                         <div class="card card-fluid">
                             <div class="card-header-accordion" id="headingOne">
                                 <div class="content-row">
-                                    <img src="mercurial/images/icon-logo-data-sources.png">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <h3 class="text">{{ $infosource->name }}</h3>
                                 </div>
 
