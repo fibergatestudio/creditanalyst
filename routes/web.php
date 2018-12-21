@@ -11,32 +11,8 @@
 |
 */
 
-//Route::get('/', function () {
-	//return redirect('/login');
-	//return view('main');
-//});
-
 //лендинг
 Route::get('/', 'MainController@index')->name('main');
-
-//кастом логин админ/пользователь
-Route::post('/login/custom', [
-	'uses' => 'LoginController@login',
-	'as' => 'login.custom'
-]);
-
-//роут для вывода админки админу
-Route::group(['middleware' => 'auth'], function(){
-
-	Route::get('/sources_list', function(){                 //на личный кабинет пользователя
-		return view('sources_list');                        //шаблон лк
-	})->name('cabinet');								    //название лк	
-
-	Route::get('/sources_list', function(){					//на dashdoard
-		return view('/sources_list');						//шаблон админки 
-	})->name('dashboard');									//название админки	
-});
-
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -102,3 +78,29 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 /* Путь страниц помощи */
 Route::get('/help', 'HelpController@help_index')->middleware('auth');
+
+/****** АДМИНИСТРАТОР : секция ******/
+
+/* Управление пользователями */
+
+	/* Создать пользователя : страница */
+	Route::get('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_page')->middleware('can:administrator_rights');
+
+		/* Создать пользователя : обработка POST запроса */
+		Route::post('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_post')->middleware('can:administrator_rights');
+
+	/* Список пользователей */
+	Route::get('/admin_user_management/index', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
+
+
+	/* Деактивировать пользователя */
+	Route::get('/admin_user_management/suspend_user/{user_id}', 'User_management_Admin_Controller@suspend_user')->middleware('can:administrator_rights');
+
+	/* Активировать пользователя */
+	Route::get('/admin_user_management/activate_user/{user_id}', 'User_management_Admin_Controller@activate_user')->middleware('can:administrator_rights');
+
+	/* Сделать пользователя администратором */
+	Route::get('/admin_user_management/grant_admin_privileges/{user_id}', 'User_management_Admin_Controller@grant_admin_privileges')->middleware('can:administrator_rights');
+
+	/* Забрать у пользователя права администратора */
+	Route::get('/admin_user_management/remove_admin_privileges/{user_id}', 'User_management_Admin_Controller@remove_admin_privileges')->middleware('can:administrator_rights');

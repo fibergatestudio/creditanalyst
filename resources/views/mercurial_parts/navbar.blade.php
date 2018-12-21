@@ -9,6 +9,11 @@
             </div>
         </form>
         <ul class="block-right">
+            @if(Auth::user()->isAdmin())
+                <li class="icon icon-admin">
+                    <a href="{{ url('/admin_user_management/index') }}" class="top-icon-admin">Админ</a>
+                </li>
+            @endif
             <li class="icon 
                 @if(Auth::user()->get_active_notifications_count() > 0)
                     icon-alarm-active

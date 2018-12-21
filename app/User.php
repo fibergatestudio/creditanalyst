@@ -47,6 +47,66 @@ class User extends Authenticatable
             ->count();
     }
 
+    /* Проверка, является ли пользователь администратором */
+    // Функция из ветки yakymenko-lk
+    public function isAdmin(){
+        if($this->role == 'admin'){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Проверка, является ли пользователь активным */
+    public function isActive(){
+        if($this->status == 'active'){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Сделать пользователя админом */
+    public function grant_admin_privileges(){
+        $this->role = 'admin';
+        $this->save();
+    }
+
+    /* Забрать права администратора */
+    public function remove_admin_privileges(){
+        $this->role = 'user';
+        $this->save();
+    }
+
+    /* Деактивировать аккаунт */
+    public function suspend_account(){
+        $this->status = 'suspended';
+        $this->save();
+    }
+    
+
+    /* Активировать аккаунт */
+    public function activate_account(){
+        $this->status = 'active';
+        $this->save();
+    }    
+
+    /* Получить статус для отображения */
+    public function getStatus(){
+        if($this->isAdmin() && $this->isActive())
+        {
+            return 'Администратор';
+        } 
+        else if ($this->isAdmin() && !$this->isActive()) {
+            return 'Администратор (не активен)';
+        } else if ($this->isActive()){
+            return 'Активен';
+        } else if (!$this->isActive()){
+            return 'Деактивирован';
+        }
+    }
+    
+    // Функция из ветки postman
     public function is_admine()
 
     {

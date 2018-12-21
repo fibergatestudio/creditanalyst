@@ -4,6 +4,10 @@
             echo 'active';
         }
     }
+
+    if(!isset($active_sidebar_name)){
+        $active_sidebar_name = '';
+    }
 ?>
 
 <section class="section-sidebar">

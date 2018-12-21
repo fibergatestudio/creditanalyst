@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\Gate;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,8 +16,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-		Schema::defaultStringLength(191);
+        // Фикс ошибки с длиной ключа для MariaDB
+        Schema::defaultStringLength(191);
+
+        // Проверка на наличие прав администратора у пользователя
+        Gate::define('administrator_rights', function($user){
+            return $user->isAdmin();
+        });
+        
+        
     }
 
     /**

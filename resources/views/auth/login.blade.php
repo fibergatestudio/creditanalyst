@@ -38,7 +38,7 @@
 
                         <form class="card-form">
                             <div class="form-group row">
-                                <label for="login" class="col">Login:</label>
+                                <label for="login" class="col">E-mail:</label>
                                 <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} col-md-7" id="login" placeholder="" name="email">
                                 <span class="col"></span>
 
