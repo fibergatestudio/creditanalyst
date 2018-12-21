@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-  <head>
 @extends('layouts.mercurial')
 
 @section('content')
@@ -39,7 +36,7 @@
                 <div class="content-row">
                     <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
                     <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                    <a href="#link-on-export-page" class="btn btn-success" >
                         Экспорт всех данных в Excel
                     </a>
                     {{-- Верхняя пагинация --}}
@@ -69,7 +66,7 @@
                 <div class="content-row">
                     <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
                     <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
-                    <a href="#" class="btn btn-success">Экспорт всех данных в Excel</a>
+                    <a href="#link-on-export-page" class="btn btn-success">Экспорт всех данных в Excel</a>
                     {{-- Нижняя пагинация --}}
 
                         {{ $indicators->links() }}
@@ -154,9 +151,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <div class="modal-footer">
-                        
+
                             <button type="submit" class="btn btn-success">Экспорт в Excel</button>
                             {{-- Пагинация --}}
                             <ul class="pagination">

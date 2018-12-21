@@ -101,7 +101,7 @@
                         <ul class="list-results">
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -110,7 +110,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -119,7 +119,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -128,26 +128,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
-                                    <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
-                                </div>
-                                <div class="result-item">
-                                    <span class="search-word">Бананы, </span><span class="search-details">показатель, 1234,00 грн,</span> <a href="#">подробнее</a>
-
-                                </div>
-                            </li>
-                            <li>
-                                <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
-                                    <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
-                                </div>
-                                <div class="result-item">
-                                    <span class="search-details">Результат 2, показатель, 1234,00 грн,</span> <a href="#"> подробнее</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -157,7 +138,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -166,7 +147,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -176,7 +157,7 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -185,7 +166,26 @@
                             </li>
                             <li>
                                 <div class="result-item">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                    <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
+                                </div>
+                                <div class="result-item">
+                                    <span class="search-word">Бананы, </span><span class="search-details">показатель, 1234,00 грн,</span> <a href="#">подробнее</a>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="result-item">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                    <span class="search-word">Бананы-ЮГ</span>,&nbsp;<a href="#"> подробнее</a>
+                                </div>
+                                <div class="result-item">
+                                    <span class="search-details">Результат 2, показатель, 1234,00 грн,</span> <a href="#"> подробнее</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="result-item">
+                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                     <span class="search-details">Источник данных,</span> <a href="#">подробнее</a>
                                 </div>
                                 <div class="result-item">
@@ -200,40 +200,6 @@
                         <div class="content-row col-md-6">
                             <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
                                 Не нашли то, что искали?
-                                <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span class="icon icon-close"></span>
-                                                </button>
-                                            </div>
-                                            <div class="text-align-left modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1"></label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
-                                                    </div>
-                                                </form>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Отправить анонимно
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        Со мной можно связаться для уточнения
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </a>
                             <a href="#" class="all-results">Отобразить все результаты</a>
                         </div>
@@ -246,6 +212,40 @@
                         </ul>
                     </div>
                 </section>
+            </div>
+            <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="icon icon-close"></span>
+                            </button>
+                        </div>
+                        <div class="text-align-left modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1"></label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
+                                </div>
+                            </form>
+                            <div class="form-group form-radio">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Отправить анонимно
+                                </label>
+                            </div>
+                            <div class="form-group form-radio">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Со мной можно связаться для уточнения
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

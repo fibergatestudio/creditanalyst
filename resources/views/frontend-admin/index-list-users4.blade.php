@@ -89,179 +89,179 @@
                     <a href="#" class="done-new-user"><i class="fas fa-plus"></i> Добавить нового пользователя</a></div>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>E-mail:</th>
-                            <th>Имя:</th>
-                            <th>Фамилия:</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th>E-mail:</th>
+                        <th>Имя:</th>
+                        <th>Фамилия:</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#" class="active"><span class="icon icon-admin "></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alex@NameCompany.ua</td>
-                            <td>Александр</td>
-                            <td>Длиннофамильный</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#">
-                                        <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
-                                    </a>
-                                    <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
-                                    <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
-                                    <a href="#"><span class="icon icon-admin"></span>Админ</a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#" class="active"><span class="icon icon-admin "></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alex@NameCompany.ua</td>
+                        <td>Александр</td>
+                        <td>Длиннофамильный</td>
+                        <td>
+                            <div class="actions">
+                                <a href="#">
+                                    <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
+                                </a>
+                                <a href="#"><span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span></a>
+                                <a href="#"><span class="icon icon-delete" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Деактивировать"></span></a>
+                                <a href="#"><span class="icon icon-admin"></span>Админ</a>
+                            </div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

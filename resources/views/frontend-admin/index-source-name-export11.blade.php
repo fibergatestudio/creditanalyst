@@ -88,31 +88,31 @@
                 <form class="card-form">
                     <table class="table table-striped table-borderless">
                         <thead>
-                            <tr>
-                                <th colspan="3">
-                                    <div class="filters">
-                                        <div class="filters-item">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="all" />
-                                                <label for="all">Отметить все</label>
-                                            </div>
-                                        </div>
-                                        <div class="filters-item filter-inline period-date">
-                                            <label for="start-from">Дата:</label>
-                                            <input type="text" class="form-control" id="start-from" placeholder="Период от --" />
-                                            <label for="start-to"></label>
-                                            <input type="text" class="form-control" id="start-to" placeholder="Период до --" />
-                                        </div>
-                                        <div class="filters-item filter-inline select-with-check">
-                                            <label for="state">Регион:</label>
-                                            <select class="form-control selectpicker" id="state" required="">
-                                                <option value="">Вся Украина</option>
-                                                <option>...</option>
-                                            </select>
+                        <tr>
+                            <th colspan="3">
+                                <div class="filters">
+                                    <div class="filters-item">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="all" />
+                                            <label for="all">Отметить все</label>
                                         </div>
                                     </div>
-                                </th>
-                            </tr>
+                                    <div class="filters-item filter-inline period-date">
+                                        <label for="start-from">Дата:</label>
+                                        <input type="text" class="form-control" id="start-from" placeholder="Период от --" />
+                                        <label for="start-to"></label>
+                                        <input type="text" class="form-control" id="start-to" placeholder="Период до --" />
+                                    </div>
+                                    <div class="filters-item filter-inline select-with-check">
+                                        <label for="state">Регион:</label>
+                                        <select class="form-control selectpicker" id="state" required="">
+                                            <option value="">Вся Украина</option>
+                                            <option>...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         <tr>

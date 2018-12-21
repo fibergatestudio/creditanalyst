@@ -110,6 +110,9 @@ select.form-control {
     .page-link {
       border-radius: 50%;
       color: #2e448f;
+      &:focus {
+        box-shadow: 0 0 0 0.2rem rgba(96,54,132,.25);
+      }
     }
     .not-active{
       color: #eaeaea;

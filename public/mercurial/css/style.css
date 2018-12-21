@@ -529,8 +529,7 @@ a:hover .icon-admin::before {
   .modal-more .modal-footer {
     border: none; }
   .modal-more .modal-header {
-    padding: 0;
-    padding-right: 15px; }
+    padding: 15px 15px 0 0; }
   .modal-more .modal-body {
     padding: 0 30px 0; }
     .modal-more .modal-body .text {
@@ -1104,7 +1103,7 @@ table .actions {
   padding: 0; }
   #page-monitoring1 .card-body .title-block,
   #page-statistic-new .card-body .title-block {
-    margin: 0 0 23px 0; }
+    margin: 0; }
 #page-monitoring1 .table-striped tbody tr:nth-of-type(odd),
 #page-statistic-new .table-striped tbody tr:nth-of-type(odd) {
   background-color: #ffffff; }
@@ -1379,6 +1378,8 @@ input,
   .page-item:first-child .page-link, .page-item:last-child .page-link {
     border-radius: 50%;
     color: #2e448f; }
+    .page-item:first-child .page-link:focus, .page-item:last-child .page-link:focus {
+      box-shadow: 0 0 0 0.2rem rgba(96, 54, 132, 0.25); }
   .page-item:first-child .not-active, .page-item:last-child .not-active {
     color: #eaeaea; }
   .page-item.active .page-link {

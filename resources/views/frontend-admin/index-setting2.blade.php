@@ -107,9 +107,9 @@
                             <div class="col inputs">
                                 <input type="text" class="form-control"  placeholder="">
                                 <input type="text" class="form-control"  placeholder="">
-                                <select id="" class="form-control selectpicker">
+                                <select id="" data-hidden="true" class="form-control selectpicker" title=" ">
                                     <option selected></option>
-                                    <option>2000</option>
+                                    <option >2000</option>
                                     <option>2001</option>
                                     <option>2002</option>
                                 </select>
