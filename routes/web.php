@@ -48,13 +48,15 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 */
 	Route::get('/dataset_view_indicator/{id}', 'DatasetController@view_data_for_indicator')->middleware('auth');
 
-/* Пути для мониторинга */	
-	
-	// Отобразить все индикаторы, которые мониторятся пользователем
-	Route::get('/user_indicator_watch_list', 'MonitoringController@show_user_indicator_watch_list')->middleware('auth');
+    /* Пути для мониторинга */
+    Route::get('/monitoring', 'MonitoringController@index');
+    Route::get('/monitoring/watchlist', 'MonitoringController@watchlist')->middleware('auth');
+    Route::get('/monitoring/chart/{id}', 'MonitoringController@chart');
+    Route::delete('/monitoring/remove/{id}', 'MonitoringController@remove')->middleware('auth');
 
-	// Добавления индикатора в вотчлист
-	Route::get('/add_indicator_to_watch_list/{indicator_id}', 'MonitoringController@add_indicator_to_watch_list')->middleware('auth');
+
+    Route::get('/user_indicator_watch_list', 'MonitoringController@index');
+    Route::get('/add_indicator_to_watch_list/{indicator_id}', 'MonitoringController@add_indicator_to_watch_list')->middleware('auth');
 
 	// Удаления индикатора из вотчлиста
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist')->middleware('auth');

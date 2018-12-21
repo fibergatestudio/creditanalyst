@@ -2,38 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-
-
-// Модели, созданные для приложения
-use App\Indicator_watcher;
+use Illuminate\Support\Facades\DB,
+    Illuminate\Support\Facades\Auth,
+    Illuminate\Http\Request,
+    App\IndicatorWatcher,
+    App\Indicator,
+    App\Dataset;
 
 class MonitoringController extends Controller
 {
-    /*
-    * Отображение списка индикаторов, отслеживаемых пользователем
-    */
-    public function show_user_indicator_watch_list(){
 
-        $current_user_id = Auth::id();
-        //$indicator_list = Indicator_watcher::where('user_id', $current_user_id)->get();
+    public function index()
+    {
+        return view('monitoring.index');
+    }
 
-        // LEFT JOIN STATEMENT
-        $indicator_watch_data = 
-            DB::table('user_indicator_watch_list')
-                ->join('indicators', 'user_indicator_watch_list.indicator_id', '=', 'indicators.id')
-                ->select('user_indicator_watch_list.*', 'indicators.name')
-                ->get();
+    public function watchlist()
+    {
+        $userId = Auth::id();
+        return IndicatorWatcher::getDataListByUserId($userId);
+    }
 
-        
-        return view('monitoring.monitoring_index', 
-            [
-                'indicator_watchlist_data' => $indicator_watch_data,
-                'active_sidebar_name' => 'monitoring'
-            ]);
+    public function remove($id)
+    {
+        $id = (int)$id;
+        $userId = Auth::id();
+        $indicator = IndicatorWatcher::find($id);
+        if (!$indicator) {
+            abort(404);
+        }
+
+        if ($indicator->user_id != $userId) {
+            abort(403);
+        }
+        $indicator->delete();
+        return;
+    }
+
+    public function chart(Request $request, $id)
+    {
+        $indicatorWatcher = IndicatorWatcher::find($id);
+        $indicator = Indicator::find($indicatorWatcher->indicator_id);
+
+
+        $backgroundColor = 'rgb(240, 214, 129)';
+        $borderColor = 'rgb(77, 36, 116)';
+
+
+        $data = Dataset::getDataGroupedByYears($indicatorWatcher->indicator_id);
+        $dataset = [
+            'labels' => [],
+            'data' => []
+        ];
+
+        foreach($data as $item) {
+            $dataset['labels'][] = $item->label;
+            $dataset['data'][] = $item->value;
+
+        }
+
+        $result = [
+            'labels' => $dataset['labels'],
+            'datasets' =>  [
+                [
+                    'label' => (strlen($indicatorWatcher->alias) ? $indicatorWatcher->alias : $indicator->name),
+                    'backgroundColor' => $backgroundColor,
+                    'borderColor' => $borderColor,
+                    'data' => $dataset['data'],
+                ]
+            ]
+        ];
+        return $result;
     }
 
     /*
@@ -54,40 +93,13 @@ class MonitoringController extends Controller
                 
         //
         if(empty($duplicate_check)){
-            $new_watcher = new Indicator_watcher();
+            $new_watcher = new IndicatorWatcher();
             $new_watcher->user_id = $user_id;
             $new_watcher->indicator_id = $indicator_id;
             $new_watcher->save();
         }
         
         return redirect('user_indicator_watch_list'); // Редирект на страницу мониторинга
-       
-    }
-
-    // Функция удаления индикатора из списка наблюдаемых
-    public function remove_indicator_from_watchlist($indicator_id){
-
-        $user_id = Auth::id();
-
-        $indicator_watcher_finder = 
-            DB::table('user_indicator_watch_list')
-                ->where([
-                    ['user_id', '=', $user_id],
-                    ['indicator_id', '=', $indicator_id]
-                ])
-                ->first();
-        
-        
-        if(!empty($indicator_watcher_finder)){
-            
-            $watcher = Indicator_watcher::find($indicator_watcher_finder->id);
-            $watcher->delete();
-        }
-        
-
-        return redirect('user_indicator_watch_list');
-
-        
 
     }
 }

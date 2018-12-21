@@ -83,20 +83,20 @@ class User extends Authenticatable
         $this->status = 'suspended';
         $this->save();
     }
-    
+
 
     /* Активировать аккаунт */
     public function activate_account(){
         $this->status = 'active';
         $this->save();
-    }    
+    }
 
     /* Получить статус для отображения */
     public function getStatus(){
         if($this->isAdmin() && $this->isActive())
         {
             return 'Администратор';
-        } 
+        }
         else if ($this->isAdmin() && !$this->isActive()) {
             return 'Администратор (не активен)';
         } else if ($this->isActive()){
@@ -105,7 +105,7 @@ class User extends Authenticatable
             return 'Деактивирован';
         }
     }
-    
+
     // Функция из ветки postman
     public function is_admine()
 
@@ -118,5 +118,10 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function indicators()
+    {
+        return $this->hasMany('App\IndicatorWatcher');
     }
 }

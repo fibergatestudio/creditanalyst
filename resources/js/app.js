@@ -17,7 +17,9 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('side-bar', require('./components/monitoring/SideBar.vue'));
+Vue.component('user-indicator-list', require('./components/monitoring/UserIndicatorList.vue').default);
 
 // const files = require.context('./', true, /\.vue$/i)
 
