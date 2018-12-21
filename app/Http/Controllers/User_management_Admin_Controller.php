@@ -41,6 +41,23 @@ class User_management_Admin_Controller extends Controller
         return redirect('/admin_user_management/index');
     }
 
+    /* Редактирование пользователя : страница */
+    public function edit_user_page($user_id){
+        $user = User::find($user_id);
+        return view('User_management_Admin.edit_user_page', ['user' => $user]);
+    }
+
+    /* Редактирование пользователя : обработка POST запроса */
+    public function edit_user_post(Request $request){
+        $user = User::find($request->user_id);
+        $user->first_name = $request->first_name;
+        $user->name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect('/admin_user_management/index');
+    }
+
     /* Деактивировать пользователя */
     public function suspend_user($user_id){
         $user = User::find($user_id);

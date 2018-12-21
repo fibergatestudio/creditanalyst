@@ -40,8 +40,8 @@
                     <span class="menu-item-description collapse show">Статистика и анализ</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="{{ sidebar_tab_active_checker('settings', $active_sidebar_name) }}">
+                <a href="{{ url('settings') }}">
                     <span class="icon icon-setup"></span>
                     <span class="menu-item-description collapse show">Настройки</span>
                 </a>

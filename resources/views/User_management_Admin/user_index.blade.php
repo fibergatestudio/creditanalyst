@@ -44,7 +44,8 @@
                                 {{-- Колонка с кнопками управления --}}
                                 <td>
                                     <div class="actions">
-                                        <a href="#">
+                                        {{-- Редактировать --}}
+                                        <a href="{{ url('/admin_user_management/edit_user/'.$user->id) }}">
                                             <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
                                         </a>
 

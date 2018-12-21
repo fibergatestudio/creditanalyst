@@ -76,6 +76,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 /* Пути для AJAX API */
 	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');
 
+/* Управление собственной информацией */
+	/* Страница редактирования */
+	Route::get('/settings', 'Personal_settings_User_Controller@index')->middleware('auth');
+
+		/* Путь обработки POST запроса */
+		Route::post('/settings/edit', 'Personal_settings_User_Controller@edit_settings')->middleware('auth');
+
 /* Путь страниц помощи */
 Route::get('/help', 'HelpController@help_index')->middleware('auth');
 
@@ -92,6 +99,11 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 	/* Список пользователей */
 	Route::get('/admin_user_management/index', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
 
+	/* Редактировать пользователя : страница */
+	Route::get('/admin_user_management/edit_user/{user_id}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
+
+		/* Редактировать пользователя : POST действие*/
+		Route::post('/admin_user_management/edit_user', 'User_management_Admin_Controller@edit_user_post');
 
 	/* Деактивировать пользователя */
 	Route::get('/admin_user_management/suspend_user/{user_id}', 'User_management_Admin_Controller@suspend_user')->middleware('can:administrator_rights');
