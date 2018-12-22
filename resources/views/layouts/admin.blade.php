@@ -120,6 +120,14 @@
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('js/line-charts.js') }}"></script>
 
+
+    <!-- Vector-map-->
+    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js') }}"></script>   
+    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
+    <script src="{{ asset('js/map-charts.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('#bootstrap-data-table-export').DataTable();
@@ -139,17 +147,17 @@
         */
 
         $('#saveChart').click(function (){
-            $('#saveChart').prop( "disabled" , true ); 
+            $('.chart-save').prop( "disabled" , true ); 
             var fileName = $('#chartName').val();
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
-                    $('#saveChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fileName.indexOf('.') !== -1){
                     alert('Недопустимый символ "." в имени файла!');
-                    $('#saveChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fullChart) {
@@ -165,22 +173,44 @@
                         success: function (data) {
                             alert(data);
                             filesCharts.push(fileName);
-                            $('#saveChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         },
                         error: function (msg) {
                             alert('Ошибка');
-                            $('#saveChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         }
                     }); 
                 }
+                else if(fullMap){
+                    $('.chart-save').prop( "disabled" , false );
+                    var fileName = $('#chartName').val();
+                    document.location.href = "http://creditanalyst/map_for_save?fileName="+fileName+"&"+getString;
+                    /*setTimeout($.ajax({
+                        url: "{{ route('chartsMapSave') }}",
+                        type: "POST",
+                        data: {fileName:fileName},
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            alert(data);
+                            filesCharts.push(fileName);
+                            $('.chart-save').prop( "disabled" , false );
+                        },
+                        error: function (msg) {
+                            alert('Ошибка');
+                            $('.chart-save').prop( "disabled" , false );
+                        }
+                    }), 1000); */
+                }
                 else{
                     alert("Постройте график!");
-                    $('#saveChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                 }
             }
             else{
                 alert("Введите название графика!");
-                $('#saveChart').prop( "disabled" , false );
+                $('.chart-save').prop( "disabled" , false );
             }
         });
 
@@ -190,18 +220,18 @@
         */
 
         $('#exportChart').click(function (){
-            $('#exportChart').prop( "disabled" , true );
+            $('.chart-save').prop( "disabled" , true );
             var fileName = $('#chartName').val();
             var fileExport = true;
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
-                    $('#exportChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fileName.indexOf('.') !== -1){
                     alert('Недопустимый символ "." в имени файла!');
-                    $('#exportChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fullChart) {
@@ -222,22 +252,22 @@
                             $('#exportChart').after(link);
                             link.click();
                             filesCharts.push(fileName);
-                            $('#exportChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         },
                         error: function (msg) {
                             alert('Ошибка');
-                            $('#exportChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         }
                     }); 
                 }
                 else{
                     alert("Постройте график!");
-                    $('#exportChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                 }
             }
             else{
                 alert("Введите название графика!");
-                $('#exportChart').prop( "disabled" , false );
+                $('.chart-save').prop( "disabled" , false );
             }
         });
 
@@ -247,18 +277,18 @@
         */
 
         $('#exportToWordChart').click(function (){
-            $('#exportToWordChart').prop( "disabled" , true );
+            $('.chart-save').prop( "disabled" , true );
             var fileName = $('#chartName').val();
             var fileExportToWord = true;
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
-                    $('#exportToWordChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fileName.indexOf('.') !== -1){
                     alert('Недопустимый символ "." в имени файла!');
-                    $('#exportToWordChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                     return 0;
                 }
                 if (fullChart) {
@@ -279,22 +309,22 @@
                             $('#exportToWordChart').after(link);
                             link.click();
                             filesCharts.push(fileName);
-                            $('#exportToWordChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         },
                         error: function (msg) {
                             alert('Ошибка');
-                            $('#exportToWordChart').prop( "disabled" , false );
+                            $('.chart-save').prop( "disabled" , false );
                         }                        
                     }); 
                 }
                 else{
                     alert("Постройте график!");
-                    $('#exportToWordChart').prop( "disabled" , false );
+                    $('.chart-save').prop( "disabled" , false );
                 }
             }
             else{
                 alert("Введите название графика!");
-                $('#exportToWordChart').prop( "disabled" , false );
+                $('.chart-save').prop( "disabled" , false );
             }
         });
 
@@ -324,14 +354,17 @@
             }    
         }
 
-</script>
+    </script>
 
-<script type="text/javascript">
+
+
+    <script type="text/javascript">
     //Посмотреть график
     function watchChart(element) {
         var fileName = filesChartsFull[element.getAttribute('data-id')];
         document.location.href = chartLink + '/' + fileName;    
     }
+
 </script>
 
 </body>

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
 use App\Indicator;
 use App\Dataset;
+use Screen\Capture;
 
 class ChartsMapController extends AdminController
 {
@@ -24,7 +25,7 @@ class ChartsMapController extends AdminController
 	public function index(){
 
 		//echo '<pre>'.print_r($files_charts,true).'</pre>';
-						
+
 		return view('admin.charts_map', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full()]);
 	}
 
@@ -34,26 +35,17 @@ class ChartsMapController extends AdminController
     */
 
 	public function save_img_file(Request $request){
-/*		Storage::put('public/charts/'.$request->fileName.'.png', file_get_contents($request->img));
-		$data = 'Файл сохранен в / storage / app / public / charts / '.$request->fileName.'.png';
 
-		if ($request->fileExport) {
-			$url = asset('storage/charts/'.$request->fileName.'.png');
-			return $url;
-		}
+		$url = 'http://creditanalyst/map_for_save'.$request->getString;
 
-		if ($request->fileExportToWord) {
-			$phpWord = new \PhpOffice\PhpWord\PhpWord();
-			$section = $phpWord->addSection();
-			$section->addImage('storage/charts/'.$request->fileName.'.png', array('width' => 500,
-        'height' => 150));  
-			$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-			$objWriter->save('storage/charts/'.$request->fileName.'.docx');
-			$url = asset('storage/charts/'.$request->fileName.'.docx');
-			return $url;
-		}
+		$screenCapture = new Capture($url);
+		$screenCapture->setWidth(1300);
+		$screenCapture->setImageType('png');
+		$fileLocation = 'charts/'.$request->fileName;
+		$screenCapture->save($fileLocation);
 
-		return $data;*/
+		return $screenCapture->getImageLocation();
+		//return $request->getString;
 	}
 
 }

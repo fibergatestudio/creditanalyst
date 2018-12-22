@@ -31,6 +31,12 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 });
 
 /*
+* Путь, который отвечает за сохранение карты в скриншот
+*/
+
+	Route::get('/map_for_save', 'MapForSaveController@show')->name('mapForSave');
+
+/*
 * Пути, которые отвечают за информационную базу приложения
 */
 
