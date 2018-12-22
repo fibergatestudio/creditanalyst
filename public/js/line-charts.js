@@ -6,6 +6,7 @@ var indicatorsObj = JSON.parse(indicators);
 var dataObj = JSON.parse(data);
 var data = {};
 var geography = '';
+
 //перебираем данные для составления объекта данных для графика под одну конкретную, 
 //первую попавшуюся область, если она задана, а не равна '0000000000'
 for (var i = 0; i < indicatorsObj.length; i++){
@@ -44,6 +45,7 @@ dataObj = data;
 var indicatorsAddArr = [];
 var measurement = '';
 var indicatorsArr = JSON.parse(indicatorsName);
+
 //поиск с автокомплитом
 $("#searchIndicator").keyup(function() {
     var html = '';
@@ -73,11 +75,13 @@ $("#searchIndicator").keyup(function() {
     }
     $("#resultIndicator").append(html);
 });
+
 //добавляем индикатор и очищаем список
 function findIndicator(text){
     $("#searchIndicator").val(text);
     $("#resultIndicator").html('');
 }
+
 //удаляем индикатор с массива и со страницы
 function removeIndicator(elem){
     for (var i = 0; i < indicatorsAddArr.length; i++){
@@ -91,6 +95,7 @@ function removeIndicator(elem){
     });
     measurement = '';
 }
+
 //добавляем индикатор на страницу
 $("#addIndicator").click(function() {
     if (indicatorsAddArr.length < 4) {
@@ -105,6 +110,7 @@ $("#addIndicator").click(function() {
                 </tr>`
                 );
         }
+        
         //корректируем под имеющиеся данные блок периода графика
         var start = 0;
         var finish = 0;
@@ -172,6 +178,8 @@ function aggregationIndicator(elem,name) {
                     var max = parseFloat(data[0].value);
                     var newData = [];
                     var length = 0;
+                    
+                    //месяц
                     if (elem.val().split('-')[0] === 'M') {
                         if (elem.val().split('-')[1] === 'mean') {                           
                             for (var j = 0; j < data.length; j++) {
@@ -263,6 +271,8 @@ function aggregationIndicator(elem,name) {
                             });
                         }
                     }
+                    
+                    //квартал
                     if (elem.val().split('-')[0] === 'Q') {
                         if (elem.val().split('-')[1] === 'mean') {                           
                             for (var j = 0; j < data.length; j++) {
@@ -368,6 +378,8 @@ function aggregationIndicator(elem,name) {
                             });
                         }
                     }
+
+                    //год
                     if (elem.val().split('-')[0] === 'Y') {
                         if (elem.val().split('-')[1] === 'mean') {                           
                             for (var j = 0; j < data.length; j++) {
@@ -517,6 +529,7 @@ $("#makeChart").click(function() {
 
         hasFromYear = false;
         hasUntilYear = false;
+        
         //проверяем наличие данных согласно периоду
         for (var i = 0; i < dataChartObj[0].data.length; i++){
             if (dataChartObj[0].frequency === 'D'){
@@ -598,8 +611,12 @@ $("#makeChart").click(function() {
         for (var i = 0; i < dataChartObj.length; i++){
             var data = [];
             
+            //создаем вертикальную шкалу согласно величине периода
             for (var j = 0; j < dataChartObj[i].data.length; j++){
-                data.push(dataChartObj[i].data[j].value);                
+                if (fromDate.getTime()<=Date.parse(dataChartObj[i].data[j].date) && Date.parse(dataChartObj[i].data[j].date)<=untilDate.getTime()+1000*3600*3)
+                {
+                    data.push(dataChartObj[i].data[j].value); 
+                }               
             }
             
             datasets.push(
