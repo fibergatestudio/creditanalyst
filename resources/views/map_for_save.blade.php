@@ -35,7 +35,7 @@
         width: 1263px;
         height: 700px;
     }
-    #myChartMap > svg{
+    #saveChartMap > svg{
         height: 650px;
     }
     .map, .vmap {
@@ -52,10 +52,10 @@
     }
     
     /* Индикаторы на карте */
-    #marker-labels div{
+    #save-marker-labels div{
         display: inline-block;
     }
-    #marker-labels div:nth-child(2n){
+    #save-marker-labels div:nth-child(2n){
         vertical-align: top;
     }
     .marker-color{
@@ -85,13 +85,8 @@
                     <h4>Ukraine</h4>
                 </div>
                 <div class="Vector-map-js">
-                    <div id="marker-labels">
-                        <div class="marker-color" id="m-color-1"></div><div id="name-1">name-1</div>
-                        <div class="marker-color" id="m-color-2"></div><div id="name-2">name-2</div>
-                        <div class="marker-color" id="m-color-3"></div><div id="name-3">name-3</div>
-                        <div class="marker-color" id="m-color-4"></div><div id="name-4">name-4</div>
-                    </div>
-                    <div id="myChartMap" class="vmap"></div>
+                    <div id="save-marker-labels"></div>
+                    <div id="saveChartMap" class="vmap"></div>
                 </div>
             </div>                                      
         </div>
@@ -141,8 +136,6 @@
 
 <script type="text/javascript">
     if(fullMap){
-        //var fileName = 'test';
-
         $(document).ready(function(){
             $.ajax({
                 url: "{{ route('chartsMapSave') }}",

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Indicator;
 use App\Dataset;
+use App\Koatuu;
 use DB;
 
 class AdminController extends Controller
@@ -41,6 +42,31 @@ class AdminController extends Controller
 		$indicators_obj = Indicator::all();
 
 		return $indicators_obj;
+	}
+
+
+	/*
+    * Функция которая возвращает объект областей с ихними кодами 
+    */
+
+	protected function koatuu_obj(){
+		
+		$koatuu_obj = Koatuu::all();
+		$temp_koatuu = ["0000000000","8000000000"];
+		$temp = [];
+		foreach ($koatuu_obj as $value) {
+			if (strpos($value->unique_koatuu_id, '00000000') !== FALSE AND !in_array($value->unique_koatuu_id, $temp_koatuu)) {
+				$temp_koatuu[] = $value->unique_koatuu_id;
+				$temp[] = Array
+				(
+					'id' => $value->id,
+					'unique_koatuu_id' => $value->unique_koatuu_id,
+					'name_ru' => $value->name_ru
+				);
+			}
+		}
+
+		return $temp;
 	}
 	
 

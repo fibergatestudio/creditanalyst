@@ -139,16 +139,69 @@
             }
 
         } );
-    </script>
 
-    <script type="text/javascript">
+        
+        //Транслитерация
+        function translit(txt){
+            // Символ, на который будут заменяться все спецсимволы
+            var space = '-';
+            // Берем значение из нужного поля и переводим в нижний регистр
+            var text = txt.toLowerCase();
+
+            // Массив для транслитерации
+            var transl = {
+                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh',
+                'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
+                'о': 'o', 'п': 'p', 'р': 'r','с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h',
+                'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'щ': 'sh','ъ': space, 'ы': 'y', 'ь': space, 'э': 'e', 'ю': 'yu', 'я': 'ya',
+                ' ': space, '_': space, '`': space, '~': space, '!': space, '@': space,
+                '#': space, '$': space, '%': space, '^': space, '&': space, '*': space,
+                '(': space, ')': space,'-': space, '\=': space, '+': space, '[': space,
+                ']': space, '\\': space, '|': space, '/': space,'.': space, ',': space,
+                '{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
+                '?': space, '<': space, '>': space, '№':space
+            }
+
+            var result = '';
+            var curent_sim = '';
+
+            for(i=0; i < text.length; i++) {
+                // Если символ найден в массиве то меняем его
+                if(transl[text[i]] != undefined) {
+                   if(curent_sim != transl[text[i]] || curent_sim != space){
+                       result += transl[text[i]];
+                       curent_sim = transl[text[i]];
+                   }                                                                            
+               }
+                // Если нет, то оставляем так как есть
+                else {
+                    result += text[i];
+                    curent_sim = text[i];
+                }                             
+            }         
+
+            result = TrimStr(result);              
+
+            // Выводим результат
+            return result;
+
+        }
+
+        function TrimStr(s) {
+            s = s.replace(/^-/, '');
+            return s.replace(/-$/, '');
+        }
+
+</script>
+
+<script type="text/javascript">
         /*
         * Сохранение графика
         */
 
         $('#saveChart').click(function (){
             $('.chart-save').prop( "disabled" , true ); 
-            var fileName = $('#chartName').val();
+            var fileName = translit($('#chartName').val());
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
                     alert("Файл с таким именем уже существует!");
@@ -183,25 +236,7 @@
                 }
                 else if(fullMap){
                     $('.chart-save').prop( "disabled" , false );
-                    var fileName = $('#chartName').val();
                     document.location.href = "http://creditanalyst/map_for_save?fileName="+fileName+"&"+getString;
-                    /*setTimeout($.ajax({
-                        url: "{{ route('chartsMapSave') }}",
-                        type: "POST",
-                        data: {fileName:fileName},
-                        headers: {
-                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (data) {
-                            alert(data);
-                            filesCharts.push(fileName);
-                            $('.chart-save').prop( "disabled" , false );
-                        },
-                        error: function (msg) {
-                            alert('Ошибка');
-                            $('.chart-save').prop( "disabled" , false );
-                        }
-                    }), 1000); */
                 }
                 else{
                     alert("Постройте график!");
@@ -221,7 +256,7 @@
 
         $('#exportChart').click(function (){
             $('.chart-save').prop( "disabled" , true );
-            var fileName = $('#chartName').val();
+            var fileName = translit($('#chartName').val());
             var fileExport = true;
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
@@ -278,7 +313,7 @@
 
         $('#exportToWordChart').click(function (){
             $('.chart-save').prop( "disabled" , true );
-            var fileName = $('#chartName').val();
+            var fileName = translit($('#chartName').val());
             var fileExportToWord = true;
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){

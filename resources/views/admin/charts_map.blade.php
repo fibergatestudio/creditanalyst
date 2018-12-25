@@ -123,12 +123,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                         <h4>Ukraine</h4>
                     </div>
                     <div class="Vector-map-js">
-                        <div id="marker-labels">
-                            <div class="marker-color" id="m-color-1"></div><div id="name-1">name-1</div>
-                            <div class="marker-color" id="m-color-2"></div><div id="name-2">name-2</div>
-                            <div class="marker-color" id="m-color-3"></div><div id="name-3">name-3</div>
-                            <div class="marker-color" id="m-color-4"></div><div id="name-4">name-4</div>
-                        </div>
+                        <div id="marker-labels"></div>
                         <div id="myChartMap" class="vmap"></div>
                     </div>
                 </div>
@@ -152,5 +147,10 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var koatuu = '<?=json_encode($koatuu_obj,JSON_UNESCAPED_UNICODE) ?>';
+    koatuu = JSON.parse(koatuu);
+</script>
 
 @endsection
