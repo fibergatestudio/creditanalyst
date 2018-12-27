@@ -4,47 +4,110 @@
 
 var indicatorsObj = JSON.parse(indicators);
 var dataObj = JSON.parse(data);
-var data = {};
+var dataTemp = {};
 var geography = '';
+var indicatorsAddArr = [];
+var measurement = '';
+var strHref = document.location.href;
 
-//перебираем данные для составления объекта данных для графика под одну конкретную, 
-//первую попавшуюся область, если она задана, а не равна '0000000000'
-for (var i = 0; i < indicatorsObj.length; i++){
-    data[indicatorsObj[i].id] = [];
-    for (var j = 0; j < dataObj.length; j++) {
-        if (dataObj[j].indicator_id === indicatorsObj[i].id) {
-            if (dataObj[j].geography !== '0000000000') {
-                if (geography !== '') {
-                    if (dataObj[j].geography === geography) {
-                        data[indicatorsObj[i].id].push({
+//Сортируем объект по полю value
+function compareValue(regionA, regionB) {
+  return regionA.value - regionB.value;
+}      
+
+//если мы находимся на странице построения линейного графика
+if(!(strHref.indexOf('charts-map') + 1)){
+    //Перебираем данные для составления объекта данных для графика под одну конкретную, 
+    //первую попавшуюся область, если она задана, а не равна '0000000000'
+    for (var i = 0; i < indicatorsObj.length; i++){
+        dataTemp[indicatorsObj[i].id] = [];
+        for (var j = 0; j < dataObj.length; j++) {
+            if (dataObj[j].indicator_id === indicatorsObj[i].id) {
+                if (dataObj[j].geography !== '0000000000') {
+                    if (geography !== '') {
+                        if (dataObj[j].geography === geography) {
+                            dataTemp[indicatorsObj[i].id].push({
+                                date : dataObj[j].date,
+                                value : dataObj[j].value
+                            });
+                        } 
+                    }
+                    else{
+                        geography = dataObj[j].geography;
+                        dataTemp[indicatorsObj[i].id].push({
                             date : dataObj[j].date,
                             value : dataObj[j].value
                         });
-                    } 
+                    }               
                 }
                 else{
-                    geography = dataObj[j].geography;
-                    data[indicatorsObj[i].id].push({
+                    dataTemp[indicatorsObj[i].id].push({
                         date : dataObj[j].date,
                         value : dataObj[j].value
                     });
-                }               
-            }
-            else{
-                data[indicatorsObj[i].id].push({
-                    date : dataObj[j].date,
-                    value : dataObj[j].value
-                });
-            }          
-        }                               
+                }          
+            }                               
+        }
+        geography = '';
     }
-    geography = '';
+
+    dataObj = dataTemp;
+    var indicatorsArr = JSON.parse(indicatorsName);
+}
+else{
+    //если мы находимся на странице построения карты
+    //Перебираем данные для составления объекта данных для графика под одну 
+    //последнюю дату для каждой области
+    var indicatorsObjTemp = [];
+    var indicatorsArr = [];
+    var koatuuArr = [];
+    
+    //создаем объект доступных индикаторов
+    for (var i = 0; i < indicatorsObj.length; i++){
+        if (indicatorsObj[i].geography_unit == 'R') {
+            indicatorsObjTemp.push(indicatorsObj[i]);
+            indicatorsArr.push(indicatorsObj[i].name);
+        }       
+    }
+    indicatorsObj = indicatorsObjTemp;
+    
+    //создаем массив кодов областей
+    for (var i = 0; i < koatuu.length; i++) {
+        koatuuArr.push(koatuu[i].unique_koatuu_id);
+    }
+    
+    //создаем новый объект
+    for (var i = 0; i < indicatorsObj.length; i++){
+        dataTemp[indicatorsObj[i].id] = [];
+        for (var k = 0; k < koatuuArr.length; k++) {
+            for (var j = dataObj.length - 1; j >= 0; j--) {
+                if (dataObj[j].indicator_id === indicatorsObj[i].id){
+                    if (koatuuArr[k] === dataObj[j].geography) {
+                        dataTemp[indicatorsObj[i].id].push({
+                            date : dataObj[j].date,
+                            geography : dataObj[j].geography,
+                            value : dataObj[j].value
+                        });
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    dataObj = dataTemp;
+    
+    var dataTemp = {};
+
+    for (key in dataObj) {
+        if (dataObj[key].length > 0) {
+            dataTemp[key] = dataObj[key].sort(compareValue);
+        }
+    }
+
+    dataObj = dataTemp;
 }
 
-dataObj = data;
-var indicatorsAddArr = [];
-var measurement = '';
-var indicatorsArr = JSON.parse(indicatorsName);
 
 //поиск с автокомплитом
 $("#searchIndicator").keyup(function() {
@@ -99,38 +162,54 @@ function removeIndicator(elem){
 //добавляем индикатор на страницу
 $("#addIndicator").click(function() {
     if (indicatorsAddArr.length < 4) {
-        if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
-            indicatorsAddArr.push($("#searchIndicator").val());
-            $("#indicatorGroup").append(`
-                <tr>
-                <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
-                <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
-                <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
-                </tr>`
-                );
-        }
-        
-        //корректируем под имеющиеся данные блок периода графика
-        var start = 0;
-        var finish = 0;
-        var html = '';
-        for (var i = 0; i < indicatorsObj.length; i++){
-            if (indicatorsObj[i].name === $("#searchIndicator").val()) {
-                start = new Date(dataObj[indicatorsObj[i].id][0].date).getFullYear();
-                finish = new Date(dataObj[indicatorsObj[i].id][dataObj[indicatorsObj[i].id].length - 1].date).getFullYear();
+        //если мы находимся на странице построения линейного графика
+        if(!(strHref.indexOf('charts-map') + 1)){
+            if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
+                indicatorsAddArr.push($("#searchIndicator").val());
+                $("#indicatorGroup").append(`
+                    <tr>
+                    <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                    <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
+                    <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
+                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                    </tr>`
+                    );
+            }
+
+                //корректируем под имеющиеся данные блок периода графика
+                var start = 0;
+                var finish = 0;
+                var html = '';
+                for (var i = 0; i < indicatorsObj.length; i++){
+                    if (indicatorsObj[i].name === $("#searchIndicator").val()) {
+                        start = new Date(dataObj[indicatorsObj[i].id][0].date).getFullYear();
+                        finish = new Date(dataObj[indicatorsObj[i].id][dataObj[indicatorsObj[i].id].length - 1].date).getFullYear();
+                    }
+                }
+                for (var i = start; i <= finish; i++) {
+                    html += `<option value="`+i+`">`+i+`</option>`;
+                }
+                $("#fromYear").html(html);
+                $("#untilYear").html(html);
+            }
+            else{
+                //если мы находимся на странице построения карты
+                if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
+                    indicatorsAddArr.push($("#searchIndicator").val());
+                    $("#indicatorGroup").append(`
+                        <tr>
+                        <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                        <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
+                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                        </tr>`
+                        );
+                }
             }
         }
-        for (var i = start; i <= finish; i++) {
-            html += `<option value="`+i+`">`+i+`</option>`;
-        }
-        $("#fromYear").html(html);
-        $("#untilYear").html(html);
-    }
-    else{
-        alert("Лимит 4 индикатора !");
-    }    
-});
+        else{
+            alert("Лимит 4 индикатора !");
+        }    
+    });
 
 
 /*

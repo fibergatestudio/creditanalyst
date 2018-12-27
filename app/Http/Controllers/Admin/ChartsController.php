@@ -50,7 +50,7 @@ class ChartsController extends AdminController
 
 	public function save_img_file(Request $request){
 
-		$file_name = \Slug::make($request->fileName);
+		$file_name = $request->fileName;
 
 		$handle = fopen($request->img, "r");
 		file_put_contents('charts/'.$file_name.'.png',$handle);
