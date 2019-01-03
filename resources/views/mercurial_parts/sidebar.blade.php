@@ -8,6 +8,8 @@
     if(!isset($active_sidebar_name)){
         $active_sidebar_name = '';
     }
+
+    App::setLocale(Auth::user()->preferred_language);
 ?>
 
 <section class="section-sidebar">
@@ -19,7 +21,7 @@
             <li class="{{ sidebar_tab_active_checker('sources', $active_sidebar_name) }}">
                 <a href="{{ url('sources_list') }}">
                     <span class="icon icon-data-sources"></span>
-                    <span class="menu-item-description collapse show">Источники данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Источники данных')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('search', $active_sidebar_name) }}">
