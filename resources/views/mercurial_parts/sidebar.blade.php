@@ -27,13 +27,13 @@
             <li class="{{ sidebar_tab_active_checker('search', $active_sidebar_name) }}">
                 <a href="{{ url('indicator_search') }}">
                     <span class="icon icon-search-list"></span>
-                    <span class="menu-item-description collapse show">Поиск данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Поиск данных')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('monitoring', $active_sidebar_name) }}">
                 <a href="{{ url('user_indicator_watch_list') }}">
                     <span class="icon icon-monitoring"></span>
-                    <span class="menu-item-description collapse show">Мониторинг данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Мониторинг данных')</span>
                 </a>
             </li>
             <li>
