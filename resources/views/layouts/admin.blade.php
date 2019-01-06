@@ -28,6 +28,9 @@
 
 </head>
 <body>
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
     <!-- Left Panel -->
 
@@ -38,20 +41,20 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/">Кредитная аналитика</a>
-                <a class="navbar-brand hidden" href="/">КА</a>
+                <a class="navbar-brand" href="/">@lang('admin.Кредитная аналитика')</a>
+                <a class="navbar-brand hidden" href="/">@lang('admin.КА')</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>Панель управления </a>
+                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>@lang('admin.Панель управления')</a>
                     </li>                                                                     
                     <li>
-                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
+                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Статистика и анализ') </a>
                     </li>
                     <li>
-                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
+                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Вернуться') </a>
                     </li>                    
                 </ul>
             </div><!-- /.navbar-collapse -->

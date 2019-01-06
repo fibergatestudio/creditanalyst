@@ -1,3 +1,7 @@
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
+
 @extends('layouts.admin')
 
 @section('content')
@@ -53,11 +57,11 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <div class="card-body card-block">
     <div class="row">
         <div class="col-12 col-md-9">
-            Для теста представлены все показатели, кроме бананов
+            @lang('charts.Для теста представлены все показатели, кроме бананов')
             <hr>
-            <input type="text" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+            <input type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
             <i class="fa fa-search"></i> 
-            <button id="addIndicator" class="btn btn-success btn-sm">Добавить индикатор</button>
+            <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
         </div>       
     </div>
     <ul id="resultIndicator"></ul>
@@ -68,7 +72,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <div class="card-body card-block">
     <div class="row form-group">
         <div class="col-12 col-md-9">
-            <h5>Период:</h5>
+            <h5>@lang('charts.Период:')</h5>
             <h5>от</h5>
             <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
                 @if(isset($months))
@@ -99,7 +103,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                 @endfor
                 @endif
             </select>
-            <button id="makeChart" class="btn btn-primary btn-sm">Построить график</button>
+            <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
         </div>
     </div>
 </div>
@@ -126,12 +130,12 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     <div class="row form-group">
         <div class="col col-md-12">
             <div class="input-group">
-                <h5>Название графика</h5>
-                <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
+                <h5>@lang('charts.Название графика')</h5>
+                <input type="text" id="chartName" name="chartName" placeholder=@lang('charts.График 1') class="form-control">
                 <div id="save-export" class="input-group-btn">
-                    <button id="saveChart" class="btn btn-success btn-sm">Сохранить</button>
-                    <button id="exportChart" class="btn btn-danger btn-sm">Экспортировать</button>
-                    <button id="exportToWordChart" class="btn btn-success btn-sm">Экспорт в Word</button>
+                    <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
+                    <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
+                    <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
                 </div>                    
             </div>
         </div>
