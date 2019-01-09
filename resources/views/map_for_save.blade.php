@@ -132,7 +132,12 @@
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
 <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script> -->
 <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
+<script src="{{ asset('js/map-charts-1.js') }}"></script>
 <script src="{{ asset('js/map-charts.js') }}"></script>
+<script src="{{ asset('js/map-charts-2.js') }}"></script>
+<script src="{{ asset('js/map-charts-3.js') }}"></script>
+
+<script src="{{ asset('js/map-charts-4.js') }}"></script>
 
 <script type="text/javascript">
     if(fullMap){
