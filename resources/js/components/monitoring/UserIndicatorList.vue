@@ -32,7 +32,7 @@
                             <button class="btn btn-warning btn-sm minw40" @click="Notifications(item)" title="Уведомления">
                                 <i class="far" :class="{'fa-bell': item.notify, 'fa-bell-slash': !item.notify}"></i>
                             </button>
-                            <button class="btn btn-light btn-sm minw40" @click="Chart(item)" title="Динамика">
+                            <button class="btn btn-light btn-sm minw40" @click="Analyse(item)" title="Динамика">
                                 <i class="far fa-chart-bar"></i>
                             </button>
                             <button class="btn btn-danger btn-sm minw40" @click="RemoveFromList(item)" title="Удалить из списка">
@@ -115,6 +115,9 @@ export default {
                 this.LoadData();
             });
             this.$set(this, 'editItem', '');
+        },
+        Analyse(item){
+            window.location = '/admin/statistics-analysis';
         },
         Chart(item){
             const request = {
