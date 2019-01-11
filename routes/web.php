@@ -58,7 +58,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
     Route::get('/monitoring', 'MonitoringController@index');
     Route::get('/monitoring/watchlist', 'MonitoringController@watchlist')->middleware('auth');
     Route::get('/monitoring/chart/{id}', 'MonitoringController@chart');
-    Route::delete('/monitoring/remove/{id}', 'MonitoringController@remove')->middleware('auth');
+    Route::delete('/monitoring/{id}', 'MonitoringController@remove')->middleware('auth');
+    Route::put('/monitoring/{id}', 'MonitoringController@update')->middleware('auth');
 
 
     Route::get('/user_indicator_watch_list', 'MonitoringController@index');
