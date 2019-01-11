@@ -17,24 +17,31 @@
     <section id="page-exit" class="section-content">
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">
         <div class="card">
+            
+            <form method="POST" action="{{ route('login') }}">
+            @csrf
+
             <div class="card-body">
                 <h3 class="title-block">Вход</h3>
                 <div class="row">
                     <div class="col-md-7 exit-language">
                         <span class="language">Язык интерфейса</span>
                         <label>
-                            <select class="form-control" data-placeholder="Choose a Language...">
-                                <option value="RU">RU</option>
-                                <option value="UKR">UKR</option>
-                                <option value="ENG">ENG</option>
+
+                            {{-- Выбор языка--}}
+                            <select class="form-control" data-placeholder="Choose a Language..." name="locale">
+                                <option value="ru">RU</option>
+                                <option value="ua">UKR</option>
+                                <option value="en">ENG</option>
                             </select>
+
+                            
                         </label>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                    
 
                         <form class="card-form">
                             <div class="form-group row">
@@ -97,10 +104,11 @@
                                 @endif
                                 </a>
                             </div>       
-                        </form>   
-                    </form>
+                        
+                    
                 </div>       
             </div>
+            </form>
         </div>
     </section>
 </body>
