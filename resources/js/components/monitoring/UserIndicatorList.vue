@@ -9,16 +9,33 @@
             <table class="table table-striped table-hover table-sm">
                 <tbody>
                     <tr v-for="(item,key) in list" :key="key">
-                        <td :title="item.name" class="vlm" @click="Chart(item.id)" style="cursor: pointer">{{ item.alias || item.name }}</td>
-                        <td class="vlm text-right">{{ item.value }}</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm minw40" @click="Notifications(item.id)" title="Уведомления">
+                        <template v-if="editItem.id === item.id">
+                            <td :title="item.name" class="vlm">
+                                <input class="form-control form-control-sm" v-model.trim="editItem.alias" @keyup.esc="ResetEdit" @keyup.enter="SaveItem">
+                            </td>
+                        </template>
+                        <template v-else>
+                            <td :title="item.name" class="vlm" @click="Chart(item)" style="cursor: pointer">{{ item.alias || item.name }}</td>
+                        </template>
+                        <td width="10%" style="white-space: nowrap" class="vlm text-right">{{ item.value }}</td>
+                        <td width="10%" style="white-space: nowrap">
+                            <template v-if="editItem.id === item.id">
+                                <button class="btn btn-success btn-sm minw40" @click="SaveItem" title="Сохранить">
+                                    <i class="far fa-save"></i>
+                                </button>
+                            </template>
+                            <template v-else>
+                                <button class="btn btn-success btn-sm minw40" @click="Edit(item)" title="Редактировать">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                            </template>
+                            <button class="btn btn-warning btn-sm minw40" @click="Notifications(item)" title="Уведомления">
                                 <i class="far" :class="{'fa-bell': item.notify, 'fa-bell-slash': !item.notify}"></i>
                             </button>
-                            <button class="btn btn-light btn-sm minw40" @click="Chart(item.id)" title="Динамика">
+                            <button class="btn btn-light btn-sm minw40" @click="Analyse(item)" title="Динамика">
                                 <i class="far fa-chart-bar"></i>
                             </button>
-                            <button class="btn btn-danger btn-sm minw40" @click="RemoveFromList(item.id)" title="Удалить из списка">
+                            <button class="btn btn-danger btn-sm minw40" @click="RemoveFromList(item)" title="Удалить из списка">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </td>
@@ -26,21 +43,26 @@
                 </tbody>
             </table>
         </template>
+        <br>
         <line-chart v-show="chartData" :chart-data="chartData" :height="150" :options="{responsive: true, maintainAspectRatio: true}"></line-chart>
+        <NotificationModal v-if="notificationItem" :item="notificationItem" @close="notificationItem = ''" @save="NotificationsSave"></NotificationModal>
     </div>
 </template>
 
 <script>
 import LineChart from './LineChart.js';
+import NotificationModal from './NotificationModal.vue';
 export default {
     name: 'UserIndicatorList',
     components: {
-        LineChart
+        LineChart,
+        NotificationModal
     },
     data(){
         return {
+            notificationItem: '',
             loading: false,
-            editMode: false,
+            editItem: '',
             list: [],
             chartData: ''
         }
@@ -59,19 +81,49 @@ export default {
                 this.$set(this, 'list', response.data);
             });
         },
-        RemoveFromList(id){
-            axios.delete(`/monitoring/remove/${id}`).then(response => {
+        RemoveFromList(item){
+            axios.delete(`/monitoring/${item.id}`).then(response => {
                 this.LoadData();
             });
         },
-        Notifications(id){
-
+        Notifications(item){
+            this.$set(this, 'notificationItem', item);
         },
-        Chart(indicator_id){
+        NotificationsSave(item){
+            //window.console.log(item);
+            this.$set(this, 'loading', true);
+            axios.put(`/monitoring/${item.id}`, item).then(response => {
+                this.$set(this, 'loading', false);
+                this.LoadData();
+            });
+            this.$set(this, 'notificationItem', '');
+        },
+        Edit(item){
+            const clone = JSON.parse(JSON.stringify(item));
+            this.$set(this, 'editItem', clone);
+            if (!item.alias) {
+                this.$set(this.editItem, 'alias', clone.name);
+            }
+        },
+        ResetEdit(){
+            this.$set(this, 'editItem', '');
+        },
+        SaveItem(){
+            this.$set(this, 'loading', true);
+            axios.put(`/monitoring/${this.editItem.id}`, this.editItem).then(response => {
+                this.$set(this, 'loading', false);
+                this.LoadData();
+            });
+            this.$set(this, 'editItem', '');
+        },
+        Analyse(item){
+            window.location = '/admin/statistics-analysis';
+        },
+        Chart(item){
             const request = {
                 period: 'years',
             };
-            axios.get(`/monitoring/chart/${indicator_id}`, {params: request}).then(response => {
+            axios.get(`/monitoring/chart/${item.id}`, {params: request}).then(response => {
                 this.$set(this, 'chartData', response.data);
             });
         }
