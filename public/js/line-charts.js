@@ -61,10 +61,37 @@ else{
     var indicatorsObjTemp = [];
     var indicatorsArr = [];
     var koatuuArr = [];
-    
+
     //создаем объект доступных индикаторов
     for (var i = 0; i < indicatorsObj.length; i++){
         if (indicatorsObj[i].geography_unit == 'R') {
+            indicatorsObjTemp.push(indicatorsObj[i]);
+            indicatorsArr.push(indicatorsObj[i].name);
+        }
+        else if (indicatorsObj[i].geography_unit == 'D') {
+            //перебираем данные с детализацией по районам, берем первый попавшийся район в области,его данные делаем областными, 
+            //остальные данные этой области удаляем, т.е. приводим детализацию к областной
+            var j = 0;
+            var geographyArr = [];
+            while (j < dataObj.length) {
+                if (dataObj[j].indicator_id === indicatorsObj[i].id) {                   
+                    if (dataObj[j].geography.substr(0, 2) !== geography.substr(0, 2)) {
+                        geography = dataObj[j].geography.substr(0, 2)+'00000000';
+                        if (geographyArr.indexOf(geography) === -1) {
+                            dataObj[j].geography = geography;
+                            geographyArr.push(geography);
+                        }
+                        else{
+                            dataObj.splice(j, 1);
+                        }
+                    }
+                    else{
+                        dataObj.splice(j, 1);
+                    }          
+                } 
+                j++;                             
+            }
+            
             indicatorsObjTemp.push(indicatorsObj[i]);
             indicatorsArr.push(indicatorsObj[i].name);
         }       

@@ -98,7 +98,6 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 <div class="card-body card-block">
     <div class="row">
         <div class="col-12 col-md-9">
-            @lang('charts_map.Для теста представлены все показатели, кроме бананов')
             <hr>
             <input type="text" placeholder=@lang('charts_map.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
             <i class="fa fa-search"></i> 
