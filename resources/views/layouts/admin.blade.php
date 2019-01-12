@@ -28,6 +28,9 @@
 
 </head>
 <body>
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
     <!-- Left Panel -->
 
@@ -38,20 +41,20 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/">Кредитная аналитика</a>
-                <a class="navbar-brand hidden" href="/">КА</a>
+                <a class="navbar-brand" href="/">@lang('admin.Кредитная аналитика')</a>
+                <a class="navbar-brand hidden" href="/">@lang('admin.КА')</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>Панель управления </a>
+                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>@lang('admin.Панель управления')</a>
                     </li>                                                                     
                     <li>
-                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
+                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Статистика и анализ') </a>
                     </li>
                     <li>
-                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
+                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Вернуться') </a>
                     </li>                    
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -96,6 +99,7 @@
         var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
         var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
         var chartLink = "{{ asset('charts') }}";
+        var rootSite = '<?=URL::to('/')?>';
     </script>
 
     <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
@@ -106,15 +110,6 @@
     <!--  Data table -->
     <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
-<!--     <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/datatables-init.js') }}"></script> -->
 
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
@@ -122,11 +117,12 @@
 
 
     <!-- Vector-map-->
-    <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js') }}"></script>  -->  
     <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script> -->
     <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-    <script src="{{ asset('js/map-charts.js') }}"></script>
+    <script src="{{ asset('js/map-charts-1.js') }}"></script>
+    <script src="{{ asset('js/map-charts-2.js') }}"></script>
+    <script src="{{ asset('js/map-charts-3.js') }}"></script>
+    <script src="{{ asset('js/map-charts-4.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -235,8 +231,27 @@
                     }); 
                 }
                 else if(fullMap){
-                    $('.chart-save').prop( "disabled" , false );
-                    document.location.href = "http://creditanalyst/map_for_save?fileName="+fileName+"&"+getString;
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
                 }
                 else{
                     alert("Постройте график!");
@@ -295,6 +310,29 @@
                         }
                     }); 
                 }
+                else if(fullMap){
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
+                }
                 else{
                     alert("Постройте график!");
                     $('.chart-save').prop( "disabled" , false );
@@ -351,6 +389,29 @@
                             $('.chart-save').prop( "disabled" , false );
                         }                        
                     }); 
+                }
+                else if(fullMap){
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
                 }
                 else{
                     alert("Постройте график!");

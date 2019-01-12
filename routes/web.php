@@ -31,10 +31,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 });
 
 /*
-* Путь, который отвечает за сохранение карты в скриншот
+* Пути, которые отвечают за сохранение карты в скриншот
 */
 
-	Route::get('/map_for_save', 'MapForSaveController@show')->name('mapForSave');
+	Route::get('/map_for_save', 'MapForSaveController@show');
+	Route::post('/map_for_save', 'MapForSaveController@processing_data')->name('mapForSave');
 
 /*
 * Пути, которые отвечают за информационную базу приложения
@@ -124,3 +125,8 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 
 	/* Забрать у пользователя права администратора */
 	Route::get('/admin_user_management/remove_admin_privileges/{user_id}', 'User_management_Admin_Controller@remove_admin_privileges')->middleware('can:administrator_rights');
+
+
+
+	/********** TEST **********/
+	Route::get('/test', 'TestController@test')->middleware('auth');

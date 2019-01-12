@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
 use Screen\Capture;
+use URL;
 
 class ChartsMapController extends AdminController
 {
@@ -34,7 +35,7 @@ class ChartsMapController extends AdminController
 
 	public function save_img_file(Request $request){
 
-		$url = 'http://creditanalyst/map_for_save'.$request->getString;
+		$url = URL::to('/').'/map_for_save'.$request->getString;
 		$file_name = $request->fileName;
 
 		$screenCapture = new Capture($url);
@@ -42,6 +43,23 @@ class ChartsMapController extends AdminController
 		$screenCapture->setImageType('png');
 		$fileLocation = 'charts/'.$file_name;
 		$screenCapture->save($fileLocation);
+
+		if ($request->fileExport == 1) {
+			$url = asset('charts/'.$file_name.'.png?fileExport=1');
+			return $url;
+		}
+
+		if ($request->fileExportToWord == 1) {
+			$phpWord = new \PhpOffice\PhpWord\PhpWord();
+			$section = $phpWord->addSection();
+			$section->addImage('charts/'.$file_name.'.png', array('width' => 500,
+        'height' => 300));  
+			$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+			$objWriter->save('charts/'.$file_name.'.docx');
+			$url = asset('charts/'.$file_name.'.docx?fileExportToWord=1');
+			unlink('charts/'.$file_name.'.png');
+			return $url;
+		}
 
 		return $screenCapture->getImageLocation();
 	}

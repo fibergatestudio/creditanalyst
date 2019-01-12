@@ -8,6 +8,8 @@
     if(!isset($active_sidebar_name)){
         $active_sidebar_name = '';
     }
+
+    App::setLocale(Auth::user()->preferred_language);
 ?>
 
 <section class="section-sidebar">
@@ -19,37 +21,37 @@
             <li class="{{ sidebar_tab_active_checker('sources', $active_sidebar_name) }}">
                 <a href="{{ url('sources_list') }}">
                     <span class="icon icon-data-sources"></span>
-                    <span class="menu-item-description collapse show">Источники данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Источники данных')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('search', $active_sidebar_name) }}">
                 <a href="{{ url('indicator_search') }}">
                     <span class="icon icon-search-list"></span>
-                    <span class="menu-item-description collapse show">Поиск данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Поиск данных')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('monitoring', $active_sidebar_name) }}">
                 <a href="{{ url('user_indicator_watch_list') }}">
                     <span class="icon icon-monitoring"></span>
-                    <span class="menu-item-description collapse show">Мониторинг данных</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Мониторинг данных')</span>
                 </a>
             </li>
             <li>
                 <a href="{{ url('admin/statistics-analysis') }}">
                     <span class="icon icon-statist"></span>
-                    <span class="menu-item-description collapse show">Статистика и анализ</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Статистика и анализ')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('settings', $active_sidebar_name) }}">
                 <a href="{{ url('settings') }}">
                     <span class="icon icon-setup"></span>
-                    <span class="menu-item-description collapse show">Настройки</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Настройки')</span>
                 </a>
             </li>
             <li class="{{ sidebar_tab_active_checker('help', $active_sidebar_name) }}">
                 <a href="{{ url('help') }}">
                     <span class="icon icon-help"></span>
-                    <span class="menu-item-description collapse show">Помощь</span>
+                    <span class="menu-item-description collapse show">@lang('sidebar.Помощь')</span>
                 </a>
             </li>
         </ul>

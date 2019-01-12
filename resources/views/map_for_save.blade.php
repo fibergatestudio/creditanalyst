@@ -77,6 +77,7 @@
     }
 </style>
 
+
 <div class="card-body card-block">
     <div class="row">
         <div class="col col-md-12">
@@ -85,7 +86,15 @@
                     <h4>Ukraine</h4>
                 </div>
                 <div class="Vector-map-js">
-                    <div id="save-marker-labels"></div>
+                    <div id="save-marker-labels">
+                        @if(!isset($_GET['indicator']))
+                        @if(isset($name_indicator_arr))
+                        @for($i=0; $i < count($name_indicator_arr); $i++)
+                        <div class="marker-color" id="m-color-{{$i+1}}"></div><div>{{$name_indicator_arr[$i]}}</div>
+                        @endfor
+                        @endif
+                        @endif
+                    </div>
                     <div id="saveChartMap" class="vmap"></div>
                 </div>
             </div>                                      
@@ -103,6 +112,11 @@
     var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
     var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
     var chartLink = "{{ asset('charts') }}";
+    var rootSite = '<?=URL::to('/')?>';
+    var datasetsObjNew = '<?=json_encode($datasets_obj,JSON_UNESCAPED_UNICODE) ?>';
+    datasetsObjNew = JSON.parse(datasetsObjNew);
+    var fileExport = '<?=(isset($_GET['fileExport']))?$_GET['fileExport'] : 0 ?>';
+    var fileExportToWord = '<?=(isset($_GET['fileExportToWord']))?$_GET['fileExportToWord'] : 0 ?>';
 </script>
 
 <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
@@ -113,42 +127,52 @@
 <!--  Data table -->
 <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
-<!-- <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/datatables-init.js') }}"></script> -->
 
 <!--  Chart js -->
 <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
 <script src="{{ asset('js/line-charts.js') }}"></script>
 
-<!-- Vector-map-->
-<!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js') }}"></script>  -->  
+<!-- Vector-map--> 
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-<!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script> -->
 <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-<script src="{{ asset('js/map-charts.js') }}"></script>
+<script src="{{ asset('js/map-charts-1.js') }}"></script>
+<script src="{{ asset('js/map-charts-2.js') }}"></script>
+<script src="{{ asset('js/map-charts-4.js') }}"></script>
 
 <script type="text/javascript">
     if(fullMap){
         $(document).ready(function(){
+
             $.ajax({
                 url: "{{ route('chartsMapSave') }}",
                 type: "POST",
-                data: {fileName:fileName, getString:getString},
+                data: {fileName:fileName, getString:getString, fileExport:fileExport, fileExportToWord:fileExportToWord},
                 headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (data) {
-                    alert(data);
-                    filesCharts.push(fileName);
-                    $('.chart-save').prop( "disabled" , false );
-                    document.location.href = "http://creditanalyst/admin/statistics-analysis";
+                    if (data.indexOf('http') == -1) {
+                        alert(data);
+                        document.location.href = rootSite+"/admin/statistics-analysis";
+                    }
+                    else if(data.indexOf('fileExport') + 1 > 0){
+                        alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.png');
+                            $('#saveChartMap').after(link);
+                            link.click();
+                            document.location.href = rootSite+"/admin/statistics-analysis";
+                    }
+                    else if(data.indexOf('fileExportToWord') + 1 > 0){
+                        alert('Файл сохранен в '+ data);
+                            var link = document.createElement('a');
+                            link.setAttribute('href',data);
+                            link.setAttribute('download',fileName +'.docx');
+                            $('#saveChartMap').after(link);
+                            link.click();
+                            document.location.href = rootSite+"/admin/statistics-analysis";
+                    }
                 },
                 error: function (msg) {
                     alert('Ошибка');
