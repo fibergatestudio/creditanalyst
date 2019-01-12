@@ -22,6 +22,8 @@ function dataset_format_date($date_format, $date){
   return $formatted_date;
 }
 
+App::setLocale(Auth::user()->preferred_language);
+
 ?>
 
 <!doctype html>
@@ -34,7 +36,7 @@ function dataset_format_date($date_format, $date){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Уведомления</title>
+    <title>@lang('notifications_index.Уведомления')</title>
   </head>
   <body>
     @include('basic_bootstrap_template_parts.navbar')
@@ -46,7 +48,7 @@ function dataset_format_date($date_format, $date){
                 </div><!-- /col col-lg-3 -->
 
                 <div class="col col-lg-9">
-                <h2>Уведомления</h2>
+                <h2>@lang('notifications_index.Уведомления')</h2>
 
                 <table class="table">
                     @foreach($notifications as $notification)

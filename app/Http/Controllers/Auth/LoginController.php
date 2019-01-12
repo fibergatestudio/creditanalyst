@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -82,9 +82,15 @@ class LoginController extends Controller
         if (isset($client->status) && $client->status == 'suspended') {
             return $this->sendFailedLoginResponse($request, 'Ваш аккаунт деактивирован');
         } else {
+            
             $credentials = $request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
+                
+                /* Задаём язык */
+                Auth::user()->preferred_language = $request->locale;
+                Auth::user()->save();
+                
                 // Authentication passed...
                 return redirect('sources_list');
             }
