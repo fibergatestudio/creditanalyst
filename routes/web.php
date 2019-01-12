@@ -125,3 +125,8 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 
 	/* Забрать у пользователя права администратора */
 	Route::get('/admin_user_management/remove_admin_privileges/{user_id}', 'User_management_Admin_Controller@remove_admin_privileges')->middleware('can:administrator_rights');
+
+
+
+	/********** TEST **********/
+	Route::get('/test', 'TestController@test')->middleware('auth');
