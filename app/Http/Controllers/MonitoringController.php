@@ -75,6 +75,36 @@ class MonitoringController extends Controller
         return $result;
     }
 
+    public function update(Request $request, $id) {
+        $id = (int)$id;
+        $userId = Auth::id();
+        $indicatorWatcher = IndicatorWatcher::find($id);
+
+        if (!$indicatorWatcher) {
+            abort(404);
+        }
+
+        if ($indicatorWatcher->user_id != $userId) {
+            abort(403);
+        }
+
+        $alias = $request->input('alias', '');
+        if (is_null($alias)) {
+            $alias = '';
+        }
+
+        $notify = (int)$request->input('notify', 0);
+        $position = $request->input('position', 0);
+        $notify_info = $request->input('notify_info', '{}');
+
+        $indicatorWatcher->alias = $alias;
+        $indicatorWatcher->notify = $notify;
+        $indicatorWatcher->position = $position;
+        $indicatorWatcher->notify_info = json_encode($notify_info);
+        $indicatorWatcher->save();
+        return $indicatorWatcher;
+    }
+
     /*
     * Функция добвавления индикаторов к списку мониторинга
     */
