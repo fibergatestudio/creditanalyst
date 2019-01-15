@@ -21,36 +21,12 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 }    
 </style>
 
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Charts</a></li>
-                    <li class="active">Chartjs</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="card-body card-block">
     <div class="row form-group">
         <div class="col col-md-12">
             <table class="table" id="indicatorGroup"></table>                                       
         </div>
     </div>
-</div>
-
-<div class="card-body card-block">
     <div class="row">
         <div class="col-12 col-md-9">
             Для теста представлены все показатели, кроме бананов
@@ -61,11 +37,6 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         </div>       
     </div>
     <ul id="resultIndicator"></ul>
-</div>
-
-<hr>
-
-<div class="card-body card-block">
     <div class="row form-group">
         <div class="col-12 col-md-9">
             <h5>Период:</h5>
@@ -102,9 +73,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             <button id="makeChart" class="btn btn-primary btn-sm">Построить график</button>
         </div>
     </div>
-</div>
-
-<div class="content mt-3">
+    <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
 
@@ -120,11 +89,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         </div>
 
     </div><!-- .animated -->
-</div><!-- .content -->
-
-<div class="card-body card-block">
-    <div class="row form-group">
-        <div class="col col-md-12">
+    <div class="col col-md-12">
             <div class="input-group">
                 <h5>Название графика</h5>
                 <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
@@ -136,7 +101,9 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             </div>
         </div>
     </div>
-</div>
+</div><!-- .content -->
+
+<hr>
 
 
 @endsection

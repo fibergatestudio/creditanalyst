@@ -1,8 +1,5 @@
+@extends('layouts.mercurial')
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,62 +26,9 @@
 </head>
 <body>
 
-    <!-- Left Panel -->
-
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="/">Кредитная аналитика</a>
-                <a class="navbar-brand hidden" href="/">КА</a>
-            </div>
-
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>Панель управления </a>
-                    </li>                                                                     
-                    <li>
-                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> Статистика и анализ </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> Вернуться </a>
-                    </li>                    
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
 
     <!-- Right Panel -->
 
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-10">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                </div>
-
-                <div class="col-sm-2">
-
-                </div>
-
-            </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
-        @yield('content')
-
-    </div><!-- /#right-panel -->
 
     <script type="text/javascript">
         var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
