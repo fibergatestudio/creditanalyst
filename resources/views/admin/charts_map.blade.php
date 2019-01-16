@@ -1,3 +1,7 @@
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
+
 @extends('layouts.admin')
 
 @section('content')
@@ -70,17 +74,16 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     </div>
     <div class="row">
         <div class="col-12 col-md-9">
-            Для теста представлены все показатели, кроме бананов
             <hr>
-            <input type="text" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+            <input type="text" placeholder=@lang('charts_map.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
             <i class="fa fa-search"></i> 
-            <button id="addIndicator" class="btn btn-success btn-sm">Добавить индикатор</button>
+            <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts_map.Добавить индикатор')</button>
         </div>       
     </div>
     <ul id="resultIndicator"></ul>
     <div class="row form-group">
         <div class="col-12 col-md-9">
-            <button id="makeChartMap" class="btn btn-primary btn-sm">Построить график</button>
+            <button id="makeChartMap" class="btn btn-primary btn-sm">@lang('charts_map.Построить график')</button>
         </div>
     </div>
         <div class="content mt-3">
@@ -102,12 +105,12 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     </div><!-- .content -->
         <div class="col col-md-12">
             <div class="input-group">
-                <h5>Название графика</h5>
-                <input type="text" id="chartName" name="chartName" placeholder="График 1" class="form-control">
+                <h5>@lang('charts_map.Название графика')</h5>
+                <input type="text" id="chartName" name="chartName" placeholder=@lang('charts_map.График 1') class="form-control">
                 <div id="save-export" class="input-group-btn">
-                    <button id="saveChart" class="btn btn-success btn-sm chart-save">Сохранить</button>
-                    <button id="exportChart" class="btn btn-danger btn-sm chart-save">Экспортировать</button>
-                    <button id="exportToWordChart" class="btn btn-success btn-sm chart-save">Экспорт в Word</button>
+                    <button id="saveChart" class="btn btn-success btn-sm chart-save">@lang('charts_map.Сохранить')</button>
+                    <button id="exportChart" class="btn btn-danger btn-sm chart-save">@lang('charts_map.Экспортировать')</button>
+                    <button id="exportToWordChart" class="btn btn-success btn-sm chart-save">@lang('charts_map.Экспорт в Word')</button>
                 </div>                    
             </div>
         </div>

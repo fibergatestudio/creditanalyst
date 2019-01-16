@@ -15,33 +15,36 @@
 {{-- Выше - было --}}
 
 {{-- Ниже - стало --}}
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
 <section id="page-source-name" class="section-content">
         <div class="content-title">
             <h2 class="name-menu">{{ $infosource->name }}</h2>
             {{-- Logout --}}
-            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+            <a href="{{ url('user_logout') }}" class="exit">@lang('indicators_index.Выйти')</a>
         </div>
         <div class="card card-fluid">
             <div class="card-body">
                 <div class="title-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('sources_list') }}">Источники данных</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('sources_list') }}">@lang('indicators_index.Источники данных')</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $infosource->name }}</li>
                         </ol>
                     </nav>
-                    <a href="{{ url('sources_list') }}" class="text button-back">Назад</a>
+                    <a href="{{ url('sources_list') }}" class="text button-back">@lang('indicators_index.Назад')</a>
                 </div>
                 <div class="content-row">
-                    <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
-                    <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
+                    <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Добавить все показатели в мониторинг')</a>
+                    <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Удалить все показатели из мониторинга')</a>
                     <a href="#link-on-export-page" class="btn btn-success" >
-                        Экспорт всех данных в Excel
+                        @lang('indicators_index.Экспорт всех данных в Excel')
                     </a>
                     {{-- Верхняя пагинация --}}
                     {{ $indicators->links() }}
-                    
+
                     {{-- Конец верхней пагинации --}}
                 </div>
                 <table class="table table-striped">
@@ -53,7 +56,7 @@
                             <td>
                                 <div class="actions">
                                     <a href=" {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
-                                        <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Добавить показатель в мониторинг"></span>
+                                        <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content=@lang('indicators_index.Добавить показатель в мониторинг')></span>
                                     </a>
                                     <a href="#" class="icon icon-stat"></a>
                                     <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a>
@@ -64,9 +67,9 @@
                     </tbody>
                 </table>
                 <div class="content-row">
-                    <a href="#" class="btn btn-outline-secondary">Добавить все показатели в мониторинг</a>
-                    <a href="#" class="btn btn-outline-secondary">Удалить все показатели из мониторинга</a>
-                    <a href="#link-on-export-page" class="btn btn-success">Экспорт всех данных в Excel</a>
+                    <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Добавить все показатели в мониторинг')</a>
+                    <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Удалить все показатели из мониторинга')</a>
+                    <a href="#link-on-export-page" class="btn btn-success">@lang('indicators_index.Экспорт всех данных в Excel')</a>
                     {{-- Нижняя пагинация --}}
 
                         {{ $indicators->links() }}
@@ -99,7 +102,7 @@
                                             <label for="exampleCheck2"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                    <td>@lang('indicators_index.Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов')</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -108,7 +111,7 @@
                                             <label for="exampleCheck3"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                    <td>@lang('indicators_index.Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов')</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -117,7 +120,7 @@
                                             <label for="exampleCheck4"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                    <td>@lang('indicators_index.Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов')</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -126,7 +129,7 @@
                                             <label for="exampleCheck5"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                    <td>@lang('indicators_index.Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов')</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -135,7 +138,7 @@
                                             <label for="exampleCheck7"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов</td>
+                                    <td>@lang('indicators_index.Показатель 1, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов')</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -144,9 +147,9 @@
                                             <label for="exampleCheck6"></label>
                                         </div>
                                     </td>
-                                    <td>Показатель 6, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов,
+                                    <td>@lang('indicators_index.Показатель 6, Рыбным текстом называется текст, служащий для временного наполнения макета в публикациях или производстве веб-сайтов,
                                         пока финальный текст еще не создан. Рыбный текст также известен как текст-заполнитель или же текст-наполнитель. Иногда текст-«рыба»
-                                        также используется композиторами при написании музыки.</td>
+                                        также используется композиторами при написании музыки.')</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -154,7 +157,7 @@
 
                         <div class="modal-footer">
 
-                            <button type="submit" class="btn btn-success">Экспорт в Excel</button>
+                            <button type="submit" class="btn btn-success">@lang('indicators_index.Экспорт в Excel')</button>
                             {{-- Пагинация --}}
                             <ul class="pagination">
                                 <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
@@ -182,7 +185,7 @@
                         </button>
                     </div>
                     <div class="text-align-left modal-body">
-                        <span class="text text-bold">Показатель Название</span>
+                        <span class="text text-bold">@lang('indicators_index.Показатель Название')</span>
                         <span class="modal-size-small">
                     Lorem ipsum dolor sit amet. Duo duis ipsum diam. Te erat clita et eos est hendrerit amet.
                     Ipsum soluta nonummy eros consequat. Iriure in eirmod consequat sit rebum consequat.
@@ -191,8 +194,8 @@
                 </span>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">В мониторинг</button>
-                        <button type="button" class="btn btn-success ">Экспорт в Excel</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">@lang('indicators_index.В мониторинг')</button>
+                        <button type="button" class="btn btn-success ">@lang('indicators_index.Экспорт в Excel')</button>
                     </div>
                 </div>
             </div>

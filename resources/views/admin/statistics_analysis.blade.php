@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <?php
+    App::setLocale(Auth::user()->preferred_language);
+    ?>
+
 <style type="text/css">
 i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
     cursor: pointer;
@@ -27,8 +31,8 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
     </div>
     <div class="row form-group">
         <div class="col col-md-12">
-            <a href="{{route('chartsIndex')}}" class="btn btn-success btn-sm">Создать новый график</a>
-            <a href="{{route('chartsMapIndex')}}" class="btn btn-success btn-sm">Создать новую карту</a>      
+            <a href="{{route('chartsIndex')}}" class="btn btn-success btn-sm">@lang('statistics_analysis.Создать новый график')</a>
+            <a href="{{route('chartsMapIndex')}}" class="btn btn-success btn-sm">@lang('statistics_analysis.Создать новую карту')</a>
         </div>
     </div>
 </div>

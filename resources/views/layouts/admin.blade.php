@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -20,12 +20,45 @@
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
 <body>
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
+    <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/">@lang('admin.Кредитная аналитика')</a>
+                <a class="navbar-brand hidden" href="/">@lang('admin.КА')</a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>@lang('admin.Панель управления')</a>
+                    </li>
+                    <li>
+                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Статистика и анализ') </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Вернуться') </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
 
     <!-- Right Panel -->
 
@@ -40,9 +73,10 @@
         var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
         var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
         var chartLink = "{{ asset('charts') }}";
+        var rootSite = '<?=URL::to('/')?>';
     </script>
 
-    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
+    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -50,15 +84,6 @@
     <!--  Data table -->
     <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
-<!--     <script src="{{ asset('assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/js/lib/data-table/datatables-init.js') }}"></script> -->
 
     <!--  Chart js -->
     <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
@@ -66,11 +91,12 @@
 
 
     <!-- Vector-map-->
-    <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.js') }}"></script>  -->  
     <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script> -->
     <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-    <script src="{{ asset('js/map-charts.js') }}"></script>
+    <script src="{{ asset('js/map-charts-1.js') }}"></script>
+    <script src="{{ asset('js/map-charts-2.js') }}"></script>
+    <script src="{{ asset('js/map-charts-3.js') }}"></script>
+    <script src="{{ asset('js/map-charts-4.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -84,7 +110,7 @@
 
         } );
 
-        
+
         //Транслитерация
         function translit(txt){
             // Символ, на который будут заменяться все спецсимволы
@@ -115,16 +141,16 @@
                    if(curent_sim != transl[text[i]] || curent_sim != space){
                        result += transl[text[i]];
                        curent_sim = transl[text[i]];
-                   }                                                                            
+                   }
                }
                 // Если нет, то оставляем так как есть
                 else {
                     result += text[i];
                     curent_sim = text[i];
-                }                             
-            }         
+                }
+            }
 
-            result = TrimStr(result);              
+            result = TrimStr(result);
 
             // Выводим результат
             return result;
@@ -144,7 +170,7 @@
         */
 
         $('#saveChart').click(function (){
-            $('.chart-save').prop( "disabled" , true ); 
+            $('.chart-save').prop( "disabled" , true );
             var fileName = translit($('#chartName').val());
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
@@ -158,7 +184,7 @@
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -176,11 +202,30 @@
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
                         }
-                    }); 
+                    });
                 }
                 else if(fullMap){
-                    $('.chart-save').prop( "disabled" , false );
-                    document.location.href = "http://creditanalyst/map_for_save?fileName="+fileName+"&"+getString;
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
                 }
                 else{
                     alert("Постройте график!");
@@ -214,7 +259,7 @@
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -237,7 +282,30 @@
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
                         }
-                    }); 
+                    });
+                }
+                else if(fullMap){
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
                 }
                 else{
                     alert("Постройте график!");
@@ -271,7 +339,7 @@
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -293,8 +361,31 @@
                         error: function (msg) {
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
-                        }                        
-                    }); 
+                        }
+                    });
+                }
+                else if(fullMap){
+                    if (indicatorsAddArr.length == 1) {
+                        document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
+                    }
+                    else{
+                        $.ajax({
+                            url: "{{ route('mapForSave') }}",
+                            type: "POST",
+                            data: {getString:getString, fileName:fileName},
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
+                            },
+                            error: function (msg) {
+                                alert('Ошибка admin');
+                                $('.chart-save').prop( "disabled" , false );
+                            }
+                        });
+                    }
                 }
                 else{
                     alert("Постройте график!");
@@ -307,11 +398,11 @@
             }
         });
 
-        
+
         /*
         * Удаление сохраненных графиков
         */
-        
+
         function removeChart(element) {
             if (confirm("Вы действительно хотите удалить эти данные ?")){
                 var fileName = filesChartsFull[element.getAttribute('data-id')];
@@ -329,8 +420,8 @@
                     error: function (msg) {
                         alert('Ошибка');
                     }
-                });               
-            }    
+                });
+            }
         }
 
     </script>
@@ -341,11 +432,10 @@
     //Посмотреть график
     function watchChart(element) {
         var fileName = filesChartsFull[element.getAttribute('data-id')];
-        document.location.href = chartLink + '/' + fileName;    
+        document.location.href = chartLink + '/' + fileName;
     }
 
 </script>
 
 </body>
 </html>
-

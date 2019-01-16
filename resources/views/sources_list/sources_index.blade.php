@@ -1,3 +1,6 @@
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 @extends('layouts.mercurial')
 
 @section('content')
@@ -36,16 +39,19 @@
             </div><!-- / accordion -->
             --}}
 {{-- ВЫШЕ - БЫЛО --}}
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
 <section id="data-sources" class="section-content">
         <div class="content-title">
-            <h2 class="name-menu">Источники данных</h2>
-            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+            <h2 class="name-menu">@lang('sources-index.Источники данных')</h2>
+            <a href="{{ url('user_logout') }}" class="exit">@lang('sources-index.Выйти')</a>
         </div>
         <div class="content-grid">
             <div class="card card-fluid">
                 <div class="card-body">
-                    <h3 class="title-block">Источники данных</h3>
+                    <h3 class="title-block">@lang('sources-index.Источники данных')</h3>
                     <div id="accordion">
                       @foreach($infosources as $infosource)
                         <div class="card card-fluid">
@@ -64,17 +70,17 @@
                                 <div id="collapseOne" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('sources-index.Описание'):</dt>
                                             <dd class="col-md-8">{{ $infosource->description }}. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
+                                            <dt class="col-md-4">@lang('sources-index.Источник / поставщик'):</dt>
                                             <dd class="col-md-8">{{ $infosource->procurer }}</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
+                                            <dt class="col-md-4">@lang('sources-index.Частота данных'):</dt>
                                             <dd class="col-md-8">{{ $infosource->frequency_unit_name }}</dd>
-                                            <dt class="col-md-4">География данных:</dt>
+                                            <dt class="col-md-4">@lang('sources-index.География данных'):</dt>
                                             <dd class="col-md-8">{{ $infosource->geography_unit_name }}</dd>
                                         </dl>
                                         <a href="{{ url('indicator_list/'.$infosource->id) }}">
-                                          <button class="btn btn-success">Список показателей</button>
+                                          <button class="btn btn-success">@lang('sources-index.Список показателей')</button>
                                         </a>
                                     </div>
                                 </div>
