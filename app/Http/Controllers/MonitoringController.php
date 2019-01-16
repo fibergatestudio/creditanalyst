@@ -20,7 +20,11 @@ class MonitoringController extends Controller
     public function watchlist()
     {
         $userId = Auth::id();
-        return IndicatorWatcher::getDataListByUserId($userId);
+        $indicatorWatchers = IndicatorWatcher::getDataListByUserId($userId);
+        foreach ($indicatorWatchers as $key => $indicatorWatcher) {
+            $indicatorWatchers[$key]->delta = Dataset::getDeltaByIndicator($indicatorWatcher->indicator_id, $indicatorWatcher->frequency);
+        }
+        return $indicatorWatchers;
     }
 
     public function remove($id)
