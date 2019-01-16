@@ -12,27 +12,6 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
 }    
 </style>
 
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Charts</a></li>
-                    <li class="active">Chartjs</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="card-body card-block">
     <div class="row form-group">
         <div class="col col-md-12">
@@ -50,9 +29,6 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
             </table>                                       
         </div>
     </div>
-</div>
-
-<div class="card-body card-block">
     <div class="row form-group">
         <div class="col col-md-12">
             <a href="{{route('chartsIndex')}}" class="btn btn-success btn-sm">@lang('statistics_analysis.Создать новый график')</a>

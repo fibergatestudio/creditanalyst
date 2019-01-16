@@ -1,14 +1,11 @@
+@extends('layouts.mercurial')
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -23,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -34,60 +31,8 @@ App::setLocale(Auth::user()->preferred_language);
 
     <!-- Left Panel -->
 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="/">@lang('admin.Кредитная аналитика')</a>
-                <a class="navbar-brand hidden" href="/">@lang('admin.КА')</a>
-            </div>
-
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="{{route('adminIndex')}}"> <i class="menu-icon fa fa-dashboard"></i>@lang('admin.Панель управления')</a>
-                    </li>                                                                     
-                    <li>
-                        <a href="{{route('statisticsAnalysisIndex')}}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Статистика и анализ') </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}"><i class="menu-icon fa fa-address-card "></i> @lang('admin.Вернуться') </a>
-                    </li>                    
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
     <!-- Right Panel -->
 
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-10">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                </div>
-
-                <div class="col-sm-2">
-
-                </div>
-
-            </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
-        @yield('content')
-
-    </div><!-- /#right-panel -->
 
     <script type="text/javascript">
         var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
@@ -102,7 +47,7 @@ App::setLocale(Auth::user()->preferred_language);
         var rootSite = '<?=URL::to('/')?>';
     </script>
 
-    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
+    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -136,7 +81,7 @@ App::setLocale(Auth::user()->preferred_language);
 
         } );
 
-        
+
         //Транслитерация
         function translit(txt){
             // Символ, на который будут заменяться все спецсимволы
@@ -167,16 +112,16 @@ App::setLocale(Auth::user()->preferred_language);
                    if(curent_sim != transl[text[i]] || curent_sim != space){
                        result += transl[text[i]];
                        curent_sim = transl[text[i]];
-                   }                                                                            
+                   }
                }
                 // Если нет, то оставляем так как есть
                 else {
                     result += text[i];
                     curent_sim = text[i];
-                }                             
-            }         
+                }
+            }
 
-            result = TrimStr(result);              
+            result = TrimStr(result);
 
             // Выводим результат
             return result;
@@ -196,7 +141,7 @@ App::setLocale(Auth::user()->preferred_language);
         */
 
         $('#saveChart').click(function (){
-            $('.chart-save').prop( "disabled" , true ); 
+            $('.chart-save').prop( "disabled" , true );
             var fileName = translit($('#chartName').val());
             if (fileName) {
                 if (filesCharts.indexOf(fileName) !== -1){
@@ -210,7 +155,7 @@ App::setLocale(Auth::user()->preferred_language);
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -228,7 +173,7 @@ App::setLocale(Auth::user()->preferred_language);
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
                         }
-                    }); 
+                    });
                 }
                 else if(fullMap){
                     if (indicatorsAddArr.length == 1) {
@@ -285,7 +230,7 @@ App::setLocale(Auth::user()->preferred_language);
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -308,7 +253,7 @@ App::setLocale(Auth::user()->preferred_language);
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
                         }
-                    }); 
+                    });
                 }
                 else if(fullMap){
                     if (indicatorsAddArr.length == 1) {
@@ -365,7 +310,7 @@ App::setLocale(Auth::user()->preferred_language);
                     return 0;
                 }
                 if (fullChart) {
-                    var canvas = document.getElementById('myChart'); 
+                    var canvas = document.getElementById('myChart');
                     var img = canvas.toDataURL();
                     $.ajax({
                         url: "{{ route('chartsSave') }}",
@@ -387,8 +332,8 @@ App::setLocale(Auth::user()->preferred_language);
                         error: function (msg) {
                             alert('Ошибка');
                             $('.chart-save').prop( "disabled" , false );
-                        }                        
-                    }); 
+                        }
+                    });
                 }
                 else if(fullMap){
                     if (indicatorsAddArr.length == 1) {
@@ -424,11 +369,11 @@ App::setLocale(Auth::user()->preferred_language);
             }
         });
 
-        
+
         /*
         * Удаление сохраненных графиков
         */
-        
+
         function removeChart(element) {
             if (confirm("Вы действительно хотите удалить эти данные ?")){
                 var fileName = filesChartsFull[element.getAttribute('data-id')];
@@ -446,8 +391,8 @@ App::setLocale(Auth::user()->preferred_language);
                     error: function (msg) {
                         alert('Ошибка');
                     }
-                });               
-            }    
+                });
+            }
         }
 
     </script>
@@ -458,11 +403,10 @@ App::setLocale(Auth::user()->preferred_language);
     //Посмотреть график
     function watchChart(element) {
         var fileName = filesChartsFull[element.getAttribute('data-id')];
-        document.location.href = chartLink + '/' + fileName;    
+        document.location.href = chartLink + '/' + fileName;
     }
 
 </script>
 
 </body>
 </html>
-

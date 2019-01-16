@@ -117,7 +117,10 @@ export default {
             this.$set(this, 'editItem', '');
         },
         Analyse(item){
-            window.location = '/admin/statistics-analysis';
+            // window.console.log(item);
+            const dt = new Date();
+            const year = dt.getFullYear();
+            window.location = `/admin/statistics-analysis/charts?indicator_id=${item.indicator_id}&from=${year}-01-01&to=${year}-12-31`;
         },
         Chart(item){
             const request = {
