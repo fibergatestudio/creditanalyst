@@ -30,7 +30,9 @@ class IndicatorWatcher extends Model
 `uiwl`.`id`,
 `uiwl`.`indicator_id`,
 `uiwl`.`alias`,
+`uiwl`.`position`,
 `uiwl`.`notify`,
+`uiwl`.`notify_info`,
 `i`.`name`,
 (SELECT `d`.`value` FROM `data` AS `d` WHERE `d`.`indicator_id` = `i`.`id` ORDER BY `d`.`id` DESC LIMIT 1) AS `value`
 FROM `user_indicator_watch_list` AS `uiwl`
@@ -39,9 +41,10 @@ WHERE
     `uiwl`.`user_id` = ?
 ORDER BY `uiwl`.`position` DESC;';
         $result = DB::select($sql, [$userId]);
-        foreach ($result as $key => $value) {
-            $result[$key]->notify = (bool)$value->notify;
-            $result[$key]->value = (float)$value->value;
+        foreach ($result as $key => $val) {
+            $result[$key]->notify = (bool)$val->notify;
+            $result[$key]->value = (float)$val->value;
+            $result[$key]->notify_info = json_decode($val->notify_info);
         }
         return $result;
     }
