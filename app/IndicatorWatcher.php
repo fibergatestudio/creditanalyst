@@ -34,6 +34,7 @@ class IndicatorWatcher extends Model
 `uiwl`.`notify`,
 `uiwl`.`notify_info`,
 `i`.`name`,
+`i`.`frequency`,
 (SELECT `d`.`value` FROM `data` AS `d` WHERE `d`.`indicator_id` = `i`.`id` ORDER BY `d`.`id` DESC LIMIT 1) AS `value`
 FROM `user_indicator_watch_list` AS `uiwl`
 JOIN `indicators` AS `i` ON `i`.`id` = `uiwl`.`indicator_id`
