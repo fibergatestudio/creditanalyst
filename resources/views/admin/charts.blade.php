@@ -142,5 +142,10 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     </div>
 </div>
 
+<script type="text/javascript">
+    var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
+    var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
+    var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
+</script>
 
 @endsection
