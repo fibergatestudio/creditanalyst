@@ -478,12 +478,20 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 
 
 
+
     <script type="text/javascript">
     //Посмотреть график
     function watchChart(element) {
         var fileName = filesChartsFull[element.getAttribute('data-id')];
         document.location.href = chartLink + '/' + fileName;
     }
+    </script>
 
-</script>
+    <script type="text/javascript">
+        var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
+        var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
+        var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
+    </script>
+
+
 @endsection
