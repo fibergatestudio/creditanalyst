@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h3 class="title-block">Мониторинг</h3>
 
-                    <div class="container" id="app">
+                    <div style="margin-left: 0;" class="container" id="app">
                         <user-indicator-list />
                     </div>
                 </div>

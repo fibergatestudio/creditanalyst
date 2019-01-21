@@ -35,7 +35,6 @@ App::setLocale(Auth::user()->preferred_language);
                                 <li class="breadcrumb-item active" aria-current="page">@lang('indicator_search.Результат поиска')</li>
                             @else
                                 <li class="breadcrumb-item"><a href="#">@lang('indicator_search.Введите поисковый запрос')</a></li>
-                                
                             @endif
                             
                         </ol>

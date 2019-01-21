@@ -74,11 +74,25 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         <div class="content-grid">
             <div class="card card-fluid">
                 <div class="card-body">
-                    <h3 class="title-block"><a style="color: #ffffff6e;">Сохраненные документы</a> / {{ $title }} 
+                    <div class="title-block">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="http://anothersite-dev.com/admin/statistics-analysis">Сохраненные документы</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Создать новую карту</li>
+                                    <li class="breadcrumb-item"> 
+                                        <a href="{{ URL::previous() }}">
+                                            <button style="border-color: #f8f9fa3d !important;" class="btn btn-outline-light btn-sm">Назад</button>
+                                        </a>
+                                    </li>
+                                
+                            </ol>
+                        </nav>
+                        </div>
+                    <!--<h3 class="title-block"><a style="color: #ffffff6e;">Сохраненные документы</a> / {{ $title }} 
                         <a href="{{ URL::previous() }}">
                             <button style="border-color: #f8f9fa3d !important;" class="btn btn-outline-light btn-sm">Назад</button>
                         </a>
-                     </h3>
+                     </h3>-->
 
 
                     <div class="card-body card-block">
@@ -87,39 +101,71 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                 <table class="table" id="indicatorGroup"></table>                                       
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-9">
+
+                        <!-- <div class="row">
+                            <div class="col-md-12">
                                 <hr>
-                                <input type="text" placeholder=@lang('charts_map.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
+                                <input type="text" placeholder=@lang('charts_map.Введите поисковый запрос') id="searchIndicator" name="searchIndicator" class="form-control">
                                 <i class="fa fa-search"></i> 
-                                <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts_map.Добавить индикатор')</button>
+                                <button id="addIndicator" style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts_map.Добавить индикатор')</button>
                             </div>       
-                        </div>
+                        </div> -->
+
+                        <hr>
+
+                         <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-8">
+                                    <input style="width:100%;" type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator" class="form-control">
+                                    <!--<i class="fa fa-search"></i>-->
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="addIndicator"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts_map.Добавить индикатор')</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button id="makeChartMap" class="btn btn-primary btn-sm">@lang('charts_map.Построить график')</button>
+                                </div>
+
+
+                            </div>
+
+                        </div>        
+                        
+                        <hr>
+
                         <ul id="resultIndicator"></ul>
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <div class="col-12 col-md-9">
                                 <button id="makeChartMap" class="btn btn-primary btn-sm">@lang('charts_map.Построить график')</button>
                             </div>
-                        </div>
-                            <div class="content mt-3">
+                        </div> -->
+                            <div class="#">
                             <div class="animated fadeIn">
                                 <div class="row">
                                 <div class="col col-md-12">
-                                <div class="input-group">
-                                    <!--<h5>@lang('charts_map.Название графика')</h5>-->
-                                    <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
-                                    <div id="save-export" class="input-group-btn">
-                                        <button id="saveChart" class="btn btn-success btn-sm chart-save">@lang('charts_map.Сохранить')</button>
-                                        <button id="exportChart" class="btn btn-danger btn-sm chart-save">@lang('charts_map.Экспортировать')</button>
-                                        <button id="exportToWordChart" class="btn btn-success btn-sm chart-save">@lang('charts_map.Экспорт в Word')</button>
-                                    </div>                    
-                                </div>
+
+                                <div class="col-lg-12">
+                                        <div class="#">
+                                            <h4>Ukraine</h4>
+                                        </div>
+                                <div>
+                                    <div class="input-group">
+                                        <!--<h5>@lang('charts_map.Название графика')</h5>-->
+                                        <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
+                                        <div id="save-export" class="input-group-btn">
+                                            <button id="saveChart" style="border-color: #84c33d;" class="btn btn-success btn-sm chart-save">@lang('charts_map.Сохранить')</button>
+                                            <button id="exportChart" class="btn btn-danger btn-sm chart-save">@lang('charts_map.Экспортировать')</button>
+                                            <button id="exportToWordChart" style="border-color: #84c33d;" class="btn btn-success btn-sm chart-save">@lang('charts_map.Экспорт в Word')</button>
+                                        </div>                    
+                                    </div>
                             </div>
 
                                     <div class="col-lg-12">
-                                        <div class="card-header">
+                                        <!--<div class="card-header">
                                             <h4>Ukraine</h4>
-                                        </div>
+                                        </div>-->
                                         <div class="Vector-map-js">
                                             <div id="marker-labels"></div>
                                             <div id="myChartMap" class="vmap"></div>

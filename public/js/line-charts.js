@@ -198,7 +198,7 @@ $("#addIndicator").click(function() {
                     <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
                     <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
                     <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
                     </tr>`
                     );
             }
@@ -224,10 +224,10 @@ $("#addIndicator").click(function() {
                 if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
                     indicatorsAddArr.push($("#searchIndicator").val());
                     $("#indicatorGroup").append(`
-                        <tr>
-                        <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                        <tr style="font-size: 20px; background-color: #f1f1f1;">
+                        <th style="background-color: #3E4451; color: white; border-bottom-left-radius: 15px; border-top-left-radius: 15px; width: 60px;" scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
                         <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
                         </tr>`
                         );
                 }
