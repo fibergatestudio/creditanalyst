@@ -2,7 +2,7 @@
 App::setLocale(Auth::user()->preferred_language);
 ?>
 
-@extends('layouts.admin')
+@extends('layouts.mercurial')
 
 @section('content')
 
