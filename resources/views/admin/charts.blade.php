@@ -113,6 +113,13 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 @endsection
 
 @section('scripts')
+
+<script type="text/javascript">
+    var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
+    var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
+    var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
+</script>
+
 <script type="text/javascript">
         var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
         filesCharts = JSON.parse(filesCharts);
@@ -126,7 +133,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         var rootSite = '<?=URL::to('/')?>';
     </script>
 
-    <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -487,11 +494,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     }
     </script>
 
-    <script type="text/javascript">
-        var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
-        var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
-        var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
-    </script>
+    
 
 
 @endsection
