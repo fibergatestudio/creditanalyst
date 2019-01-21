@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-check">
                             <input type="radio" class="form-check-input" value="digest" id="exampleCheck4" v-model="current.notify_info.when">
-                            <label class="form-check-label" for="exampleCheck4">Включить внутренний дайжест</label>
+                            <label class="form-check-label" for="exampleCheck4">Включить внутренний дайджест</label>
                         </div>
 
                     </div>

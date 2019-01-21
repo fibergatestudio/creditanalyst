@@ -18,6 +18,17 @@
                             <td :title="item.name" class="vlm" @click="Chart(item)" style="cursor: pointer">{{ item.alias || item.name }}</td>
                         </template>
                         <td width="10%" style="white-space: nowrap" class="vlm text-right">{{ item.value }}</td>
+                        <td width="10%" style="white-space: nowrap" class="vlm text-right">
+                            <template v-if="item.delta.number > 0">
+                                <i class="fas fa-arrow-up" style="font-size: 24px; float: left"></i>
+                            </template>
+                            <template v-if="item.delta.number < 0">
+                                <i class="fas fa-arrow-down" style="font-size: 24px; float: left"></i>
+                            </template>
+                            <span style="font-size: 10px; float: right">
+                                {{ item.delta.number }}<br>{{ item.delta.percent }} %
+                            </span>
+                        </td>
                         <td width="10%" style="white-space: nowrap">
                             <template v-if="editItem.id === item.id">
                                 <button class="btn btn-success btn-sm minw40" @click="SaveItem" title="Сохранить">
@@ -117,7 +128,10 @@ export default {
             this.$set(this, 'editItem', '');
         },
         Analyse(item){
-            window.location = '/admin/statistics-analysis';
+            // window.console.log(item);
+            const dt = new Date();
+            const year = dt.getFullYear();
+            window.location = `/admin/statistics-analysis/charts?indicator_id=${item.indicator_id}&from=${year}-01-01&to=${year}-12-31`;
         },
         Chart(item){
             const request = {
