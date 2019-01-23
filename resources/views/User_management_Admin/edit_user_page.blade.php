@@ -16,20 +16,36 @@
                                 <li class="breadcrumb-item active" aria-current="page">Редактировать пользователя</li>
                             </ol>
                         </nav>
-                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a></div>
+                        @role('app-admin')
+                        <a href="{{ url('/admin_user_management/show_room/'.$room_id) }}" class="text button-back">Назад</a>
+                        @endrole
+                        @role('admin')
+                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a>
+                        @endrole                        
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             {{-- Форма редактирования пользователя --}}
-                            <form class="card-form" method="POST" action="{{ url('admin_user_management/edit_user') }}">
+                            <form class="card-form" method="POST" action="{{ url('admin_user_management/edit_user/'.$room_id) }}">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                @if($user->user_room_id)
                                 <div class="form-group row">
                                     <label class="col-md-12">E-mail:</label>
                                     <div class="input-group">
-                                        <input name="email" type="email" class="form-control col-md-12"  placeholder="" value="{{ $user->email }}" required>
-                                        
+                                        <input name="login" type="text" class="form-control col-md-6"  placeholder="" required value="{{ $user->name }}">
+                                        <input name="email" type="text" class="form-control col-md-6"  placeholder="" required value="{{ $domain }}" disabled="disabled">
                                     </div>
                                 </div>
+                                @else
+                                <div class="form-group row">
+                                    <label class="col-md-12">E-mail:</label>
+                                    <div class="input-group">
+                                        <input name="login" type="text" class="form-control col-md-6"  placeholder="" required value="{{ $user->name }}">
+                                        <input name="email" type="text" class="form-control col-md-6"  placeholder="@admin.com" required value="{{ $domain }}">
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="form-group row">
                                     <label class="col-md-12">Имя:</label>
                                     <input name="first_name" type="text" class="form-control col-md-12"  placeholder="" value="{{ $user->first_name }}" required>

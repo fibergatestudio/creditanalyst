@@ -110,10 +110,10 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 	Route::get('/admin_user_management/index/{room_id?}', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
 
 	/* Редактировать пользователя : страница */
-	Route::get('/admin_user_management/edit_user/{user_id}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/edit_user/{user_id}/{room_id?}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
 
 	/* Редактировать пользователя : POST действие*/
-	Route::post('/admin_user_management/edit_user', 'User_management_Admin_Controller@edit_user_post');
+	Route::post('/admin_user_management/edit_user/{room_id?}', 'User_management_Admin_Controller@edit_user_post');
 
 	/* Деактивировать пользователя */
 	Route::get('/admin_user_management/suspend_user/{user_id}', 'User_management_Admin_Controller@suspend_user')->middleware('can:administrator_rights');

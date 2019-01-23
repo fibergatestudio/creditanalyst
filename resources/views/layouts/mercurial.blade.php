@@ -46,6 +46,34 @@
     });
 </script>
 
+<!-- Сброс пароля -->
+
+<form method="POST" id="password-reset" action="{{ route('password.email') }}">
+    @csrf
+            <input id="email" type="hidden" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="" required>
+</form>
+
+<script type="text/javascript">
+    $('a.change-password').click(function (e) {
+        if (confirm("Вы действительно хотите сбросить пароль ?")) {        
+            e.preventDefault();
+            var email = $(this).children('input').val();
+            $('#email').val(email);
+            document.getElementById('password-reset').submit();
+            localStorage.setItem('email', email);            
+        }       
+    });
+    
+    $(document).ready(function () {
+        if (localStorage.getItem('email')) {
+            alert("Пользователю с e-mail: "+localStorage.getItem('email')+" было отправлено письмо со ссылкой для сброса пароля !");
+            localStorage.removeItem('email');
+        }
+    });
+</script>
+
+<!-- Конец сброса пароля -->
+
 @yield('scripts')
 
 </body>
