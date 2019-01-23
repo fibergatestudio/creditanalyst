@@ -124,12 +124,12 @@
                                         </a>
 
                                         {{-- Сброс пароля -- TBD --}}
-                                        {{-- 
-                                        <a href="#">
+ 
+                                        <a href="#" class="change-password">
+                                            <input type="hidden" name="user_email" value="{{ $user->email }}">
                                             <span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span>
-                                        </a>
-                                        --}}
-                                        
+                                        </a>                                        
+
                                     </div>
                                 </td>
                                 @endrole
@@ -140,17 +140,17 @@
                                 <td>
                                     <div class="actions">
                                         {{-- Редактировать --}}
-                                        <a href="{{ url('/admin_user_management/edit_user/'.$user->id) }}">
+                                        <a href="{{ url('/admin_user_management/edit_user/'.$user->id.'/'.$user->user_room_id) }}">
                                             <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
                                         </a>
 
                                         {{-- Сброс пароля -- TBD --}}
-                                        {{-- 
-                                        <a href="#">
+                                         
+                                        <a href="#" class="change-password">
+                                            <input type="hidden" name="user_email" value="{{ $user->email }}">
                                             <span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span>
                                         </a>
-                                        --}}
-                                        
+                                                                               
                                         {{-- Деактивировать / Активировать --}}
                                         @if($user->isActive())
                                             {{-- Деактивировать --}}

@@ -10,11 +10,19 @@
 
         <div class="card card-fluid">
             <div class="card-body">
-                <h3 class="title-block">Кабинет администратора</h3>
+                <div class="title-block">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ url('/admin_user_management/index') }}">Кабинет администратора</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Кабинет {{ $room_name }}</li>
+                        </ol>
+                    </nav>
+                    <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a>
+                </div>
 
                 <div class="content-title">
                     <span>Список пользователей</span>
-                    <a href="{{ url('/admin_user_management/create_user') }}" class="done-new-user"><i class="fas fa-plus"></i> Добавить нового пользователя</a></div>                  
+                    <a href="{{ url('/admin_user_management/create_user/'.$room_id) }}" class="done-new-user"><i class="fas fa-plus"></i> Добавить нового пользователя</a></div>                  
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -54,11 +62,11 @@
                                         </a>
 
                                         {{-- Сброс пароля -- TBD --}}
-                                        {{-- 
-                                        <a href="#">
+                                        
+                                        <a href="#" class="change-password">
+                                            <input type="hidden" name="user_email" value="{{ $user->email }}">
                                             <span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span>
-                                        </a>
-                                        --}}
+                                        </a>                                        
                                         
                                     </div>
                                 </td>
@@ -70,16 +78,17 @@
                                 <td>
                                     <div class="actions">
                                         {{-- Редактировать --}}
-                                        <a href="{{ url('/admin_user_management/edit_user/'.$user->id) }}">
+                                        <a href="{{ url('/admin_user_management/edit_user/'.$user->id.'/'.$user->user_room_id) }}">
                                             <span class="icon icon-edit" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Редактировать"></span>
                                         </a>
 
                                         {{-- Сброс пароля -- TBD --}}
-                                        {{-- 
-                                        <a href="#">
+                                         
+                                        <a href="#" class="change-password">
+                                            <input type="hidden" name="user_email" value="{{ $user->email }}">
                                             <span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span>
                                         </a>
-                                        --}}
+                                        
                                         
                                         {{-- Деактивировать / Активировать --}}
                                         @if($user->isActive())

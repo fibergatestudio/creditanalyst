@@ -15,11 +15,7 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="card-body">
                     <div class="title-block">
                         <nav aria-label="breadcrumb">
-                            {{-- <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/settings/edit') }}">Кабинет администратора</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Редактировать пользователя</li>
-                            </ol> --}}
-                            @lang('personal_settings_user_index.Настройки')
+                        @lang('personal_settings_user_index.Настройки')
                         </nav>
                         <a href="{{ url('/sources_list') }}" class="text button-back">@lang('personal_settings_user_index.Назад')</a></div>
 
@@ -30,19 +26,18 @@ App::setLocale(Auth::user()->preferred_language);
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 <div class="form-group row">
-                                    <label class="col-md-12">E-mail:</label>
-                                    <div class="input-group">
-                                        <input name="email" type="email" class="form-control col-md-12"  placeholder="" value="{{ $user->email }}" required>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-md-12">@lang('personal_settings_user_index.Имя:')</label>
                                     <input name="first_name" type="text" class="form-control col-md-12"  placeholder="" value="{{ $user->first_name }}" required>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-12">@lang('personal_settings_user_index.Фамилия:')</label>
                                     <input name="last_name" type="text" class="form-control col-md-12" value="{{ $user->last_name }}" placeholder=""  required>
+                                </div>
+                                <div class="from-group row">
+                                    <a href="#" class="change-password">
+                                        <input type="hidden" name="user_email" value="{{ $user->email }}">
+                                        <span class="icon icon-change-password" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="Сброс пароля"></span>
+                                    </a>
                                 </div>
                                 <div class="from-group row">
                                     <div class="block-new-user">
