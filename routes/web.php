@@ -105,19 +105,19 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 /* Управление пользователями */
 
 	/* Создать пользователя : страница */
-	Route::get('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_page')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/create_user/{room_id}', 'User_management_Admin_Controller@create_user_page')->middleware('can:administrator_rights');
 
-		/* Создать пользователя : обработка POST запроса */
-		Route::post('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_post')->middleware('can:administrator_rights');
+	/* Создать пользователя : обработка POST запроса */
+	Route::post('/admin_user_management/create_user/{room_id}', 'User_management_Admin_Controller@create_user_post')->middleware('can:administrator_rights');
 
 	/* Список пользователей */
-	Route::get('/admin_user_management/index', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/index/{room_id?}', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
 
 	/* Редактировать пользователя : страница */
-	Route::get('/admin_user_management/edit_user/{user_id}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/edit_user/{user_id}/{room_id?}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
 
-		/* Редактировать пользователя : POST действие*/
-		Route::post('/admin_user_management/edit_user', 'User_management_Admin_Controller@edit_user_post');
+	/* Редактировать пользователя : POST действие*/
+	Route::post('/admin_user_management/edit_user/{room_id?}', 'User_management_Admin_Controller@edit_user_post');
 
 	/* Деактивировать пользователя */
 	Route::get('/admin_user_management/suspend_user/{user_id}', 'User_management_Admin_Controller@suspend_user')->middleware('can:administrator_rights');
@@ -131,7 +131,28 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 	/* Забрать у пользователя права администратора */
 	Route::get('/admin_user_management/remove_admin_privileges/{user_id}', 'User_management_Admin_Controller@remove_admin_privileges')->middleware('can:administrator_rights');
 
+/* Управление кабинетами */
 
+	/* Список пользователей кабинета*/
+	Route::get('/admin_user_management/show_room/{room_id}', 'User_management_Admin_Controller@show_room')->middleware('can:administrator_rights');
+
+	/* Создать кабинет : страница */
+	Route::get('/admin_user_management/create_room', 'User_management_Admin_Controller@create_room_page')->middleware('can:administrator_rights');
+
+	/* Создать кабинет : обработка POST запроса */
+	Route::post('/admin_user_management/create_room', 'User_management_Admin_Controller@create_room_post')->middleware('can:administrator_rights');
+
+	/* Редактировать кабинет : страница */
+	Route::get('/admin_user_management/edit_room/{room_id}', 'User_management_Admin_Controller@edit_room_page')->middleware('can:administrator_rights');
+
+	/* Редактировать кабинет : POST действие*/
+	Route::post('/admin_user_management/edit_room', 'User_management_Admin_Controller@edit_room_post');
+
+	/* Деактивировать кабинет */
+	Route::get('/admin_user_management/suspend_room/{room_id}', 'User_management_Admin_Controller@suspend_room')->middleware('can:administrator_rights');
+
+	/* Активировать кабинет */
+	Route::get('/admin_user_management/activate_room/{room_id}', 'User_management_Admin_Controller@activate_room')->middleware('can:administrator_rights');
 
 	/********** TEST **********/
 	Route::get('/test', 'TestController@test')->middleware('auth');

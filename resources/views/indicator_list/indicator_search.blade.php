@@ -69,7 +69,7 @@ App::setLocale(Auth::user()->preferred_language);
                             @foreach($results as $result)
                                 <li>
                                     <div class="result-item">
-                                        <img src="{{assert('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                        <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
                                         <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#">@lang('indicator_search.подробнее')</a>
                                     </div>
                                     <div class="result-item">
