@@ -73,38 +73,44 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                         <ul id="resultIndicator"></ul>
                         <div class="row form-group">
                             <div class="col-12 col-md-9">
-                                <h5>@lang('charts.Период:')</h5>
-                                <h5>от</h5>
-                                <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
-                                    @if(isset($months))
-                                    @for($i=0; $i < count($months); $i++)
-                                    <option value="{{$i}}">{{ $months[$i] }}</option>
-                                    @endfor
-                                    @endif
-                                </select>
-                                <select name="fromYear" id="fromYear" class="form-control-sm form-control">
-                                    @if(isset($years))
-                                    @for($i=0; $i < count($years); $i++)
-                                    <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                                    @endfor
-                                    @endif
-                                </select>
-                                <h5>до</h5>
-                                <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
-                                    @if(isset($months))
-                                    @for($i=0; $i < count($months); $i++)
-                                    <option value="{{$i}}">{{ $months[$i] }}</option>
-                                    @endfor
-                                    @endif
-                                </select>
-                                <select name="untilYear" id="untilYear" class="form-control-sm form-control">
-                                    @if(isset($years))
-                                    @for($i=0; $i < count($years); $i++)
-                                    <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                                    @endfor
-                                    @endif
-                                </select>
-                                <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
+                            <h5>@lang('charts.Период:')</h5>
+                                <div class="col-md-5">
+                                    <h5>от</h5>
+                                    <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
+                                        @if(isset($months))
+                                        @for($i=0; $i < count($months); $i++)
+                                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                                        @endfor
+                                        @endif
+                                    </select>
+                                    <select name="fromYear" id="fromYear" class="form-control-sm form-control">
+                                        @if(isset($years))
+                                        @for($i=0; $i < count($years); $i++)
+                                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                                        @endfor
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <h5>до</h5>
+                                    <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
+                                        @if(isset($months))
+                                        @for($i=0; $i < count($months); $i++)
+                                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                                        @endfor
+                                        @endif
+                                    </select>
+                                    <select name="untilYear" id="untilYear" class="form-control-sm form-control">
+                                        @if(isset($years))
+                                        @for($i=0; $i < count($years); $i++)
+                                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                                        @endfor
+                                        @endif
+                                    </select>
+                                </div>
+                                <div style="    padding-top: 40px;" class="col-md-2">
+                                    <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
+                                </div>
                             </div>
                         </div>
                         <div class="content mt-3">

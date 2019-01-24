@@ -18,22 +18,22 @@
     <section id="page-exit" class="section-content">
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">
         <div class="card">
-  
+            
             <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div class="card-body">
-                <h3 class="title-block">Вход</h3>
+                <h3 class="title-block">Вхід</h3>
                 <div class="row">
                     <div class="col-md-7 exit-language">
-                        <span class="language">Язык интерфейса</span>
+                        <span class="language">Мова інтерфейсу</span>
                         <label>
 
-                            <input type="hidden" name="locale" value="ru">
+                            <input type="hidden" name="locale" value="ua">
                             {{-- Выбор языка--}}
                             <select class="form-control" data-placeholder="Choose a Language..." onchange="location = this.value;">
-                                <option>RU</option>
-                                <option value="login-ua">UKR</option>
+                                <option>UKR</option>
+                                <option value="login">RU</option>
                                 <option value="login-en">ENG</option>
                             </select>
 
@@ -88,17 +88,17 @@
                                         <!-- версия регистрации через лару-->
                                         <!-- <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> -->
 
-                                        <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+                                        <label class="form-check-label" for="exampleCheck1">Запам'ятати мене</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="button-exit row">
                                 <button type="submit" class="btn btn-success col-md-7">
-                                    {{ __('Вход') }}
+                                    {{ __('Увійти') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}" class="remind-password text">Забыли пароль?
+                                <a href="{{ route('password.request') }}" class="remind-password text">Забули пароль?
                                     <!-- версия регистрации через лару-->
                                     <!-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

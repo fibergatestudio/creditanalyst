@@ -30,6 +30,10 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 });
 
+//Замена языка на логине
+	Route::get('/login-ua', 'LoginLanguageController@login_page_ukr');
+	Route::get('/login-en', 'LoginLanguageController@login_page_en');
+
 /*
 * Пути, которые отвечают за сохранение карты в скриншот
 */

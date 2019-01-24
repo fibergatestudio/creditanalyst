@@ -52,6 +52,8 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
+    //Изменение языка на странице логина
+
     public function login(Request $request)
     {
         $this->validateLogin($request);
