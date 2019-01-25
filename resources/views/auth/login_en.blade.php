@@ -65,7 +65,7 @@
 
 
                             <div class="form-group row">
-                                <label for="exampleInputPassword1" class="col">Пароль:</label>
+                                <label for="exampleInputPassword1" class="col">Password:</label>
                                 <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }} col-md-7" id="exampleInputPassword1" placeholder="" name="password">
                                 <span class="col"></span>
                             </div>

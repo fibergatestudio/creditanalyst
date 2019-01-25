@@ -46,7 +46,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="col-sm-8 align-self-center">
                         <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" actions="{{ url('indicator_search') }} >
+                            <form class="form-inline" method="GET" actions="{{ url('indicator_search') }}">
                                 @csrf
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder=@lang('indicator_search.Введите поисковый запрос') name="search_query" style="width: 500px">
@@ -69,7 +69,7 @@ App::setLocale(Auth::user()->preferred_language);
                             @foreach($results as $result)
                                 <li>
                                     <div class="result-item">
-                                        <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                        <!--<img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">-->
                                         <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#">@lang('indicator_search.подробнее')</a>
                                     </div>
                                     <div class="result-item">

@@ -23,7 +23,7 @@ class IndicatorListController extends Controller
         $indicators = 
             DB::table('indicators')
                 ->where('source_id', $source_id)
-                ->paginate(3);
+                ->paginate(10);
         
         return view('indicator_list.indicators_index',
             [

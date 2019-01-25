@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use App\Exports\UsersExport;
+use App\Exports\InvoicesExport;
 
 class ImportController extends Controller
 {
@@ -167,7 +169,6 @@ class ImportController extends Controller
             } // end if
         } //end foreach
 
-
         if($debug == false){
             DB::table('geography_units')->insert($geography_units_to_import);
         }
@@ -195,5 +196,21 @@ class ImportController extends Controller
             DB::table('measurement_units')->insert($measurement_units_to_import);
         }
 
+    }
+
+    public function export_to_exel($infosource_id){
+
+        // Excel::create('Filename', function($excel) {
+
+        // })->export('xls');
+
+        //return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new InvoicesExport, 'invoices.xlsx');
+        //return (new UsersExport(2018))->download('invoices.xlsx');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new InvoicesExport, 'invoices.xlsx');
     }
 }

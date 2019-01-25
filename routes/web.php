@@ -87,6 +87,11 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 */
 
 	Route::get('/import', 'ImportController@import_test_data');
+	/* Экспорт данных */
+		Route::get('indicator_list/{infosource_id}/export_page', 'ExportController@view_export_page');
+		Route::get('indicator_list/{infosource_id}/export_all', 'ExportController@export_all');
+		Route::get('indicator_list/{infosource_id}/export', 'ExportController@export');
+
 /* Пути для AJAX API */
 	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');
 
