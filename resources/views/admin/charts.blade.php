@@ -56,7 +56,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                         </div>
                         <div class="row">
 
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12"> -->
 
                                 <div class="col-md-10">
                                     <input style="width:100%;" type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator" class="form-control">
@@ -67,7 +67,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                 </div>
 
 
-                            </div>
+                            <!-- </div> -->
 
                         </div>           
                         <ul id="resultIndicator"></ul>

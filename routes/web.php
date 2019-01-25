@@ -54,6 +54,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/indicator_search/', 'IndicatorListController@search')->middleware('auth');
 	Route::get('/indicator_search?search_query={search_query?}', 'IndicatorListController@search');
 
+	Route::post('/indicator_search/send_message', 'IndicatorListController@send_message');
+
 /*
 * Пути для данных
 */

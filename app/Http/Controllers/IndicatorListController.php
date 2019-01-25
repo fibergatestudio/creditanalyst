@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Infosource;
 use App\Indicator;
+use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 
@@ -65,5 +66,19 @@ class IndicatorListController extends Controller
             'results_meta' => $results_meta,
             'active_sidebar_name' => 'search'
         ]);
+    }
+    
+    /*
+    * Функция страницы поиска Показателей
+    */
+
+    public function send_message(Request $request){
+
+        $newmessage = new Empty_requests();
+        $newmessage->message = $request->message;
+        $newmessage->email = $request->email;
+        $newmessage->save();
+
+        return back();
     }
 }

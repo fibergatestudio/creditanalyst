@@ -47,7 +47,7 @@ App::setLocale(Auth::user()->preferred_language);
                         <div class="input-group">
                             {{-- Форма поиска --}}
                             <form class="form-inline" method="GET" actions="{{ url('indicator_search') }}">
-                                @csrf
+                                
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder=@lang('indicator_search.Введите поисковый запрос') name="search_query" style="width: 500px">
                                     <div class="input-group-append">
@@ -86,23 +86,66 @@ App::setLocale(Auth::user()->preferred_language);
 
                         @if( count($results) == 0 && !empty($_GET['search_query']))
                             @lang('indicator_search.По вашему запросу, к сожалению, ничего не найдено')
+                            <br>
+                            <a href="#" class="not-result"  data-toggle="modal" data-target="#notFoundModal2">
+                                Не нашли то, что искали?
+                            </a>
                         @endif
                     </div>
 
                     {{-- Конец результатов поиска --}}
 
+                    {{-- Добавить заход денег : Форма и модальное окно --}}
+                    <form action="{{ url('/indicator_search/send_message') }}" method="POST">
+                        @csrf
 
+                        <div class="modal fade" id="notFoundModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <textarea name="message" class="form-control" rows="3" placeholder="Привет! Поиск не дал результатов!" require></textarea>
+                                        </div>
+                                        <div class="form-group form-radio">
+                                            <input class="form-check-input" type="radio" name="email" id="exampleRadios1" value="Анонимно" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Отправить анонимно
+                                            </label>
+                                        </div>
+                                        <div class="form-group form-radio">
+                                            <input class="form-check-input" type="radio" name="email" id="exampleRadios2" value="{{ Auth::user()->email }}">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                                Со мной можно связаться для уточнения*
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                    <p>*Будет использован текущий email</p>
+                                    </div>
+                                    <div style="justify-content:left;" class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Отправить</button>
+                                    </div>
+
+                                    <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
+                                </div>{{-- /modal-content --}}
+                            </div>{{-- /modal-dialog --}}
+                        </div>{{-- /modal fade --}}
+                    </form>
 
                     <div class="w-100 search-delimeter row"></div>
 
-                    <div class="content-row results-bottom col-md-12">
+                    {{-- Старый поп-ап --}}
+                    <!-- <div class="content-row results-bottom col-md-12">
                         <div class="content-row col-md-6">
-                            <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
-                                {{-- Не нашли то, что искали? --}}
-                            </a>
-
                                 {{-- Модальное окно : не нашли --}}
-                                <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <form action="{{ url('/indicator_search/send_message') }}" method="POST">
+
+                                <div class="modal modal-search fade" id="notFoundModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -114,33 +157,33 @@ App::setLocale(Auth::user()->preferred_language);
                                                 <form>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlTextarea1"></label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск не дал результатов!"></textarea>
                                                     </div>
                                                 </form>
                                                 <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <input class="form-check-input" type="radio" name="email" id="exampleRadios1" value="anon" checked>
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Отправить анонимно
                                                     </label>
                                                 </div>
                                                 <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                    <input class="form-check-input" type="radio" name="email" id="exampleRadios2" value="nonanon">
                                                     <label class="form-check-label" for="exampleRadios2">
                                                         Со мной можно связаться для уточнения
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
+                                                <button type="submit" class="btn btn-success" data-dismiss="modal">Отправить</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>{{-- /modal --}}
+                            </form>
                                 {{-- Конец модального окна --}}
 
-
                             <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
-                        </div>
+                        </div> -->
 
                         {{--
                         <ul class="pagination col-md-2">
