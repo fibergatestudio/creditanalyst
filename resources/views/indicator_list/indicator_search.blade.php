@@ -49,7 +49,7 @@ App::setLocale(Auth::user()->preferred_language);
                             <form class="form-inline" method="GET" actions="{{ url('indicator_search') }} >
                                 @csrf
                                 <div class="input-group">
-                                    <input type="text" class="form-control typeahead input-lg" placeholder=@lang('indicator_search.Введите поисковый запрос') name="search_query" style="width: 500px">
+                                    <input type="text" class="form-control typeahead input-lg" placeholder="@lang('indicator_search.Введите поисковый запрос')" name="search_query" style="width: 500px">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="submit"><span class="icon icon-search"></span></button>
                                     </div>
@@ -68,8 +68,7 @@ App::setLocale(Auth::user()->preferred_language);
                         
                             @foreach($results as $result)
                                 <li>
-                                    <div class="result-item">
-                                        <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                    <div class="result-item">                                        
                                         <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#">@lang('indicator_search.подробнее')</a>
                                     </div>
                                     <div class="result-item">
@@ -98,7 +97,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="content-row results-bottom col-md-12">
                         <div class="content-row col-md-6">
                             <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
-                                {{-- Не нашли то, что искали? --}}
+                                Не нашли то, что искали? 
                             </a>
 
                                 {{-- Модальное окно : не нашли --}}
@@ -139,17 +138,17 @@ App::setLocale(Auth::user()->preferred_language);
                                 {{-- Конец модального окна --}}
 
 
-                            <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
+                            
                         </div>
-
-                        {{--
+                                <a href="#" class="all-results">Отобразить все результаты</a>
+                        
                         <ul class="pagination col-md-2">
                             <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
                             <li class="page-item active"><a class="page-link " href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
                         </ul>
-                        --}}
+                        
                     </div>
                 </section>
             </div>
