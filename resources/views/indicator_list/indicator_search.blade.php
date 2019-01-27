@@ -46,7 +46,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="col-sm-8 align-self-center">
                         <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" actions="{{ url('indicator_search') }} >
+                            <form class="form-inline" method="GET" action="{{ url('indicator_search') }} ">
                                 @csrf
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder="@lang('indicator_search.Введите поисковый запрос')" name="search_query" style="width: 500px">
@@ -84,76 +84,120 @@ App::setLocale(Auth::user()->preferred_language);
                         @endif
 
                         @if( count($results) == 0 && !empty($_GET['search_query']))
-                            @lang('indicator_search.По вашему запросу, к сожалению, ничего не найдено')
+                            @lang('indicator_search.По вашему запросу, к сожалению, ничего не найдено') 
+                        <div class="content-row results-bottom col-md-12">    
+                            <div class="content-row col-md-6">
+                                <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
+                                    Не нашли то, что искали? 
+                                </a>
+                            </div>
+                        </div>
+                        @elseif (count($results) < 5 && !empty($_GET['search_query']))
+                        <div class="content-row results-bottom col-md-12">
+                            <div class="content-row col-md-6">
+                                    <a href="{{url('/sources_list')}}" class="not-result">
+                                        Не нашли то, что искали? 
+                                    </a>
+                            </div>
+                        </div>
                         @endif
-                    </div>
+                    </div>    
+                        
+                    
 
                     {{-- Конец результатов поиска --}}
 
 
-
+                    
                     <div class="w-100 search-delimeter row"></div>
+                        <div class="content-row results-bottom col-md-12">
+                            @if (count($results)>=5)
+                            <form  method="GET" action="{{ url('/indicator_search_all') }} ">
+                                @csrf
+                                
+                                    <input type="hidden" value="{{$search_query}}" name="search_query">
+                                    <input type="submit" class="btn btn-link"  value="Отобразить все результаты">
+                                
 
-                    <div class="content-row results-bottom col-md-12">
-                        <div class="content-row col-md-6">
-                            <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
-                                Не нашли то, что искали? 
-                            </a>
+                            </form>
+                            
+                            
+                            
+                            
+                              {{--  <div class="content-row col-md-6">
+                                    <a href="#" class="not-result">
+                                        Отобразить все результаты
+                                    </a>
+                                </div>--}}
+                            @endif
+                        </div>
+                        <div class="content-row results-bottom col-md-12">
+                            {{-- Не нашли что искали с модальным окном  --}}  
+                            <div class="content-row col-md-6">
+                                
 
-                                {{-- Модальное окно : не нашли --}}
-                                <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span class="icon icon-close"></span>
-                                                </button>
-                                            </div>
-                                            <div class="text-align-left modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1"></label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск %поисковый_запрос% не дал результатов!"></textarea>
+                                    {{-- Модальное окно : не нашли --}}
+                                    <div class="modal modal-search fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span class="icon icon-close"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="text-align-left modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1"></label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск {{$search_query}} не дал результатов!"></textarea>
+                                                        </div>
+                                                    </form>
+                                                    <div class="form-group form-radio">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            Отправить анонимно
+                                                        </label>
                                                     </div>
-                                                </form>
-                                                <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Отправить анонимно
-                                                    </label>
+                                                    <div class="form-group form-radio">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios2">
+                                                            Со мной можно связаться для уточнения
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        Со мной можно связаться для уточнения
-                                                    </label>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">Отправить</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>{{-- /modal --}}
-                                {{-- Конец модального окна --}}
+                                    </div>{{-- /modal --}}
+                                   {{--  Конец модального окна --}}
 
 
-                            
-                        </div>
-                                <a href="#" class="all-results">Отобразить все результаты</a>
+
+                            </div>
+                    
+                    
+                    
+                            {{--    <a href="#" class="all-results">Отобразить все результаты</a>
                         
-                        <ul class="pagination col-md-2">
-                            <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                            <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
+                            <ul class="pagination col-md-2">
+                                <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                            </ul> --}}
                         
                     </div>
+                @if($results)    
+                {{ $results->links() }}   
+                @endif
                 </section>
             </div>
         </div>
+      
     </section>
+    
     @endsection
 
 
