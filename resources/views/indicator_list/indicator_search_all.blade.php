@@ -99,7 +99,72 @@ App::setLocale(Auth::user()->preferred_language);
     </section>
     
     @endsection
+@section('scripts')
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
+    {{-- Typeahead JS --}}
+    <script src="{{ url('assets/typeahead.bundle.js') }}"></script>
+
+    <script>
+        var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+
+            // an array that will be populated with substring matches
+            matches = [];
+
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+                matches.push(str);
+            }
+            });
+
+            cb(matches);
+        };
+        };
+
+        // Сделать прогрузку по API
+
+        var hints = [];
+        $( document ).ready(function() {
+
+            $.getJSON("{{ url('ajax/indicator_hints') }}", function(data){
+                for (var i = 0, len = data.length; i < len; i++) {
+                    //console.log(data[i]);
+                    hints.push(data[i]);
+                }
+            });
+
+        });
+
+
+
+        //var states = ['Объёмы производства картошки в Украине'];
+
+        $('.typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'hints',
+            source: substringMatcher(hints)
+        });
+    </script>
+
+    <style>
+        .tt-menu{
+            background-color: white;
+            border: 1px solid grey;
+        }
+    </style>
+@endsection
 
 
 

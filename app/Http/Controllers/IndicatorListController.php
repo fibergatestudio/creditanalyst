@@ -50,7 +50,7 @@ class IndicatorListController extends Controller
 
             $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$_GET['search_query']."')")
                 ->whereRaw("MATCH(name)AGAINST('".$_GET['search_query']."' IN BOOLEAN MODE)")
-                ->paginate(5);
+                ->get();
 
             //print_r($results);
 

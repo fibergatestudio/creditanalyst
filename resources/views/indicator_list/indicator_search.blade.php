@@ -69,12 +69,15 @@ App::setLocale(Auth::user()->preferred_language);
                             @foreach($results as $result)
                                 <li>
                                     <div class="result-item">                                        
-                                        <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="#">@lang('indicator_search.подробнее')</a>
+                                        <span class="search-word">{{ $results_meta[$result->id]['infosource_name'] }}</span>,&nbsp;<a href="{{ url ('/sources_list') }}">@lang('indicator_search.подробнее')</a>
                                     </div>
                                     <div class="result-item">
-                                        <span class="search-details">{{ $result->name }}</span> <a href="#"> @lang('indicator_search.подробнее')</a>
+                                        <span class="search-details">{{ $result->name }}</span> <a href="{{ url ('/sources_list') }}"> @lang('indicator_search.подробнее')</a>
                                     </div>
                                 </li>
+                                @if ($loop->iteration == 5)
+                                    @break
+                                @endif
                             @endforeach
 
                         </ul>
@@ -110,16 +113,26 @@ App::setLocale(Auth::user()->preferred_language);
 
                     
                     <div class="w-100 search-delimeter row"></div>
+
+                        {{-- Отобразить все результаты --}}
                         <div class="content-row results-bottom col-md-12">
                             @if (count($results)>=5)
-                            <form  method="GET" action="{{ url('/indicator_search_all') }} ">
+                            <div class="input-group">
+                            {{-- Форма поиска --}}
+                            <form class="form-inline" method="GET" action="{{ url('indicator_search_all') }} ">
                                 @csrf
-                                
-                                    <input type="hidden" value="{{$search_query}}" name="search_query">
-                                    <input type="submit" class="btn btn-link"  value="Отобразить все результаты">
-                                
+                                <div class="input-group">
+                                    <input type="hidden" class="form-control typeahead input-lg" value="{{$search_query}}" name="search_query" style="width: 500px">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-link" type="submit">Отобразить все результаты</button>
+                                    </div>
+                                </div>
 
                             </form>
+
+                            {{-- Конец формы --}}
+
+                        </div>
                             
                             
                             
@@ -189,9 +202,7 @@ App::setLocale(Auth::user()->preferred_language);
                             </ul> --}}
                         
                     </div>
-                @if($results)    
-                {{ $results->links() }}   
-                @endif
+                
                 </section>
             </div>
         </div>
