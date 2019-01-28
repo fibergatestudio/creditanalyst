@@ -152,7 +152,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                         </div>
                                 <div>
                                     <div class="input-group">
-                                        <!--<h5>@lang('charts_map.Название графика')</h5>-->
+                                        <!-- <h5>@lang('charts_map.Название графика')</h5> -->
                                         <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
                                         <div id="save-export" class="input-group-btn">
                                             <button id="saveChart" style="border-color: #84c33d;" class="btn btn-success btn-sm chart-save">@lang('charts_map.Сохранить')</button>

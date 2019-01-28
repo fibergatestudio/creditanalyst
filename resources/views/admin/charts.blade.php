@@ -129,7 +129,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                             </div>
                                 <div class="col-lg-12">
 
-                                            <!-- <h4 class="mb-3">myChart </h4>-->
+                                            <h4 class="mb-3">myChart </h4>
                                             <canvas id="myChart" width="1200" height="300"></canvas>
 
                                 </div><!-- /# column -->
