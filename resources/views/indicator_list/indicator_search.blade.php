@@ -49,7 +49,7 @@ App::setLocale(Auth::user()->preferred_language);
                             <form class="form-inline" method="GET" actions="{{ url('indicator_search') }}">
                                 
                                 <div class="input-group">
-                                    <input type="text" class="form-control typeahead input-lg" placeholder=@lang('indicator_search.Введите поисковый запрос') name="search_query" style="width: 500px">
+                                    <input type="text" class="form-control typeahead input-lg" placeholder="@lang('indicator_search.Введите поисковый запрос')" name="search_query" style="width: 500px">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="submit"><span class="icon icon-search"></span></button>
                                     </div>
@@ -91,7 +91,9 @@ App::setLocale(Auth::user()->preferred_language);
                                 Не нашли то, что искали?
                             </a>
                         @endif
-                    </div>
+                    </div>    
+                        
+                    
 
                     {{-- Конец результатов поиска --}}
 
@@ -138,6 +140,14 @@ App::setLocale(Auth::user()->preferred_language);
                     </form>
 
                     <div class="w-100 search-delimeter row"></div>
+                        <div class="content-row results-bottom col-md-12">
+                            @if (count($results)>=5)
+                            <form  method="GET" action="{{ url('/indicator_search_all') }} ">
+                                @csrf
+                                
+                                    <input type="hidden" value="{{$search_query}}" name="search_query">
+                                    <input type="submit" class="btn btn-link"  value="Отобразить все результаты">
+                                
 
                     {{-- Старый поп-ап --}}
                     <!-- <div class="content-row results-bottom col-md-12">
@@ -185,19 +195,29 @@ App::setLocale(Auth::user()->preferred_language);
                             <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
                         </div> -->
 
-                        {{--
-                        <ul class="pagination col-md-2">
-                            <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                            <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                        --}}
+                            </div>
+                    
+                    
+                    
+                            {{--    <a href="#" class="all-results">Отобразить все результаты</a>
+                        
+                            <ul class="pagination col-md-2">
+                                <li class="page-item"><a class="page-link not-active" href="#"><i class="fas fa-chevron-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                            </ul> --}}
+                        
                     </div>
+                @if($results)    
+                {{ $results->links() }}   
+                @endif
                 </section>
             </div>
         </div>
+      
     </section>
+    
     @endsection
 
 

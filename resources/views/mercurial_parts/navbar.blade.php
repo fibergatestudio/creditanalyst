@@ -2,7 +2,7 @@
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">
         <form class="form-inline form-search">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Введите поисковый запрос">
+                <input type="text" class="form-control" placeholder="@lang('indicator_search.Введите поисковый запрос')">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button"><span class="icon icon-search"></span></button>
                 </div>
