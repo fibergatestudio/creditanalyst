@@ -30,8 +30,8 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="title-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            @if(isset($_GET['search_query']) && !empty($_GET['search_query']))
-                                <li class="breadcrumb-item"><a href="{{ url('indicator_search') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
+                            @if(isset($_POST['search_query']) && !empty($_POST['search_query']))
+                                <li class="breadcrumb-item"><a href="{{ url('indicator_search_post') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">@lang('indicator_search.Результат поиска')</li>
                             @else
                                 <li class="breadcrumb-item"><a href="#">@lang('indicator_search.Введите поисковый запрос')</a></li>
@@ -46,7 +46,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="col-sm-8 align-self-center">
                         <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" action="{{ url('indicator_search') }}" >
+                            <form class="form-inline" method="POST" action="{{ url('indicator_search_post') }}" >
                                 @csrf
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder="{{$search_query}}" name="search_query" style="width: 500px">
@@ -85,9 +85,10 @@ App::setLocale(Auth::user()->preferred_language);
                     
 
                     {{-- Конец результатов поиска --}}
+                    <div class="w-100 search-delimeter row"></div>
 
-
-                    
+                    {{--Возврат на страницу поиска--}}
+                    <a href="{{ url('indicator_search') }}" class="btn btn-primary">Вернуться</a>         
                     
                         
                     
@@ -99,7 +100,7 @@ App::setLocale(Auth::user()->preferred_language);
     </section>
     
     @endsection
-@section('scripts')
+ @section('scripts')
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -164,7 +165,7 @@ App::setLocale(Auth::user()->preferred_language);
             border: 1px solid grey;
         }
     </style>
-@endsection
+@endsection  
 
 
 

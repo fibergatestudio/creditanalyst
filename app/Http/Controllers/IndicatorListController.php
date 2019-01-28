@@ -10,6 +10,7 @@ use App\Indicator;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+
 class IndicatorListController extends Controller
 {
 
@@ -37,19 +38,18 @@ class IndicatorListController extends Controller
     /*
     * Функция страницы поиска Показателей
     */
-    public function search($search_query = ''){
+    public function search(Request $request){
         $results = [];
         $results_meta = [];
-        
-        if(isset($_GET['search_query'])){
-            $results = Indicator::search($_GET['search_query'])->get();
-            
-            $search_query = $_GET['search_query'];
-            
-            
+        $search_query = $request->search_query;
+        $need_number = 5; //Сколько показывать результатов поиска на странице
 
-            $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$_GET['search_query']."')")
-                ->whereRaw("MATCH(name)AGAINST('".$_GET['search_query']."' IN BOOLEAN MODE)")
+
+        if(isset($search_query)){
+            $results = Indicator::search($search_query)->get();  
+
+            $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$search_query."')")
+                ->whereRaw("MATCH(name)AGAINST('".$search_query."' IN BOOLEAN MODE)")
                 ->get();
 
             //print_r($results);
@@ -65,24 +65,24 @@ class IndicatorListController extends Controller
             'results' => $results,
             'results_meta' => $results_meta,
             'active_sidebar_name' => 'search',
-            'search_query' => $search_query
+            'search_query' => $search_query,
+            'need_number' => $need_number
         ]);
     }
     
     /* Отобразить все результаты поиска*/
-    public function show_all_search($search_query = ''){
+    public function show_all_search(Request $request){
         $results = [];
         $results_meta = [];
-        
-        if(isset($_GET['search_query'])){
-            $results = Indicator::search($_GET['search_query'])->get();
-            
-            $search_query = $_GET['search_query'];
-            
+        $search_query = $request->search_query;
+
+
+        if(isset($search_query)){
+            $results = Indicator::search($search_query)->get();   
             
 
-            $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$_GET['search_query']."')")
-                ->whereRaw("MATCH(name)AGAINST('".$_GET['search_query']."' IN BOOLEAN MODE)")
+            $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$search_query."')")
+                ->whereRaw("MATCH(name)AGAINST('".$search_query."' IN BOOLEAN MODE)")
                 ->get();
 
             //print_r($results);

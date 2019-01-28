@@ -30,8 +30,8 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="title-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            @if(isset($_GET['search_query']) && !empty($_GET['search_query']))
-                                <li class="breadcrumb-item"><a href="{{ url('indicator_search') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
+                            @if(isset($_POST['search_query']) && !empty($_POST['search_query']))
+                                <li class="breadcrumb-item"><a href="{{ url('indicator_search_post') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">@lang('indicator_search.Результат поиска')</li>
                             @else
                                 <li class="breadcrumb-item"><a href="#">@lang('indicator_search.Введите поисковый запрос')</a></li>
@@ -46,7 +46,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="col-sm-8 align-self-center">
                         <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" action="{{ url('indicator_search') }} ">
+                            <form class="form-inline" method="POST" action="{{ url('indicator_search_post') }} ">
                                 @csrf
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder="@lang('indicator_search.Введите поисковый запрос')" name="search_query" style="width: 500px">
@@ -75,7 +75,8 @@ App::setLocale(Auth::user()->preferred_language);
                                         <span class="search-details">{{ $result->name }}</span> <a href="{{ url ('/sources_list') }}"> @lang('indicator_search.подробнее')</a>
                                     </div>
                                 </li>
-                                @if ($loop->iteration == 5)
+                                {{--Сколько показателей показывать на странице--}}
+                                @if ($loop->iteration == $need_number) 
                                     @break
                                 @endif
                             @endforeach
@@ -116,10 +117,10 @@ App::setLocale(Auth::user()->preferred_language);
 
                         {{-- Отобразить все результаты --}}
                         <div class="content-row results-bottom col-md-12">
-                            @if (count($results)>=5)
+                            @if (count($results) >= $need_number)
                             <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" action="{{ url('indicator_search_all') }} ">
+                            <form class="form-inline" method="POST" action="{{ url('indicator_search_all') }} ">
                                 @csrf
                                 <div class="input-group">
                                     <input type="hidden" class="form-control typeahead input-lg" value="{{$search_query}}" name="search_query" style="width: 500px">
@@ -134,14 +135,6 @@ App::setLocale(Auth::user()->preferred_language);
 
                         </div>
                             
-                            
-                            
-                            
-                              {{--  <div class="content-row col-md-6">
-                                    <a href="#" class="not-result">
-                                        Отобразить все результаты
-                                    </a>
-                                </div>--}}
                             @endif
                         </div>
                         <div class="content-row results-bottom col-md-12">
