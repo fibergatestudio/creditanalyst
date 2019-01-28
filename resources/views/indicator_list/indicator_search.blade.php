@@ -96,7 +96,7 @@ App::setLocale(Auth::user()->preferred_language);
                                 </a>
                             </div>
                         </div>
-                        @elseif (count($results) < 5 && !empty($_GET['search_query']))
+                        @elseif (count($results) < $need_number && !empty($_POST['search_query']))
                         <div class="content-row results-bottom col-md-12">
                             <div class="content-row col-md-6">
                                     <a href="{{url('/sources_list')}}" class="not-result">
