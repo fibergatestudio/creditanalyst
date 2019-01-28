@@ -53,7 +53,7 @@ ORDER BY `uiwl`.`position` DESC;';
     /* Функция, которая даёт информацию о том, уведомление моментальное (true) или ежедневное (false) */
     public function are_instant_notifications_on(){
         $notification_info = json_decode($this->notify_info);
-        if($notification_info['when'] == 'digest'){
+        if(property_exists($notification_info, 'when') && $notification_info->when == 'digest'){
             return false;
         } else {
             return true;
