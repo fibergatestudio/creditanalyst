@@ -83,11 +83,11 @@ App::setLocale(Auth::user()->preferred_language);
 
                         </ul>
                         
-                        @if( count($results) == 0 && empty($_GET['search_query']))
+                        @if( count($results) == 0 && empty($_POST['search_query']))
                             @lang('indicator_search.Пожалуйста, введите поисковый запрос.')
                         @endif
 
-                        @if( count($results) == 0 && !empty($_GET['search_query']))
+                        @if( count($results) == 0 && !empty($_POST['search_query']))
                             @lang('indicator_search.По вашему запросу, к сожалению, ничего не найдено') 
                         <div class="content-row results-bottom col-md-12">    
                             <div class="content-row col-md-6">
