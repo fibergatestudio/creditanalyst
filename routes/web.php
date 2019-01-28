@@ -52,8 +52,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 * Пути для поиска индикаторов
 */
 	Route::get('/indicator_search/', 'IndicatorListController@search')->middleware('auth');
-	Route::get('/indicator_search?search_query={search_query?}', 'IndicatorListController@search');
-        Route::get('/indicator_search_all?search_query={search_query?}', 'IndicatorListController@show_all_search');
+	Route::post('/indicator_search_post', 'IndicatorListController@search');
+    Route::post('/indicator_search_all', 'IndicatorListController@show_all_search');
 
 	Route::post('/indicator_search/send_message', 'IndicatorListController@send_message');
 

@@ -30,8 +30,8 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="title-block">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            @if(isset($_GET['search_query']) && !empty($_GET['search_query']))
-                                <li class="breadcrumb-item"><a href="{{ url('indicator_search') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
+                            @if(isset($_POST['search_query']) && !empty($_POST['search_query']))
+                                <li class="breadcrumb-item"><a href="{{ url('indicator_search_post') }}">@lang('indicator_search.Введите поисковый запрос')</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">@lang('indicator_search.Результат поиска')</li>
                             @else
                                 <li class="breadcrumb-item"><a href="#">@lang('indicator_search.Введите поисковый запрос')</a></li>
@@ -46,7 +46,7 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="col-sm-8 align-self-center">
                         <div class="input-group">
                             {{-- Форма поиска --}}
-                            <form class="form-inline" method="GET" action="{{ url('indicator_search') }}" >
+                            <form class="form-inline" method="POST" action="{{ url('indicator_search_post') }}" >
                                 @csrf
                                 <div class="input-group">
                                     <input type="text" class="form-control typeahead input-lg" placeholder="{{$search_query}}" name="search_query" style="width: 500px">
@@ -85,9 +85,10 @@ App::setLocale(Auth::user()->preferred_language);
                     
 
                     {{-- Конец результатов поиска --}}
+                    <div class="w-100 search-delimeter row"></div>
 
-
-                    
+                    {{--Возврат на страницу поиска--}}
+                    <a href="{{ url('indicator_search') }}" class="btn btn-primary">Вернуться</a>         
                     
                         
                     
@@ -99,7 +100,72 @@ App::setLocale(Auth::user()->preferred_language);
     </section>
     
     @endsection
+ @section('scripts')
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
+    {{-- Typeahead JS --}}
+    <script src="{{ url('assets/typeahead.bundle.js') }}"></script>
+
+    <script>
+        var substringMatcher = function(strs) {
+        return function findMatches(q, cb) {
+            var matches, substringRegex;
+
+            // an array that will be populated with substring matches
+            matches = [];
+
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+                matches.push(str);
+            }
+            });
+
+            cb(matches);
+        };
+        };
+
+        // Сделать прогрузку по API
+
+        var hints = [];
+        $( document ).ready(function() {
+
+            $.getJSON("{{ url('ajax/indicator_hints') }}", function(data){
+                for (var i = 0, len = data.length; i < len; i++) {
+                    //console.log(data[i]);
+                    hints.push(data[i]);
+                }
+            });
+
+        });
+
+
+
+        //var states = ['Объёмы производства картошки в Украине'];
+
+        $('.typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'hints',
+            source: substringMatcher(hints)
+        });
+    </script>
+
+    <style>
+        .tt-menu{
+            background-color: white;
+            border: 1px solid grey;
+        }
+    </style>
+@endsection  
 
 
 
