@@ -42,7 +42,7 @@ class IndicatorListController extends Controller
         $results = [];
         $results_meta = [];
         $search_query = $request->search_query;
-        $need_number = 5; //Сколько показывать результатов поиска на странице
+        $need_number = 10; //Сколько показывать результатов поиска на странице
 
 
         if(isset($search_query)){
