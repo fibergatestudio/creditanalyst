@@ -82,7 +82,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/user_logout', 'UserManagementController@user_logout')->middleware('auth');
 
 /* Пути для крона */
-	Route::get('/cron', 'CronController@notification_pusher');
+	Route::get('/cron', 'CronController@notification_pusher'); // Основной путь - ставить на крон раз в час
+	Route::get('/cron_daily', 'CronController@cron_daily'); // Раз в сутки в 9 утра
 
 /*
 * Пути для импорта данных (временные)
