@@ -8,7 +8,40 @@ App::setLocale(Auth::user()->preferred_language);
 
 <style type="text/css">
 #searchIndicator, #resultIndicator{
-    width: 500px;
+    width: 600px;
+}
+#indicatorGroup tr th:nth-child(1){
+    width: 20px;
+}
+#indicatorGroup tr th:nth-child(2){
+    width: 50px;
+    background: #3e4550;
+    color: #fff;
+    text-align:center;
+    vertical-align: center;
+}
+table#indicatorGroup{
+    border-spacing: 0px 11px;
+    border-collapse: separate;
+}
+table#indicatorGroup th{
+    border-top-left-radius:  10px;
+    border-bottom-left-radius:  10px;
+    border-top:none;
+}
+table#indicatorGroup tr td:nth-child(4){
+    border-top-right-radius:  10px;
+    border-bottom-right-radius:  10px;
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td:nth-child(3){
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td{
+    border-top:none;
+}
+#addIndicator{
+    margin-left: 50px;
 }
 #resultIndicator{
     background: #fff;
@@ -20,94 +53,115 @@ App::setLocale(Auth::user()->preferred_language);
     background: #87CEEB;
     cursor: pointer;
 }
-i.fa.fa-window-close-o, i.fa.fa-wrench{
+i.fa.fa-wrench{
     cursor: pointer;
 }    
 </style>
 
-<div class="card-body card-block">
-    <div class="row form-group">
-        <div class="col col-md-12">
-            <table class="table" id="indicatorGroup"></table>                                       
-        </div>
+<section class="section-content">
+    <div class="content-title">
+        <h2 class="name-menu">Статистика и анализ</h2>
+        <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
     </div>
-    <div class="row">
-        <div class="col-12 col-md-9">
-            @lang('charts.Для теста представлены все показатели, кроме бананов')
-            <hr>
-            <input type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
-            <i class="fa fa-search"></i> 
-            <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
-        </div>       
-    </div>
-    <ul id="resultIndicator"></ul>
-    <div class="row form-group">
-        <div class="col-12 col-md-9">
-            <h5>@lang('charts.Период:')</h5>
-            <h5>от</h5>
-            <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
-                @if(isset($months))
-                @for($i=0; $i < count($months); $i++)
-                <option value="{{$i}}">{{ $months[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <select name="fromYear" id="fromYear" class="form-control-sm form-control">
-                @if(isset($years))
-                @for($i=0; $i < count($years); $i++)
-                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <h5>до</h5>
-            <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
-                @if(isset($months))
-                @for($i=0; $i < count($months); $i++)
-                <option value="{{$i}}">{{ $months[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <select name="untilYear" id="untilYear" class="form-control-sm form-control">
-                @if(isset($years))
-                @for($i=0; $i < count($years); $i++)
-                <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                @endfor
-                @endif
-            </select>
-            <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
-        </div>
-    </div>
-    <div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+    
+    <div class="card card-fluid">
+        <div class="card-body">
 
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="mb-3">myChart </h4>
-                        <canvas id="myChart" width="1200" height="300"></canvas>
+            <div class="title-block">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url('/admin/statistics-analysis') }}">Сохраненные документы</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Создать новый график</li>
+                    </ol>
+                </nav>
+                <a href="{{ url('/admin/statistics-analysis') }}" class="text button-back">Назад</a>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-12">
+                    <table class="table" id="indicatorGroup"></table>                                       
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    @lang('charts.Для теста представлены все показатели, кроме бананов')
+                    <hr>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-group" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"><span class="icon icon-search"></span></button>
+                        </div>
+                        <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
+                    </div>
+
+                </div>       
+            </div>
+            <ul id="resultIndicator"></ul>
+            <div class="row form-group">
+                <div class="col-12 col-md-9">
+                    <h5>@lang('charts.Период:')</h5>
+                    <h5>от</h5>
+                    <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
+                        @if(isset($months))
+                        @for($i=0; $i < count($months); $i++)
+                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <select name="fromYear" id="fromYear" class="form-control-sm form-control">
+                        @if(isset($years))
+                        @for($i=0; $i < count($years); $i++)
+                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <h5>до</h5>
+                    <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
+                        @if(isset($months))
+                        @for($i=0; $i < count($months); $i++)
+                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <select name="untilYear" id="untilYear" class="form-control-sm form-control">
+                        @if(isset($years))
+                        @for($i=0; $i < count($years); $i++)
+                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
+                </div>
+            </div>
+            <div class="content mt-3">
+                <div class="animated fadeIn">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <h4 class="mb-3">myChart </h4>
+                            <canvas id="myChart" width="1100" height="300"></canvas>
+                        </div><!-- /# column -->
+
+                    </div>
+
+                </div><!-- .animated -->
+                <div class="col col-md-12">
+                    <div class="input-group">
+                        <h5>@lang('charts.Название графика')</h5>
+                        <input type="text" id="chartName" name="chartName" placeholder=@lang('charts.График 1') class="form-control">
+                        <div id="save-export" class="input-group-btn">
+                            <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
+                            <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
+                            <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
+                        </div>                    
                     </div>
                 </div>
-            </div><!-- /# column -->
-
-        </div>
-
-    </div><!-- .animated -->
-    <div class="col col-md-12">
-            <div class="input-group">
-                <h5>@lang('charts.Название графика')</h5>
-                <input type="text" id="chartName" name="chartName" placeholder=@lang('charts.График 1') class="form-control">
-                <div id="save-export" class="input-group-btn">
-                    <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
-                    <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
-                    <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                </div>                    
             </div>
         </div>
     </div>
-</div><!-- .content -->
-
-<hr>
+</section>
 
 
 @endsection
@@ -121,51 +175,51 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 </script>
 
 <script type="text/javascript">
-        var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
-        filesCharts = JSON.parse(filesCharts);
-        var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
-        filesChartsFull = JSON.parse(filesChartsFull);
-        var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
-        var indicatorsName = '<?=$indicators_name ?>';
-        var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var chartLink = "{{ asset('charts') }}";
-        var rootSite = '<?=URL::to('/')?>';
-    </script>
+    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+    filesCharts = JSON.parse(filesCharts);
+    var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
+    filesChartsFull = JSON.parse(filesChartsFull);
+    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
+    var indicatorsName = '<?=$indicators_name ?>';
+    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var chartLink = "{{ asset('charts') }}";
+    var rootSite = '<?=URL::to('/')?>';
+</script>
 
-    {{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
+<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!--  Data table -->
-    <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<!--  Data table -->
+<script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
 
-    <!--  Chart js -->
-    <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('js/line-charts.js') }}"></script>
+<!--  Chart js -->
+<script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+<script src="{{ asset('js/line-charts.js') }}"></script>
 
 
-    <!-- Vector-map-->
-    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-    <script src="{{ asset('js/map-charts-1.js') }}"></script>
-    <script src="{{ asset('js/map-charts-2.js') }}"></script>
-    <script src="{{ asset('js/map-charts-3.js') }}"></script>
-    <script src="{{ asset('js/map-charts-4.js') }}"></script>
+<!-- Vector-map-->
+<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
+<script src="{{ asset('js/map-charts-1.js') }}"></script>
+<script src="{{ asset('js/map-charts-2.js') }}"></script>
+<script src="{{ asset('js/map-charts-3.js') }}"></script>
+<script src="{{ asset('js/map-charts-4.js') }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
 
-            $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
+        $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
-            if ($('.dataTables_empty').text() == 'No data available in table') {
-                $('.dataTables_empty').text('Нет данных');
-            }
+        if ($('.dataTables_empty').text() == 'No data available in table') {
+            $('.dataTables_empty').text('Нет данных');
+        }
 
-        } );
+    } );
 
 
         //Транслитерация
@@ -219,9 +273,9 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             return s.replace(/-$/, '');
         }
 
-</script>
+    </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         /*
         * Сохранение графика
         */
@@ -492,9 +546,9 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         var fileName = filesChartsFull[element.getAttribute('data-id')];
         document.location.href = chartLink + '/' + fileName;
     }
-    </script>
+</script>
 
-    
+
 
 
 @endsection

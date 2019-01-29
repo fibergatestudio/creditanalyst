@@ -181,10 +181,15 @@ function removeIndicator(elem){
         }
     }
     elem.parent().remove();
-    $("#indicatorGroup > tr > th").each(function(k,elem) {
-        $(elem).text(k+1);
+    $("#indicatorGroup > tr > th.indicator-index").each(function(k,elem) {
+        $(elem).text('0'+(k+1));
     });
     measurement = '';
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');  
 }
 
 //добавляем индикатор на страницу при клике
@@ -196,10 +201,12 @@ $("#addIndicator").click(function() {
                 indicatorsAddArr.push($("#searchIndicator").val());
                 $("#indicatorGroup").append(`
                     <tr>
-                    <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                    <th></th>
+                    <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th>                           
                     <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
                     <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                    <td onclick="removeIndicator($(this))">
+                    <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>         
                     </tr>`
                     );
             }
@@ -226,18 +233,26 @@ $("#addIndicator").click(function() {
                     indicatorsAddArr.push($("#searchIndicator").val());
                     $("#indicatorGroup").append(`
                         <tr>
-                        <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                        <th></th>
+                        <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th> 
                         <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                        <td onclick="removeIndicator($(this))">
+                        <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>         
                         </tr>`
                         );
                 }
             }
-    }
-    else{
-        alert("Лимит 4 индикатора !");
-    }    
+        }
+        else{
+            alert("Лимит 4 индикатора !");
+        }
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');    
 });
+
 
 //добавляем индикатор на страницу если он пришел с $_GET
 var indicatorNameGet = '';
@@ -253,10 +268,12 @@ if (indicatorIdGet > 0) {
         indicatorsAddArr.push(indicatorNameGet);
         $("#indicatorGroup").append(`
             <tr>
-            <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+            <th></th>
+            <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th>                           
             <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
             <td class="indicator-name">`+ indicatorNameGet +`</td>
-            <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+            <td onclick="removeIndicator($(this))">
+            <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>         
             </tr>`
             );
 
@@ -275,7 +292,51 @@ if (indicatorIdGet > 0) {
             }
             $("#fromYear").html(html);
             $("#untilYear").html(html);
-    }
+        }
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))"  title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');   
+}
+
+
+/*
+* Ротация индикаторов
+*/
+
+function rotateIndicator(elem){
+    if ($("#indicatorGroup tr").length > 1) {
+        indicatorsAddArr = [];
+        var rotateElem = elem.parent().parent().html();
+        var nextElem = elem.parent().parent().next().html();
+        var prevElem = elem.parent().parent().prev().html();
+        //меняем элементы местами
+        $("#indicatorGroup tr").each(function(k,el) {
+            if($(el).html() === rotateElem && k === ($("#indicatorGroup tr").length - 1)){
+                elem.parent().parent().prev().html(rotateElem);
+                elem.parent().parent().html(prevElem);
+            }
+            else{               
+                elem.parent().parent().next().html(rotateElem);
+                elem.parent().parent().html(nextElem);
+            }
+        });
+        //перезаписываем номера индикаторов
+        $("#indicatorGroup > tr > th.indicator-index").each(function(k,elem) {
+            $(elem).text('0'+(k+1));
+        });
+        measurement = '';
+        //картинки для ротации индикаторов
+        $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+        $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+        $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');
+        //перезаписываем массив индикаторов
+        $("#indicatorGroup tr td.indicator-name").each(function(k,elem) {
+            indicatorsAddArr.push($(elem).text());
+        });
+        console.log(indicatorsAddArr);
+    }     
 }
 
 
@@ -642,7 +703,7 @@ if (indicatorIdGet > 0){
 
     //Если есть индикаторы
     if (indicatorsAddArr.length > 0){  
-        
+
         //Cоздаем объект данных согласно индикаторам
         for (var i = 0; i < indicatorsAddArr.length; i++){
             for (var j = 0; j < indicatorsObj.length; j++){
@@ -806,7 +867,7 @@ $("#makeChart").click(function() {
     var untilDate = new Date(untilYear, untilMonth, 1);
     var daysPeriod = Math.ceil((untilDate.getTime() - fromDate.getTime()) / (1000 * 3600 * 24));
     var yearsPeriod = ' ' + fromYear + 'г. - ' + untilYear + 'г.';
-console.log(fromDate);
+    console.log(fromDate);
     if (daysPeriod < 28) {
         alert("Выберите корректный период (больше месяца) !");
         return 0;
