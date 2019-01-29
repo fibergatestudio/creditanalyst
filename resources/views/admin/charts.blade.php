@@ -22,7 +22,7 @@ App::setLocale(Auth::user()->preferred_language);
 }
 i.fa.fa-window-close-o, i.fa.fa-wrench{
     cursor: pointer;
-}    
+}
 </style>
 
 <section id="data-sources" class="section-content">
@@ -33,16 +33,16 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         <div class="content-grid">
             <div class="card card-fluid">
                 <div class="card-body">
-                    <h3 class="title-block"><a style="color: #ffffff6e;">Сохраненные документы</a> / {{ $title }} 
+                    <h3 class="title-block"><a style="color: #ffffff6e;">Сохраненные документы</a> / {{ $title }}
                         <a href="{{ URL::previous() }}">
                             <button style="border-color: #f8f9fa3d !important;" class="btn btn-outline-light btn-sm"> Назад</button>
                         </a>
                     </h3>
-                    
+
                     <div class="card-body card-block">
                         <div class="row form-group">
                             <div class="col col-md-12">
-                                <table class="table" id="indicatorGroup"></table>                                       
+                                <table class="table" id="indicatorGroup"></table>
                             </div>
                         </div>
 
@@ -69,7 +69,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 
                             <!-- </div> -->
 
-                        </div>           
+                        </div>
                         <ul id="resultIndicator"></ul>
                         <div class="row form-group">
                             <div class="col-12 col-md-9">
@@ -124,7 +124,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                         <button id="saveChart"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
                                         <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
                                         <button id="exportToWordChart"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                                    </div>                    
+                                    </div>
                                 </div>
                             </div>
                                 <div class="col-lg-12">
@@ -133,7 +133,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                             <canvas id="myChart" width="1200" height="300"></canvas>
 
                                 </div><!-- /# column -->
-                                
+
 
                             </div>
 
@@ -146,7 +146,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                                         <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
                                         <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
                                         <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                                    </div>                    
+                                    </div>
                                 </div>
                             </div>-->
                         </div>
@@ -542,7 +542,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
     }
     </script>
 
-    
+
 
 
 @endsection
