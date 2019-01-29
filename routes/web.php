@@ -30,6 +30,10 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 });
 
+//Замена языка на логине
+	Route::get('/login-ua', 'LoginLanguageController@login_page_ukr');
+	Route::get('/login-en', 'LoginLanguageController@login_page_en');
+
 /*
 * Пути, которые отвечают за сохранение карты в скриншот
 */
@@ -43,12 +47,15 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 	Route::get('/sources_list', 'SourcesListController@show')->middleware('auth'); // Список всех Источников
 	Route::get('/indicator_list/{id}', 'IndicatorListController@show')->name('indicators_index'); // Список показателей в Источнике
-
+        
 /*
 * Пути для поиска индикаторов
 */
 	Route::get('/indicator_search/', 'IndicatorListController@search')->middleware('auth');
-	Route::get('/indicator_search?search_query={search_query?}', 'IndicatorListController@search');
+	Route::post('/indicator_search_post', 'IndicatorListController@search');
+    Route::post('/indicator_search_all', 'IndicatorListController@show_all_search');
+
+	Route::post('/indicator_search/send_message', 'IndicatorListController@send_message');
 
 /*
 * Пути для данных
@@ -76,13 +83,19 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/user_logout', 'UserManagementController@user_logout')->middleware('auth');
 
 /* Пути для крона */
-	Route::get('/cron', 'CronController@notification_pusher');
+	Route::get('/cron', 'CronController@notification_pusher'); // Основной путь - ставить на крон раз в час
+	Route::get('/cron_daily', 'CronController@cron_daily'); // Раз в сутки в 9 утра
 
 /*
 * Пути для импорта данных (временные)
 */
 
 	Route::get('/import', 'ImportController@import_test_data');
+	/* Экспорт данных */
+		Route::get('indicator_list/{infosource_id}/export_page', 'ExportController@view_export_page');
+		Route::get('indicator_list/{infosource_id}/export_all', 'ExportController@export_all');
+		Route::get('indicator_list/{infosource_id}/export', 'ExportController@export');
+
 /* Пути для AJAX API */
 	Route::get('/ajax/indicator_hints', 'AjaxController@indicator_hints_json');
 
@@ -101,19 +114,19 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 /* Управление пользователями */
 
 	/* Создать пользователя : страница */
-	Route::get('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_page')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/create_user/{room_id}', 'User_management_Admin_Controller@create_user_page')->middleware('can:administrator_rights');
 
-		/* Создать пользователя : обработка POST запроса */
-		Route::post('/admin_user_management/create_user', 'User_management_Admin_Controller@create_user_post')->middleware('can:administrator_rights');
+	/* Создать пользователя : обработка POST запроса */
+	Route::post('/admin_user_management/create_user/{room_id}', 'User_management_Admin_Controller@create_user_post')->middleware('can:administrator_rights');
 
 	/* Список пользователей */
-	Route::get('/admin_user_management/index', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/index/{room_id?}', 'User_management_Admin_Controller@index')->middleware('can:administrator_rights');
 
 	/* Редактировать пользователя : страница */
-	Route::get('/admin_user_management/edit_user/{user_id}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
+	Route::get('/admin_user_management/edit_user/{user_id}/{room_id?}', 'User_management_Admin_Controller@edit_user_page')->middleware('can:administrator_rights');
 
-		/* Редактировать пользователя : POST действие*/
-		Route::post('/admin_user_management/edit_user', 'User_management_Admin_Controller@edit_user_post');
+	/* Редактировать пользователя : POST действие*/
+	Route::post('/admin_user_management/edit_user/{room_id?}', 'User_management_Admin_Controller@edit_user_post');
 
 	/* Деактивировать пользователя */
 	Route::get('/admin_user_management/suspend_user/{user_id}', 'User_management_Admin_Controller@suspend_user')->middleware('can:administrator_rights');
@@ -127,7 +140,28 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 	/* Забрать у пользователя права администратора */
 	Route::get('/admin_user_management/remove_admin_privileges/{user_id}', 'User_management_Admin_Controller@remove_admin_privileges')->middleware('can:administrator_rights');
 
+/* Управление кабинетами */
 
+	/* Список пользователей кабинета*/
+	Route::get('/admin_user_management/show_room/{room_id}', 'User_management_Admin_Controller@show_room')->middleware('can:administrator_rights');
+
+	/* Создать кабинет : страница */
+	Route::get('/admin_user_management/create_room', 'User_management_Admin_Controller@create_room_page')->middleware('can:administrator_rights');
+
+	/* Создать кабинет : обработка POST запроса */
+	Route::post('/admin_user_management/create_room', 'User_management_Admin_Controller@create_room_post')->middleware('can:administrator_rights');
+
+	/* Редактировать кабинет : страница */
+	Route::get('/admin_user_management/edit_room/{room_id}', 'User_management_Admin_Controller@edit_room_page')->middleware('can:administrator_rights');
+
+	/* Редактировать кабинет : POST действие*/
+	Route::post('/admin_user_management/edit_room', 'User_management_Admin_Controller@edit_room_post');
+
+	/* Деактивировать кабинет */
+	Route::get('/admin_user_management/suspend_room/{room_id}', 'User_management_Admin_Controller@suspend_room')->middleware('can:administrator_rights');
+
+	/* Активировать кабинет */
+	Route::get('/admin_user_management/activate_room/{room_id}', 'User_management_Admin_Controller@activate_room')->middleware('can:administrator_rights');
 
 	/********** TEST **********/
 	Route::get('/test', 'TestController@test')->middleware('auth');

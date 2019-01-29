@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h3>Мониторинг</h3>
         <template v-if="!list.length && !loading">
             <p>Ни один показатель небыл добавлен, <a href="/sources_list">добавьте</a> данные!</p>
-            <a href="/indicator_search" class="btn btn-success">Поиск данных</a>
+            <a href="/indicator_search" style="border-color: #84c33d;" class="btn btn-success">Поиск данных</a>
         </template>
         <template v-else>
             <table class="table table-striped table-hover table-sm">

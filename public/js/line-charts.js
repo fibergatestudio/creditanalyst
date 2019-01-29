@@ -71,15 +71,16 @@ else{
         else if (indicatorsObj[i].geography_unit == 'D') {
             //перебираем данные с детализацией по районам, берем первый попавшийся район в области,его данные делаем областными, 
             //остальные данные этой области удаляем, т.е. приводим детализацию к областной
-            var j = 0;
+            var j = dataObj.length - 1;
             var geographyArr = [];
-            while (j < dataObj.length) {
+            while (j >= 0) {
                 if (dataObj[j].indicator_id === indicatorsObj[i].id) {                   
                     if (dataObj[j].geography.substr(0, 2) !== geography.substr(0, 2)) {
                         geography = dataObj[j].geography.substr(0, 2)+'00000000';
-                        if (geographyArr.indexOf(geography) === -1) {
+                        if (geographyArr.indexOf(geography) === -1) {                           
                             dataObj[j].geography = geography;
                             geographyArr.push(geography);
+                            //console.log(dataObj[j]);
                         }
                         else{
                             dataObj.splice(j, 1);
@@ -87,9 +88,9 @@ else{
                     }
                     else{
                         dataObj.splice(j, 1);
-                    }          
+                    }                             
                 } 
-                j++;                             
+                j--;                             
             }
             
             indicatorsObjTemp.push(indicatorsObj[i]);
@@ -186,7 +187,7 @@ function removeIndicator(elem){
     measurement = '';
 }
 
-//добавляем индикатор на страницу
+//добавляем индикатор на страницу при клике
 $("#addIndicator").click(function() {
     if (indicatorsAddArr.length < 4) {
         //если мы находимся на странице построения линейного графика
@@ -194,11 +195,11 @@ $("#addIndicator").click(function() {
             if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
                 indicatorsAddArr.push($("#searchIndicator").val());
                 $("#indicatorGroup").append(`
-                    <tr>
-                    <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                    <tr style="font-size: 20px; background-color: #f1f1f1;">
+                    <th style="background-color: #3E4451; color: white; border-bottom-left-radius: 15px; border-top-left-radius: 15px; width: 60px;"scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
                     <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
                     <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
                     </tr>`
                     );
             }
@@ -224,19 +225,58 @@ $("#addIndicator").click(function() {
                 if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
                     indicatorsAddArr.push($("#searchIndicator").val());
                     $("#indicatorGroup").append(`
-                        <tr>
-                        <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                        <tr style="font-size: 20px; background-color: #f1f1f1;">
+                        <th style="background-color: #3E4451; color: white; border-bottom-left-radius: 15px; border-top-left-radius: 15px; width: 60px;" scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
                         <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
                         </tr>`
                         );
                 }
             }
+    }
+    else{
+        alert("Лимит 4 индикатора !");
+    }    
+});
+
+//добавляем индикатор на страницу если он пришел с $_GET
+var indicatorNameGet = '';
+if (indicatorIdGet > 0) {
+    for (var i = 0; i < indicatorsObj.length; i++) {
+        if (indicatorsObj[i].id == indicatorIdGet){
+            indicatorNameGet = indicatorsObj[i].name;
+            break;
         }
-        else{
-            alert("Лимит 4 индикатора !");
-        }    
-    });
+    }
+    
+    if (indicatorsArr.indexOf(indicatorNameGet) + 1) {
+        indicatorsAddArr.push(indicatorNameGet);
+        $("#indicatorGroup").append(`
+            <tr>
+            <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+            <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
+            <td class="indicator-name">`+ indicatorNameGet +`</td>
+            <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+            </tr>`
+            );
+
+            //корректируем под имеющиеся данные блок периода графика
+            var start = 0;
+            var finish = 0;
+            var html = '';
+            for (var i = 0; i < indicatorsObj.length; i++){
+                if (indicatorsObj[i].name === indicatorNameGet) {
+                    start = new Date(dataObj[indicatorsObj[i].id][0].date).getFullYear();
+                    finish = new Date(dataObj[indicatorsObj[i].id][dataObj[indicatorsObj[i].id].length - 1].date).getFullYear();
+                }
+            }
+            for (var i = start; i <= finish; i++) {
+                html += `<option value="`+i+`">`+i+`</option>`;
+            }
+            $("#fromYear").html(html);
+            $("#untilYear").html(html);
+    }
+}
 
 
 /*
@@ -578,6 +618,177 @@ var fullChart = false;
 var backgroundColor = ['rgba(255, 99, 132, 0.2)', 'rgba(76, 47, 39, 0.2)', 'rgba(33, 255, 33, 0.2)', 'rgba(33, 33, 255, 0.2)'];
 var borderColor = ['rgba(255, 99, 132, 1)', 'rgba(76, 47, 39, 1)', 'rgba(33, 255, 33, 1)', 'rgba(33, 33, 255, 1)'];
 
+
+//Построение графика если индикатор пришел с $_GET
+if (indicatorIdGet > 0){
+
+    var frequency = '';
+    var ctx = undefined;
+    var myLineChart = undefined;
+    var dataChartObj = [];
+    var datasets = [];
+    var labels = [];
+    
+    var fromYear = new Date(fromGet).getFullYear();
+    var untilYear = new Date(toGet).getFullYear();
+    var fromDate = new Date(fromGet);
+    var untilDate = new Date(toGet);
+    var daysPeriod = Math.ceil((untilDate.getTime() - fromDate.getTime()) / (1000 * 3600 * 24));
+    var yearsPeriod = ' ' + fromYear + 'г. - ' + untilYear + 'г.';
+
+    if (daysPeriod < 28) {
+        alert("Выберите корректный период (больше месяца) !");
+    }
+
+    //Если есть индикаторы
+    if (indicatorsAddArr.length > 0){  
+        
+        //Cоздаем объект данных согласно индикаторам
+        for (var i = 0; i < indicatorsAddArr.length; i++){
+            for (var j = 0; j < indicatorsObj.length; j++){
+                if (indicatorsAddArr[i] === indicatorsObj[j].name) {
+                    dataChartObj.push(
+                    { 
+                        'id':indicatorsObj[j].id,
+                        'frequency':indicatorsObj[j].frequency,
+                        'name':indicatorsObj[j].name,
+                        'data':dataObj[indicatorsObj[j].id]
+                    }
+                    );
+                }
+            }    
+        }
+        
+        //Cоздаем объект с данными для каждого индикатора
+
+        hasFromYear = false;
+        hasUntilYear = false;
+        
+        //проверяем наличие данных согласно периоду
+        for (var i = 0; i < dataChartObj[0].data.length; i++){
+            if (dataChartObj[0].frequency === 'D'){
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear && new Date(dataChartObj[0].data[i].date).getMonth() == fromMonth){
+                    hasFromYear = true;
+                    break;
+                } 
+            }
+            else{
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear){
+                    hasFromYear = true;
+                    break;
+                }
+            }
+        }
+        for (var i = 0; i < dataChartObj[0].data.length; i++){
+            if (dataChartObj[0].frequency === 'D') {
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear && new Date(dataChartObj[0].data[i].date).getMonth() == untilMonth - 1){
+                    hasUntilYear = true;
+                    break;  
+                }
+            }
+            else{
+                if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear){
+                    hasUntilYear = true;
+                    break;  
+                }
+            }
+        }       
+        if (!hasFromYear || !hasUntilYear) {
+            alert("Нет данных этого индикатора для этого периода !");
+            document.location.href = rootSite+"/admin/statistics-analysis/charts";
+        } 
+        
+        //создаем горизонтальную шкалу согласно величине периода
+        if (daysPeriod < 58) {
+            for (var i = 0; i < dataChartObj[0].data.length; i++){
+                if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                    labels.push((new Date(dataChartObj[0].data[i].date).toLocaleString()).slice(0, -14));
+                }               
+            }
+        }
+        else if (daysPeriod < 367) {
+            for (var i = 0; i < dataChartObj[0].data.length; i++){
+                if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                    labels.push(monthsArr[new Date(dataChartObj[0].data[i].date).getMonth()]);
+                }               
+            }
+        }
+        else if (daysPeriod < 732){
+            for (var i = 0; i < dataChartObj[0].data.length; i++){
+                if (new Date(dataChartObj[0].data[i].date).getMonth() < 9) {
+                    if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                        labels.push(
+                            '0'+(new Date(dataChartObj[0].data[i].date).getMonth()+1)+'.'
+                            +(new Date(dataChartObj[0].data[i].date).getFullYear()+'').substr(2,2)
+                            );
+                    }
+                }
+                else{
+                    if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                        labels.push(
+                            (new Date(dataChartObj[0].data[i].date).getMonth()+1)+'.'
+                            +(new Date(dataChartObj[0].data[i].date).getFullYear()+'').substr(2,2)
+                            );
+                    }
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < dataChartObj[0].data.length; i++){
+                if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
+                    labels.push(new Date(dataChartObj[0].data[i].date).getFullYear());
+                }
+            }
+        }  
+
+        //создаем объект datasets согласно данным
+        for (var i = 0; i < dataChartObj.length; i++){
+            var data = [];
+            
+            //создаем вертикальную шкалу согласно величине периода
+            for (var j = 0; j < dataChartObj[i].data.length; j++){
+                if (fromDate.getTime()<=Date.parse(dataChartObj[i].data[j].date) && Date.parse(dataChartObj[i].data[j].date)<=untilDate.getTime()+1000*3600*3)
+                {
+                    data.push(dataChartObj[i].data[j].value); 
+                }               
+            }
+            
+            datasets.push(
+            {
+                label: dataChartObj[i].name + yearsPeriod,//название линии в графике
+                data: data,//вертикальная шкала данных
+                backgroundColor: [backgroundColor[i]],//цвет заливки площади под линией в графике
+                borderColor: [borderColor[i]],//цвет линии в графике
+                borderWidth: 1,//толщина линии
+                pointRadius: 0,//наличие точек на линии
+            });
+        }
+
+        //рисуем график с помощью Chart.js
+        ctx = document.getElementById("myChart").getContext('2d');
+        myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,//горизонтальная шкала данных
+                datasets: datasets,                       
+            },
+            options: {
+                animation: {
+                duration: 0, // general animation time
+            },
+            hover: {
+                animationDuration: 0, // duration of animations when hovering an item
+            },
+                responsiveAnimationDuration: 0, // animation duration after a resize
+            }
+        });
+
+        fullChart = true;
+    }
+}
+
+
+//Построение графика при клике
 $("#makeChart").click(function() {
 
     var frequency = '';
@@ -595,7 +806,7 @@ $("#makeChart").click(function() {
     var untilDate = new Date(untilYear, untilMonth, 1);
     var daysPeriod = Math.ceil((untilDate.getTime() - fromDate.getTime()) / (1000 * 3600 * 24));
     var yearsPeriod = ' ' + fromYear + 'г. - ' + untilYear + 'г.';
-
+console.log(fromDate);
     if (daysPeriod < 28) {
         alert("Выберите корректный период (больше месяца) !");
         return 0;
@@ -711,7 +922,9 @@ $("#makeChart").click(function() {
                     labels.push(new Date(dataChartObj[0].data[i].date).getFullYear());
                 }
             }
-        }  
+        }
+
+        console.log(labels);  
 
         //создаем объект datasets согласно данным
         for (var i = 0; i < dataChartObj.length; i++){

@@ -61,6 +61,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">EN</a>
+                                    <a class="dropdown-item" href="#">UKR</a>
                                 </div>
                             </li>
                         </ul>

@@ -52,7 +52,11 @@ class User extends Authenticatable
     public function isAdmin(){
         if($this->role == 'admin'){
             return true;
-        } else {
+        }
+        else if($this->role == 'app-admin'){
+            return true;
+        }
+        else {
             return false;
         }
     }
@@ -124,4 +128,5 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\IndicatorWatcher');
     }
+
 }

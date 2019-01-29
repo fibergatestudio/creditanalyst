@@ -16,17 +16,23 @@
                                 <li class="breadcrumb-item active" aria-current="page">Новый пользователь</li>
                             </ol>
                         </nav>
-                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a></div>
+                        @role('app-admin')
+                        <a href="{{ url('/admin_user_management/show_room/'.$room_id) }}" class="text button-back">Назад</a>
+                        @endrole
+                        @role('admin')
+                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a>
+                        @endrole
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             {{-- Форма добавления пользователя --}}
-                            <form class="card-form" method="POST" action="{{ url('admin_user_management/create_user') }}">
+                            <form class="card-form" method="POST" action="{{ url('admin_user_management/create_user/'.$room_id) }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-md-12">E-mail:</label>
                                     <div class="input-group">
-                                        <input name="email" type="email" class="form-control col-md-12"  placeholder="" required>
-                                        
+                                        <input name="login" type="text" class="form-control col-md-6"  placeholder="" required>
+                                        <input name="email" type="text" class="form-control col-md-6"  placeholder="" required value="{{ $domain }}" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="form-group row">

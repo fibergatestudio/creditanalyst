@@ -31,7 +31,6 @@ App::setLocale(Auth::user()->preferred_language);
                           Список показателей
                         </div>
                       </a>
-
                     </div><!-- / card body -->
                   </div><!-- / collapse -->
                 </div><!-- / card -->
@@ -57,7 +56,7 @@ App::setLocale(Auth::user()->preferred_language);
                         <div class="card card-fluid">
                             <div class="card-header-accordion" id="headingOne">
                                 <div class="content-row">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                    <!-- <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt=""> -->
                                     <h3 class="text">{{ $infosource->name }}</h3>
                                 </div>
 

@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -17,7 +18,7 @@
     <section id="page-exit" class="section-content">
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">
         <div class="card">
-            
+  
             <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -28,11 +29,12 @@
                         <span class="language">Язык интерфейса</span>
                         <label>
 
+                            <input type="hidden" name="locale" value="ru">
                             {{-- Выбор языка--}}
-                            <select class="form-control" data-placeholder="Choose a Language..." name="locale">
-                                <option value="ru">RU</option>
-                                <option value="ua">UKR</option>
-                                <option value="en">ENG</option>
+                            <select class="form-control" data-placeholder="Choose a Language..." onchange="location = this.value;">
+                                <option>RU</option>
+                                <option value="login-ua">UKR</option>
+                                <option value="login-en">ENG</option>
                             </select>
 
                             
