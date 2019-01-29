@@ -47,12 +47,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 	Route::get('/sources_list', 'SourcesListController@show')->middleware('auth'); // Список всех Источников
 	Route::get('/indicator_list/{id}', 'IndicatorListController@show')->name('indicators_index'); // Список показателей в Источнике
-
+        
 /*
 * Пути для поиска индикаторов
 */
 	Route::get('/indicator_search/', 'IndicatorListController@search')->middleware('auth');
-	Route::get('/indicator_search?search_query={search_query?}', 'IndicatorListController@search');
+	Route::post('/indicator_search_post', 'IndicatorListController@search');
+    Route::post('/indicator_search_all', 'IndicatorListController@show_all_search');
 
 	Route::post('/indicator_search/send_message', 'IndicatorListController@send_message');
 
