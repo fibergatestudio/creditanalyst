@@ -95,7 +95,7 @@ App::setLocale(Auth::user()->preferred_language);
 
                     {{-- Конец результатов поиска --}}
 
-                    {{-- Добавить заход денег : Форма и модальное окно --}}
+                    {{-- Не нашли : Форма и модальное окно --}}
                     <form action="{{ url('/indicator_search/send_message') }}" method="POST">
                         @csrf
 
@@ -138,52 +138,6 @@ App::setLocale(Auth::user()->preferred_language);
                     </form>
 
                     <div class="w-100 search-delimeter row"></div>
-
-                    {{-- Старый поп-ап --}}
-                    <!-- <div class="content-row results-bottom col-md-12">
-                        <div class="content-row col-md-6">
-                                {{-- Модальное окно : не нашли --}}
-                            <form action="{{ url('/indicator_search/send_message') }}" method="POST">
-
-                                <div class="modal modal-search fade" id="notFoundModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span class="icon icon-close"></span>
-                                                </button>
-                                            </div>
-                                            <div class="text-align-left modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1"></label>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Привет! Поиск не дал результатов!"></textarea>
-                                                    </div>
-                                                </form>
-                                                <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="email" id="exampleRadios1" value="anon" checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Отправить анонимно
-                                                    </label>
-                                                </div>
-                                                <div class="form-group form-radio">
-                                                    <input class="form-check-input" type="radio" name="email" id="exampleRadios2" value="nonanon">
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        Со мной можно связаться для уточнения
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success" data-dismiss="modal">Отправить</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>{{-- /modal --}}
-                            </form>
-                                {{-- Конец модального окна --}}
-
-                            <a href="#" class="all-results">{{-- Отобразить все результаты --}}</a>
-                        </div> -->
 
                         {{--
                         <ul class="pagination col-md-2">
