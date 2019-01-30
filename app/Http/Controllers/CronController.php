@@ -46,7 +46,18 @@ class CronController extends Controller
             // Если есть новые данные, нужно задать для них уведомления
             if($new_data_count > 0){
                 // Проверяем, нет ли активных уведомлений - если есть, то новое создавать не нужно
-                // ...
+                $seen_notifications = Notification::where('indicator_id', $notification_watcher->indicator_id)->where()->get(); // находим уведомления у которых (notify == 1)
+                // перебераем  уведомления
+                foreach ($seen_notifications as $seen_notification) {   
+                    if($seen_notification->seen == 1){   
+                        // создаем новое уведомление
+                        $new_notification = new Notification();
+                        $new_notification->user_id = $user_to_be_notified_id;
+                        $new_notification->dataset_entry_id = $new_data_entry->id;
+                        $new_notification->seen = false;
+                        $new_notification->save();
+                    }
+                }
 
                 // Если нет, то создаём новое
             }
