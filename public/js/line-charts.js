@@ -13,11 +13,11 @@ var strHref = document.location.href;
 //Сортируем объект по полю value
 function compareValue(regionA, regionB) {
   return regionA.value - regionB.value;
-}      
+}
 
 //если мы находимся на странице построения линейного графика
 if(!(strHref.indexOf('charts-map') + 1)){
-    //Перебираем данные для составления объекта данных для графика под одну конкретную, 
+    //Перебираем данные для составления объекта данных для графика под одну конкретную,
     //первую попавшуюся область, если она задана, а не равна '0000000000'
     for (var i = 0; i < indicatorsObj.length; i++){
         dataTemp[indicatorsObj[i].id] = [];
@@ -30,7 +30,7 @@ if(!(strHref.indexOf('charts-map') + 1)){
                                 date : dataObj[j].date,
                                 value : dataObj[j].value
                             });
-                        } 
+                        }
                     }
                     else{
                         geography = dataObj[j].geography;
@@ -38,15 +38,15 @@ if(!(strHref.indexOf('charts-map') + 1)){
                             date : dataObj[j].date,
                             value : dataObj[j].value
                         });
-                    }               
+                    }
                 }
                 else{
                     dataTemp[indicatorsObj[i].id].push({
                         date : dataObj[j].date,
                         value : dataObj[j].value
                     });
-                }          
-            }                               
+                }
+            }
         }
         geography = '';
     }
@@ -56,7 +56,7 @@ if(!(strHref.indexOf('charts-map') + 1)){
 }
 else{
     //если мы находимся на странице построения карты
-    //Перебираем данные для составления объекта данных для графика под одну 
+    //Перебираем данные для составления объекта данных для графика под одну
     //последнюю дату для каждой области
     var indicatorsObjTemp = [];
     var indicatorsArr = [];
@@ -69,15 +69,15 @@ else{
             indicatorsArr.push(indicatorsObj[i].name);
         }
         else if (indicatorsObj[i].geography_unit == 'D') {
-            //перебираем данные с детализацией по районам, берем первый попавшийся район в области,его данные делаем областными, 
+            //перебираем данные с детализацией по районам, берем первый попавшийся район в области,его данные делаем областными,
             //остальные данные этой области удаляем, т.е. приводим детализацию к областной
             var j = dataObj.length - 1;
             var geographyArr = [];
             while (j >= 0) {
-                if (dataObj[j].indicator_id === indicatorsObj[i].id) {                   
+                if (dataObj[j].indicator_id === indicatorsObj[i].id) {
                     if (dataObj[j].geography.substr(0, 2) !== geography.substr(0, 2)) {
                         geography = dataObj[j].geography.substr(0, 2)+'00000000';
-                        if (geographyArr.indexOf(geography) === -1) {                           
+                        if (geographyArr.indexOf(geography) === -1) {
                             dataObj[j].geography = geography;
                             geographyArr.push(geography);
                             //console.log(dataObj[j]);
@@ -88,22 +88,22 @@ else{
                     }
                     else{
                         dataObj.splice(j, 1);
-                    }                             
-                } 
-                j--;                             
+                    }
+                }
+                j--;
             }
-            
+
             indicatorsObjTemp.push(indicatorsObj[i]);
             indicatorsArr.push(indicatorsObj[i].name);
-        }       
+        }
     }
     indicatorsObj = indicatorsObjTemp;
-    
+
     //создаем массив кодов областей
     for (var i = 0; i < koatuu.length; i++) {
         koatuuArr.push(koatuu[i].unique_koatuu_id);
     }
-    
+
     //создаем новый объект
     for (var i = 0; i < indicatorsObj.length; i++){
         dataTemp[indicatorsObj[i].id] = [];
@@ -124,7 +124,7 @@ else{
     }
 
     dataObj = dataTemp;
-    
+
     var dataTemp = {};
 
     for (key in dataObj) {
@@ -143,14 +143,14 @@ $("#searchIndicator").keyup(function() {
     $("#resultIndicator").html(html);
     var value = $(this).val().toLowerCase();
     for (var i = 0; i < indicatorsObj.length; i++) {
-        var string = indicatorsObj[i].name.toLowerCase();                     
+        var string = indicatorsObj[i].name.toLowerCase();
         if (string.indexOf(value) + 1) {
             if (indicatorsAddArr.length > 0) {
                 if (measurement === '') {
                     for (var j = 0; j < indicatorsObj.length; j++){
                         if (indicatorsObj[j].name === indicatorsAddArr[0]) {
                             measurement = indicatorsObj[j].measurement_unit;
-                        }                       
+                        }
                     }
                 }
                 else{
@@ -161,8 +161,8 @@ $("#searchIndicator").keyup(function() {
             }
             else{
                 html += '<li onclick="findIndicator($(this).text())">'+ indicatorsObj[i].name +'</li>';
-            }            
-        }            
+            }
+        }
     }
     $("#resultIndicator").append(html);
 });
@@ -181,10 +181,15 @@ function removeIndicator(elem){
         }
     }
     elem.parent().remove();
-    $("#indicatorGroup > tr > th").each(function(k,elem) {
-        $(elem).text(k+1);
+    $("#indicatorGroup > tr > th.indicator-index").each(function(k,elem) {
+        $(elem).text('0'+(k+1));
     });
     measurement = '';
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');
 }
 
 //добавляем индикатор на страницу при клике
@@ -195,11 +200,13 @@ $("#addIndicator").click(function() {
             if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
                 indicatorsAddArr.push($("#searchIndicator").val());
                 $("#indicatorGroup").append(`
-                    <tr style="font-size: 20px; background-color: #f1f1f1;">
-                    <th style="background-color: #3E4451; color: white; border-bottom-left-radius: 15px; border-top-left-radius: 15px; width: 60px;"scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                    <tr>
+                    <th></th>
+                    <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th>
                     <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
                     <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                    <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
+                    <td onclick="removeIndicator($(this))">
+                    <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>
                     </tr>`
                     );
             }
@@ -225,19 +232,27 @@ $("#addIndicator").click(function() {
                 if ((indicatorsAddArr.indexOf($("#searchIndicator").val()) === -1) && (indicatorsArr.indexOf($("#searchIndicator").val()) + 1)) {
                     indicatorsAddArr.push($("#searchIndicator").val());
                     $("#indicatorGroup").append(`
-                        <tr style="font-size: 20px; background-color: #f1f1f1;">
-                        <th style="background-color: #3E4451; color: white; border-bottom-left-radius: 15px; border-top-left-radius: 15px; width: 60px;" scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+                        <tr>
+                        <th></th>
+                        <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th>
                         <td class="indicator-name">`+ $("#searchIndicator").val() +`</td>
-                        <td onclick="removeIndicator($(this))"><i class="fa fa-window-close"></i></td>         
+                        <td onclick="removeIndicator($(this))">
+                        <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>
                         </tr>`
                         );
                 }
             }
-    }
-    else{
-        alert("Лимит 4 индикатора !");
-    }    
+        }
+        else{
+            alert("Лимит 4 индикатора !");
+        }
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');
 });
+
 
 //добавляем индикатор на страницу если он пришел с $_GET
 var indicatorNameGet = '';
@@ -248,15 +263,17 @@ if (indicatorIdGet > 0) {
             break;
         }
     }
-    
+
     if (indicatorsArr.indexOf(indicatorNameGet) + 1) {
         indicatorsAddArr.push(indicatorNameGet);
         $("#indicatorGroup").append(`
             <tr>
-            <th scope="row" class="indicator-index">`+ ($("#indicatorGroup > tr").length + 1) +`</th>
+            <th></th>
+            <th scope="row" class="indicator-index">`+ `0`+($("#indicatorGroup > tr").length + 1)+`</th>
             <td><i onclick="settingsIndicator($(this))" class="fa fa-wrench" title="Позволяет объединять данные"></i></td>
             <td class="indicator-name">`+ indicatorNameGet +`</td>
-            <td onclick="removeIndicator($(this))"><i class="fa fa-window-close-o"></i></td>         
+            <td onclick="removeIndicator($(this))">
+            <img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>
             </tr>`
             );
 
@@ -275,6 +292,50 @@ if (indicatorIdGet > 0) {
             }
             $("#fromYear").html(html);
             $("#untilYear").html(html);
+        }
+
+    //картинки для ротации индикаторов
+    $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))"  title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+    $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');
+}
+
+
+/*
+* Ротация индикаторов
+*/
+
+function rotateIndicator(elem){
+    if ($("#indicatorGroup tr").length > 1) {
+        indicatorsAddArr = [];
+        var rotateElem = elem.parent().parent().html();
+        var nextElem = elem.parent().parent().next().html();
+        var prevElem = elem.parent().parent().prev().html();
+        //меняем элементы местами
+        $("#indicatorGroup tr").each(function(k,el) {
+            if($(el).html() === rotateElem && k === ($("#indicatorGroup tr").length - 1)){
+                elem.parent().parent().prev().html(rotateElem);
+                elem.parent().parent().html(prevElem);
+            }
+            else{
+                elem.parent().parent().next().html(rotateElem);
+                elem.parent().parent().html(nextElem);
+            }
+        });
+        //перезаписываем номера индикаторов
+        $("#indicatorGroup > tr > th.indicator-index").each(function(k,elem) {
+            $(elem).text('0'+(k+1));
+        });
+        measurement = '';
+        //картинки для ротации индикаторов
+        $("#indicatorGroup tr th:first-child").html('<img onclick="rotateIndicator($(this))" class="img-rotate" title="Переместить" src="/mercurial/images/icons/28.png" style="cursor: pointer;">');
+        $("#indicatorGroup tr:first-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;">');
+        $("#indicatorGroup tr:last-child th:first-child").html('<img onclick="rotateIndicator($(this))" title="Переместить" src="/mercurial/images/icons/27.png" style="cursor: pointer;transform: rotate(180deg);">');
+        //перезаписываем массив индикаторов
+        $("#indicatorGroup tr td.indicator-name").each(function(k,elem) {
+            indicatorsAddArr.push($(elem).text());
+        });
+        console.log(indicatorsAddArr);
     }
 }
 
@@ -324,17 +385,17 @@ function aggregationIndicator(elem,name) {
                     var max = parseFloat(data[0].value);
                     var newData = [];
                     var length = 0;
-                    
+
                     //месяц
                     if (elem.val().split('-')[0] === 'M') {
-                        if (elem.val().split('-')[1] === 'mean') {                           
+                        if (elem.val().split('-')[1] === 'mean') {
                             for (var j = 0; j < data.length; j++) {
                                 if (new Date(data[j].date).getMonth() == startMonth) {
                                     total += parseFloat(data[j].value);
                                     length++;
                                 }
                                 else{
-                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    mean = Math.ceil(total/length*100)/100;
                                     newData.push({
                                         date : startDate,
                                         value : mean
@@ -349,14 +410,14 @@ function aggregationIndicator(elem,name) {
                                         startMonth = 0;
                                     }
                                     total = 0;
-                                    length = 0;                                    
+                                    length = 0;
                                 }
                             }
                             mean = Math.ceil(total/length*100)/100;
                             newData.push({
                                 date : startDate,
                                 value : mean
-                            });                            
+                            });
                         }
                         else if (elem.val().split('-')[1] === 'min') {
                             for (var j = 0; j < data.length; j++) {
@@ -365,7 +426,7 @@ function aggregationIndicator(elem,name) {
                                         min = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : min
@@ -378,8 +439,8 @@ function aggregationIndicator(elem,name) {
                                         startYear++;
                                         startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                         startMonth = 0;
-                                    } 
-                                    min = parseFloat(data[j].value);                            
+                                    }
+                                    min = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -394,7 +455,7 @@ function aggregationIndicator(elem,name) {
                                         max = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : max
@@ -408,7 +469,7 @@ function aggregationIndicator(elem,name) {
                                         startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                         startMonth = 0;
                                     }
-                                    max = parseFloat(data[j].value);                             
+                                    max = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -417,18 +478,18 @@ function aggregationIndicator(elem,name) {
                             });
                         }
                     }
-                    
+
                     //квартал
                     if (elem.val().split('-')[0] === 'Q') {
-                        if (elem.val().split('-')[1] === 'mean') {                           
+                        if (elem.val().split('-')[1] === 'mean') {
                             for (var j = 0; j < data.length; j++) {
                                 if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
                                     startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
-                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    mean = Math.ceil(total/length*100)/100;
                                     newData.push({
                                         date : startDate,
                                         value : mean
-                                    });                                   
+                                    });
                                     total = 0;
                                     length = 0;
                                     startYear++;
@@ -440,7 +501,7 @@ function aggregationIndicator(elem,name) {
                                     length++;
                                 }
                                 else{
-                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    mean = Math.ceil(total/length*100)/100;
                                     newData.push({
                                         date : startDate,
                                         value : mean
@@ -448,24 +509,24 @@ function aggregationIndicator(elem,name) {
                                     startMonth += 3;
                                     startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
                                     total = 0;
-                                    length = 0;                                    
+                                    length = 0;
                                 }
                             }
                             mean = Math.ceil(total/length*100)/100;
                             newData.push({
                                 date : startDate,
                                 value : mean
-                            });                            
+                            });
                         }
                         else if (elem.val().split('-')[1] === 'min') {
                             for (var j = 0; j < data.length; j++) {
                                 if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
-                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                                   
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
                                     newData.push({
                                         date : startDate,
                                         value : min
                                     });
-                                    min = parseFloat(data[j].value);                                   
+                                    min = parseFloat(data[j].value);
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                     startMonth = 0;
@@ -475,7 +536,7 @@ function aggregationIndicator(elem,name) {
                                         min = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : min
@@ -493,12 +554,12 @@ function aggregationIndicator(elem,name) {
                         else if (elem.val().split('-')[1] === 'max') {
                             for (var j = 0; j < data.length; j++) {
                                 if (new Date(data[j].date).getMonth() == 0 && startMonth == 9) {
-                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');                                   
+                                    startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
                                     newData.push({
                                         date : startDate,
                                         value : max
                                     });
-                                    max = parseFloat(data[j].value);                                   
+                                    max = parseFloat(data[j].value);
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                     startMonth = 0;
@@ -508,14 +569,14 @@ function aggregationIndicator(elem,name) {
                                         max = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : max
                                     });
                                     startMonth += 3;
                                     startDate = startDate.replace(/-[0-9]+-/g, '-'+(startMonth+1)+'-');
-                                    max = parseFloat(data[j].value);                          
+                                    max = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -527,14 +588,14 @@ function aggregationIndicator(elem,name) {
 
                     //год
                     if (elem.val().split('-')[0] === 'Y') {
-                        if (elem.val().split('-')[1] === 'mean') {                           
+                        if (elem.val().split('-')[1] === 'mean') {
                             for (var j = 0; j < data.length; j++) {
                                 if (new Date(data[j].date).getFullYear() == startYear) {
                                     total += parseFloat(data[j].value);
                                     length++;
                                 }
                                 else{
-                                    mean = Math.ceil(total/length*100)/100;                                    
+                                    mean = Math.ceil(total/length*100)/100;
                                     newData.push({
                                         date : startDate,
                                         value : mean
@@ -542,14 +603,14 @@ function aggregationIndicator(elem,name) {
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
                                     total = 0;
-                                    length = 0;                                    
+                                    length = 0;
                                 }
                             }
                             mean = Math.ceil(total/length*100)/100;
                             newData.push({
                                 date : startDate,
                                 value : mean
-                            });                            
+                            });
                         }
                         else if (elem.val().split('-')[1] === 'min') {
                             for (var j = 0; j < data.length; j++) {
@@ -558,14 +619,14 @@ function aggregationIndicator(elem,name) {
                                         min = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : min
                                     });
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
-                                    min = parseFloat(data[j].value);                            
+                                    min = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -580,14 +641,14 @@ function aggregationIndicator(elem,name) {
                                         max = parseFloat(data[j].value);
                                     }
                                 }
-                                else{                                  
+                                else{
                                     newData.push({
                                         date : startDate,
                                         value : max
                                     });
                                     startYear++;
                                     startDate = startDate.replace(/[0-9]+-[0-9]+-/g, startYear+'-1-');
-                                    max = parseFloat(data[j].value);                            
+                                    max = parseFloat(data[j].value);
                                 }
                             }
                             newData.push({
@@ -603,7 +664,7 @@ function aggregationIndicator(elem,name) {
                 else{
                     return 0;
                 }
-            }           
+            }
         }
     }
 }
@@ -628,7 +689,7 @@ if (indicatorIdGet > 0){
     var dataChartObj = [];
     var datasets = [];
     var labels = [];
-    
+
     var fromYear = new Date(fromGet).getFullYear();
     var untilYear = new Date(toGet).getFullYear();
     var fromDate = new Date(fromGet);
@@ -641,14 +702,14 @@ if (indicatorIdGet > 0){
     }
 
     //Если есть индикаторы
-    if (indicatorsAddArr.length > 0){  
-        
+    if (indicatorsAddArr.length > 0){
+
         //Cоздаем объект данных согласно индикаторам
         for (var i = 0; i < indicatorsAddArr.length; i++){
             for (var j = 0; j < indicatorsObj.length; j++){
                 if (indicatorsAddArr[i] === indicatorsObj[j].name) {
                     dataChartObj.push(
-                    { 
+                    {
                         'id':indicatorsObj[j].id,
                         'frequency':indicatorsObj[j].frequency,
                         'name':indicatorsObj[j].name,
@@ -656,21 +717,21 @@ if (indicatorIdGet > 0){
                     }
                     );
                 }
-            }    
+            }
         }
-        
+
         //Cоздаем объект с данными для каждого индикатора
 
         hasFromYear = false;
         hasUntilYear = false;
-        
+
         //проверяем наличие данных согласно периоду
         for (var i = 0; i < dataChartObj[0].data.length; i++){
             if (dataChartObj[0].frequency === 'D'){
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear && new Date(dataChartObj[0].data[i].date).getMonth() == fromMonth){
                     hasFromYear = true;
                     break;
-                } 
+                }
             }
             else{
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear){
@@ -683,34 +744,34 @@ if (indicatorIdGet > 0){
             if (dataChartObj[0].frequency === 'D') {
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear && new Date(dataChartObj[0].data[i].date).getMonth() == untilMonth - 1){
                     hasUntilYear = true;
-                    break;  
+                    break;
                 }
             }
             else{
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear){
                     hasUntilYear = true;
-                    break;  
+                    break;
                 }
             }
-        }       
+        }
         if (!hasFromYear || !hasUntilYear) {
             alert("Нет данных этого индикатора для этого периода !");
             document.location.href = rootSite+"/admin/statistics-analysis/charts";
-        } 
-        
+        }
+
         //создаем горизонтальную шкалу согласно величине периода
         if (daysPeriod < 58) {
             for (var i = 0; i < dataChartObj[0].data.length; i++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
                     labels.push((new Date(dataChartObj[0].data[i].date).toLocaleString()).slice(0, -14));
-                }               
+                }
             }
         }
         else if (daysPeriod < 367) {
             for (var i = 0; i < dataChartObj[0].data.length; i++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
                     labels.push(monthsArr[new Date(dataChartObj[0].data[i].date).getMonth()]);
-                }               
+                }
             }
         }
         else if (daysPeriod < 732){
@@ -739,20 +800,20 @@ if (indicatorIdGet > 0){
                     labels.push(new Date(dataChartObj[0].data[i].date).getFullYear());
                 }
             }
-        }  
+        }
 
         //создаем объект datasets согласно данным
         for (var i = 0; i < dataChartObj.length; i++){
             var data = [];
-            
+
             //создаем вертикальную шкалу согласно величине периода
             for (var j = 0; j < dataChartObj[i].data.length; j++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[i].data[j].date) && Date.parse(dataChartObj[i].data[j].date)<=untilDate.getTime()+1000*3600*3)
                 {
-                    data.push(dataChartObj[i].data[j].value); 
-                }               
+                    data.push(dataChartObj[i].data[j].value);
+                }
             }
-            
+
             datasets.push(
             {
                 label: dataChartObj[i].name + yearsPeriod,//название линии в графике
@@ -770,7 +831,7 @@ if (indicatorIdGet > 0){
             type: 'line',
             data: {
                 labels: labels,//горизонтальная шкала данных
-                datasets: datasets,                       
+                datasets: datasets,
             },
             options: {
                 animation: {
@@ -799,20 +860,20 @@ $("#makeChart").click(function() {
     var labels = [];
 
     var fromMonth = $("#fromMonth").val();
-    var fromYear = $("#fromYear").val();    
+    var fromYear = $("#fromYear").val();
     var untilMonth = $("#untilMonth").val();
     var untilYear = $("#untilYear").val();
     var fromDate = new Date(fromYear, fromMonth, 1 );
     var untilDate = new Date(untilYear, untilMonth, 1);
     var daysPeriod = Math.ceil((untilDate.getTime() - fromDate.getTime()) / (1000 * 3600 * 24));
     var yearsPeriod = ' ' + fromYear + 'г. - ' + untilYear + 'г.';
-console.log(fromDate);
+    console.log(fromDate);
     if (daysPeriod < 28) {
         alert("Выберите корректный период (больше месяца) !");
         return 0;
-    }  
-    
-    
+    }
+
+
     //Если есть индикаторы
     if (indicatorsAddArr.length > 0){
         //Cоздаем объект данных согласно индикаторам
@@ -820,7 +881,7 @@ console.log(fromDate);
             for (var j = 0; j < indicatorsObj.length; j++){
                 if (indicatorsAddArr[i] === indicatorsObj[j].name) {
                     dataChartObj.push(
-                    { 
+                    {
                         'id':indicatorsObj[j].id,
                         'frequency':indicatorsObj[j].frequency,
                         'name':indicatorsObj[j].name,
@@ -828,7 +889,7 @@ console.log(fromDate);
                     }
                     );
                 }
-            }    
+            }
         }
 
         //Проверяем частоту данных
@@ -839,21 +900,21 @@ console.log(fromDate);
             else if(frequency !== dataChartObj[i].frequency){
                 alert("Настройте одинаковую частоту индикаторов !");
                 return 0;
-            }            
+            }
         }
-        
+
         //Cоздаем объект с данными для каждого индикатора
 
         hasFromYear = false;
         hasUntilYear = false;
-        
+
         //проверяем наличие данных согласно периоду
         for (var i = 0; i < dataChartObj[0].data.length; i++){
             if (dataChartObj[0].frequency === 'D'){
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear && new Date(dataChartObj[0].data[i].date).getMonth() == fromMonth){
                     hasFromYear = true;
                     break;
-                } 
+                }
             }
             else{
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == fromYear){
@@ -866,34 +927,34 @@ console.log(fromDate);
             if (dataChartObj[0].frequency === 'D') {
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear && new Date(dataChartObj[0].data[i].date).getMonth() == untilMonth - 1){
                     hasUntilYear = true;
-                    break;  
+                    break;
                 }
             }
             else{
                 if((new Date(dataChartObj[0].data[i].date).getFullYear()+'') == untilYear){
                     hasUntilYear = true;
-                    break;  
+                    break;
                 }
             }
-        }       
+        }
         if (!hasFromYear || !hasUntilYear) {
             alert("Нет данных этого индикатора для этого периода !");
             return 0;
-        } 
-        
+        }
+
         //создаем горизонтальную шкалу согласно величине периода
         if (daysPeriod < 58) {
             for (var i = 0; i < dataChartObj[0].data.length; i++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
                     labels.push((new Date(dataChartObj[0].data[i].date).toLocaleString()).slice(0, -14));
-                }               
+                }
             }
         }
         else if (daysPeriod < 367) {
             for (var i = 0; i < dataChartObj[0].data.length; i++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[0].data[i].date) && Date.parse(dataChartObj[0].data[i].date)<=untilDate.getTime()+1000*3600*3){
                     labels.push(monthsArr[new Date(dataChartObj[0].data[i].date).getMonth()]);
-                }               
+                }
             }
         }
         else if (daysPeriod < 732){
@@ -924,20 +985,20 @@ console.log(fromDate);
             }
         }
 
-        console.log(labels);  
+        console.log(labels);
 
         //создаем объект datasets согласно данным
         for (var i = 0; i < dataChartObj.length; i++){
             var data = [];
-            
+
             //создаем вертикальную шкалу согласно величине периода
             for (var j = 0; j < dataChartObj[i].data.length; j++){
                 if (fromDate.getTime()<=Date.parse(dataChartObj[i].data[j].date) && Date.parse(dataChartObj[i].data[j].date)<=untilDate.getTime()+1000*3600*3)
                 {
-                    data.push(dataChartObj[i].data[j].value); 
-                }               
+                    data.push(dataChartObj[i].data[j].value);
+                }
             }
-            
+
             datasets.push(
             {
                 label: dataChartObj[i].name + yearsPeriod,//название линии в графике
@@ -955,7 +1016,7 @@ console.log(fromDate);
             type: 'line',
             data: {
                 labels: labels,//горизонтальная шкала данных
-                datasets: datasets,                       
+                datasets: datasets,
             },
             options: {
                 animation: {
@@ -975,5 +1036,3 @@ console.log(fromDate);
     }
 
 });
-
-

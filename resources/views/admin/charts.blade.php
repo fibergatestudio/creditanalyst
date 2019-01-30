@@ -8,7 +8,40 @@ App::setLocale(Auth::user()->preferred_language);
 
 <style type="text/css">
 #searchIndicator, #resultIndicator{
-    width: 500px;
+    width: 600px;
+}
+#indicatorGroup tr th:nth-child(1){
+    width: 20px;
+}
+#indicatorGroup tr th:nth-child(2){
+    width: 50px;
+    background: #3e4550;
+    color: #fff;
+    text-align:center;
+    vertical-align: center;
+}
+table#indicatorGroup{
+    border-spacing: 0px 11px;
+    border-collapse: separate;
+}
+table#indicatorGroup th{
+    border-top-left-radius:  10px;
+    border-bottom-left-radius:  10px;
+    border-top:none;
+}
+table#indicatorGroup tr td:nth-child(4){
+    border-top-right-radius:  10px;
+    border-bottom-right-radius:  10px;
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td:nth-child(3){
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td{
+    border-top:none;
+}
+#addIndicator{
+    margin-left: 50px;
 }
 #resultIndicator{
     background: #fff;
@@ -20,7 +53,7 @@ App::setLocale(Auth::user()->preferred_language);
     background: #87CEEB;
     cursor: pointer;
 }
-i.fa.fa-window-close-o, i.fa.fa-wrench{
+i.fa.fa-wrench{
     cursor: pointer;
 }
 </style>
@@ -169,51 +202,51 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 </script>
 
 <script type="text/javascript">
-        var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
-        filesCharts = JSON.parse(filesCharts);
-        var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
-        filesChartsFull = JSON.parse(filesChartsFull);
-        var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
-        var indicatorsName = '<?=$indicators_name ?>';
-        var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var chartLink = "{{ asset('charts') }}";
-        var rootSite = '<?=URL::to('/')?>';
-    </script>
+    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+    filesCharts = JSON.parse(filesCharts);
+    var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
+    filesChartsFull = JSON.parse(filesChartsFull);
+    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
+    var indicatorsName = '<?=$indicators_name ?>';
+    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var chartLink = "{{ asset('charts') }}";
+    var rootSite = '<?=URL::to('/')?>';
+</script>
 
-    {{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
+<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!--  Data table -->
-    <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+<!--  Data table -->
+<script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
 
-    <!--  Chart js -->
-    <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('js/line-charts.js') }}"></script>
+<!--  Chart js -->
+<script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+<script src="{{ asset('js/line-charts.js') }}"></script>
 
 
-    <!-- Vector-map-->
-    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-    <script src="{{ asset('js/map-charts-1.js') }}"></script>
-    <script src="{{ asset('js/map-charts-2.js') }}"></script>
-    <script src="{{ asset('js/map-charts-3.js') }}"></script>
-    <script src="{{ asset('js/map-charts-4.js') }}"></script>
+<!-- Vector-map-->
+<script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+<script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
+<script src="{{ asset('js/map-charts-1.js') }}"></script>
+<script src="{{ asset('js/map-charts-2.js') }}"></script>
+<script src="{{ asset('js/map-charts-3.js') }}"></script>
+<script src="{{ asset('js/map-charts-4.js') }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
 
-            $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
+        $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
 
-            if ($('.dataTables_empty').text() == 'No data available in table') {
-                $('.dataTables_empty').text('Нет данных');
-            }
+        if ($('.dataTables_empty').text() == 'No data available in table') {
+            $('.dataTables_empty').text('Нет данных');
+        }
 
-        } );
+    } );
 
 
         //Транслитерация
@@ -267,9 +300,9 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             return s.replace(/-$/, '');
         }
 
-</script>
+    </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         /*
         * Сохранение графика
         */
@@ -540,7 +573,8 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
         var fileName = filesChartsFull[element.getAttribute('data-id')];
         document.location.href = chartLink + '/' + fileName;
     }
-    </script>
+</script>
+
 
 
 
