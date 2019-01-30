@@ -40,35 +40,30 @@ class CronController extends Controller
                     ['indicator_id', '=', $notification_watcher->indicator_id],
                     ['id', '>', $last_processed_id]
                 ])
-                ->count();
-            
+                ->count();           
             
             // Если есть новые данные, нужно задать для них уведомления
             if($new_data_count > 0){
-                // Проверяем, нет ли активных уведомлений - если есть, то новое создавать не нужно
+                // Выбираем уведомления у которых indicator_id соответствует активным вотчерам 
                 $seen_notifications = Notification::where('indicator_id', $notification_watcher->indicator_id)->where()->get(); // находим уведомления у которых (notify == 1)
                 // перебераем  уведомления
                 foreach ($seen_notifications as $seen_notification) {   
-                    if($seen_notification->seen == 1){   
-                        // создаем новое уведомление
+                    if($seen_notification->seen == 0){          // проверяем наличие непросмотреноого уведомления
+                        continue;                               // если таковой есть, пропускаем 
+                    }else{                                      // если нет то создаем новый
                         $new_notification = new Notification();
-                        $new_notification->user_id = $user_to_be_notified_id;
-                        $new_notification->dataset_entry_id = $new_data_entry->id;
-                        $new_notification->seen = false;
+                        $new_notification->user_id = $notification_watcher->user_id;
+                        $new_notification->indicator_id = $notification_watcher->indicator_id;
+                        $new_notification->seen = 0;
                         $new_notification->save();
-                    }
-                }
-
-                // Если нет, то создаём новое
+                        }
+                }                
             }
-
-                
-
         } // end foreach
         
-        // Устанавливаем новый последний отработанный ID
+        //Устанавливаем новый последний отработанный ID
         // !! Раскоментировать, закоменчено для теста
-        //CronData::set_last_processed_data_entry_id();
+        CronData::set_last_processed_data_entry_id();
         
         
 
@@ -151,7 +146,7 @@ class CronController extends Controller
             /* Вносим в новую таблицу */
             $new_notification = new Notification();
             $new_notification->user_id = $daily_notification->user_id;
-            $new_notification->dataset_entry_id = $daily_notification->dataset_entry_id;
+            $new_notification->indicator_id = $daily_notification->indicator_id;
             $new_notification->seen = false;
             $new_notification->save();
             
