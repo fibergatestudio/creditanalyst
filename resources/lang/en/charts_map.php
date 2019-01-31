@@ -6,10 +6,10 @@ return [
     'Построить график' => 'Create a chart',
     'Сохранить' => 'Save',
     'Экспортировать' => 'Export',
-    'Экспорт в Word' => 'Export to Word',
+    'Экспорт в Word' => 'Export to MS Word',
     'Название графика' => 'Chart name',
     'Период:' => 'Period:',
     'Введите поисковый запрос' => 'Enter your search query',
     'График 1' => 'Chart 1',
-
+    'Украина' => 'Ukraine',
 ];

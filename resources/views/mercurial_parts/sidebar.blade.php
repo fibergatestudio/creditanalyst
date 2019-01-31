@@ -14,7 +14,7 @@
 
 <section class="section-sidebar">
         <h3 class="sidebar-title">
-            <span class="menu-item-description collapse show">Meню</span>
+            <span class="menu-item-description collapse show">@lang('sidebar.Meню')</span>
             <span class="icon icon-menu"></span>
         </h3>
         <ul class="list-menu">

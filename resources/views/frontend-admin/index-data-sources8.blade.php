@@ -35,44 +35,44 @@
 
     <section class="section-sidebar">
         <h3 class="sidebar-title">
-            <span class="menu-item-description collapse show">Meню</span>
+            <span class="menu-item-description collapse show">@lang('index_data.Meню')</span>
             <span class="icon icon-menu"></span>
         </h3>
         <ul class="list-menu">
             <li class="active">
                 <a href="#">
                     <span class="icon icon-data-sources"></span>
-                    <span class="menu-item-description collapse show">Источники данных</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Источники данных')</span>
                 </a>
             </li>
             <li >
                 <a href="#">
                     <span class="icon icon-search-list"></span>
-                    <span class="menu-item-description collapse show">Поиск данных</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Поиск данных')</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <span class="icon icon-monitoring"></span>
-                    <span class="menu-item-description collapse show">Мониторинг данных</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Мониторинг данных')</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <span class="icon icon-statist"></span>
-                    <span class="menu-item-description collapse show">Статистика и анализ</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Статистика и анализ')</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <span class="icon icon-setup"></span>
-                    <span class="menu-item-description collapse show">Настройки</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Настройки')</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <span class="icon icon-help"></span>
-                    <span class="menu-item-description collapse show">Помощь</span>
+                    <span class="menu-item-description collapse show">@lang('index_data.Помощь')</span>
                 </a>
             </li>
         </ul>
@@ -80,19 +80,19 @@
 
     <section id="data-sources" class="section-content">
         <div class="content-title">
-            <h2 class="name-menu">Источники данных</h2>
+            <h2 class="name-menu">@lang('index_data.Источники данных')</h2>
             <a href="#" class="exit">Выйти</a>
         </div>
         <div class="content-grid">
             <div class="card card-fluid">
                 <div class="card-body">
-                    <h3 class="title-block">Источники данных</h3>
+                    <h3 class="title-block">@lang('index_data.Источники данных')</h3>
                     <div id="accordion">
                         <div class="card card-fluid">
                             <div class="card-header-accordion" id="headingOne">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}"  alt=""/>
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -104,16 +104,16 @@
                                 <div id="collapseOne" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание'):</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
-                                            <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Источник / поставщик:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Госкомстат')</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="card-header-accordion" id="headingOne1">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
@@ -134,16 +134,16 @@
                                 <div id="collapseOne1" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание:')</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник/поставщик:</dt>
-                                            <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Источник/поставщик:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Госкомстат')</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                             <div class="card-header-accordion" id="headingOne3">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
@@ -164,16 +164,16 @@
                                 <div id="collapseOne3" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание:')</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
-                                            <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Источник / поставщик:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Госкомстат')</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                             <div class="card-header-accordion" id="headingOne4">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
@@ -194,16 +194,16 @@
                                 <div id="collapseOne4" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание:')</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
-                                            <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Источник / поставщик:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Госкомстат')</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                             <div class="card-header-accordion" id="headingOne5">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne5" aria-expanded="true" aria-controls="collapseOne">
@@ -224,16 +224,16 @@
                                 <div id="collapseOne5" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание:')</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Источник / поставщик:')</dt>
                                             <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                             <div class="card-header-accordion" id="headingOne6">
                                 <div class="content-row">
                                     <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
-                                    <h3 class="text">Название источника</h3>
+                                    <h3 class="text">@lang('index_data.Название источника')</h3>
                                 </div>
 
                                 <button class="btn btn-link caret" data-toggle="collapse" data-target="#collapseOne6" aria-expanded="true" aria-controls="collapseOne">
@@ -254,16 +254,16 @@
                                 <div id="collapseOne6" class="collapse show col-md-6" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <dl class="row">
-                                            <dt class="col-md-4">Описание:</dt>
+                                            <dt class="col-md-4">@lang('index_data.Описание:')</dt>
                                             <dd class="col-md-8">Lorem ipsum dolor sit amet. Erat sit aliquyam clita. Eu dolor justo et ea ad. Ipsum dolor quis nonumy eos nonumy. Eos dolor tempor. </dd>
-                                            <dt class="col-md-4">Источник / поставщик:</dt>
-                                            <dd class="col-md-8">Госкомстат</dd>
-                                            <dt class="col-md-4">Частота данных:</dt>
-                                            <dd class="col-md-8">Квартальная</dd>
-                                            <dt class="col-md-4">География данных:</dt>
-                                            <dd class="col-md-8">Вся Украина</dd>
+                                            <dt class="col-md-4">@lang('index_data.Источник / поставщик:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Госкомстат')</dd>
+                                            <dt class="col-md-4">@lang('index_data.Частота данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Квартальная')</dd>
+                                            <dt class="col-md-4">@lang('index_data.География данных:')</dt>
+                                            <dd class="col-md-8">@lang('index_data.Вся Украина')</dd>
                                         </dl>
-                                        <button class="btn btn-success">Список пользователей</button>
+                                        <button class="btn btn-success">@lang('index_data.Список пользователей')</button>
                                     </div>
                                 </div>
                             </div>
