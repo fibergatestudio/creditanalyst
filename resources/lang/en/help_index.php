@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'Страница помощи' => 'Help and Support',
+    'Помощь и поддержка' => 'Help and Support',
 
 ];
