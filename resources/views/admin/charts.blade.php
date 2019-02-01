@@ -22,13 +22,13 @@ App::setLocale(Auth::user()->preferred_language);
 }
 i.fa.fa-window-close-o, i.fa.fa-wrench{
     cursor: pointer;
-}    
+}
 </style>
 
 <div class="card-body card-block">
     <div class="row form-group">
         <div class="col col-md-12">
-            <table class="table" id="indicatorGroup"></table>                                       
+            <table class="table" id="indicatorGroup"></table>
         </div>
     </div>
     <div class="row">
@@ -36,9 +36,9 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
             @lang('charts.Для теста представлены все показатели, кроме бананов')
             <hr>
             <input type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
-            <i class="fa fa-search"></i> 
+            <i class="fa fa-search"></i>
             <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
-        </div>       
+        </div>
     </div>
     <ul id="resultIndicator"></ul>
     <div class="row form-group">
@@ -101,7 +101,7 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
                     <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
                     <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
                     <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                </div>                    
+                </div>
             </div>
         </div>
     </div>
