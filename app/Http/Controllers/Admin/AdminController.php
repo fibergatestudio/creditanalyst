@@ -14,6 +14,10 @@ class AdminController extends Controller
 	
 	protected $months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 	protected $years = ['1991','1992','1993','1994','1995','1996','1997','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018'];
+	protected $colors_arr = [
+		'#00afff','#00a8ff','#00a1ff','#009aff','#0093ff','#008cff','#0085ff','#007eff','#0077ff','#0070ff',
+		'#0069ff','#0062ff','#005bff','#0054ff','#004dff','#0046ff','#003fff','#0038ff','#0031ff','#002aff',
+		'#0023ff','#001cff','#0015ff','#000eff','#0007ff'];
 
 
 	/*
@@ -31,6 +35,23 @@ class AdminController extends Controller
 
 		return $indicators_name;
 	}
+
+
+	/*
+    * Функция которая выделяет имена и id индикаторов и возвращает json 
+    */
+
+	protected function get_obj_name_indicators(){
+		
+		$indicators_name = [];
+		$indicators_obj = Indicator::all();
+		foreach ($indicators_obj as $k => $value) {
+			$indicators_name[$value['id']] = $value['name'];
+		}
+		$indicators_name =  json_encode($indicators_name,JSON_UNESCAPED_UNICODE);
+
+		return $indicators_name;
+	}	
 
 
 	/*

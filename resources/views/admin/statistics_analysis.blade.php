@@ -45,4 +45,24 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
 
     </div>
 </section>
+
 @endsection
+
+<script type="text/javascript">
+    var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
+    var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
+    var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
+</script>
+
+<script type="text/javascript">
+    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+    filesCharts = JSON.parse(filesCharts);
+    var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
+    filesChartsFull = JSON.parse(filesChartsFull);
+    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
+    var indicatorsName = '<?=$indicators_name ?>';
+    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var chartLink = "{{ asset('charts') }}";
+    var rootSite = '<?=URL::to('/')?>';
+</script>
