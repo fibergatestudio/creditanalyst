@@ -63,10 +63,12 @@ App::setLocale(Auth::user()->preferred_language);
 
     <!-- Vector-map-->
     <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script> -->
     <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
     <script src="{{ asset('js/map-charts-1.js') }}"></script>
     <script src="{{ asset('js/map-charts-2.js') }}"></script>
     <script src="{{ asset('js/map-charts-3.js') }}"></script>
+    <script src="{{ asset('js/map-charts.js') }}"></script>
     <script src="{{ asset('js/map-charts-4.js') }}"></script>
 
     <script type="text/javascript">
@@ -141,6 +143,9 @@ App::setLocale(Auth::user()->preferred_language);
         */
 
         $('#saveChart').click(function (){
+
+            fullMap = true;
+
             $('.chart-save').prop( "disabled" , true );
             var fileName = translit($('#chartName').val());
             if (fileName) {

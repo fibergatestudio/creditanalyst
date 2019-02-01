@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/scss/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lib/vector-map/jqvmap.min.css') }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 
 </head>
@@ -41,7 +41,7 @@
     .map, .vmap {
         width: 100%;
         height: 650px;
-    }  
+    }
     .map-content{
         margin-left: 100px;
         margin-top: 100px;
@@ -50,7 +50,7 @@
     .marker-map{
         margin-top: -15px;
     }
-    
+
     /* Индикаторы на карте */
     #save-marker-labels div{
         display: inline-block;
@@ -97,7 +97,7 @@
                     </div>
                     <div id="saveChartMap" class="vmap"></div>
                 </div>
-            </div>                                      
+            </div>
         </div>
     </div>
 </div>
@@ -119,7 +119,7 @@
     var fileExportToWord = '<?=(isset($_GET['fileExportToWord']))?$_GET['fileExportToWord'] : 0 ?>';
 </script>
 
-<script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>      
+<script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -132,11 +132,14 @@
 <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
 <script src="{{ asset('js/line-charts.js') }}"></script>
 
-<!-- Vector-map--> 
+<!-- Vector-map-->
 <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
 <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
 <script src="{{ asset('js/map-charts-1.js') }}"></script>
+<script src="{{ asset('js/map-charts.js') }}"></script>
 <script src="{{ asset('js/map-charts-2.js') }}"></script>
+<script src="{{ asset('js/map-charts-3.js') }}"></script>
+
 <script src="{{ asset('js/map-charts-4.js') }}"></script>
 
 <script type="text/javascript">
@@ -178,7 +181,7 @@
                     alert('Ошибка');
                     $('.chart-save').prop( "disabled" , false );
                 }
-            }); 
+            });
         });
     }
 </script>
@@ -186,4 +189,3 @@
 
 </body>
 </html>
-
