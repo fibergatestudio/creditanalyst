@@ -169,9 +169,9 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 
 
 	//маршруты для языков
-	Route::get('/', function () {
-	    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
-	});
+	// Route::get('/', function () {
+	//     return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
+	// });
 
 
 	//Переключение языков
