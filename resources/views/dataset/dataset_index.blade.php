@@ -48,7 +48,7 @@ function dataset_format_date($date_format, $date){
 
                 <div class="col col-lg-9">
                   <h2>{{ $indicator->name }} </h2>
-                  @lang('dataset_index.Единицы измерения:') {{ $indicator->measurement_unit_name }}
+                  Единицы измерения: {{ $indicator->measurement_unit_name }}
                   <table class="table">
                     @foreach($dataset as $data_entry)
                       <tr>

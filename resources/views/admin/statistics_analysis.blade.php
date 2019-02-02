@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <?php
-    App::setLocale(Auth::user()->preferred_language);
-    ?>
+<?php
+App::setLocale(Auth::user()->preferred_language);
+?>
 
 <style type="text/css">
 i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{

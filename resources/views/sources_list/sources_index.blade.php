@@ -20,18 +20,17 @@ App::setLocale(Auth::user()->preferred_language);
 
                   <div id="collapse{{ $infosource->id }}" class="collapse" aria-labelledby="heading{{ $infosource->id }}" data-parent="#sources_accordion">
                     <div class="card-body">
-                      @lang('sources-index.Описание: '){{ $infosource->description }}<br>
-                      @lang('sources-index.Поставщик: '){{ $infosource->procurer }}<br>
-                      @lang('sources-index.Макс. частота данных: '){{ $infosource->frequency_unit_name }}<br>
-                      @lang('sources-index.Макс. география данных: '){{ $infosource->geography_unit_name }}<br>
+                      Описание: {{ $infosource->description }}<br>
+                      Поставщик: {{ $infosource->procurer }}<br>
+                      Макс. частота данных: {{ $infosource->frequency_unit_name }}<br>
+                      Макс. география данных: {{ $infosource->geography_unit_name }}<br>
                       
                       <!-- Кнопка "список показателей" -->
                       <a href="{{ url('indicator_list/'.$infosource->id) }}">
                         <div class="btn btn-success">
-                          @lang('sources-index.Список показателей')
+                          Список показателей
                         </div>
                       </a>
-
                     </div><!-- / card body -->
                   </div><!-- / collapse -->
                 </div><!-- / card -->
@@ -57,7 +56,7 @@ App::setLocale(Auth::user()->preferred_language);
                         <div class="card card-fluid">
                             <div class="card-header-accordion" id="headingOne">
                                 <div class="content-row">
-                                    <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt="">
+                                    <!-- <img src="{{asset('mercurial/images/icon-logo-data-sources.png')}}" alt=""> -->
                                     <h3 class="text">{{ $infosource->name }}</h3>
                                 </div>
 

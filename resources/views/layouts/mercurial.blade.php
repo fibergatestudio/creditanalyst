@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Mercurial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
 
     <link href="{{ url('mercurial/css/style.css') }}" rel="stylesheet">
@@ -44,6 +46,34 @@
         });*/
     });
 </script>
+
+<!-- Сброс пароля -->
+
+<form method="POST" id="password-reset" action="{{ route('password.email') }}">
+    @csrf
+            <input id="email" type="hidden" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="" required>
+</form>
+
+<script type="text/javascript">
+    $('a.change-password').click(function (e) {
+        if (confirm("Вы действительно хотите сбросить пароль ?")) {        
+            e.preventDefault();
+            var email = $(this).children('input').val();
+            $('#email').val(email);
+            document.getElementById('password-reset').submit();
+            localStorage.setItem('email', email);            
+        }       
+    });
+    
+    $(document).ready(function () {
+        if (localStorage.getItem('email')) {
+            alert("Пользователю с e-mail: "+localStorage.getItem('email')+" было отправлено письмо со ссылкой для сброса пароля !");
+            localStorage.removeItem('email');
+        }
+    });
+</script>
+
+<!-- Конец сброса пароля -->
 
 @yield('scripts')
 

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'Кредитная аналитика' => 'Credit Analytics',
+    'Кредитная аналитика' => 'Credit Analyst',
     'КА' => 'CA',
-    'Панель управления' => 'Control Panel',
+    'Панель управления' => 'Console',
     'Статистика и анализ' => 'Statistics and Analysis',
     'Вернуться' => 'Back',
 

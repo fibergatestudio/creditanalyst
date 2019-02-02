@@ -2,7 +2,7 @@
 App::setLocale(Auth::user()->preferred_language);
 ?>
 
-@extends('layouts.admin')
+@extends('layouts.mercurial')
 
 @section('content')
 
@@ -53,7 +53,7 @@ table#indicatorGroup tr td{
     background: #87CEEB;
     cursor: pointer;
 }
-i.fa.fa-window-close-o, i.fa.fa-wrench{
+i.fa.fa-wrench{
     cursor: pointer;
 }
 div.input-group.mb-3>div.input-group-append>button.btn.btn-outline-secondary{
