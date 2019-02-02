@@ -16,6 +16,13 @@ class MapForSaveController extends AdminController
     */
     public function show(){
 
+        //выводим маркер единственного индикатора
+        $html = '<div class="marker-color-one">';                                   
+        for($i=0; $i < count($this->colors_arr); $i++){
+            $html .= '<div style="background:'.$this->colors_arr[$i].';"></div>';
+        }
+        $html .= '<div>indicator</div></div>';
+
     	$datasets_obj = [];
     	$name_indicator_arr = [];
 
@@ -43,7 +50,7 @@ class MapForSaveController extends AdminController
 
     	die();*/
 
-    	return view('map_for_save', ['indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'datasets_obj' => $datasets_obj, 'name_indicator_arr' => $name_indicator_arr]);
+    	return view('map_for_save', ['indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'datasets_obj' => $datasets_obj, 'name_indicator_arr' => $name_indicator_arr, 'indicators_obj_name' => $this->get_obj_name_indicators(), 'colors_arr' => $html]);
     }
 
 

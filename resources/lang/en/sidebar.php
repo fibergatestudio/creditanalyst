@@ -11,5 +11,4 @@ return [
     'Уведомления' => 'Notifications',
     'Построение графика' => 'Chart creation',
     'Выход' => 'Exit',
-    'Меню' => 'Menu',
 ];

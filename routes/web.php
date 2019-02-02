@@ -26,7 +26,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/statistics-analysis/charts',['uses'=>'Admin\ChartsController@index','as'=>'chartsIndex']);
 	Route::post('/statistics-analysis/charts',['uses' => 'Admin\ChartsController@save_img_file','as' => 'chartsSave']);
 	Route::get('/statistics-analysis/charts-map',['uses'=>'Admin\ChartsMapController@index','as'=>'chartsMapIndex']);
-	Route::post('/statistics-analysis/charts-map',['uses' => 'Admin\ChartsMapController@save_img_file','as' => 'chartsMapSave']);
+	Route::post('/statistics-analysis/charts-map',['uses' => 'Admin\ChartsMapController@save_img_file','as' => 'chartsMapSave']);	
 
 });
 
@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 	Route::get('/sources_list', 'SourcesListController@show')->middleware('auth'); // Список всех Источников
 	Route::get('/indicator_list/{id}', 'IndicatorListController@show')->name('indicators_index'); // Список показателей в Источнике
-
+        
 /*
 * Пути для поиска индикаторов
 */
@@ -83,8 +83,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 	Route::get('/user_logout', 'UserManagementController@user_logout')->middleware('auth');
 
 /* Пути для крона */
-	Route::get('/cron', 'CronController@notification_pusher'); // Основной путь - ставить на крон раз в час
-	Route::get('/cron_daily', 'CronController@cron_daily'); // Раз в сутки в 9 утра
+	Route::get('/cron', 'CronController@notification_pusher');
 
 /*
 * Пути для импорта данных (временные)
@@ -165,41 +164,3 @@ Route::get('/help', 'HelpController@help_index')->middleware('auth');
 
 	/********** TEST **********/
 	Route::get('/test', 'TestController@test')->middleware('auth');
-
-
-
-	//маршруты для языков
-	Route::get('/', function () {
-	    return redirect('/'. App\Http\Middleware\LocaleMiddleware::$mainLanguage);
-	});
-
-
-	//Переключение языков
-
-	Route::get('setlocale/{lang}', function ($lang) {
-
-	    $referer = Redirect::back()->getTargetUrl();; //URL предыдущей страницы
-	    $parse_url = parse_url($referer, PHP_URL_PATH); //URI предыдущей страницы
-
-	    //разбиваем на массив по разделителю
-	    $segments = explode('/', $parse_url);
-
-	    //Если URL (где нажали на переключение языка) содержал корректную метку языка
-	    if (in_array($segments[1], App\Http\Middleware\LocaleMiddleware::$languages)) {
-
-	        unset($segments[1]); //удаляем метку
-	    }
-
-	    //Добавляем метку языка в URL (если выбран не язык по-умолчанию)
-	    array_splice($segments, 1, 0, $lang);
-
-	    //формируем полный URL
-	    $url = Request::root().implode("/", $segments);
-
-	    //если были еще GET-параметры - добавляем их
-	    if(parse_url($referer, PHP_URL_QUERY)){
-	        $url = $url.'?'. parse_url($referer, PHP_URL_QUERY);
-	    }
-	    return redirect($url); //Перенаправляем назад на ту же страницу
-
-	})->name('setlocale');

@@ -63,6 +63,22 @@
         height: 15px;
         margin: 5px;
     }
+    .marker-color-one{
+    width: 1100px;
+    height: 25px;
+    margin: 5px;
+    }
+    .marker-color-one div{
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    }
+    .marker-color-one div:last-child{
+    margin-top: 0;
+    width: 700px;
+    margin-left: 5px;
+    }
     #m-color-1{
         background: #FF0000;
     }
@@ -83,7 +99,7 @@
         <div class="col col-md-12">
             <div class="card map">
                 <div class="card-header">
-                    <h4>@lang('map_for_save.Украина')</h4>
+                    <h4>Ukraine</h4>
                 </div>
                 <div class="Vector-map-js">
                     <div id="save-marker-labels">
@@ -93,6 +109,8 @@
                         <div class="marker-color" id="m-color-{{$i+1}}"></div><div>{{$name_indicator_arr[$i]}}</div>
                         @endfor
                         @endif
+                        @else
+                        {!! $colors_arr !!}
                         @endif
                     </div>
                     <div id="saveChartMap" class="vmap"></div>
@@ -101,6 +119,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
+    var fromGet = '<?=(isset($_GET['from']))?$_GET['from'] : "2017-01-01" ?>';
+    var toGet = '<?=(isset($_GET['to']))?$_GET['to'] : "2018-01-01" ?>';
+    var indicatorsObjName = '<?=$indicators_obj_name ?>';
+    indicatorsObjName = JSON.parse(indicatorsObjName);
+</script>
 
 <script type="text/javascript">
     var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
@@ -164,7 +190,7 @@
                             link.click();
                             document.location.href = rootSite+"/admin/statistics-analysis";
                     }
-                    else if(data.indexOf('fileExportToWord') + 1 > 0){
+                    else if(data.indexOf('fileWord') + 1 > 0){
                         alert('Файл сохранен в '+ data);
                             var link = document.createElement('a');
                             link.setAttribute('href',data);

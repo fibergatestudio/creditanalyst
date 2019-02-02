@@ -100,6 +100,9 @@ $("#makeChartMap").click(function() {
                 event.preventDefault();
             }
         } );
+        
+        //Выводим название индикатора
+        $('.marker-color-one div:last-child').text(indicatorsAddArr[0]);
 
         fullMap = true;
 

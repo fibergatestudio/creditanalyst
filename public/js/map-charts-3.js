@@ -142,7 +142,7 @@ $("#makeChartMap").click(function() {
         for (var i = 0; i < indicatorsAddArr.length; i++) {
             indicatorHtml += `<div class="marker-color" id="m-color-`+(i+1)+`"></div><div>`+indicatorsAddArr[i]+`</div>`;
         }
-        $("#marker-labels").append(indicatorHtml);       
+        $("#marker-labels").html(indicatorHtml);       
 
         //Выводим диаграммы на карту
         for (var i = 1; i < 26; i++) {

@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -17,22 +18,23 @@
     <section id="page-exit" class="section-content">
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">
         <div class="card">
-            
+  
             <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <div class="card-body">
-                <h3 class="title-block">@lang('login.Вход')</h3>
+                <h3 class="title-block">Вход</h3>
                 <div class="row">
                     <div class="col-md-7 exit-language">
-                        <span class="language">@lang('login.Язык интерфейса')</span>
+                        <span class="language">Язык интерфейса</span>
                         <label>
 
+                            <input type="hidden" name="locale" value="ru">
                             {{-- Выбор языка--}}
-                            <select class="form-control" data-placeholder="Choose a Language..." name="locale">
-                                <option value="ru">RU</option>
-                                <option value="ua">UKR</option>
-                                <option value="en">ENG</option>
+                            <select class="form-control" data-placeholder="Choose a Language..." onchange="location = this.value;">
+                                <option>RU</option>
+                                <option value="login-ua">UKR</option>
+                                <option value="login-en">ENG</option>
                             </select>
 
                             
@@ -63,7 +65,7 @@
 
 
                             <div class="form-group row">
-                                <label for="exampleInputPassword1" class="col">@lang('login.Пароль:')</label>
+                                <label for="exampleInputPassword1" class="col">Пароль:</label>
                                 <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }} col-md-7" id="exampleInputPassword1" placeholder="" name="password">
                                 <span class="col"></span>
                             </div>
@@ -86,7 +88,7 @@
                                         <!-- версия регистрации через лару-->
                                         <!-- <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> -->
 
-                                        <label class="form-check-label" for="exampleCheck1">@lang('login.Запомнить меня')</label>
+                                        <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +98,7 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}" class="remind-password text">@lang('login.Забыли пароль?')
+                                <a href="{{ route('password.request') }}" class="remind-password text">Забыли пароль?
                                     <!-- версия регистрации через лару-->
                                     <!-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

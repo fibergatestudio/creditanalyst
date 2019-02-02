@@ -39,7 +39,7 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="content-row">
                     <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Добавить все показатели в мониторинг')</a>
                     <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Удалить все показатели из мониторинга')</a>
-                    <a href="#link-on-export-page" class="btn btn-success" >
+                    <a href="{{ url('indicator_list/{infosource_id}/export_all') }}" class="btn btn-success" >
                         @lang('indicators_index.Экспорт всех данных в Excel')
                     </a>
                     {{-- Верхняя пагинация --}}
@@ -58,8 +58,13 @@ App::setLocale(Auth::user()->preferred_language);
                                     <a href=" {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
                                         <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content=@lang('indicators_index.Добавить показатель в мониторинг')></span>
                                     </a>
-                                    <a href="{{ url("admin/statistics-analysis/charts?indicator_id=" .$indicator->id. "&from=2019-01-01&to=2019-12-31") }}" class="icon icon-stat"></a>
-                                    <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a>
+                                    <a href="#" class="icon icon-stat"></a>
+                                    
+                                    {{-- Открытие модального окна --}}
+                                    {{-- <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a> --}}
+
+                                    {{-- Меняем модальное окно на экспорт и скачивание эксель таблицы --}}
+                                    <a href="{{ url('indicator_list/'.$indicator->id.'/export') }}" class="icon icon-open"> </a>
                                 </div>
                             </td>
                         </tr>
@@ -69,7 +74,8 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="content-row">
                     <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Добавить все показатели в мониторинг')</a>
                     <a href="#" class="btn btn-outline-secondary">@lang('indicators_index.Удалить все показатели из мониторинга')</a>
-                    <a href="#link-on-export-page" class="btn btn-success">@lang('indicators_index.Экспорт всех данных в Excel')</a>
+                    
+                    <a href="{{ url('indicator_list/{infosource_id}/export_all') }}" class="btn btn-success">@lang('indicators_index.Экспорт всех данных в Excel')</a>
                     {{-- Нижняя пагинация --}}
 
                         {{ $indicators->links() }}
@@ -85,7 +91,7 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3>@lang('indicators_index.Экспорт в Excel')</h3>
+                            <h3>Экспорт в Excel</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span class="icon icon-close"></span>
                             </button>
@@ -185,7 +191,7 @@ App::setLocale(Auth::user()->preferred_language);
                         </button>
                     </div>
                     <div class="text-align-left modal-body">
-                        <span class="text text-bold">@lang('indicators_index.Название Показателя')</span>
+                        <span class="text text-bold">@lang('indicators_index.Показатель Название')</span>
                         <span class="modal-size-small">
                     Lorem ipsum dolor sit amet. Duo duis ipsum diam. Te erat clita et eos est hendrerit amet.
                     Ipsum soluta nonummy eros consequat. Iriure in eirmod consequat sit rebum consequat.
@@ -196,12 +202,14 @@ App::setLocale(Auth::user()->preferred_language);
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">@lang('indicators_index.В мониторинг')</button>
                         <button type="button" class="btn btn-success ">@lang('indicators_index.Экспорт в Excel')</button>
+
+                        <form action="{{ url('indicator_list/'.$infosource->id.'/export_page') }}">
+                            <input type="submit" value="Экспорт в Excel" />
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
         {{-- Конец модального окна --}}
-
-    </section>
-
 @endsection

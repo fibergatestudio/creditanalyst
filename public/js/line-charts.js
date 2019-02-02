@@ -80,7 +80,6 @@ else{
                         if (geographyArr.indexOf(geography) === -1) {
                             dataObj[j].geography = geography;
                             geographyArr.push(geography);
-                            //console.log(dataObj[j]);
                         }
                         else{
                             dataObj.splice(j, 1);
@@ -335,7 +334,6 @@ function rotateIndicator(elem){
         $("#indicatorGroup tr td.indicator-name").each(function(k,elem) {
             indicatorsAddArr.push($(elem).text());
         });
-        console.log(indicatorsAddArr);
     }
 }
 
@@ -867,7 +865,6 @@ $("#makeChart").click(function() {
     var untilDate = new Date(untilYear, untilMonth, 1);
     var daysPeriod = Math.ceil((untilDate.getTime() - fromDate.getTime()) / (1000 * 3600 * 24));
     var yearsPeriod = ' ' + fromYear + 'г. - ' + untilYear + 'г.';
-    console.log(fromDate);
     if (daysPeriod < 28) {
         alert("Выберите корректный период (больше месяца) !");
         return 0;
@@ -985,7 +982,6 @@ $("#makeChart").click(function() {
             }
         }
 
-        console.log(labels);
 
         //создаем объект datasets согласно данным
         for (var i = 0; i < dataChartObj.length; i++){
