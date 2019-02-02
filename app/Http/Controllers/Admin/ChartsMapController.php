@@ -23,9 +23,16 @@ class ChartsMapController extends AdminController
 	
 	public function index(){
 
-		//echo '<pre>'.print_r($this->koatuu_obj(),true).'</pre>';
+		//выводим маркер единственного индикатора
+		$html = '<div class="marker-color-one">';                                   
+		for($i=0; $i < count($this->colors_arr); $i++){
+			$html .= '<div style="background:'.$this->colors_arr[$i].';"></div>';
+		}
+		$html .= '<div>indicator</div></div>';  
 
-		return view('admin.charts_map', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'koatuu_obj' => $this->koatuu_obj()]);
+		/*echo '<pre>'.print_r($this->colors_arr,true).'</pre>';*/
+
+		return view('admin.charts_map', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'koatuu_obj' => $this->koatuu_obj(), 'colors_arr' => $html, 'indicators_obj_name' => $this->get_obj_name_indicators()]);
 	}
 
 	
@@ -56,7 +63,7 @@ class ChartsMapController extends AdminController
         'height' => 300));  
 			$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 			$objWriter->save('charts/'.$file_name.'.docx');
-			$url = asset('charts/'.$file_name.'.docx?fileExportToWord=1');
+			$url = asset('charts/'.$file_name.'.docx?fileWord=1');
 			unlink('charts/'.$file_name.'.png');
 			return $url;
 		}
