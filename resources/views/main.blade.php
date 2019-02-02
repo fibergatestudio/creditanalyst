@@ -41,19 +41,19 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">О нас  <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#">@lang('main.О нас')<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Условия  использования</a>
+                                <a class="nav-link" href="#">@lang('main.Условия  использования')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Часто задаваемые вопросы</a>
+                                <a class="nav-link" href="#">@lang('main.Часто задаваемые вопросы')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Обратная  связь</a>
+                                <a class="nav-link" href="#">@lang('main.Обратная  связь')</a>
                             </li>
                             <a href="{{ url('login') }}">
-                                <button class="btn">Вход</button>
+                                <button class="btn">@lang('main.Вход')</button>
                             </a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +61,6 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">EN</a>
-                                    <a class="dropdown-item" href="#">UKR</a>
                                 </div>
                             </li>
                         </ul>
@@ -76,10 +75,10 @@
                         <div class="row justify-content-end">
                             <div class="col-md-7">
                                 <div class="header-content">
-                                    <strong>Дескриптор - главный заголовок лендинга,</strong>
-                                    <h1>Который понятным языком</h1>
-                                    <p>коротко объяснит суть сайта или приложения</p>
-                                    <button type="button" href="#" class="btn">Оставить заявку</button>
+                                    <strong>@lang('main.Дескриптор - главный заголовок лендинга,')</strong>
+                                    <h1>@lang('main.Который понятным языком')</h1>
+                                    <p>@lang('main.коротко объяснит суть сайта или приложения')</p>
+                                    <button type="button" href="#" class="btn">@lang('main.Оставить заявку')</button>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +95,7 @@
                     <div class="row flex-column-reverse flex-lg-row">
                         <div class="col-lg-5">
                             <div class="section-text">
-                                <h2>О Приложении</h2>
+                                <h2>@lang('main.О Приложении')</h2>
                                 <p>Lorem ipsum dolor sit amet. Takimata facilisis dolor. Vero ea at. Lobortis zzril delenit at quis eum accumsan takimata. Erat lobortis ut lobortis dolores vero eos. Sed dolor delenit commodo. Justo magna duis labore ea sit. Luptatum aliquyam eu kasd magna odio. Sadipscing ut labore facilisis sit nibh.</p>
                                 <p>Iriure ea sed. Elit et dolor amet. Vero ea soluta. Ipsum clita takimata. Sea autem cum sed. Tempor ullamcorper lorem invidunt takimata justo. Sea nibh exerci no nisl. Nonumy magna duo at stet. Possim et eos diam illum ipsum duo.
                                 Iriure ea sed. Elit et dolor amet. Vero ea soluta. Ipsum clita takimata. Sea autem cum sed. Tempor ullamcorper lorem invidunt takimata justo. </p>
@@ -116,7 +115,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-title">преимущества</h2>
+                            <h2 class="section-title">@lang('main.преимущества')</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -130,29 +129,29 @@
                         <div class="col-lg-3 col-6">
                             <div class="col-content text-center">
                                 <img src="img/icon/section-icon-1.png" alt="">
-                                <p>Все нужные данные</br>
-                                под рукой</p>
+                                <p>@lang('main.Все нужные данные')</br>
+                                @lang('main.под рукой')</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6">
                             <div class="col-content text-center">
                                 <img src="img/icon/section-icon-2.png" alt="">
-                                <p>Новая информация</br>
-                                сразу доступна</p>
+                                <p>@lang('main.Новая информация')</br>
+                                @lang('main.сразу доступна')</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6">
                             <div class="col-content col-content-bt text-center">
                                 <img src="img/icon/section-icon-3.png" alt="">
-                                <p>Удобные инструменты</br>
-                                для мониторинга и анализа</p>
+                                <p>@lang('main.Удобные инструменты')</br>
+                                @lang('main.для мониторинга и анализа')</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6">
                             <div class="col-content col-content-bt text-center">
                                 <img src="img/icon/section-icon-4.png" alt="">
-                                <p>Оптимизация бизнес</br>
-                                процессов</p>
+                                <p>@lang('main.Оптимизация бизнес')</br>
+                                @lang('main.процессов')</p>
                             </div>
                         </div>
                     </div>
@@ -165,7 +164,7 @@
                     <div class="row flex-column-reverse flex-lg-row">
                         <div class="col-lg-6">
                             <div class="section-text">
-                                <h2>Условия использования</h2>
+                                <h2>@lang('main.Условия использования')</h2>
                                 <p>Lorem ipsum dolor sit amet. Takimata facilisis dolor. Vero ea at. Lobortis zzril delenit at quis eum accumsan takimata. Erat lobortis ut lobortis dolores vero eos. Sed dolor delenit commodo. Justo magna duis labore ea sit. Luptatum aliquyam eu kasd magna odio. Sadipscing ut labore facilisis sit nibh.</p>
                                 <p>Iriure ea sed. Elit et dolor amet. Vero ea soluta. Ipsum clita takimata. Sea autem cum sed. Tempor ullamcorper lorem invidunt takimata justo. Sea nibh exerci no nisl. Nonumy magna duo at stet. Possim et eos diam illum ipsum duo.
                                 Iriure ea sed. Elit et dolor amet. Vero ea soluta. Ipsum clita takimata. Sea autem cum sed. Tempor ullamcorper lorem invidunt takimata justo. </p>
@@ -185,37 +184,37 @@
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-title section-title-sm">Как начать?</h2>
+                            <h2 class="section-title section-title-sm">@lang('main.Как начать?')</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-3 col-sm-6">
                             <div class="col-content col-content-sm">
-                                <strong><span>01</span> Заголовок шага</strong>
+                                <strong><span>01</span> @lang('main.Заголовок шага')</strong>
                                 <p>Lorem ipsum dolor sit amet. Labore dolore diam dolore vero. Ipsum suscipit tempor nonummy</p>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
                             <div class="col-content col-content-sm">
-                                <strong><span>02</span> Заголовок шага</strong>
+                                <strong><span>02</span>@lang('main.Заголовок шага')</strong>
                                 <p>Lorem ipsum dolor sit amet. Labore dolore diam dolore vero. Ipsum suscipit tempor nonummy</p>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
                             <div class="col-content col-content-sm">
-                                <strong><span>03</span> Заголовок шага</strong>
+                                <strong><span>03</span> @lang('main.Заголовок шага')</strong>
                                 <p>Lorem ipsum dolor sit amet. Labore dolore diam dolore vero. Ipsum suscipit tempor nonummy</p>
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
                             <div class="col-content col-content-sm">
-                                <strong><span>04</span> Заголовок шага</strong>
+                                <strong><span>04</span> @lang('main.Заголовок шага')</strong>
                                 <p>Lorem ipsum dolor sit amet. Labore dolore diam dolore vero. Ipsum suscipit tempor nonummy</p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-center"><button type="button" class="btn">Оставить заявку</button></div>
+                        <div class="col text-center"><button type="button" class="btn">@lang('main.Оставить заявку')</button></div>
                     </div>
                 </div>
             </div>
@@ -225,7 +224,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-title section-title-sm">Отзывы</h2>
+                            <h2 class="section-title section-title-sm">@lang('main.Отзывы')</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -239,7 +238,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="rev-log">
-                                                    <p>Login_random <span>(24.05.2018)</span></p>
+                                                    <p>@lang('main.Логин') <span>(24.05.2018)</span></p>
                                                 </div>
                                                 <div class="rev-star">
                                                     <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
@@ -261,7 +260,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="rev-log">
-                                                    <p>Login_random <span>(24.05.2018)</span></p>
+                                                    <p>@lang('main.Логин')<span>(24.05.2018)</span></p>
                                                 </div>
                                                 <div class="rev-star">
                                                     <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
@@ -283,7 +282,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="rev-log">
-                                                    <p>Login_random <span>(24.05.2018)</span></p>
+                                                    <p>@lang('main.Логин')<span>(24.05.2018)</span></p>
                                                 </div>
                                                 <div class="rev-star">
                                                     <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
@@ -305,7 +304,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="rev-log">
-                                                    <p>Login_random <span>(24.05.2018)</span></p>
+                                                    <p>@lang('main.Логин')<span>(24.05.2018)</span></p>
                                                 </div>
                                                 <div class="rev-star">
                                                     <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
@@ -327,7 +326,7 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="rev-log">
-                                                    <p>Login_random <span>(24.05.2018)</span></p>
+                                                    <p>@lang('main.Логин')<span>(24.05.2018)</span></p>
                                                 </div>
                                                 <div class="rev-star">
                                                     <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
@@ -345,7 +344,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-center"><a href="#" class="lorem-link">Читать все отзывы...</a></div>
+                        <div class="col text-center"><a href="#" class="lorem-link">@lang('main.Читать все отзывы...')</a></div>
                     </div>
                 </div>
             </div>
@@ -355,7 +354,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-title">Часто задаваемые вопросы</h2>
+                            <h2 class="section-title">@lang('main.Часто задаваемые вопросы')</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -367,7 +366,7 @@
                                             <div class="card-header" id="headingOne">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -382,7 +381,7 @@
                                             <div class="card-header" id="headingTwo">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                        Как долго действует контракт?
+                                                        @lang('main.Как долго действует контракт?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -396,7 +395,7 @@
                                             <div class="card-header" id="headingThree">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -410,7 +409,7 @@
                                             <div class="card-header" id="headingFor">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFor" aria-expanded="false" aria-controls="collapseFor">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -428,7 +427,7 @@
                                             <div class="card-header" id="heading1">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -443,7 +442,7 @@
                                             <div class="card-header" id="heading2">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                                        Как долго действует контракт?
+                                                        @lang('main.Как долго действует контракт?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -457,7 +456,7 @@
                                             <div class="card-header" id="heading3">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -471,7 +470,7 @@
                                             <div class="card-header" id="heading4">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                                        Заголовок часто задаваемого вопроса?
+                                                        @lang('main.Заголовок часто задаваемого вопроса?')
                                                     </button>
                                                 </h5>
                                             </div>
@@ -493,8 +492,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <h2 class="section-title">Остались вопросы?</h2>
-                        <strong class="section-title__text">Спросите, используя форму обратной связи!</strong>
+                        <h2 class="section-title">@lang('main.Остались вопросы?')</h2>
+                        <strong class="section-title__text">@lang('main.Спросите, используя форму обратной связи!')</strong>
                     </div>
                 </div>
                 <div class="row">
@@ -502,18 +501,18 @@
                         <form action="">
                             <div class="form-group">
                                 <div class="input-section__item">
-                                    <label for="name-form">Имя:</label>
+                                    <label for="name-form">@lang('main.Имя:')</label>
                                     <input id="name-form" type="text" name="name" placeholder="Имя">
                                 </div>
                                 <div class="input-section__item">
-                                    <label for="mail-form">E-mail:</label>
+                                    <label for="mail-form">@lang('main.E-mail:')</label>
                                     <input id="mail-form" type="text" name="mail" placeholder="E-mail:">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <textarea name="message" id="" cols="30" rows="10" placeholder="Текст сообщения"></textarea>
                             </div>
-                            <button class="btn">Отправить</button>
+                            <button class="btn">@lang('main.Отправить')</button>
                         </form>
                     </div>
                 </div>

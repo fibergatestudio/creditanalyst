@@ -99,7 +99,7 @@
         <div class="col col-md-12">
             <div class="card map">
                 <div class="card-header">
-                    <h4>Ukraine</h4>
+                    <h4>@lang('map_for_save.Украина')</h4>
                 </div>
                 <div class="Vector-map-js">
                     <div id="save-marker-labels">

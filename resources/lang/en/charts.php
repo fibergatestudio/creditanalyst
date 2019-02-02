@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Для теста представлены все показатели, кроме бананов' => 'All the index is provided for test, except bananas',
+    'Для теста представлены все показатели, кроме бананов' => 'All the index is provided for the test, except bananas',
     'Добавить индикатор' => 'Add an indicator',
     'Построить график' => 'Create a chart',
     'Сохранить' => 'Save',
@@ -11,5 +11,5 @@ return [
     'Период:' => 'Period:',
     'Введите поисковый запрос' => 'Enter your search query',
     'График 1' => 'Chart 1',
-
+    'Мой график' => 'My chart',
 ];

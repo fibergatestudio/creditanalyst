@@ -3,8 +3,8 @@
 @section('content')
 <section id="newusers" class="section-content">
         <div class="content-title">
-            <h2 class="name-menu">Новый пользователь</h2>
-            <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+            <h2 class="name-menu">@lang('user_management.Новый пользователь')</h2>
+            <a href="{{ url('user_logout') }}" class="exit">@lang('user_management.Выйти')</a>
         </div>
         <div class="content-grid">
             <div class="card card-fluid">
@@ -12,48 +12,42 @@
                     <div class="title-block">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/admin_user_management/index') }}">Кабинет администратора</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Новый пользователь</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/admin_user_management/index') }}">@lang('user_management.Кабинет администратора')</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">@lang('user_management.Новый пользователь')</li>
                             </ol>
                         </nav>
-                        @role('app-admin')
-                        <a href="{{ url('/admin_user_management/show_room/'.$room_id) }}" class="text button-back">Назад</a>
-                        @endrole
-                        @role('admin')
-                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a>
-                        @endrole
-                    </div>
+                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">@lang('user_management.Назад')</a></div>
                     <div class="row">
                         <div class="col-md-6">
                             {{-- Форма добавления пользователя --}}
-                            <form class="card-form" method="POST" action="{{ url('admin_user_management/create_user/'.$room_id) }}">
+                            <form class="card-form" method="POST" action="{{ url('admin_user_management/create_user') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-md-12">E-mail:</label>
                                     <div class="input-group">
-                                        <input name="login" type="text" class="form-control col-md-6"  placeholder="" required>
-                                        <input name="email" type="text" class="form-control col-md-6"  placeholder="" required value="{{ $domain }}" disabled="disabled">
+                                        <input name="email" type="email" class="form-control col-md-12"  placeholder="" required>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-12">Пароль:</label>
+                                    <label class="col-md-12">@lang('user_management.Пароль:')</label>
                                     <div class="input-group">
                                         <input name="password" type="password" class="form-control col-md-12"  placeholder="" required>
                                         
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-12">Имя:</label>
+                                    <label class="col-md-12">@lang('user_management.Имя:')</label>
                                     <input name="first_name" type="text" class="form-control col-md-12"  placeholder=""  required>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-12">Фамилия:</label>
+                                    <label class="col-md-12">@lang('user_management.Фамилия:')</label>
                                     <input name="last_name" type="text" class="form-control col-md-12"  placeholder=""  required>
                                 </div>
                                 <div class="from-group row">
                                     <div class="block-new-user">
-                                        <button class="btn btn-success" type="submit">Добавить</button>
-                                        {{-- <span class="icon italic icon-italic done-new-user">пользователь добавлен!</span> --}}
+                                        <button class="btn btn-success" type="submit">@lang('user_management.Добавить')</button>
+                                        {{-- <span class="icon italic icon-italic done-new-user">@lang('user_management.пользователь добавлен!')</span> --}}
                                     </div>
                                 </div>
                             </form>
