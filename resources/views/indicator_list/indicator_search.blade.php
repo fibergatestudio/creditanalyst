@@ -91,7 +91,7 @@ App::setLocale(Auth::user()->preferred_language);
                             @lang('indicator_search.По вашему запросу, к сожалению, ничего не найдено') 
                         <div class="content-row results-bottom col-md-12">    
                             <div class="content-row col-md-6">
-                                <a href="#" class="not-result"  data-toggle="modal" data-target="#exampleModal2">
+                                <a href="#" class="not-result"  data-toggle="modal" data-target="#notFoundModal2">
                                     Не нашли то, что искали? 
                                 </a>
                             </div>
@@ -114,10 +114,12 @@ App::setLocale(Auth::user()->preferred_language);
                     {{-- Добавить заход денег : Форма и модальное окно --}}
                     <form action="{{ url('/indicator_search/send_message') }}" method="POST">
                         @csrf
-
+                        
                         <div class="modal fade" id="notFoundModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
+                                
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -177,7 +179,7 @@ App::setLocale(Auth::user()->preferred_language);
                             
                             @endif
                         </div>
-                        <div class="content-row results-bottom col-md-12">
+                        <!-- <div class="content-row results-bottom col-md-12">
                             {{-- Не нашли что искали с модальным окном  --}}  
                             <div class="content-row col-md-6">
                                 

@@ -108,12 +108,13 @@ class IndicatorListController extends Controller
     */
 
     public function send_message(Request $request){
-
+        
         $newmessage = new Empty_requests();
         $newmessage->message = $request->message;
         $newmessage->email = $request->email;
         $newmessage->save();
 
-        return back();
+        /* return back(); */
+        return redirect('indicator_search');
     }
 }
