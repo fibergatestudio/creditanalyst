@@ -1,7 +1,7 @@
 <header class="header">
         <img src="{{ url('mercurial/images/logo.png') }}" class="logo" alt="logo">        
              {{-- Форма поиска (Поиск в шапке несет такуюже функцию как поиск данных)--}}
-            <form class="form-inline form-search" method="GET" action="{{ url('indicator_search') }} ">
+            <form class="form-inline form-search" method="POST" action="{{ url('indicator_search_post') }} ">
              @csrf
                 <div class="input-group mb-3">
                     <input type="text" class="form-control typeahead input-lg" placeholder="@lang('indicator_search.Введите поисковый запрос')" name="search_query" style="width: 500px">
