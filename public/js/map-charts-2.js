@@ -5,6 +5,7 @@ if (Object.keys(parseUrlQuery()).length != 0) {
     var fileName = '';
     var numberIndicator = '';
     var idIndicatorArr = [];
+    var indicatorId = '';
 
     for (key in markerObj) {
         if (key == 'fileName') {
@@ -12,6 +13,9 @@ if (Object.keys(parseUrlQuery()).length != 0) {
         }
         else if (key == 'indicator') {
             numberIndicator = markerObj[key];
+        }
+        else if (key == 'indicatorId') {
+            indicatorId = markerObj[key];
         }
         else if (key.slice(0, -1) == 'indicator') {
             idIndicatorArr.push(parseInt(markerObj[key]));
@@ -26,7 +30,7 @@ if (Object.keys(parseUrlQuery()).length != 0) {
         var colors = {};
 
         for (key in markerObj){
-            if (key !== 'fileName' && key !== 'indicator' && key !== 'fileExport' && key !== 'fileExportToWord'){
+            if (key !== 'fileName' && key !== 'indicator' && key !== 'fileExport' && key !== 'fileExportToWord' && key !== 'indicatorId'){
                 colors[key.slice(1)] = '#'+ markerObj[key];
             }
         }
@@ -74,6 +78,10 @@ if (Object.keys(parseUrlQuery()).length != 0) {
             }
         } );
     }
+
+    //Выводим название индикатора
+    $('.marker-color-one div:last-child').text(indicatorsObjName[indicatorId]);
+    console.log(indicatorsObjName[indicatorId]);
 
     fullMap = true;
 

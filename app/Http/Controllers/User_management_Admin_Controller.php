@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
+use App\Mail\UserCreated;
 use App\User;
 use App\UserRoom;
 use DB;
+use Mail;
 
 class User_management_Admin_Controller extends Controller
 {
@@ -60,6 +62,8 @@ class User_management_Admin_Controller extends Controller
         $new_user->role = 'user';
         $new_user->user_room_id = $room_id;
         $new_user->save();
+
+        Mail::to($new_user->email)->send(new UserCreated($new_user, $request->password));
 
         // ? Вернуться на страницу списка пользователей
         return redirect('/admin_user_management/index');

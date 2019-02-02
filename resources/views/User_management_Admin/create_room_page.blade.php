@@ -16,7 +16,8 @@
                                 <li class="breadcrumb-item active" aria-current="page">Новый Кабинет</li>
                             </ol>
                         </nav>
-                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a></div>
+                        <a href="{{ url('/admin_user_management/index') }}" class="text button-back">Назад</a>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             {{-- Форма добавления кабинета --}}

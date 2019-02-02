@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1d382cfec7368400e3996008d34e82f",
+    "content-hash": "6e1ce9414f8b8e884098563f508ba236",
     "packages": [
         {
             "name": "alexusmai/ruslug",
@@ -930,7 +930,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-01-22T15:08:35+00:00"
+            "time": "2019-01-15T15:20:32+00:00"
         },
         {
             "name": "laravel/nexmo-notification-channel",
@@ -1383,7 +1383,7 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2019-01-25T15:01:37+00:00"
+            "time": "2018-11-01T10:33:16+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -1783,7 +1783,7 @@
                 }
             ],
             "description": "PHP Client for using Nexmo's API.",
-            "time": "2019-01-02T09:06:47+00:00"
+            "time": "2018-12-17T10:47:50+00:00"
         },
         {
             "name": "nikic/php-parser",

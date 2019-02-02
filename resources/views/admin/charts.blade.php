@@ -8,7 +8,40 @@ App::setLocale(Auth::user()->preferred_language);
 
 <style type="text/css">
 #searchIndicator, #resultIndicator{
-    width: 500px;
+    width: 600px;
+}
+#indicatorGroup tr th:nth-child(1){
+    width: 20px;
+}
+#indicatorGroup tr th:nth-child(2){
+    width: 30px;
+    background: #3e4550;
+    color: #fff;
+    text-align:center;
+    vertical-align: middle;
+}
+table#indicatorGroup{
+    border-spacing: 0px 11px;
+    border-collapse: separate;
+}
+table#indicatorGroup th{
+    border-top-left-radius:  10px;
+    border-bottom-left-radius:  10px;
+    border-top:none;
+}
+table#indicatorGroup tr td:nth-child(4){
+    border-top-right-radius:  10px;
+    border-bottom-right-radius:  10px;
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td:nth-child(3){
+    background: #f2f2f2;
+}
+table#indicatorGroup tr td{
+    border-top:none;
+}
+#addIndicator{
+    margin-left: 50px;
 }
 #resultIndicator{
     background: #fff;
@@ -20,147 +53,138 @@ App::setLocale(Auth::user()->preferred_language);
     background: #87CEEB;
     cursor: pointer;
 }
-i.fa.fa-window-close-o, i.fa.fa-wrench{
+i.fa.fa-wrench{
     cursor: pointer;
-}    
+}
+div.input-group.mb-3>div.input-group-append>button.btn.btn-outline-secondary{
+    border-left: none;
+    border-top-right-radius:  5px;
+    border-bottom-right-radius:  5px;
+}
+#searchIndicator.form-control:focus, #searchIndicator.form-control{
+    box-shadow: none;
+    border-right: none;
+}
+div.input-group.mb-3:hover button.btn.btn-outline-secondary.add-indicator, div.input-group.mb-3:hover #searchIndicator{
+    border-color: #3e4550;
+}
+#chartName{
+    border-top-right-radius:  5px;
+    border-bottom-right-radius:  5px;
+}
+#saveChart{
+    margin-left: 10px;
+}
+div.animated.fadeIn{
+    margin-top: 20px;
+}
 </style>
 
-<section id="data-sources" class="section-content">
-        <div class="content-title">
-            <h2 class="name-menu">Статистика и анализ</h2>
-            <a href="{{ url('user_logout') }}" class="exit">@lang('sources-index.Выйти')</a>
-        </div>
-        <div class="content-grid">
-            <div class="card card-fluid">
-                <div class="card-body">
-                    <h3 class="title-block"><a style="color: #ffffff6e;">Сохраненные документы</a> / {{ $title }} 
-                        <a href="{{ URL::previous() }}">
-                            <button style="border-color: #f8f9fa3d !important;" class="btn btn-outline-light btn-sm"> Назад</button>
-                        </a>
-                    </h3>
-                    
-                    <div class="card-body card-block">
-                        <div class="row form-group">
-                            <div class="col col-md-12">
-                                <table class="table" id="indicatorGroup"></table>                                       
-                            </div>
-                        </div>
+<section class="section-content">
+    <div class="content-title">
+        <h2 class="name-menu">Статистика и анализ</h2>
+        <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+    </div>
 
-                        <div class="row">
-                            <div class="col-12 col-md-9">
-                                @lang('charts.Для теста представлены все показатели, кроме бананов')
-                                <hr>
-                                <!-- <input type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator">
-                                <i class="fa fa-search"></i> -->
-                            </div>
-                        </div>
-                        <div class="row">
+    <div class="card card-fluid">
+        <div class="card-body">
 
-                            <!-- <div class="col-md-12"> -->
-
-                                <div class="col-md-10">
-                                    <input style="width:100%;" type="text" placeholder=@lang('charts.Введите поисковый запрос') id="searchIndicator" name="searchIndicator" class="form-control">
-                                    <!--<i class="fa fa-search"></i>-->
-                                </div>
-                                <div class="col-md-2">
-                                    <button id="addIndicator"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
-                                </div>
-
-
-                            <!-- </div> -->
-
-                        </div>           
-                        <ul id="resultIndicator"></ul>
-                        <div class="row form-group">
-                            <div class="col-12 col-md-9">
-                            <h5>@lang('charts.Период:')</h5>
-                                <div class="col-md-5">
-                                    <h5>от</h5>
-                                    <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
-                                        @if(isset($months))
-                                        @for($i=0; $i < count($months); $i++)
-                                        <option value="{{$i}}">{{ $months[$i] }}</option>
-                                        @endfor
-                                        @endif
-                                    </select>
-                                    <select name="fromYear" id="fromYear" class="form-control-sm form-control">
-                                        @if(isset($years))
-                                        @for($i=0; $i < count($years); $i++)
-                                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                                        @endfor
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="col-md-5">
-                                    <h5>до</h5>
-                                    <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
-                                        @if(isset($months))
-                                        @for($i=0; $i < count($months); $i++)
-                                        <option value="{{$i}}">{{ $months[$i] }}</option>
-                                        @endfor
-                                        @endif
-                                    </select>
-                                    <select name="untilYear" id="untilYear" class="form-control-sm form-control">
-                                        @if(isset($years))
-                                        @for($i=0; $i < count($years); $i++)
-                                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
-                                        @endfor
-                                        @endif
-                                    </select>
-                                </div>
-                                <div style="    padding-top: 40px;" class="col-md-2">
-                                    <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content mt-3">
-                        <div class="animated fadeIn">
-                            <div class="row">
-                            <div class="col col-md-12">
-                                <div class="input-group">
-                                    <!-- <h5>@lang('charts.Название графика')</h5>-->
-                                    <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
-                                    <div id="save-export" class="input-group-btn">
-                                        <button id="saveChart"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
-                                        <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
-                                        <button id="exportToWordChart"  style="border-color: #84c33d;" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                                    </div>                    
-                                </div>
-                            </div>
-                                <div class="col-lg-12">
-
-                                            <!-- <h4 class="mb-3">myChart </h4>-->
-                                            <canvas id="myChart" width="1200" height="300"></canvas>
-
-                                </div><!-- /# column -->
-                                
-
-                            </div>
-
-                        </div><!-- .animated -->
-                            <!-- <div class="col col-md-12">
-                                <div class="input-group">
-                                    <h5>@lang('charts.Название графика')</h5>
-                                    <input type="text" id="chartName" name="chartName" placeholder=@lang('charts.График 1') class="form-control">
-                                    <div id="save-export" class="input-group-btn">
-                                        <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
-                                        <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
-                                        <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
-                                    </div>                    
-                                </div>
-                            </div>-->
-                        </div>
-                  </div>
+            <div class="title-block">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url('/admin/statistics-analysis') }}">Сохраненные документы</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Создать новый график</li>
+                    </ol>
+                </nav>
+                <a href="{{ url('/admin/statistics-analysis') }}" class="text button-back">Назад</a>
             </div>
-      </div>
-</div><!-- .content -->
 
-<hr>
+            <div class="row form-group">
+                <div class="col col-md-12">
+                    <table class="table" id="indicatorGroup"></table>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    @lang('charts.Для теста представлены все показатели, кроме бананов')
+                    <hr>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary add-indicator" type="button"><span class="icon icon-search"></span></button>
+                        </div>
+                        <button id="addIndicator" class="btn btn-success btn-sm">@lang('charts.Добавить индикатор')</button>
+                    </div>
+
+                </div>
+            </div>
+            <ul id="resultIndicator"></ul>
+            <div class="row form-group">
+                <h5>@lang('charts.Период:')</h5>
+                <div class="col-6 col-md-4">
+                    <h5>от</h5>
+                    <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
+                        @if(isset($months))
+                        @for($i=0; $i < count($months); $i++)
+                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <select name="fromYear" id="fromYear" class="form-control-sm form-control">
+                        @if(isset($years))
+                        @for($i=0; $i < count($years); $i++)
+                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                </div>
+                <div class="col-6 col-md-4">
+                    <h5>до</h5>
+                    <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
+                        @if(isset($months))
+                        @for($i=0; $i < count($months); $i++)
+                        <option value="{{$i}}">{{ $months[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                    <select name="untilYear" id="untilYear" class="form-control-sm form-control">
+                        @if(isset($years))
+                        @for($i=0; $i < count($years); $i++)
+                        <option value="{{$years[$i]}}">{{ $years[$i] }}</option>
+                        @endfor
+                        @endif
+                    </select>
+                </div>
+                <button id="makeChart" class="btn btn-primary btn-sm">@lang('charts.Построить график')</button>
+            </div>
+            <div class="content mt-3">
+                <div class="col col-md-12">
+                    <div class="input-group">
+                        <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
+                        <div id="save-export" class="input-group-btn">
+                            <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
+                            <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
+                            <button id="exportToWordChart" class="btn btn-success btn-sm">@lang('charts.Экспорт в Word')</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animated fadeIn">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <canvas id="myChart" width="1100" height="300"></canvas>
+                        </div><!-- /# column -->
+                    </div>
+                </div><!-- .animated -->
+
+            </div>
+        </div>
+    </div>
+</section>
 
 @endsection
-
-@section('scripts')
 
 <script type="text/javascript">
     var indicatorIdGet = '<?=(isset($_GET['indicator_id']))?$_GET['indicator_id'] : 0 ?>';
@@ -169,380 +193,14 @@ i.fa.fa-window-close-o, i.fa.fa-wrench{
 </script>
 
 <script type="text/javascript">
-        var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
-        filesCharts = JSON.parse(filesCharts);
-        var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
-        filesChartsFull = JSON.parse(filesChartsFull);
-        var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
-        var indicatorsName = '<?=$indicators_name ?>';
-        var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
-        var chartLink = "{{ asset('charts') }}";
-        var rootSite = '<?=URL::to('/')?>';
-    </script>
-
-    {{-- <script src="{{ asset('assets/js/vendor/jquery-2.1.4.min.js') }}"></script> --}}
-    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
-    <!--  Data table -->
-    <script src="{{ asset('assets/js/lib/data-table/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
-
-    <!--  Chart js -->
-    <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('js/line-charts.js') }}"></script>
-
-
-    <!-- Vector-map-->
-    <script src="{{ asset('assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/lib/vector-map/country/jquery.vmap.ukraine.js') }}"></script>
-    <script src="{{ asset('js/map-charts-1.js') }}"></script>
-    <script src="{{ asset('js/map-charts-2.js') }}"></script>
-    <script src="{{ asset('js/map-charts-3.js') }}"></script>
-    <script src="{{ asset('js/map-charts-4.js') }}"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#bootstrap-data-table-export').DataTable();
-
-            $('#bootstrap-data-table_length > label > select > option:nth-child(4)').text('Все');
-
-            if ($('.dataTables_empty').text() == 'No data available in table') {
-                $('.dataTables_empty').text('Нет данных');
-            }
-
-        } );
-
-
-        //Транслитерация
-        function translit(txt){
-            // Символ, на который будут заменяться все спецсимволы
-            var space = '-';
-            // Берем значение из нужного поля и переводим в нижний регистр
-            var text = txt.toLowerCase();
-
-            // Массив для транслитерации
-            var transl = {
-                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh',
-                'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
-                'о': 'o', 'п': 'p', 'р': 'r','с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h',
-                'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'щ': 'sh','ъ': space, 'ы': 'y', 'ь': space, 'э': 'e', 'ю': 'yu', 'я': 'ya',
-                ' ': space, '_': space, '`': space, '~': space, '!': space, '@': space,
-                '#': space, '$': space, '%': space, '^': space, '&': space, '*': space,
-                '(': space, ')': space,'-': space, '\=': space, '+': space, '[': space,
-                ']': space, '\\': space, '|': space, '/': space,'.': space, ',': space,
-                '{': space, '}': space, '\'': space, '"': space, ';': space, ':': space,
-                '?': space, '<': space, '>': space, '№':space
-            }
-
-            var result = '';
-            var curent_sim = '';
-
-            for(i=0; i < text.length; i++) {
-                // Если символ найден в массиве то меняем его
-                if(transl[text[i]] != undefined) {
-                   if(curent_sim != transl[text[i]] || curent_sim != space){
-                       result += transl[text[i]];
-                       curent_sim = transl[text[i]];
-                   }
-               }
-                // Если нет, то оставляем так как есть
-                else {
-                    result += text[i];
-                    curent_sim = text[i];
-                }
-            }
-
-            result = TrimStr(result);
-
-            // Выводим результат
-            return result;
-
-        }
-
-        function TrimStr(s) {
-            s = s.replace(/^-/, '');
-            return s.replace(/-$/, '');
-        }
-
+    var filesCharts = '<?=json_encode($files_charts,JSON_UNESCAPED_UNICODE) ?>';
+    filesCharts = JSON.parse(filesCharts);
+    var filesChartsFull = '<?=json_encode($files_charts_full,JSON_UNESCAPED_UNICODE) ?>';
+    filesChartsFull = JSON.parse(filesChartsFull);
+    var months = '<?=json_encode($months,JSON_UNESCAPED_UNICODE) ?>';
+    var indicatorsName = '<?=$indicators_name ?>';
+    var indicators = '<?=json_encode($indicators_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var data = '<?=json_encode($data_obj,JSON_UNESCAPED_UNICODE) ?>';
+    var chartLink = "{{ asset('charts') }}";
+    var rootSite = '<?=URL::to('/')?>';
 </script>
-
-<script type="text/javascript">
-        /*
-        * Сохранение графика
-        */
-
-        $('#saveChart').click(function (){
-            $('.chart-save').prop( "disabled" , true );
-            var fileName = translit($('#chartName').val());
-            if (fileName) {
-                if (filesCharts.indexOf(fileName) !== -1){
-                    alert("Файл с таким именем уже существует!");
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fileName.indexOf('.') !== -1){
-                    alert('Недопустимый символ "." в имени файла!');
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fullChart) {
-                    var canvas = document.getElementById('myChart');
-                    var img = canvas.toDataURL();
-                    $.ajax({
-                        url: "{{ route('chartsSave') }}",
-                        type: "POST",
-                        data: {img:img, fileName:fileName},
-                        headers: {
-                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (data) {
-                            alert(data);
-                            filesCharts.push(fileName);
-                            $('.chart-save').prop( "disabled" , false );
-                        },
-                        error: function (msg) {
-                            alert('Ошибка');
-                            $('.chart-save').prop( "disabled" , false );
-                        }
-                    });
-                }
-                else if(fullMap){
-                    if (indicatorsAddArr.length == 1) {
-                        document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
-                    }
-                    else{
-                        $.ajax({
-                            url: "{{ route('mapForSave') }}",
-                            type: "POST",
-                            data: {getString:getString, fileName:fileName},
-                            headers: {
-                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function (data) {
-                                console.log(data);
-                                document.location.href = rootSite+"/map_for_save?fileName="+fileName+"&"+getString;
-                            },
-                            error: function (msg) {
-                                alert('Ошибка admin');
-                                $('.chart-save').prop( "disabled" , false );
-                            }
-                        });
-                    }
-                }
-                else{
-                    alert("Постройте график!");
-                    $('.chart-save').prop( "disabled" , false );
-                }
-            }
-            else{
-                alert("Введите название графика!");
-                $('.chart-save').prop( "disabled" , false );
-            }
-        });
-
-
-        /*
-        * Экспорт графика
-        */
-
-        $('#exportChart').click(function (){
-            $('.chart-save').prop( "disabled" , true );
-            var fileName = translit($('#chartName').val());
-            var fileExport = true;
-            if (fileName) {
-                if (filesCharts.indexOf(fileName) !== -1){
-                    alert("Файл с таким именем уже существует!");
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fileName.indexOf('.') !== -1){
-                    alert('Недопустимый символ "." в имени файла!');
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fullChart) {
-                    var canvas = document.getElementById('myChart');
-                    var img = canvas.toDataURL();
-                    $.ajax({
-                        url: "{{ route('chartsSave') }}",
-                        type: "POST",
-                        data: {img:img, fileName:fileName, fileExport:fileExport},
-                        headers: {
-                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (data) {
-                            alert('Файл сохранен в '+ data);
-                            var link = document.createElement('a');
-                            link.setAttribute('href',data);
-                            link.setAttribute('download',fileName +'.png');
-                            $('#exportChart').after(link);
-                            link.click();
-                            filesCharts.push(fileName);
-                            $('.chart-save').prop( "disabled" , false );
-                        },
-                        error: function (msg) {
-                            alert('Ошибка');
-                            $('.chart-save').prop( "disabled" , false );
-                        }
-                    });
-                }
-                else if(fullMap){
-                    if (indicatorsAddArr.length == 1) {
-                        document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
-                    }
-                    else{
-                        $.ajax({
-                            url: "{{ route('mapForSave') }}",
-                            type: "POST",
-                            data: {getString:getString, fileName:fileName},
-                            headers: {
-                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function (data) {
-                                console.log(data);
-                                document.location.href = rootSite+"/map_for_save?fileExport=1&fileName="+fileName+"&"+getString;
-                            },
-                            error: function (msg) {
-                                alert('Ошибка admin');
-                                $('.chart-save').prop( "disabled" , false );
-                            }
-                        });
-                    }
-                }
-                else{
-                    alert("Постройте график!");
-                    $('.chart-save').prop( "disabled" , false );
-                }
-            }
-            else{
-                alert("Введите название графика!");
-                $('.chart-save').prop( "disabled" , false );
-            }
-        });
-
-
-        /*
-        * Экспорт графика в Word
-        */
-
-        $('#exportToWordChart').click(function (){
-            $('.chart-save').prop( "disabled" , true );
-            var fileName = translit($('#chartName').val());
-            var fileExportToWord = true;
-            if (fileName) {
-                if (filesCharts.indexOf(fileName) !== -1){
-                    alert("Файл с таким именем уже существует!");
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fileName.indexOf('.') !== -1){
-                    alert('Недопустимый символ "." в имени файла!');
-                    $('.chart-save').prop( "disabled" , false );
-                    return 0;
-                }
-                if (fullChart) {
-                    var canvas = document.getElementById('myChart');
-                    var img = canvas.toDataURL();
-                    $.ajax({
-                        url: "{{ route('chartsSave') }}",
-                        type: "POST",
-                        data: {img:img, fileName:fileName, fileExportToWord:fileExportToWord},
-                        headers: {
-                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (data) {
-                            alert('Файл сохранен в '+ data);
-                            var link = document.createElement('a');
-                            link.setAttribute('href',data);
-                            link.setAttribute('download',fileName +'.docx');
-                            $('#exportToWordChart').after(link);
-                            link.click();
-                            filesCharts.push(fileName);
-                            $('.chart-save').prop( "disabled" , false );
-                        },
-                        error: function (msg) {
-                            alert('Ошибка');
-                            $('.chart-save').prop( "disabled" , false );
-                        }
-                    });
-                }
-                else if(fullMap){
-                    if (indicatorsAddArr.length == 1) {
-                        document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
-                    }
-                    else{
-                        $.ajax({
-                            url: "{{ route('mapForSave') }}",
-                            type: "POST",
-                            data: {getString:getString, fileName:fileName},
-                            headers: {
-                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function (data) {
-                                console.log(data);
-                                document.location.href = rootSite+"/map_for_save?fileExportToWord=1&fileName="+fileName+"&"+getString;
-                            },
-                            error: function (msg) {
-                                alert('Ошибка admin');
-                                $('.chart-save').prop( "disabled" , false );
-                            }
-                        });
-                    }
-                }
-                else{
-                    alert("Постройте график!");
-                    $('.chart-save').prop( "disabled" , false );
-                }
-            }
-            else{
-                alert("Введите название графика!");
-                $('.chart-save').prop( "disabled" , false );
-            }
-        });
-
-
-        /*
-        * Удаление сохраненных графиков
-        */
-
-        function removeChart(element) {
-            if (confirm("Вы действительно хотите удалить эти данные ?")){
-                var fileName = filesChartsFull[element.getAttribute('data-id')];
-                $.ajax({
-                    url: "{{ route('statisticsAnalysisDestroy') }}",
-                    type: "POST",
-                    data: {fileName:fileName},
-                    headers: {
-                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (data) {
-                        alert('Файл "'+data+'" успешно удален !');
-                        element.parentElement.remove();
-                    },
-                    error: function (msg) {
-                        alert('Ошибка');
-                    }
-                });
-            }
-        }
-
-    </script>
-
-
-
-
-    <script type="text/javascript">
-    //Посмотреть график
-    function watchChart(element) {
-        var fileName = filesChartsFull[element.getAttribute('data-id')];
-        document.location.href = chartLink + '/' + fileName;
-    }
-    </script>
-
-    
-
-
-@endsection
