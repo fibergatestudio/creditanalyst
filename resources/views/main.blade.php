@@ -33,7 +33,7 @@
         <section>
             <div class="container-fluid">
                 <nav class="navbar navbar-expand">
-                    <a class="navbar-brand" href="{{ route('main') }}"><img src="img/logo-top.png" alt="logo"></a>
+                    <a class="navbar-brand" href="#"><img src="img/logo-top.png" alt="logo"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -41,16 +41,16 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ trans('app.Aboutus') }}">О нас  <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#">О нас  <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ trans('app.PrivasyPolicy') }}">Условия  использования</a>
+                                <a class="nav-link" href="#">Условия  использования</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ trans('app.FAQ') }}">Часто задаваемые вопросы</a>
+                                <a class="nav-link" href="#">Часто задаваемые вопросы</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ trans('app.Feedback') }}">Обратная  связь</a>
+                                <a class="nav-link" href="#">Обратная  связь</a>
                             </li>
                             <a href="{{ url('login') }}">
                                 <button class="btn">Вход</button>

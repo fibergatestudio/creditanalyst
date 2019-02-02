@@ -3,14 +3,14 @@
 */
 
 $("#makeChartMap").click(function() {
-
+    
     //Если у нас больше 1 индикатора
     if(indicatorsAddArr.length > 1){
 
         //Выводим карту
         $( '#myChartMap' ).vectorMap( {
             map: 'ukraine_merc_en',
-            pins: {
+            pins: { 
                 "1" : "\u003cdiv class=\"map-content\"\u003eЧеркасская\u003c/div\u003e\u003ccanvas id=\"marker-1\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "2" : "\u003cdiv class=\"map-content\"\u003eЧерниговская\u003c/div\u003e\u003ccanvas id=\"marker-2\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "3" : "\u003cdiv class=\"map-content\"\u003eЧерновецкая\u003c/div\u003e\u003ccanvas id=\"marker-3\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
@@ -19,7 +19,7 @@ $("#makeChartMap").click(function() {
                 "6" : "\u003cdiv class=\"map-content\"\u003eДонецкая\u003c/div\u003e\u003ccanvas id=\"marker-6\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "7" : "\u003cdiv class=\"map-content\"\u003eИвано-Франковская\u003c/div\u003e\u003ccanvas id=\"marker-7\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "8" : "\u003cdiv class=\"map-content\"\u003eХарьковская\u003c/div\u003e\u003ccanvas id=\"marker-8\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
-                "9" : "\u003cdiv class=\"map-content\"\u003eХерсонская\u003c/div\u003e\u003ccanvas id=\"marker-9\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
+                "9" : "\u003cdiv class=\"map-content\"\u003eХерсонская\u003c/div\u003e\u003ccanvas id=\"marker-9\" class=\"marker-map\"\u003e\u003c/canvas\u003e",        
                 "10" : "\u003cdiv class=\"map-content\"\u003eХмельницкая\u003c/div\u003e\u003ccanvas id=\"marker-10\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "12" : "\u003cdiv class=\"map-content\"\u003eКиевская\u003c/div\u003e\u003ccanvas id=\"marker-11\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "13" : "\u003cdiv class=\"map-content\"\u003eКировоградская\u003c/div\u003e\u003ccanvas id=\"marker-12\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
@@ -35,25 +35,24 @@ $("#makeChartMap").click(function() {
                 "24" : "\u003cdiv class=\"map-content\"\u003eВинницкая\u003c/div\u003e\u003ccanvas id=\"marker-22\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "25" : "\u003cdiv class=\"map-content\"\u003eВолынская\u003c/div\u003e\u003ccanvas id=\"marker-23\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
                 "26" : "\u003cdiv class=\"map-content\"\u003eЗапорожская\u003c/div\u003e\u003ccanvas id=\"marker-24\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
-                "27" : "\u003cdiv class=\"map-content\"\u003eЖитомирская\u003c/div\u003e\u003ccanvas id=\"marker-25\" class=\"marker-map\"\u003e\u003c/canvas\u003e",
+                "27" : "\u003cdiv class=\"map-content\"\u003eЖитомирская\u003c/div\u003e\u003ccanvas id=\"marker-25\" class=\"marker-map\"\u003e\u003c/canvas\u003e",         
             },
             pinMode: 'content',
             color: '#00a8ff',
             borderColor: 'yellow',
-            backgroundColor: 'yellow',
+            backgroundColor: 'yellow',    
             enableZoom: false,
             showTooltip: false,
             selectedColor: null,
-            hoverColor: null,
-            onRegionClick: function ( event, code, region ) {
+            hoverColor: null,   
+            onRegionClick: function ( event, code, region ) {      
                 event.preventDefault();
             }
-        } );
-        //Если у нас больше 1 индикатора
-        if(indicatorsAddArr.length > 1){
-        //Cоздаем объект данных согласно индикаторам
+        } ); 
 
-        //выбираем нужные данные из объекта dataObj в массив datasetsArr
+        //Cоздаем объект данных согласно индикаторам
+        
+        //выбираем нужные данные из объекта dataObj в массив datasetsArr          
         for (var j = 0; j < indicatorsAddArr.length; j++) {
 
             for (var k = 0; k < indicatorsObj.length; k++) {
@@ -80,9 +79,9 @@ $("#makeChartMap").click(function() {
                             tempArr.push(temp);
                         }
                     }
-                    datasetsArr.push(tempArr);
-                }
-            }
+                    datasetsArr.push(tempArr);                    
+                }            
+            }    
         }
 
         //формируем строку для передачи на страницу сохранения графика
@@ -96,9 +95,9 @@ $("#makeChartMap").click(function() {
                         getString += '&indicator'+i+'='+indicatorsObj[j].id;
                     }
                 }
-            }
+            }            
         }
-
+        
         for (var i = 0; i < datasetsArr.length; i++){
             for (var j = 0; j < 25; j++) {
                 getString += '&'+i+'-'+j+'='+datasetsArr[i][j];
@@ -112,7 +111,7 @@ $("#makeChartMap").click(function() {
             var tempBack = [];
             for (var i = 0; i < datasetsArr.length; i++) {
                 tempData.push(datasetsArr[i][j]);
-                tempBack.push(backgroundColorMap[i]);
+                tempBack.push(backgroundColorMap[i]); 
             }
             //переводим данные индикаторов tempData в проценты
             var sum = 0;
@@ -136,14 +135,14 @@ $("#makeChartMap").click(function() {
             }
             datasetsObj.push(tempObj);
         }
-
+        
         var indicatorHtml = '';
 
         //Выводим маркеры индикаторов на карту
         for (var i = 0; i < indicatorsAddArr.length; i++) {
             indicatorHtml += `<div class="marker-color" id="m-color-`+(i+1)+`"></div><div>`+indicatorsAddArr[i]+`</div>`;
         }
-        $("#marker-labels").html(indicatorHtml);
+        $("#marker-labels").html(indicatorHtml);       
 
         //Выводим диаграммы на карту
         for (var i = 1; i < 26; i++) {
@@ -158,10 +157,10 @@ $("#makeChartMap").click(function() {
                 },
                 options: {
                     animation: {
-                        duration: 0,
+                        duration: 0, 
                     },
                     hover: {
-                        animationDuration: 0,
+                        animationDuration: 0, 
                     },
                     responsiveAnimationDuration: 0,
                 }
