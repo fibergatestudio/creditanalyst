@@ -72,7 +72,10 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
     Route::get('/show_notification', 'MonitoringController@show_notification')->middleware('auth');
     Route::get('/user_indicator_watch_list', 'MonitoringController@index');
     Route::get('/add_indicator_to_watch_list/{indicator_id}', 'MonitoringController@add_indicator_to_watch_list')->middleware('auth');
-
+    
+    // Для Вики
+    Route::get('/set_null', 'MonitoringController@set_null');
+    
 	// Удаления индикатора из вотчлиста
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist')->middleware('auth');
 

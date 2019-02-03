@@ -46,34 +46,20 @@ class CronController extends Controller
             }else{                                                              // изменения есть
                 $last_data_entry_id = Dataset::orderBy('id', 'desc')->first();
                 if($notification_watcher->are_instant_notifications_on() === true){  // проверяем когда отправлять уведомление (сразу)
-                    // Выбираем уведомления у которых indicator_id соответствует активным вотчерам                   
-                    
-                        $new_notification = new Notification();
-                        $new_notification->user_id = $notification_watcher->user_id;
-                        $new_notification->indicator_id = $notification_watcher->indicator_id;
-                        $new_notification->seen = 0;
-                        $new_notification->save();
-                                          
+                    $new_notification = new Notification();
+                    $new_notification->user_id = $notification_watcher->user_id;
+                    $new_notification->indicator_id = $notification_watcher->indicator_id;
+                    $new_notification->seen = 0;
+                    $new_notification->save();
                         
-                        
-                        
-                    
-                                               
-                                       
                     }else{                                                      // отправка "раз в сутки", сохраняем т таблицу daily_notification_watch_list
-                        
+                        $new_daily_notification = new Daily_notifications();
+                        $new_daily_notification->user_id = $notification_watcher->user_id;
+                        $new_daily_notification->indicator_id = $notification_watcher->indicator_id;
+                        $new_daily_notification->seen = 0;
+                        $new_daily_notification->save(); 
                                 
-                                    $new_daily_notification = new Daily_notifications();
-                                    $new_daily_notification->user_id = $notification_watcher->user_id;
-                                    $new_daily_notification->indicator_id = $notification_watcher->indicator_id;
-                                    $new_daily_notification->seen = 0;
-                                    $new_daily_notification->save(); 
-                                
-                            }
-                        
-                                
-                    
-                        
+                        }
                         
             }             
                                         

@@ -29,10 +29,15 @@
                 @endif
                 "
                 >
+                
                 <a href="{{ url('/show_notification') }}" class="active">{{ Auth::user()->get_active_notifications_count() }}</a>
+                
             </li>
+            
             <li class="icon icon-user">
                 <a href="#">{{ Auth::user()->email }}</a>
+                @if(Auth::user()->id == 7) <a href="{{ url('/set_null') }}">обнулить</a>
+                @endif
             </li>
         </ul>
         
