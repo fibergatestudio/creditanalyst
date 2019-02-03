@@ -14,14 +14,7 @@
             {{-- Конец формы --}}
 
                   
-        {{--<form class="form-inline form-search">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="@lang('indicator_search.Введите поисковый запрос')">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button"><span class="icon icon-search"></span></button>
-                </div>
-            </div>
-        </form>--}}
+        
         <ul class="block-right">
             @if(Auth::user()->isAdmin())
                 <li class="icon icon-admin">
@@ -36,7 +29,7 @@
                 @endif
                 "
                 >
-                <a href="#" class="active">{{ Auth::user()->get_active_notifications_count() }}</a>
+                <a href="{{ url('/show_notification') }}" class="active">{{ Auth::user()->get_active_notifications_count() }}</a>
             </li>
             <li class="icon icon-user">
                 <a href="#">{{ Auth::user()->email }}</a>

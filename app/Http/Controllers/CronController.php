@@ -7,11 +7,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\CronData;
 use App\Indicator;
-use App\Indicator_watcher;
+use App\IndicatorWatcher;
 use App\Dataset;
 use App\Notification;
+use App\Daily_notifications;
 
 class CronController extends Controller
 {
@@ -21,7 +24,6 @@ class CronController extends Controller
     * Функция, которая отвечает за рассылку уведомлений пользователям
     */
     public function notification_pusher(){
-
 
         // Получаем список всех активных вотчеров с включенными уведомлениями (notify = 1) для всех пользователей
         $active_notification_watchers = IndicatorWatcher::where('notify', 1)->get();
@@ -37,31 +39,53 @@ class CronController extends Controller
                     ['id', '>', $last_processed_id]
                 ])
                 ->count();
-
+            
             // Если есть новые данные, нужно задать для них уведомления
-            if($new_data_count > 0){
-                // Выбираем уведомления у которых indicator_id соответствует активным вотчерам
-                $seen_notifications = Notification::where('indicator_id', $notification_watcher->indicator_id)->where()->get(); // находим уведомления у которых (notify == 1)
-                // перебераем  уведомления
-                foreach ($seen_notifications as $seen_notification) {
-                    if($seen_notification->seen == 0){          // проверяем наличие непросмотреноого уведомления
-                        continue;                               // если таковой есть, пропускаем
-                    }else{                                      // если нет то создаем новый
+            if($new_data_count == 0){                                           // если не было изменений
+                $last_data_entry_id = Dataset::orderBy('id', 'desc')->first();                
+            }else{                                                              // изменения есть
+                $last_data_entry_id = Dataset::orderBy('id', 'desc')->first();
+                if($notification_watcher->are_instant_notifications_on() === true){  // проверяем когда отправлять уведомление (сразу)
+                    // Выбираем уведомления у которых indicator_id соответствует активным вотчерам                   
+                    
                         $new_notification = new Notification();
                         $new_notification->user_id = $notification_watcher->user_id;
                         $new_notification->indicator_id = $notification_watcher->indicator_id;
                         $new_notification->seen = 0;
                         $new_notification->save();
-                        }
-                }
-            }
+                                          
+                        
+                        
+                        
+                    
+                                               
+                                       
+                    }else{                                                      // отправка "раз в сутки", сохраняем т таблицу daily_notification_watch_list
+                        
+                                
+                                    $new_daily_notification = new Daily_notifications();
+                                    $new_daily_notification->user_id = $notification_watcher->user_id;
+                                    $new_daily_notification->indicator_id = $notification_watcher->indicator_id;
+                                    $new_daily_notification->seen = 0;
+                                    $new_daily_notification->save(); 
+                                
+                            }
+                        
+                                
+                    
+                        
+                        
+            }             
+                                        
+            
         } // end foreach
 
         //Устанавливаем новый последний отработанный ID
         // !! Раскоментировать, закоменчено для теста
-        CronData::set_last_processed_data_entry_id();
+        CronData::set_last_processed_data_entry_id($last_data_entry_id->id);
+        
 
-
+        /*
         // Получить список всех новых данных, которые "зашли" в систему с прошлого прогона
         // Для этого используются данные об ID последнего проработанного вхождения данных
         $last_processed_id = CronData::get_last_processed_indicator_id();
@@ -101,7 +125,7 @@ class CronController extends Controller
         CronData::set_last_processed_data_entry_id($last_data_entry_id);
 
         // Т.к. этот скрипт отрабатывает по крону, не делаем редирект
-
+        */
     } /* Конец функции */
 
     /* Функция, которая вызывается по крону 1 раз в сутки */
