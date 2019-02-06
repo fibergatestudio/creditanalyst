@@ -119,13 +119,15 @@ class IndicatorListController extends Controller
  
         Mail::to("credit.s.test@i.ua")->queue(new SearchEmail($search_result));
         
+        return redirect('indicator_search');
         
+        // старый код
         /*$newmessage = new Empty_requests();
         $newmessage->message = $request->message;
         $newmessage->email = $request->email;
         $newmessage->save();*/
 
         /* return back(); */
-        return redirect('indicator_search');
+        
     }
 }
