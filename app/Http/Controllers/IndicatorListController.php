@@ -11,6 +11,9 @@ use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Mail\SearchEmail;
+use Mail;
+
 
 class IndicatorListController extends Controller
 {
@@ -109,10 +112,18 @@ class IndicatorListController extends Controller
 
     public function send_message(Request $request){
         
-        $newmessage = new Empty_requests();
+        $search_result = new \stdClass();
+        $search_result->message = $request->message;                            // текст сообщения
+        $search_result->email = $request->email;
+        $search_result->name = $request->name;                                // от кого сообщение                                    
+ 
+        Mail::to("credit.s.test@i.ua")->queue(new SearchEmail($search_result));
+        
+        
+        /*$newmessage = new Empty_requests();
         $newmessage->message = $request->message;
         $newmessage->email = $request->email;
-        $newmessage->save();
+        $newmessage->save();*/
 
         /* return back(); */
         return redirect('indicator_search');

@@ -101,4 +101,5 @@ export default {
         overflow-y: auto;
         transition: opacity .3s ease;
     }
+    
 </style>

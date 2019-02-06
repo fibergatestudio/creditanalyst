@@ -126,8 +126,9 @@ App::setLocale(Auth::user()->preferred_language);
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <input  type="hidden" name="name" value="{{ Auth::user()->name }}">
                                         <div class="form-group">
-                                            <textarea name="message" class="form-control" rows="3" placeholder="Привет! Поиск не дал результатов!" require></textarea>
+                                            <textarea name="message" class="form-control" rows="3" placeholder="" require>Привет! Поиск {{$search_query}} не дал результатов!</textarea>
                                         </div>
                                         <div class="form-group form-radio">
                                             <input class="form-check-input" type="radio" name="email" id="exampleRadios1" value="Анонимно" checked>
