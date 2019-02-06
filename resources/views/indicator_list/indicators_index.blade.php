@@ -52,13 +52,13 @@ App::setLocale(Auth::user()->preferred_language);
                     <tbody>
                       @foreach($indicators as $indicator)
                         <tr>
-                            <td>{{ $indicator->name }}</td>
+                            <td>{{ $indicator->localized_name }}</td>
                             <td>
                                 <div class="actions">
                                     <a href=" {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
                                         <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content=@lang('indicators_index.Добавить показатель в мониторинг')></span>
                                     </a>
-                                    <a href="#" class="icon icon-stat"></a>
+                                    <a href="{{ url("admin/statistics-analysis/charts?indicator_id=" .$indicator->id. "&from=2019-01-01&to=2019-12-31") }}" class="icon icon-stat"></a>
                                     
                                     {{-- Открытие модального окна --}}
                                     {{-- <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a> --}}

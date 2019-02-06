@@ -11,6 +11,7 @@ use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class IndicatorListController extends Controller
 {
@@ -26,6 +27,11 @@ class IndicatorListController extends Controller
             DB::table('indicators')
                 ->where('source_id', $source_id)
                 ->paginate(10);
+
+        foreach ($indicators as $indicator) {
+            $indicator_eloquent = Indicator::find($indicator->id);
+            $indicator->localized_name = $indicator_eloquent->language_name();
+        }        
         
         return view('indicator_list.indicators_index',
             [
@@ -56,8 +62,8 @@ class IndicatorListController extends Controller
             //print_r($results);
 
             foreach($results as $result_entry){
-                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
-                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
+                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->language_procurer();
+                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->language_name();
             }
             
         }
@@ -89,8 +95,8 @@ class IndicatorListController extends Controller
             //print_r($results);
 
             foreach($results as $result_entry){
-                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
-                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
+                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->language_procurer();
+                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->language_name();
             }
             
         }

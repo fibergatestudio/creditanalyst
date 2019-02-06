@@ -47,14 +47,14 @@ class ExportController extends Controller
             'export_dataset' => $export_dataset
         ]);
     }
-
+    //Экспорт данных по показателю
     public function export($infosource_id)
     {
         return Excel::download(new BladeExport($infosource_id), 'export.xlsx');
         
         //return Excel::download(new UsersExport, 'users.xlsx');
     }
-
+    //Экспорт всех данных
     public function export_all()
     {
         return Excel::download(new BladeExportAll(), 'exportall.xlsx'); 

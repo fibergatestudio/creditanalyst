@@ -9,4 +9,7 @@ return [
     'Частота данных' => 'Data frequency',
     'География данных' => 'Data geography',
     'Список показателей' => 'Index list',
+    'Макс. частота данных' => 'Max. data frequency',
+    'Макс. география данных' => 'Max. data geography',
+    'Поставщик' => 'Provider',
 ];
