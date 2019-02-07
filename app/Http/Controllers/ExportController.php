@@ -37,7 +37,7 @@ class ExportController extends Controller
                 'geography_units.name_ru AS geography_unit_name',
                 'frequency_units.name_ru AS frequency_unit_name',
                 'measurement_units.name_ru AS measurement_unit_name',
-                'indicators.name AS indicator_name' 
+                'indicators.name_ru AS indicator_name' 
                     )
             ->orderBy('data.date', 'desc')
             ->get();
