@@ -15,6 +15,7 @@ use App\Dataset;
 use DateTime;
 use DateInterval;
 
+
 class ChartsController extends AdminController
 {
 	
@@ -37,7 +38,14 @@ class ChartsController extends AdminController
 			$obj[$i]['value'] = mt_rand(60, 99)/10;
 			$oStart->add(new DateInterval("P1D"));
 		}
-        */		
+        */	
+        if(Auth::user()->preferred_language == 'ru'){
+			$this->months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		} else if (Auth::user()->preferred_language == 'ua'){
+			$this->months = ['Январь по-украински','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		} else if (Auth::user()->preferred_language == 'en'){
+			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		}	
 				
 		//echo '<pre>'.print_r($files_charts,true).'</pre>';
 						
