@@ -16,11 +16,7 @@ class AddFulltextIndexToIndicators extends Migration
         //Schema::table('indicators', function (Blueprint $table) {
             //
         //});
-        DB::statement('ALTER TABLE indicators ADD FULLTEXT fulltext_index_ru (name_ru)');
-
-        DB::statement('ALTER TABLE indicators ADD FULLTEXT fulltext_index_en (name_en)');
-
-        DB::statement('ALTER TABLE indicators ADD FULLTEXT fulltext_index_ua (name_ua)');
+        DB::statement('ALTER TABLE indicators ADD FULLTEXT fulltext_index (name)');
     }
 
     /**
