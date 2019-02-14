@@ -42,7 +42,7 @@ App::setLocale(Auth::user()->preferred_language);
                                 <div class="from-group row">
                                     <div class="block-new-user">
                                         <button class="btn btn-success" type="submit">@lang('personal_settings_user_index.Сохранить')</button>
-                                        {{-- <span class="icon italic icon-italic done-new-user">пользователь добавлен!</span> --}}
+                                        {{-- <span class="icon italic icon-italic done-new-user">@lang('personal_settings_user_index.пользователь добавлен')!</span> --}}
                                     </div>
                                 </div>
                             </form>

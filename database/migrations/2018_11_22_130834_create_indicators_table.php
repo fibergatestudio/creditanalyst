@@ -35,7 +35,9 @@ class CreateIndicatorsTable extends Migration
     {
         Schema::create('indicators', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); // Название показателя, обязательное поле
+            $table->string('name_ru'); // Название показателя на ру, обязательное поле
+            $table->string('name_en'); // Название показателя на en, обязательное поле
+            $table->string('name_ua'); // Название показателя на en, обязательное поле
             $table->string('frequency'); // Частота показателя - за какой период предоставляется блок данных (месяц, квартал, год, возможно - другие варианты)
             $table->string('geography_unit'); // Географическая единица - территориальная величина, на которую предоставляется один блок данных (район, область, регион, возможны другие варианты)
             $table->string('measurement_unit'); // Единица измерения показателя (кг, тонна, гривны и т.д.)

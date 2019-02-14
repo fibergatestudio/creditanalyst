@@ -82,8 +82,8 @@ div.animated.fadeIn{
 
 <section class="section-content">
     <div class="content-title">
-        <h2 class="name-menu">Статистика и анализ</h2>
-        <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+        <h2 class="name-menu">@lang('charts.Статистика и анализ')</h2>
+        <a href="{{ url('user_logout') }}" class="exit">@lang('charts.Выйти')</a>
     </div>
 
     <div class="card card-fluid">
@@ -92,11 +92,11 @@ div.animated.fadeIn{
             <div class="title-block">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('/admin/statistics-analysis') }}">Сохраненные документы</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Создать новый график</li>
+                        <li class="breadcrumb-item"><a href="{{ url('/admin/statistics-analysis') }}">@lang('charts.Сохраненные документы')</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@lang('charts.Создать новый график')</li>
                     </ol>
                 </nav>
-                <a href="{{ url('/admin/statistics-analysis') }}" class="text button-back">Назад</a>
+                <a href="{{ url('/admin/statistics-analysis') }}" class="text button-back">@lang('charts.Назад')</a>
             </div>
 
             <div class="row form-group">
@@ -111,7 +111,7 @@ div.animated.fadeIn{
                     <hr>
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Введите поисковый запрос" id="searchIndicator" name="searchIndicator">
+                        <input type="text" class="form-control" placeholder="@lang('charts.Введите поисковый запрос')" id="searchIndicator" name="searchIndicator">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary add-indicator" type="button"><span class="icon icon-search"></span></button>
                         </div>
@@ -124,7 +124,7 @@ div.animated.fadeIn{
             <div class="row form-group">
                 <h5>@lang('charts.Период:')</h5>
                 <div class="col-6 col-md-4">
-                    <h5>от</h5>
+                    <h5>@lang('charts.от')</h5>
                     <select name="fromMonth" id="fromMonth" class="form-control-sm form-control">
                         @if(isset($months))
                         @for($i=0; $i < count($months); $i++)
@@ -141,7 +141,7 @@ div.animated.fadeIn{
                     </select>
                 </div>
                 <div class="col-6 col-md-4">
-                    <h5>до</h5>
+                    <h5>@lang('charts.до')</h5>
                     <select name="untilMonth" id="untilMonth" class="form-control-sm form-control">
                         @if(isset($months))
                         @for($i=0; $i < count($months); $i++)
@@ -162,7 +162,7 @@ div.animated.fadeIn{
             <div class="content mt-3">
                 <div class="col col-md-12">
                     <div class="input-group">
-                        <input type="text" id="chartName" name="chartName" placeholder="Название графика" class="form-control">
+                        <input type="text" id="chartName" name="chartName" placeholder="@lang('charts.Название графика')" class="form-control">
                         <div id="save-export" class="input-group-btn">
                             <button id="saveChart" class="btn btn-success btn-sm">@lang('charts.Сохранить')</button>
                             <button id="exportChart" class="btn btn-danger btn-sm">@lang('charts.Экспортировать')</button>
