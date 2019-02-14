@@ -15,12 +15,12 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
 <section class="section-content">
     <div class="content-title">
         <h2 class="name-menu">{{ $title }}</h2>
-        <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
+        <a href="{{ url('user_logout') }}" class="exit">@lang('statistics_analysis.Выйти')</a>
     </div>
 
     <div class="card card-fluid">
         <div class="card-body">
-            <h3 class="title-block">Сохраненные документы</h3>
+            <h3 class="title-block">@lang('statistics_analysis.Сохраненные документы')</h3>
 
             <div class="row form-group">
                 <div class="col col-md-12">
@@ -34,8 +34,8 @@ i.fa.fa-window-close-o, i.fa.fa-caret-square-o-right{
                 @for($i=0; $i < count($files_charts); $i++)
                 <tr>
                     <td class="chart-name">{{ $type_file_arr[$i] }}. {{ $files_charts[$i] }}</td>
-                    <td><img onclick="watchChart(this)" data-id="{{ $i }}" src="/mercurial/images/icon-open.png" title="Посмотреть" style="cursor: pointer;"></td>
-                    <td onclick="removeChart(this)" data-id="{{ $i }}"><img  title="Удалить" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>
+                    <td><img onclick="watchChart(this)" data-id="{{ $i }}" src="/mercurial/images/icon-open.png" title="@lang('statistics_analysis.Посмотреть')" style="cursor: pointer;"></td>
+                    <td onclick="removeChart(this)" data-id="{{ $i }}"><img  title="@lang('statistics_analysis.Удалить')" src="/mercurial/images/icon-delet-red.png" style="cursor: pointer;"></td>
                 </tr>
                 @endfor
                 @endif

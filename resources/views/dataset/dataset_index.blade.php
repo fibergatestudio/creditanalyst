@@ -3,11 +3,12 @@
 * Блок функций, который отвечает за форматирование даты
 */
 function dataset_format_date($date_format, $date){
-  $ru_months = ['Январь', 'Ферваль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+  $ru_months = ['Январь', 'Ферваль', 'Март', '.Апрель', '.Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
   if($date_format == 'month'){
     $d = date_parse_from_format("Y-m-d", $date);
     $month_number =  $d["month"];
-    $year_number = $d["year"];
+    $year_number = $d["year"];  
+
 
     $formatted_date = $ru_months[$month_number - 1].' '.$year_number;
   }
@@ -34,7 +35,7 @@ function dataset_format_date($date_format, $date){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Просмотр данных</title>
+    <title>@lang('dataset_index.Просмотр данных')</title>
   </head>
   <body>
     @include('basic_bootstrap_template_parts.navbar')
@@ -48,7 +49,7 @@ function dataset_format_date($date_format, $date){
 
                 <div class="col col-lg-9">
                   <h2>{{ $indicator->name }} </h2>
-                  Единицы измерения: {{ $indicator->measurement_unit_name }}
+                  @lang('dataset_index.Единицы измерения:') {{ $indicator->measurement_unit_name }}
                   <table class="table">
                     @foreach($dataset as $data_entry)
                       <tr>

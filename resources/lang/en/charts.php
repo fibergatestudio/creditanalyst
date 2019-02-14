@@ -11,5 +11,12 @@ return [
     'Период:' => 'Period:',
     'Введите поисковый запрос' => 'Enter your search query',
     'График 1' => 'Chart 1',
-
+    'Статистика и анализ' => 'Statistics and analysis',
+    'Сохраненные документы' => 'Saved documents',
+    'Создать новый график' => 'Create new chart',
+    'Выйти' => 'Exit',
+    'Назад' => 'Back',
+    'от' => 'from',
+    'до' => 'to',
+    'Введите поисковый запрос' => 'Enter search query',
 ];

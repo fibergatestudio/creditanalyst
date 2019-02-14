@@ -41,11 +41,17 @@ class ImportController extends Controller
                 // То набираем данные для импорта
                 $data_to_import[] = [
                     'id' => $first_page_row[0],
-                    'name' => $first_page_row[1],
-                    'procurer' => $first_page_row[2],
-                    'description' => $first_page_row[3],
-                    'max_frequency' => $first_page_row[4],
-                    'max_geographic_unit' => $first_page_row[5]
+                    'name_ru' => $first_page_row[1],
+                    'name_en' => $first_page_row[2],
+                    'name_ua' => $first_page_row[3],
+                    'procurer_ru' => $first_page_row[4],
+                    'procurer_en' => $first_page_row[5],
+                    'procurer_ua' => $first_page_row[6],
+                    'description_ru' => $first_page_row[7],
+                    'description_en' => $first_page_row[8],
+                    'description_ua' => $first_page_row[9],
+                    'max_frequency' => $first_page_row[10],
+                    'max_geographic_unit' => $first_page_row[11],
                 ];
             }
         }
@@ -64,11 +70,13 @@ class ImportController extends Controller
             if($indicator[0] != 'id' && !empty($indicator[0])){
                 $indicator_data_to_import[] = [
                     'id' => $indicator[0],
-                    'name' => $indicator[1],
-                    'frequency' => $indicator[2],
-                    'geography_unit' => $indicator[3],
-                    'measurement_unit' => $indicator[4],
-                    'source_id' => $indicator[5]
+                    'name_ru' => $indicator[1],
+                    'name_en' => $indicator[2],
+                    'name_ua' => $indicator[3],
+                    'frequency' => $indicator[4],
+                    'geography_unit' => $indicator[5],
+                    'measurement_unit' => $indicator[6],
+                    'source_id' => $indicator[7]
                 ];
             }
         }

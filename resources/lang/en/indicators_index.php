@@ -7,7 +7,7 @@ return [
     'Назад' => 'Back',
     'Удалить все показатели из мониторинга' => 'Clear all data from monitoring',
     'Экспорт всех данных в Excel' => 'Export all data to Excel',
-    'Добавить показатель в мониторинг' => 'Add the index to monitoring',
+    'Добавить в мониторинг' => 'Add to monitoring',
     'Показатель 1, Рыбным текстом называется текст, служащий для временного 
         наполнения макета в публикациях или производстве веб-сайтов' => 'Index 1. "Lorem ipsum" is a special text, which
         is used for temporary content filling in publications or web-design',
@@ -19,4 +19,5 @@ return [
     'В мониторинг' => 'To monitoring',
     'Экспорт в Excel' => 'Export to Excel',
     'Показатель Название' => 'Index Name',
+    'График' => 'Chart',
 ];
