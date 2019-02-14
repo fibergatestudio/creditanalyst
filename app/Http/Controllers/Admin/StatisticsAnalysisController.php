@@ -8,52 +8,18 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
-use Auth;
 
 
 class StatisticsAnalysisController extends AdminController
 {
-
 	private	$title = 'Статистика и анализ';
 
-
-	// функция перевода тайтла на другие языки
-	public function __construct(){
-		
-/*		if(Auth::user()->preferred_language == 'ru'){
-			$this->title = ['Статистика и анализ'];
-
-		} else if (Auth::user()->preferred_language == 'ua'){
-			$this->title = ['Статистика та аналіз'];
-			
-		} else if (Auth::user()->preferred_language == 'en'){
-			$this->title = ['Statistics and analysis'];
-		}*/
-	}
 	
 	/*
     * Функция которая отображает страницу сохраненных графиков
     */
 	
-	public function index(){
-
-		if(Auth::user()->preferred_language == 'ru'){
-			$this->title = 'Статистика и анализ';
-
-		} else if (Auth::user()->preferred_language == 'ua'){
-			$this->title = 'Статистика та аналіз';
-			
-		} else if (Auth::user()->preferred_language == 'en'){
-			$this->title = 'Statistics and analysis';
-		}
-
-		if(Auth::user()->preferred_language == 'ru'){
-			$this->months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		} else if (Auth::user()->preferred_language == 'ua'){
-			$this->months = ['Январь по-украински','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		} else if (Auth::user()->preferred_language == 'en'){
-			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		}		
+	public function index(){		
 		
 		$type_file_arr = [];
 		$files = $this->files_charts_full();
@@ -83,7 +49,7 @@ class StatisticsAnalysisController extends AdminController
 				}
 			}
 		}
-		//echo '<pre>'.print_r(Auth::user()->preferred_language,true).'</pre>';	
+		//echo '<pre>'.print_r($type_file_arr,true).'</pre>';	
 		
 		return view('admin.statistics_analysis', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'type_file_arr' => $type_file_arr]);
 	}
