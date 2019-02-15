@@ -7,19 +7,8 @@
 <body style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; background-color: #f5f8fa; color: #74787E; height: 100%; hyphens: auto; line-height: 1.4; margin: 0; -moz-hyphens: auto; -ms-word-break: break-all; width: 100% !important; -webkit-hyphens: auto; -webkit-text-size-adjust: none; word-break: break-word;">
 
     <div>
-        {{ $search_result->message }}
+        Вам пришло уведомление по индикатору - {{ $notify->indicator }}
     </div>
-    @if($search_result->email != 'Анонимно')
-        <div>
-            От: {{ $search_result->name }}        
-        </div>
-         <div>        
-            Email : <a href="mailto: {{ $search_result->email }}">{{ $search_result->email }}</a>
-        </div>
-    @else
-        <div>        
-            Email : <a href="mailto: {{ $search_result->email }}">{{ $search_result->email }}</a>
-        </div>
-    @endif
+    
 </body>
 </html>

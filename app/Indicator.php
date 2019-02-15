@@ -13,5 +13,6 @@ class Indicator extends Model
     
     protected $searchable = [
         'name'
-    ];
+    ];  
+    
 }
