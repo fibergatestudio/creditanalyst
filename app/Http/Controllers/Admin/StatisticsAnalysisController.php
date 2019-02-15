@@ -12,7 +12,22 @@ use App\Http\Controllers\Admin\AdminController;
 
 class StatisticsAnalysisController extends AdminController
 {
+
 	private	$title = 'Статистика и анализ';
+
+
+	// функция перевода тайтла на другие языки
+	public function __construct(){
+		
+		if(Auth::user()->preferred_language == 'ru'){
+			$this->title = ['Статистика и анализ'];
+
+		} else if (Auth::user()->preferred_language == 'ua'){
+			$this->title = ['Статистика та аналіз'];
+			
+		} else if (Auth::user()->preferred_language == 'en'){
+			$this->title = ['Statistics and analysis'];
+		}
 
 	
 	/*

@@ -9,6 +9,8 @@ use App\Dataset;
 use App\Koatuu;
 use DB;
 
+use Illuminate\Support\Facades\Auth; 
+
 class AdminController extends Controller
 {
 	
@@ -18,7 +20,22 @@ class AdminController extends Controller
 		'#00afff','#00a8ff','#00a1ff','#009aff','#0093ff','#008cff','#0085ff','#007eff','#0077ff','#0070ff',
 		'#0069ff','#0062ff','#005bff','#0054ff','#004dff','#0046ff','#003fff','#0038ff','#0031ff','#002aff',
 		'#0023ff','#001cff','#0015ff','#000eff','#0007ff'];
+		
+	// Функция перевода месяцев на другие языки
+	public function __construct(){
+		
+		if(Auth::user()->preferred_language == 'ru'){
+			$this->months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		} else if (Auth::user()->preferred_language == 'ua'){
+			$this->months = ['Январь по-украински','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		} else if (Auth::user()->preferred_language == 'en'){
+			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		}
 
+		// Ну и именно проблема в том, что Auth::user() не возвращает текущего юзера, хотя логин точно есть.
+		
+
+	}
 
 	/*
     * Функция которая выделяет имена индикаторов и возвращает json 

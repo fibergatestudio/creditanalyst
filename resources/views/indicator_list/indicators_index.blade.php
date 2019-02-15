@@ -52,13 +52,13 @@ App::setLocale(Auth::user()->preferred_language);
                     <tbody>
                       @foreach($indicators as $indicator)
                         <tr>
-                            <td>{{ $indicator->name }}</td>
+                            <td>{{ $indicator->localized_name }}</td>
                             <td>
                                 <div class="actions">
                                     <a href=" {{ url("/add_indicator_to_watch_list/")."/".$indicator->id }}">
-                                        <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content=@lang('indicators_index.Добавить показатель в мониторинг')></span>
+                                        <span class="icon icon-added-monitoring" data-toggle="popover" data-trigger="hover" data-placement="top" title="@lang('indicators_index.Добавить в мониторинг')" data-content=""></span>
                                     </a>
-                                    <a href="#" class="icon icon-stat"></a>
+                                    <a href="{{ url("admin/statistics-analysis/charts?indicator_id=" .$indicator->id. "&from=2019-01-01&to=2019-12-31") }}" class="icon icon-stat" title="@lang('indicators_index.График')"></a>
                                     
                                     {{-- Открытие модального окна --}}
                                     {{-- <a href="#" class="icon icon-open"  data-toggle="modal" data-target="#exampleModal2"> </a> --}}
@@ -91,7 +91,7 @@ App::setLocale(Auth::user()->preferred_language);
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3>Экспорт в Excel</h3>
+                            <h3>@lang('indicators_index.Экспорт в Excel')</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span class="icon icon-close"></span>
                             </button>
