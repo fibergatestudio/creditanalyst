@@ -9,7 +9,7 @@ use App\Dataset;
 use App\Koatuu;
 use DB;
 
-use Illuminate\Support\Facades\Auth; 
+//use Illuminate\Support\Facades\Auth; 
 
 class AdminController extends Controller
 {
@@ -24,13 +24,13 @@ class AdminController extends Controller
 	// Функция перевода месяцев на другие языки
 	public function __construct(){
 		
-		if(Auth::user()->preferred_language == 'ru'){
+/*		if(Auth::user()->preferred_language == 'ru'){
 			$this->months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 		} else if (Auth::user()->preferred_language == 'ua'){
 			$this->months = ['Январь по-украински','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 		} else if (Auth::user()->preferred_language == 'en'){
 			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		}
+		}*/
 
 		// Ну и именно проблема в том, что Auth::user() не возвращает текущего юзера, хотя логин точно есть.
 		
