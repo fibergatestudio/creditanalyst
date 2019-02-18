@@ -6,8 +6,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
 use App\Indicator;
@@ -21,6 +19,7 @@ class ChartsController extends AdminController
 	
 	private	$title = 'Создать новый график';
 
+	
 	/*
     * Функция которая отображает страницу создания графиков
     */

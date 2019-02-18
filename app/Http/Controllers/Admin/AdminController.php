@@ -9,8 +9,11 @@ use App\Dataset;
 use App\Koatuu;
 use DB;
 
+<<<<<<< HEAD
 //use Illuminate\Support\Facades\Auth; 
 
+=======
+>>>>>>> parent of 2c2f13a... Merge remote-tracking branch 'origin/postman-credit2u' into dev-merge-15-02-florko
 class AdminController extends Controller
 {
 	
@@ -20,6 +23,7 @@ class AdminController extends Controller
 		'#00afff','#00a8ff','#00a1ff','#009aff','#0093ff','#008cff','#0085ff','#007eff','#0077ff','#0070ff',
 		'#0069ff','#0062ff','#005bff','#0054ff','#004dff','#0046ff','#003fff','#0038ff','#0031ff','#002aff',
 		'#0023ff','#001cff','#0015ff','#000eff','#0007ff'];
+<<<<<<< HEAD
 		
 	// Функция перевода месяцев на другие языки
 	public function __construct(){
@@ -31,11 +35,9 @@ class AdminController extends Controller
 		} else if (Auth::user()->preferred_language == 'en'){
 			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 		}*/
+=======
+>>>>>>> parent of 2c2f13a... Merge remote-tracking branch 'origin/postman-credit2u' into dev-merge-15-02-florko
 
-		// Ну и именно проблема в том, что Auth::user() не возвращает текущего юзера, хотя логин точно есть.
-		
-
-	}
 
 	/*
     * Функция которая выделяет имена индикаторов и возвращает json 

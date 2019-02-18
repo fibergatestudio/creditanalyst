@@ -13,9 +13,9 @@ use Auth;
 
 class StatisticsAnalysisController extends AdminController
 {
-
 	private	$title = 'Статистика и анализ';
 
+<<<<<<< HEAD
 
 	// функция перевода тайтла на другие языки
 	public function __construct(){
@@ -30,6 +30,8 @@ class StatisticsAnalysisController extends AdminController
 			$this->title = ['Statistics and analysis'];
 		}*/
 	}
+=======
+>>>>>>> parent of 2c2f13a... Merge remote-tracking branch 'origin/postman-credit2u' into dev-merge-15-02-florko
 	
 	/*
     * Функция которая отображает страницу сохраненных графиков
