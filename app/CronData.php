@@ -12,10 +12,10 @@ class CronData extends Model
     /*
     * Функция, которая получает ID последнего отработанного элемента
     */
-    public static function get_last_processed_indicator_id(){
+    public static function get_last_processed_data_id(){
         $data_last_processed_indicator_id = 
             DB::table('cron_data')
-            ->where('key', '=', 'last_processed_indicator_id')
+            ->where('key', '=', 'last_processed_dataset_id')
             ->first();
         $id_to_return = $data_last_processed_indicator_id->value;
         return $id_to_return;
@@ -28,7 +28,7 @@ class CronData extends Model
 
     public static function set_last_processed_data_entry_id($id){
         DB::table('cron_data')
-            ->where('key', '=', 'last_processed_indicator_id')
+            ->where('key', '=', 'last_processed_dataset_id')
             ->update(['value' => $id]);
     }
 }

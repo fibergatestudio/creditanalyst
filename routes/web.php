@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 */
 	Route::get('/indicator_search/', 'IndicatorListController@search')->middleware('auth');
 	Route::post('/indicator_search_post', 'IndicatorListController@search');
-    Route::post('/indicator_search_all', 'IndicatorListController@show_all_search');
+        Route::post('/indicator_search_all', 'IndicatorListController@show_all_search');
 
 	Route::post('/indicator_search/send_message', 'IndicatorListController@send_message');
 
@@ -69,10 +69,13 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
     Route::delete('/monitoring/{id}', 'MonitoringController@remove')->middleware('auth');
     Route::put('/monitoring/{id}', 'MonitoringController@update')->middleware('auth');
 
-
+    Route::get('/show_notification', 'MonitoringController@show_notification')->middleware('auth');
     Route::get('/user_indicator_watch_list', 'MonitoringController@index');
     Route::get('/add_indicator_to_watch_list/{indicator_id}', 'MonitoringController@add_indicator_to_watch_list')->middleware('auth');
-
+    
+    // Для Вики
+    Route::get('/set_null', 'MonitoringController@set_null');
+    
 	// Удаления индикатора из вотчлиста
 	Route::get('/remove_indicator_from_watchlist/{indicator_id}', 'MonitoringController@remove_indicator_from_watchlist')->middleware('auth');
 
@@ -84,6 +87,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'],function() {
 
 /* Пути для крона */
 	Route::get('/cron', 'CronController@notification_pusher');
+        Route::get('/cron_daily', 'CronController@cron_daily');
 
 /*
 * Пути для импорта данных (временные)

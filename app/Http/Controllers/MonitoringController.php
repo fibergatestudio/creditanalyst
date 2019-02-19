@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\DB,
     Illuminate\Http\Request,
     App\IndicatorWatcher,
     App\Indicator,
-    App\Dataset;
+    App\Dataset,
+    App\Notification,
+    App\CronData;
+
+    
 
 class MonitoringController extends Controller
 {
@@ -135,5 +139,30 @@ class MonitoringController extends Controller
         
         return redirect('user_indicator_watch_list'); // Редирект на страницу мониторинга
 
+    }
+    // обнуление активных уведомлений
+    public function show_notification(){
+        $userId = Auth::id();
+        $notifications = Notification::where('user_id', $userId)->get();
+        foreach ($notifications as $notification){
+           $notification->seen = true;
+           $notification->save(); 
+        }
+        
+        
+        return redirect('user_indicator_watch_list'); // Редирект на страницу мониторинга
+    }
+    
+    // Специально для Вики
+    public function set_null(){
+        $cron = CronData::first();
+        $cron->value = 0;
+        $cron->save();
+        $notifications = Notification::all();
+        foreach($notifications as $notification){
+            $notification->delete();
+        }
+        return redirect('user_indicator_watch_list'); // Редирект на страницу мониторинга
+        
     }
 }
