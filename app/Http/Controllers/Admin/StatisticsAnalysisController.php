@@ -9,6 +9,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class StatisticsAnalysisController extends AdminController
 {
@@ -19,15 +21,10 @@ class StatisticsAnalysisController extends AdminController
 	// функция перевода тайтла на другие языки
 	public function __construct(){
 		
-		if(Auth::user()->preferred_language == 'ru'){
-			$this->title = ['Статистика и анализ'];
+		
+	}
 
-		} else if (Auth::user()->preferred_language == 'ua'){
-			$this->title = ['Статистика та аналіз'];
-			
-		} else if (Auth::user()->preferred_language == 'en'){
-			$this->title = ['Statistics and analysis'];
-		}
+	// Ну шото оно нифига не работает.. а какая ветка у Славика, может её смержить тебе? Или просто узнать, что Славик сделал для фикса проблемы, и повторить руками?
 
 	
 	/*
@@ -65,6 +62,19 @@ class StatisticsAnalysisController extends AdminController
 			}
 		}
 		//echo '<pre>'.print_r($type_file_arr,true).'</pre>';	
+
+		// Перевод языка
+
+		if(Auth::user()->preferred_language == 'ru'){
+			$this->title = 'Статистика и анализ';
+
+		} else if (Auth::user()->preferred_language == 'ua'){
+			$this->title = 'Статистика та аналіз';
+			
+		} else if (Auth::user()->preferred_language == 'en'){
+			$this->title = 'Statistics and analysis';
+		}
+
 		
 		return view('admin.statistics_analysis', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'type_file_arr' => $type_file_arr]);
 	}
