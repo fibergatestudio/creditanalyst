@@ -11,8 +11,10 @@ use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\SearchEmail;
 use Mail;
+
 
 
 class IndicatorListController extends Controller
@@ -25,11 +27,11 @@ class IndicatorListController extends Controller
         $infosource = Infosource::find($source_id);
         //$indicators = Indicator::where('source_id', $source_id)->get();
 
-        $indicators = 
+        $indicators =
             DB::table('indicators')
                 ->where('source_id', $source_id)
                 ->paginate(10);
-        
+
         return view('indicator_list.indicators_index',
             [
                 'infosource' => $infosource,
@@ -50,7 +52,7 @@ class IndicatorListController extends Controller
 
 
         if(isset($search_query)){
-            $results = Indicator::search($search_query)->get();  
+            $results = Indicator::search($search_query)->get();
 
             $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$search_query."')")
                 ->whereRaw("MATCH(name)AGAINST('".$search_query."' IN BOOLEAN MODE)")
@@ -62,7 +64,7 @@ class IndicatorListController extends Controller
                 $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
                 $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
             }
-            
+
         }
 
         return view('indicator_list.indicator_search',[
@@ -73,7 +75,7 @@ class IndicatorListController extends Controller
             'need_number' => $need_number
         ]);
     }
-    
+
     /* Отобразить все результаты поиска*/
     public function show_all_search(Request $request){
         $results = [];
@@ -82,8 +84,8 @@ class IndicatorListController extends Controller
 
 
         if(isset($search_query)){
-            $results = Indicator::search($search_query)->get();   
-            
+            $results = Indicator::search($search_query)->get();
+
 
             $results = Indicator::selectRaw("*, MATCH(name) AGAINST ('".$search_query."')")
                 ->whereRaw("MATCH(name)AGAINST('".$search_query."' IN BOOLEAN MODE)")
@@ -95,7 +97,7 @@ class IndicatorListController extends Controller
                 $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
                 $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
             }
-            
+
         }
 
         return view('indicator_list.indicator_search_all',[
@@ -105,22 +107,22 @@ class IndicatorListController extends Controller
             'search_query' => $search_query
         ]);
     }
-    
+
     /*
     * Функция страницы поиска Показателей
     */
 
     public function send_message(Request $request){
-        
+
         $search_result = new \stdClass();
         $search_result->message = $request->message;                            // текст сообщения
         $search_result->email = $request->email;
-        $search_result->name = $request->name;                                // от кого сообщение                                    
- 
+        $search_result->name = $request->name;                                // от кого сообщение
+
         Mail::to("credit.s.test@i.ua")->queue(new SearchEmail($search_result));
-        
+
         return redirect('indicator_search');
-        
+
         // старый код
         /*$newmessage = new Empty_requests();
         $newmessage->message = $request->message;
@@ -128,6 +130,6 @@ class IndicatorListController extends Controller
         $newmessage->save();*/
 
         /* return back(); */
-        
+
     }
 }
