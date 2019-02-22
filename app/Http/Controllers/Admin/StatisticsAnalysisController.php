@@ -10,20 +10,33 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\AdminController;
 use Auth;
 
-//use Illuminate\Support\Facades\Auth;
-
 
 class StatisticsAnalysisController extends AdminController
 {
 	private	$title = 'Статистика и анализ';
 
+<<<<<<< HEAD
 
-	// Ну шото оно нифига не работает.. а какая ветка у Славика, может её смержить тебе? Или просто узнать, что Славик сделал для фикса проблемы, и повторить руками?
+	// функция перевода тайтла на другие языки
+	public function __construct(){
+		
+/*		if(Auth::user()->preferred_language == 'ru'){
+			$this->title = ['Статистика и анализ'];
 
+		} else if (Auth::user()->preferred_language == 'ua'){
+			$this->title = ['Статистика та аналіз'];
+			
+		} else if (Auth::user()->preferred_language == 'en'){
+			$this->title = ['Statistics and analysis'];
+		}*/
+	}
+=======
+>>>>>>> parent of 2c2f13a... Merge remote-tracking branch 'origin/postman-credit2u' into dev-merge-15-02-florko
+	
 	/*
     * Функция которая отображает страницу сохраненных графиков
     */
-
+	
 	public function index(){
 
 		if(Auth::user()->preferred_language == 'ru'){
@@ -31,7 +44,7 @@ class StatisticsAnalysisController extends AdminController
 
 		} else if (Auth::user()->preferred_language == 'ua'){
 			$this->title = 'Статистика та аналіз';
-
+			
 		} else if (Auth::user()->preferred_language == 'en'){
 			$this->title = 'Statistics and analysis';
 		}
@@ -42,8 +55,8 @@ class StatisticsAnalysisController extends AdminController
 			$this->months = ['Январь по-украински','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 		} else if (Auth::user()->preferred_language == 'en'){
 			$this->months = ['January','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		}
-
+		}		
+		
 		$type_file_arr = [];
 		$files = $this->files_charts_full();
 		$i = 1;
@@ -72,21 +85,8 @@ class StatisticsAnalysisController extends AdminController
 				}
 			}
 		}
-		//echo '<pre>'.print_r($type_file_arr,true).'</pre>';
-
-		// Перевод языка
-
-		if(Auth::user()->preferred_language == 'ru'){
-			$this->title = 'Статистика и анализ';
-
-		} else if (Auth::user()->preferred_language == 'ua'){
-			$this->title = 'Статистика та аналіз';
-
-		} else if (Auth::user()->preferred_language == 'en'){
-			$this->title = 'Statistics and analysis';
-		}
-
-
+		//echo '<pre>'.print_r(Auth::user()->preferred_language,true).'</pre>';	
+		
 		return view('admin.statistics_analysis', ['title' => $this->title, 'indicators_obj' => $this->indicators_obj(), 'indicators_name' => $this->get_arr_name_indicators(), 'months' => $this->months, 'years' => $this->years, 'data_obj' => $this->data_obj(), 'files_charts' => $this->files_charts(), 'files_charts_full' => $this->files_charts_full(), 'type_file_arr' => $type_file_arr]);
 	}
 
@@ -98,9 +98,9 @@ class StatisticsAnalysisController extends AdminController
 
 		if (file_exists ('charts/'.$request->fileName)) {
 			unlink('charts/'.$request->fileName);
-		}
-
-		return $request->fileName;
+		}		
+		
+		return $request->fileName;	
 	}
 
 }
