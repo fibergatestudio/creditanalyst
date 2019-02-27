@@ -36,7 +36,8 @@
             
             <li class="icon icon-user">
                 <a href="#">{{ Auth::user()->email }}</a>
-                <a href="{{ url('/set_null') }}"> обнулить</a>                
+                <a href="{{ url('/set_null') }}"> обнулить</a>  
+                              
             </li>
         </ul>
         
