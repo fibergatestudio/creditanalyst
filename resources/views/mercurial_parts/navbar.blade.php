@@ -36,8 +36,7 @@
             
             <li class="icon icon-user">
                 <a href="#">{{ Auth::user()->email }}</a>
-                @if(Auth::user()->id == 4) <a href="{{ url('/set_null') }}">обнулить</a>
-                @endif
+                <a href="{{ url('/set_null') }}"> обнулить</a>                
             </li>
         </ul>
         
