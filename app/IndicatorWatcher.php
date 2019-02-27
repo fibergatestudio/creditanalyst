@@ -59,4 +59,14 @@ ORDER BY `uiwl`.`position` DESC;';
             return true;
         }
     }
+    
+    // Функция, которая дает информацию о том, нужно  отправлять уведомление по почте (true) или нет
+    public function are_send_to_email(){
+        $notification_info = json_decode($this->notify_info);
+        if(property_exists($notification_info, 'way') && in_array('email', $notification_info->way)){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
