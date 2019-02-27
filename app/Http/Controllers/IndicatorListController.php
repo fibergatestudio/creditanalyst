@@ -11,9 +11,12 @@ use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+
 use Illuminate\Support\Facades\Auth;
 use App\Mail\SearchEmail;
 use Mail;
+
+
 
 
 
@@ -31,11 +34,6 @@ class IndicatorListController extends Controller
             DB::table('indicators')
                 ->where('source_id', $source_id)
                 ->paginate(10);
-
-        foreach ($indicators as $indicator) {
-            $indicator_eloquent = Indicator::find($indicator->id);
-            $indicator->localized_name = $indicator_eloquent->language_name();
-        }        
         
         return view('indicator_list.indicators_index',
             [
@@ -66,8 +64,8 @@ class IndicatorListController extends Controller
             //print_r($results);
 
             foreach($results as $result_entry){
-                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->language_procurer();
-                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->language_name();
+                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
+                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
             }
             
         }
@@ -99,8 +97,8 @@ class IndicatorListController extends Controller
             //print_r($results);
 
             foreach($results as $result_entry){
-                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->language_procurer();
-                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->language_name();
+                $results_meta[$result_entry->id]['procurer'] = Infosource::find($result_entry->source_id)->procurer;
+                $results_meta[$result_entry->id]['infosource_name'] = Infosource::find($result_entry->source_id)->name;
             }
             
         }
@@ -126,13 +124,15 @@ class IndicatorListController extends Controller
  
         Mail::to("credit.s.test@i.ua")->queue(new SearchEmail($search_result));
         
+        return redirect('indicator_search');
         
+        // старый код
         /*$newmessage = new Empty_requests();
         $newmessage->message = $request->message;
         $newmessage->email = $request->email;
         $newmessage->save();*/
 
         /* return back(); */
-        return redirect('indicator_search');
+        
     }
 }

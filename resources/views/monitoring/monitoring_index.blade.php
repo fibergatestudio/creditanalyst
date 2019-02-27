@@ -32,7 +32,7 @@ App::setLocale(Auth::user()->preferred_language);
         <section id="page-monitoring" class="section-content">
             <div class="content-title">
                 <h2 class="name-menu">@lang('monitoring_index.Мониторинг')</h2>
-                <a href="{{ url('user_logout') }}" class="exit">@lang('monitoring_index.Выйти')</a>
+                <a href="{{ url('user_logout') }}" class="exit">Выйти</a>
             </div>
             <div class="card card-fluid">
                 <div class="card-body">

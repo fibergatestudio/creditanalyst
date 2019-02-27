@@ -18,7 +18,7 @@
         </div>
     @else
         <div>        
-            Email : <a href="mailto: {{ $search_result->email }}">{{ $search_result->email }}</a>
+            Email : {{ $search_result->email }}
         </div>
     @endif
 </body>

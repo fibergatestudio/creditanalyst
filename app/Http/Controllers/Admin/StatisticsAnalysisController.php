@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class StatisticsAnalysisController extends AdminController
 {
-
 	private	$title = 'Статистика и анализ';
+
 
 
 	// функция перевода тайтла на другие языки
@@ -23,8 +23,6 @@ class StatisticsAnalysisController extends AdminController
 		
 		
 	}
-
-	// Ну шото оно нифига не работает.. а какая ветка у Славика, может её смержить тебе? Или просто узнать, что Славик сделал для фикса проблемы, и повторить руками?
 
 	
 	/*
