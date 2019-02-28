@@ -11,8 +11,13 @@ use App\Empty_requests;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
+
+use Illuminate\Support\Facades\Auth;
 use App\Mail\SearchEmail;
 use Mail;
+
+
+
 
 
 class IndicatorListController extends Controller
