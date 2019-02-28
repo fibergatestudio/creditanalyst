@@ -23,7 +23,7 @@ class Personal_settings_User_Controller extends Controller
         $user->name = $request->first_name;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->email = $request->email;
+        //$user->email = $request->email;
         $user->save();
         return back();
     }
