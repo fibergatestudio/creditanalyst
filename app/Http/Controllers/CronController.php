@@ -42,9 +42,9 @@ class CronController extends Controller
             
             // Если есть новые данные, нужно задать для них уведомления
             if($new_data_count == 0){                                           // если не было изменений
-                $last_data_entry_id = Dataset::orderBy('id', 'desc')->first();                
+                $last_data_entry_id = Dataset::orderBy('id', 'desc')->firstOrFail();                
             }else{                                                              // изменения есть
-                $last_data_entry_id = Dataset::orderBy('id', 'desc')->first();
+                $last_data_entry_id = Dataset::orderBy('id', 'desc')->firstOrFail();
                 if($notification_watcher->are_instant_notifications_on() === true){  // проверяем когда отправлять уведомление (сразу)
                     $new_notification = new Notification();
                     $new_notification->user_id = $notification_watcher->user_id;

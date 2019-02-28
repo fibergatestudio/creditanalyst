@@ -25,12 +25,12 @@
                         <br>
                         <h6>Когда отправлять уведомления:</h6>
                         <div class="form-check">
-                            <input type="radio" class="form-check-input" value="event" id="exampleCheck3" v-model="current.notify_info.when">
-                            <label class="form-check-label" for="exampleCheck3">При наступлении события</label>
+                            <input type="radio" class="form-check-input" value="event" id="exampleCheck3" v-model="current.notify_info.when" style="margin-left: 5px">
+                            <label class="form-check-label" for="exampleCheck3" style="margin: 13px 0px 0px 25px">При наступлении события</label>
                         </div>
                         <div class="form-check">
-                            <input type="radio" class="form-check-input" value="digest" id="exampleCheck4" v-model="current.notify_info.when">
-                            <label class="form-check-label" for="exampleCheck4">Включить внутренний дайджест</label>
+                            <input type="radio" class="form-check-input" value="digest" id="exampleCheck4" v-model="current.notify_info.when" style="margin-left: 5px">
+                            <label class="form-check-label" for="exampleCheck4" style="margin: 13px 0px 0px 25px">Включить внутренний дайджест</label>
                         </div>
 
                     </div>
@@ -101,5 +101,6 @@ export default {
         overflow-y: auto;
         transition: opacity .3s ease;
     }
+
     
 </style>
